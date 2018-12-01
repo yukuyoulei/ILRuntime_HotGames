@@ -1,0 +1,7 @@
+﻿<linker>  
+  <assembly fullname="Assembly-CSharp" preserve="all"/>
+  <assembly fullname="UnityEngine" preserve="all"/>
+  <assembly fullname="UnityEngine.UI" preserve="all"/>
+  <assembly fullname="UnityEngine.CoreModule" preserve="all"/>
+  <assembly fullname="UnityEngine.UIModule" preserve="all"/>
+</linker>
