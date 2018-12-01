@@ -16,3 +16,7 @@ Unity项目中的UBuildTools类为编辑器辅助类，在Unity编辑器中运�
 已经实现的几个GUI游戏中发现一些小问题，原因是Unity的一些内置资源在热更项目里面无法直接获取，之后我会再想办法，不过想必身处8012年末期的大家应该也不会再用GUI来做游戏的，所以这个坑不是很着急填。
 
 AGameBase类不是从MonoBehaviour继承的，ILRuntime的原作者建议热更项目中尽量不要继承自MonoBehaviour，所以我也就这么做了。 Update和OnGUI这两个需要每帧执行的方法似乎比较损耗性能，各位开发时也需要慎重，当然，亲测一些小游戏是完全没必要在意这些小损耗的。
+
+ILRuntime项目地址：
+https://github.com/Ourpalm/ILRuntime
+向大佬致敬，感谢大佬带来了可以让我们用C#热更功能的ILRuntime。
