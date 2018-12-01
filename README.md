@@ -22,7 +22,7 @@ https://github.com/Ourpalm/ILRuntime
 向大佬致敬，感谢大佬带来了可以让我们用C#热更功能的ILRuntime。
 
 目前已知限制：
- - 不能使用? 
+ - 不能使用可空类型修饰符(?)
  
 	示例： int? ivalue = null;
 
