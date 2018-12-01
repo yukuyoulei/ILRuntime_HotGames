@@ -1,7 +1,11 @@
 # ILRuntime_HotGames
 基于ILRuntime的热更新能力实现的可以直接使用的框架。
 
-C#热更项目请用VS2017打开。
+AHotGames是C#热更项目。
+UHotGames是Unity项目。
+
+C#热更项目（AHotGames）请用VS2017打开。
+Unity项目是用Unity2018创建的，不过2017版本以上的Unity应该也能打开，并没有用到什么高级特性，只是一堆代码，目前只有Scene/Main场景有用，其实自己创建一个空场景，随便在哪个GameObject挂上入口类Enter类就可以跑了。
 
 使用方法很简单，ILRuntime部分已经在Unity工程中整合，除非有未实现的ILRuntime适配器需要添加，或者ILRuntime有重大更新，否则不建议修改这部分。在C#热更项目中写好功能后编译，我已经写好编译后事件，VS会直接将生成到Unity项目的dll的扩展名修改成bytes，以避免Unity将热更dll直接编译入最终的Assemble中。
 Unity项目中的Enter类为起始类，可以修改Config路径为自己的远程路径。
