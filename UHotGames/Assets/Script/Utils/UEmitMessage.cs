@@ -16,6 +16,10 @@ public class UEmitMessage : MonoBehaviour
             {
                 obj = new GameObject(amsg[1]);
             }
+            else
+            {
+                obj = Instantiate(obj);
+            }
             ILRuntimeHandler.Instance.OnLoadClass(amsg[1], obj, amsg.Length > 3 ? amsg[3] : "");
         }
         else if (amsg[0] == "unloadall")
