@@ -1,0 +1,2 @@
+# ILRuntime_HotGames
+基于ILRuntime的热更新能力实现的可以直接使用的框架。
