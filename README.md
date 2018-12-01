@@ -20,3 +20,8 @@ AGameBase类不是从MonoBehaviour继承的，ILRuntime的原作者建议热更�
 ILRuntime项目地址：
 https://github.com/Ourpalm/ILRuntime
 向大佬致敬，感谢大佬带来了可以让我们用C#热更功能的ILRuntime。
+
+目前已知限制：
+ - 不能使用? 
+	示例： int? ivalue = null;
+	这种用法暂时是无法使用的，会报错。
