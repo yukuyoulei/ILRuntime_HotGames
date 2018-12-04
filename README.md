@@ -52,7 +52,8 @@ VS2017启动起来后，你可以看到Start方法里有一群排成“人”字
 
 ▷Main Camera
 
-▽Canvas
+  ▽Canvas
+
        Text
 
 假装上面是一张图片吧啊，那个向下的三角还挺不好找……
