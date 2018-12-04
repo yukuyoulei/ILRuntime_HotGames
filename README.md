@@ -50,11 +50,9 @@ VS2017启动起来后，你可以看到Start方法里有一群排成“人”字
 
 在GameObject/UI菜单栏里，点击Text，添加一个Text，左边的Hierarchy视图将会变成下图这样：
 
-▷Main Camera
-
-  ▽Canvas
-
-       Text
+▷Main Camera</br>
+&emsp;&emsp;▽Canvas</br>
+&emsp;&emsp;&emsp;&emsp;Text</br>
 
 假装上面是一张图片吧啊，那个向下的三角还挺不好找……
 
