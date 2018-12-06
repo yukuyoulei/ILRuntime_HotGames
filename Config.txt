@@ -1,1 +1,3 @@
 resources=http://fscoding.top/hotgames/
+useab=1
+preloads=firstui,dll/

@@ -294,10 +294,6 @@ public class UAssetBundleDownloader : MonoBehaviour
             {
                 return prefab;
             }
-            if (assetBundlePath.Contains("."))
-            {
-                assetBundlePath = assetBundlePath.Substring(0, assetBundlePath.LastIndexOf("."));
-            }
         }
 #endif
         if (!UConfigManager.bUsingAb)
@@ -305,6 +301,10 @@ public class UAssetBundleDownloader : MonoBehaviour
         if (prefab)
         {
             return prefab;
+        }
+        if (assetBundlePath.Contains("."))
+        {
+            assetBundlePath = assetBundlePath.Substring(0, assetBundlePath.LastIndexOf("."));
         }
 
         assetBundlePath = assetBundlePath.ToLower();

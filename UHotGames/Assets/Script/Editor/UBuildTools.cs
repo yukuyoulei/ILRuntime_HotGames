@@ -893,6 +893,8 @@ public class Platform
 			case BuildTarget.StandaloneWindows:
 			case BuildTarget.StandaloneWindows64:
 				return "Windows";
+            case BuildTarget.WebGL:
+                return "WebGL";
 			default:
 				return "Platform";
 		}
