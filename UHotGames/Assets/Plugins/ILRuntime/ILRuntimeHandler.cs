@@ -222,6 +222,6 @@ public class ILRuntimeHandler
 
 	public void SetUnityMessageReceiver(GameObject receiver)
 	{
-		appdomain.Invoke("AGameBase", "SetUnityMessageReceiver", null, receiver);
+		appdomain.Invoke("AHotBase", "SetUnityMessageReceiver", null, receiver);
 	}
 }

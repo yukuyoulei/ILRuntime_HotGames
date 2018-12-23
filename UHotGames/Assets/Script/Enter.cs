@@ -29,7 +29,8 @@ public class Enter : MonoBehaviour
                          dll += ".bytes";
                      }
 #endif
-                     ILRuntimeHandler.Instance.DoLoadDll("ahotmages", UAssetBundleDownloader.Instance.OnLoadAsset<TextAsset>(dll).bytes);
+                     ILRuntimeHandler.Instance.DoLoadDll("ahotmages"
+                         , UAssetBundleDownloader.Instance.OnLoadAsset<TextAsset>(dll).bytes);
                      ILRuntimeHandler.Instance.SetUnityMessageReceiver(MonoInstancePool.getInstance<UEmitMessage>(true).gameObject);
 
                      ILRuntimeHandler.Instance.OnLoadClass("AEntrance", new GameObject("AEntrance"));

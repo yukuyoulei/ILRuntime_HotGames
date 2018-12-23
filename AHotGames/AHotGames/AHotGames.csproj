@@ -69,23 +69,29 @@
       <HintPath>..\..\UHotGames\Temp\bin\Debug\UnityEngine.UIModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestModule">
+      <HintPath>..\..\UHotGames\Temp\bin\Debug\UnityEngine.UnityWebRequestModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestWWWModule">
+      <HintPath>..\..\UHotGames\Temp\bin\Debug\UnityEngine.UnityWebRequestWWWModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="games\game\UBlackJack.cs" />
-    <Compile Include="games\game\Snake.cs" />
-    <Compile Include="games\game\GameLianliankan.cs" />
-    <Compile Include="games\game\DocMario.cs" />
-    <Compile Include="games\game\ChessBlackAndWhite.cs" />
+    <Compile Include="games\uis\LoginUI.cs" />
+    <Compile Include="games\uis\FirstUI.cs" />
     <Compile Include="games\AEntrance.cs" />
-    <Compile Include="games\aempty\AEmptyGame.cs" />
+    <Compile Include="games\aempty\AEmptyUI.cs" />
     <Compile Include="utils\AHotDrag.cs" />
     <Compile Include="utils\ClickButton.cs" />
-    <Compile Include="games\aempty\AGameBase.cs" />
+    <Compile Include="games\aempty\AHotBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="utils\UEmitMessager.cs" />
     <Compile Include="utils\UOnGUIer.cs" />
     <Compile Include="utils\UStaticFuncs.cs" />
     <Compile Include="utils\UUpdater.cs" />
+    <Compile Include="utils\UWebSender.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

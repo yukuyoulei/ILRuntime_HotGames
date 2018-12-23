@@ -58,9 +58,9 @@ public class AHotDrag : MonoBehaviour
 
 	private void RegistDragMessage()
 	{
-		if (AGameBase.strArg=="teacher")
+		if (AHotBase.strArg=="teacher")
 		{
-			AGameBase.curGame.OnRegistAction(new Action<string>((msg) =>
+			AHotBase.curGame.OnRegistAction(new Action<string>((msg) =>
 			{
 				var amsg = msg.Split(':');
 				if (amsg.Length < 2)
@@ -159,11 +159,11 @@ public class AHotDrag : MonoBehaviour
 					onDragBegin();
 				}
 
-                if (AGameBase.strArg == "teacher")
+                if (AHotBase.strArg == "teacher")
                 {
                     if (!DontSyncDrag)
 					{
-						AGameBase.SendMessageToUnityReceiver(MessageHeadDragBegin + ":" + gameObject.name);
+						AHotBase.SendMessageToUnityReceiver(MessageHeadDragBegin + ":" + gameObject.name);
 					}
 				}
 			}
@@ -188,9 +188,9 @@ public class AHotDrag : MonoBehaviour
 				{
 					onDragDrop();
 				}
-                if (AGameBase.strArg == "teacher")
+                if (AHotBase.strArg == "teacher")
                     if (!DontSyncDrag)
-						AGameBase.SendMessageToUnityReceiver(MessageHeadDragDrop + ":" + gameObject.name);
+						AHotBase.SendMessageToUnityReceiver(MessageHeadDragDrop + ":" + gameObject.name);
 			}
 			else
 			{
@@ -198,10 +198,10 @@ public class AHotDrag : MonoBehaviour
 				{
 					onDragEnd();
 				}
-                if (AGameBase.strArg == "teacher")
+                if (AHotBase.strArg == "teacher")
                 {
                     if (!DontSyncDrag)
-						AGameBase.SendMessageToUnityReceiver(MessageHeadDragEnd + ":" + gameObject.name);
+						AHotBase.SendMessageToUnityReceiver(MessageHeadDragEnd + ":" + gameObject.name);
 				}
 			}
 			StartCoroutine(DelayCancel());
@@ -232,10 +232,10 @@ public class AHotDrag : MonoBehaviour
 				lastPosition = Input.mousePosition;
 			}
 
-            if (AGameBase.strArg == "teacher")
+            if (AHotBase.strArg == "teacher")
             {
                 if (!DontSyncDrag)
-					AGameBase.SendMessageToUnityReceiver(MessageHeadDraging + ":" + gameObject.name + ":" + (int)transform.localPosition.x + "," + (int)transform.localPosition.y);
+					AHotBase.SendMessageToUnityReceiver(MessageHeadDraging + ":" + gameObject.name + ":" + (int)transform.localPosition.x + "," + (int)transform.localPosition.y);
 			}
 		}
 		else

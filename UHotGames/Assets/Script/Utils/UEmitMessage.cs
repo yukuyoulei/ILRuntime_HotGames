@@ -8,6 +8,7 @@ public class UEmitMessage : MonoBehaviour
 {
     public void EmitMessage(string msg)
     {
+        Debug.Log("Receive message " + msg);
         var amsg = msg.Split('|');
         if (amsg[0] == "load")
         {

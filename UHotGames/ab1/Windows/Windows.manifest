@@ -1,0 +1,10 @@
+ManifestFileVersion: 0
+CRC: 1913686018
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: dll/ahotgames.ab
+      Dependencies: {}
+    Info_1:
+      Name: firstui.ab
+      Dependencies: {}

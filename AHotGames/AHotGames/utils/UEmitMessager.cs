@@ -8,7 +8,7 @@ using UnityEngine;
 
 public class UEmitMessager : MonoBehaviour
 {
-	public AGameBase gameBase;
+	public AHotBase gameBase;
 	public Action<string> onReceiveMsg;
 	public void OnRegistAction(Action<string> a)
 	{
@@ -28,6 +28,6 @@ public class UEmitMessager : MonoBehaviour
 	{
 		yield return new WaitForSeconds(delay);
 
-		AGameBase.SendMessageToUnityReceiver(message);
+		AHotBase.SendMessageToUnityReceiver(message);
 	}
 }

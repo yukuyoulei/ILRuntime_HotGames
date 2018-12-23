@@ -5,6 +5,10 @@ VisualStudioVersion = 15.0.27703.2047
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AHotGames", "AHotGames\AHotGames.csproj", "{1B939595-1352-4A54-8CE9-16642359E984}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-firstpass", "..\UHotGames\Assembly-CSharp-firstpass.csproj", "{B4510CD9-ADE9-98F2-A8BD-9DBE4DA6AB16}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "..\UHotGames\Assembly-CSharp.csproj", "{9E75ACDF-45EB-E560-7ED9-7DD85239C67E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,22 @@ Global
 		{1B939595-1352-4A54-8CE9-16642359E984}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1B939595-1352-4A54-8CE9-16642359E984}.Release|x64.ActiveCfg = Release|Any CPU
 		{1B939595-1352-4A54-8CE9-16642359E984}.Release|x64.Build.0 = Release|Any CPU
+		{B4510CD9-ADE9-98F2-A8BD-9DBE4DA6AB16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4510CD9-ADE9-98F2-A8BD-9DBE4DA6AB16}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4510CD9-ADE9-98F2-A8BD-9DBE4DA6AB16}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B4510CD9-ADE9-98F2-A8BD-9DBE4DA6AB16}.Debug|x64.Build.0 = Debug|Any CPU
+		{B4510CD9-ADE9-98F2-A8BD-9DBE4DA6AB16}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4510CD9-ADE9-98F2-A8BD-9DBE4DA6AB16}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4510CD9-ADE9-98F2-A8BD-9DBE4DA6AB16}.Release|x64.ActiveCfg = Release|Any CPU
+		{B4510CD9-ADE9-98F2-A8BD-9DBE4DA6AB16}.Release|x64.Build.0 = Release|Any CPU
+		{9E75ACDF-45EB-E560-7ED9-7DD85239C67E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E75ACDF-45EB-E560-7ED9-7DD85239C67E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E75ACDF-45EB-E560-7ED9-7DD85239C67E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{9E75ACDF-45EB-E560-7ED9-7DD85239C67E}.Debug|x64.Build.0 = Debug|Any CPU
+		{9E75ACDF-45EB-E560-7ED9-7DD85239C67E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E75ACDF-45EB-E560-7ED9-7DD85239C67E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E75ACDF-45EB-E560-7ED9-7DD85239C67E}.Release|x64.ActiveCfg = Release|Any CPU
+		{9E75ACDF-45EB-E560-7ED9-7DD85239C67E}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,6 @@
+E:\Projects\svn_games\AHotGames\AHotGames\obj\Debug\AHotGames.csprojAssemblyReference.cache
+E:\Projects\svn_games\AHotGames\AHotGames\obj\Debug\AHotGames.csproj.CoreCompileInputs.cache
+E:\Projects\svn_games\UHotGames\Assets\RemoteResources\Dll\AHotGames.dll
+E:\Projects\svn_games\UHotGames\Assets\RemoteResources\Dll\AHotGames.pdb
+E:\Projects\svn_games\AHotGames\AHotGames\obj\Debug\AHotGames.dll
+E:\Projects\svn_games\AHotGames\AHotGames\obj\Debug\AHotGames.pdb
