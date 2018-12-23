@@ -1,6 +1,0 @@
-I:\AProjects\svn_codegame\codegame_pc\Assets\RemoteResources\Dll\UHotGames.dll
-I:\AProjects\svn_codegame\codegame_pc\Assets\RemoteResources\Dll\UHotGames.pdb
-I:\AProjects\svn_codegame\codegame_pc\UHotGames\UHotGames\obj\Release\UHotGames.csproj.CoreCompileInputs.cache
-I:\AProjects\svn_codegame\codegame_pc\UHotGames\UHotGames\obj\Release\UHotGames.dll
-I:\AProjects\svn_codegame\codegame_pc\UHotGames\UHotGames\obj\Release\UHotGames.pdb
-I:\AProjects\svn_codegame\codegame_pc\UHotGames\UHotGames\obj\Release\UHotGames.csprojAssemblyReference.cache
