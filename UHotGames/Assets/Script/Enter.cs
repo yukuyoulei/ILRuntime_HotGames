@@ -12,11 +12,14 @@ using System.Linq;
 public class Enter : MonoBehaviour
 {
     public static string ConfigURL = "http://fscoding.top/hotgames/Config.txt";
+    public bool UseAB;
     private void Start()
     {
         ConfigDownloader.Instance.StartToDownload(ConfigURL, () =>
          {
              ParseConfigs();
+
+             Debug.Log("UConfigManager.bUsingAb " + UConfigManager.bUsingAb);
 
              UAssetBundleDownloader.Instance.DownloadResources((l1) =>
              {
@@ -58,5 +61,9 @@ public class Enter : MonoBehaviour
     private void ParseConfigs()
     {
         UConfigManager.bUsingAb = ConfigDownloader.Instance.OnGetIntValue("useab") == 1;
+
+#if UNITY_EDITOR
+        UConfigManager.bUsingAb = UseAB;
+#endif
     }
 }

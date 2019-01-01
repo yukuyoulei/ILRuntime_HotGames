@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Text;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -22,52 +23,72 @@ public class UWebSender : MonoBehaviour
             return sinstance;
         }
     }
-    HttpWebRequest req;
+    private static List<Action> callbacks = new List<Action>();
+    private static object lockObj = new object();
     public void OnRequest(string url, string scontent, Action<string> actionResult, Action<string> actionFailed)
     {
-        try
+        new Thread(new ThreadStart(() =>
         {
-            byte[] bs = Encoding.ASCII.GetBytes(scontent);
-            HttpWebRequest req = (HttpWebRequest)HttpWebRequest.Create(url);
-            req.Method = "POST";
-            req.ContentType = "application/x-www-form-urlencoded";
-            req.ContentLength = bs.Length;
-            using (Stream reqStream = req.GetRequestStream())
+            try
             {
-                reqStream.Write(bs, 0, bs.Length);
-            }
-            using (WebResponse wr = req.GetResponse())
-            {
-                actionResult(new StreamReader(wr.GetResponseStream(), Encoding.UTF8).ReadToEnd());
-            }
-        }
-        catch (Exception ex)
-        {
-            actionFailed(ex.StackTrace);
-        }
-    }
+                byte[] bs = Encoding.ASCII.GetBytes(scontent);
+                var req = (HttpWebRequest)HttpWebRequest.Create(url);
+                req.Method = "POST";
+                req.ContentType = "application/x-www-form-urlencoded";
+                req.ContentLength = bs.Length;
+                using (Stream reqStream = req.GetRequestStream())
+                {
+                    reqStream.Write(bs, 0, bs.Length);
+                }
+                using (WebResponse wr = req.GetResponse())
+                {
+                    var result = new StreamReader(wr.GetResponseStream(), Encoding.UTF8).ReadToEnd();
+                    lock (lockObj)
+                    {
+                        callbacks.Add(() =>
+                        {
+                            if (actionResult != null)
+                                actionResult(result);
+                        });
+                    }
 
-    private IEnumerator Send(string url, string scontent, Action<string> actionResult, Action<string> actionFailed)
+                }
+            }
+            catch (Exception ex)
+            {
+                lock (lockObj)
+                {
+                    callbacks.Add(() =>
+                    {
+                        if (actionFailed != null)
+                            actionFailed(ex.Message);
+                    });
+                }
+
+            }
+        }
+        )).Start();
+    }
+    private void Start()
     {
-        WWW www = null;
-        if (string.IsNullOrEmpty(scontent))
+
+    }
+    private void Update()
+    {
+        if (callbacks.Count == 0)
         {
-            www = new WWW(url);
+            return;
         }
-        else
+        lock (lockObj)
         {
-            www = new WWW(url, System.Text.Encoding.Default.GetBytes(scontent));
+            foreach (var cb in callbacks)
+            {
+                //if (cb.Target != null)
+                {
+                    cb();
+                }
+            }
+            callbacks.Clear();
         }
-        yield return www;
-        if (string.IsNullOrEmpty(www.error))
-        {
-            var text = www.text;
-            actionResult(text);
-        }
-        else
-        {
-            actionFailed(www.error);
-        }
-        www.Dispose();
     }
 }

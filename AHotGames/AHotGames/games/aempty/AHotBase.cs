@@ -224,6 +224,22 @@ public abstract class AHotBase
     {
         SendMessageToUnityReceiver("load|" + classname + "|" + prefab + "|" + arg);
     }
+    public static void LoadAnotherUI<T>() where T : AHotBase
+    {
+        LoadAnotherUI(typeof(T).Name);
+    }
+    public static void LoadAnotherUI(string uiname)
+    {
+        LoadAnotherClass(uiname, "UI/" + uiname + ".prefab");
+    }
+    protected void UnloadThisUI()
+    {
+        if (dGameObjects.ContainsKey(gameObj.name))
+        {
+            dGameObjects.Remove(gameObj.name);
+        }
+        GameObject.Destroy(gameObj);
+    }
     public static void UnloadAllClasses()
     {
         SendMessageToUnityReceiver("unloadall");

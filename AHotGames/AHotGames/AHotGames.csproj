@@ -79,6 +79,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="games\uis\RegisterUI.cs" />
     <Compile Include="games\uis\LoginUI.cs" />
     <Compile Include="games\uis\FirstUI.cs" />
     <Compile Include="games\AEntrance.cs" />
@@ -90,6 +91,7 @@
     <Compile Include="utils\UEmitMessager.cs" />
     <Compile Include="utils\UOnGUIer.cs" />
     <Compile Include="utils\UStaticFuncs.cs" />
+    <Compile Include="utils\Utils.cs" />
     <Compile Include="utils\UUpdater.cs" />
     <Compile Include="utils\UWebSender.cs" />
   </ItemGroup>
