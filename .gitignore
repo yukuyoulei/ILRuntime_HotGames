@@ -1,2 +1,8 @@
-
-*.cache
+AHotGames/.vs/*
+AHotGames/AHotGames/obj/*
+UHotGames/Library/*
+UHotGames/obj/*
+UHotGames/Temp/*
+UHotGames/Release/*
+UHotGames/ab1/*
+UHotGames/RemoteResources/*

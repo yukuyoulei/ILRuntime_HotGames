@@ -5,7 +5,7 @@ using System.Text;
 using UnityEngine.UI;
 using UnityEngine;
 
-public class FirstUI : AHotBase
+public class UIFirst : AHotBase
 {
 	protected override void InitComponents()
 	{

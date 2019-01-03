@@ -9,7 +9,7 @@ public class AEntrance : AHotBase
 {
     protected override void InitComponents()
     {
-        LoadAnotherClass("LoginUI", "UI/LoginUI.prefab");
+        LoadAnotherUI<UILogin>();
     }
 
 }

@@ -18,5 +18,7 @@ public static class Utils
         }
         return sBuilder.ToString();
     }
+
+    public static string BaseURL = "https://cn1.ydvrgame.com/felement/";
 }
 

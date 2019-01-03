@@ -5,7 +5,7 @@ using System.Text;
 using UnityEngine.UI;
 using UnityEngine;
 
-public class LoginUI : AHotBase
+public class UILogin : AHotBase
 {
     public static string CachedUsername
     {
@@ -41,7 +41,7 @@ public class LoginUI : AHotBase
             btnLogin.enabled = false;
             var username = inputUsername.text;
             var password = inputPassword.text;
-            UWebSender.Instance.OnRequest("http://cn1.ydvrgame.com/felement/accountlogin"
+            UWebSender.Instance.OnRequest(Utils.BaseURL + "accountlogin"
                 , string.Format("username={0}&password={1}", username, Utils.MD5Hash(password))
                 , (result) =>
                 {
@@ -61,7 +61,7 @@ public class LoginUI : AHotBase
         {
             UnloadThisUI();
 
-            LoadAnotherUI("RegisterUI");
+            LoadAnotherUI<UIRegister>();
         });
     }
 }

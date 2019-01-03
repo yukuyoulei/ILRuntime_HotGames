@@ -33,6 +33,11 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\UHotGames\Assets\Plugins\Newtonsoft.Json.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -79,9 +84,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="games\uis\RegisterUI.cs" />
-    <Compile Include="games\uis\LoginUI.cs" />
-    <Compile Include="games\uis\FirstUI.cs" />
+    <Compile Include="games\uis\UIAlert.cs" />
+    <Compile Include="games\uis\UIRegister.cs" />
+    <Compile Include="games\uis\UILogin.cs" />
+    <Compile Include="games\uis\UIFirst.cs" />
     <Compile Include="games\AEntrance.cs" />
     <Compile Include="games\aempty\AEmptyUI.cs" />
     <Compile Include="utils\AHotDrag.cs" />

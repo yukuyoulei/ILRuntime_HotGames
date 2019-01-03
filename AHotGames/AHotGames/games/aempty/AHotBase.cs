@@ -9,6 +9,7 @@ public abstract class AHotBase
     protected GameObject gameObj;
     public static AHotBase curGame;
     public static string strArg;
+    protected bool bDestroying;
     public void SetGameObj(GameObject gameObj, string arg)
     {
         if (dGameObjects.ContainsKey(gameObj.name))
@@ -234,6 +235,8 @@ public abstract class AHotBase
     }
     protected void UnloadThisUI()
     {
+        bDestroying = true;
+
         if (dGameObjects.ContainsKey(gameObj.name))
         {
             dGameObjects.Remove(gameObj.name);

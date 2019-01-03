@@ -27,6 +27,7 @@ public class UWebSender : MonoBehaviour
     private static object lockObj = new object();
     public void OnRequest(string url, string scontent, Action<string> actionResult, Action<string> actionFailed)
     {
+        Debug.Log("request " + url + "?" + scontent);
         new Thread(new ThreadStart(() =>
         {
             try
