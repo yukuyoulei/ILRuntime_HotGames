@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using UnityEngine.UI;
 using UnityEngine;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 public class UILogin : AHotBase
 {
@@ -18,6 +20,7 @@ public class UILogin : AHotBase
             PlayerPrefs.SetString("un", value);
         }
     }
+    public static string token { get; set; }
     protected override void InitComponents()
     {
         var inputUsername = FindWidget<InputField>("inputUsername");
@@ -46,9 +49,21 @@ public class UILogin : AHotBase
                 , (result) =>
                 {
                     btnLogin.enabled = true;
-                    Debug.Log("web result " + result);
 
-                    CachedUsername = username;
+                    var jres = (JObject)JsonConvert.DeserializeObject(result);
+                    var err = jres["err"].ToString();
+                    if (err == "0")
+                    {
+                        CachedUsername = jres["username"].ToString();
+                        token = jres["token"].ToString();
+
+                        UnloadThisUI();
+                        LoadAnotherUI<UIMain>();
+                    }
+                    else
+                    {
+                        UIAlert.Show("登录失败，" + Utils.ErrorFormat(err));
+                    }
                 }
                 , (error) =>
                 {

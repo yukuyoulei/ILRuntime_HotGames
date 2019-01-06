@@ -84,6 +84,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="games\uis\UIMain.cs" />
     <Compile Include="games\uis\UIAlert.cs" />
     <Compile Include="games\uis\UIRegister.cs" />
     <Compile Include="games\uis\UILogin.cs" />

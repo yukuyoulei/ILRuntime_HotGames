@@ -19,12 +19,6 @@ public class UIRegister : AHotBase
             LoadAnotherUI<UILogin>();
         });
 
-        var dErrors = new Dictionary<string, string>();
-        dErrors.Add("-1", "系统错误。");
-        dErrors.Add("-2", "重复的用户名。");
-        dErrors.Add("-3", "无效的用户名长度。");
-        dErrors.Add("-4", "无效的邮箱地址。");
-
         var inputUsername = FindWidget<InputField>("inputUsername");
         var inputEmail = FindWidget<InputField>("inputEmail");
         var inputPassword = FindWidget<InputField>("inputPassword");
@@ -78,13 +72,9 @@ public class UIRegister : AHotBase
                             LoadAnotherUI<UILogin>();
                         }, null, true);
                     }
-                    else if (dErrors.ContainsKey(err))
-                    {
-                        UIAlert.Show("注册失败，" + dErrors[err]);
-                    }
                     else
                     {
-                        UIAlert.Show("注册失败，错误码：" + err + ",请重新再试。");
+                        UIAlert.Show("注册失败，" + Utils.ErrorFormat(err));
                     }
                 }
                 , (failedRes) =>

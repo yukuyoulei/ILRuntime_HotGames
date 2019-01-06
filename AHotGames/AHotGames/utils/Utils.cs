@@ -20,5 +20,23 @@ public static class Utils
     }
 
     public static string BaseURL = "https://cn1.ydvrgame.com/felement/";
+
+    private static Dictionary<string, string> dErrors;
+    public static string ErrorFormat(string error)
+    {
+        if (dErrors == null)
+        {
+            dErrors = new Dictionary<string, string>();
+            dErrors.Add("2", "无效的token。");
+            dErrors.Add("1", "账号密码错误。");
+            dErrors.Add("-1", "系统错误。");
+            dErrors.Add("-2", "重复的用户名。");
+            dErrors.Add("-3", "无效的用户名长度。");
+            dErrors.Add("-4", "无效的邮箱地址。");
+        }
+        if (dErrors.ContainsKey(error))
+            return dErrors[error];
+        return error;
+    }
 }
 

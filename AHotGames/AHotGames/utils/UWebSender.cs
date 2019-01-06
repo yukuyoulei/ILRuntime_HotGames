@@ -44,6 +44,7 @@ public class UWebSender : MonoBehaviour
                 using (WebResponse wr = req.GetResponse())
                 {
                     var result = new StreamReader(wr.GetResponseStream(), Encoding.UTF8).ReadToEnd();
+                    Debug.Log("web result " + result);
                     lock (lockObj)
                     {
                         callbacks.Add(() =>
