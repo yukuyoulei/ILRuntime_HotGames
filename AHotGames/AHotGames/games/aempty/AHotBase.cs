@@ -225,7 +225,7 @@ public abstract class AHotBase
     {
         SendMessageToUnityReceiver("load|" + classname + "|" + prefab + "|" + arg);
     }
-    public static void LoadAnotherUI<T>() where T : AHotBase
+    public static void LoadAnother<T>() where T : AHotBase
     {
         LoadAnotherUI(typeof(T).Name);
     }
@@ -233,7 +233,7 @@ public abstract class AHotBase
     {
         LoadAnotherClass(uiname, "UI/" + uiname + ".prefab");
     }
-    protected void UnloadThisUI()
+    protected void UnloadThis()
     {
         bDestroying = true;
 

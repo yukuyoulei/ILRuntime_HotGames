@@ -9,10 +9,14 @@ using Newtonsoft.Json;
 
 public class UIMain : AHotBase
 {
+    Button menuCell;
     protected override void InitComponents()
     {
         var textUsername = FindWidget<Text>("textUsername");
         textUsername.text = UILogin.CachedUsername;
+
+        menuCell = FindWidget<Button>("menuCell");
+        menuCell.gameObject.SetActive(false);
 
         var btnLogout = FindWidget<Button>("btnLogout");
         btnLogout.onClick.AddListener(() =>
@@ -24,8 +28,8 @@ public class UIMain : AHotBase
                    var err = jres["err"].ToString();
                    if (err == "0")
                    {
-                       UnloadThisUI();
-                       LoadAnotherUI<UILogin>();
+                       UnloadThis();
+                       LoadAnother<UILogin>();
                    }
                    else
                    {
@@ -36,6 +40,15 @@ public class UIMain : AHotBase
                    UIAlert.Show("web error:" + fail);
                });
 
+        });
+
+        var menu = GameObject.Instantiate(menuCell, menuCell.transform.parent);
+        menu.gameObject.SetActive(true);
+        menu.GetComponentInChildren<Text>().text = "孤独的世界";
+        menu.onClick.AddListener(() =>
+        {
+            UnloadThis();
+            LoadAnother<GameLonelyWorld>();
         });
     }
 }

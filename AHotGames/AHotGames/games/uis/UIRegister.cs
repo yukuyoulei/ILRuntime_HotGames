@@ -14,9 +14,9 @@ public class UIRegister : AHotBase
         var btnReturn = FindWidget<Button>("btnReturn");
         btnReturn.onClick.AddListener(() =>
         {
-            UnloadThisUI();
+            UnloadThis();
 
-            LoadAnotherUI<UILogin>();
+            LoadAnother<UILogin>();
         });
 
         var inputUsername = FindWidget<InputField>("inputUsername");
@@ -66,10 +66,10 @@ public class UIRegister : AHotBase
                     {
                         UIAlert.Show("注册成功，请返回登录界面登录。", () =>
                         {
-                            UnloadThisUI();
+                            UnloadThis();
 
                             UILogin.CachedUsername = jres["username"].ToString();
-                            LoadAnotherUI<UILogin>();
+                            LoadAnother<UILogin>();
                         }, null, true);
                     }
                     else

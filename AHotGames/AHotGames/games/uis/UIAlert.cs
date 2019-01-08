@@ -21,13 +21,13 @@ public class UIAlert : AHotBase
         btnConfirm.onClick.AddListener(() =>
         {
             actionConfirm?.Invoke();
-            UnloadThisUI();
+            UnloadThis();
         });
         btnCancel = FindWidget<Button>("btnCancel");
         btnCancel.onClick.AddListener(() =>
         {
             actionCancel?.Invoke();
-            UnloadThisUI();
+            UnloadThis();
         });
 
         if (bHideConfirmButton)
@@ -62,7 +62,7 @@ public class UIAlert : AHotBase
         if (sintance == null
             || sintance.bDestroying)
         {
-            LoadAnotherUI<UIAlert>();
+            LoadAnother<UIAlert>();
         }
     }
     public static void Hide()
@@ -70,7 +70,7 @@ public class UIAlert : AHotBase
         if (sintance != null
             && !sintance.bDestroying)
         {
-            sintance.UnloadThisUI();
+            sintance.UnloadThis();
         }
     }
 }

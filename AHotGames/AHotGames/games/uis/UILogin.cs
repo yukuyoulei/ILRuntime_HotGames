@@ -57,8 +57,8 @@ public class UILogin : AHotBase
                         CachedUsername = jres["username"].ToString();
                         token = jres["token"].ToString();
 
-                        UnloadThisUI();
-                        LoadAnotherUI<UIMain>();
+                        UnloadThis();
+                        LoadAnother<UIMain>();
                     }
                     else
                     {
@@ -74,9 +74,9 @@ public class UILogin : AHotBase
         var btnRegister = FindWidget<Button>("btnRegister");
         btnRegister.onClick.AddListener(() =>
         {
-            UnloadThisUI();
+            UnloadThis();
 
-            LoadAnotherUI<UIRegister>();
+            LoadAnother<UIRegister>();
         });
     }
 }
