@@ -378,11 +378,13 @@ namespace ILRuntime.Runtime.CLRBinding
 
         static bool CheckAssignableToCrossBindingAdapters(Enviorment.AppDomain domain, Type type)
         {
+            if (type == typeof(object))
+                return true;
             bool res = domain.CrossBindingAdaptors.ContainsKey(type);
             if (!res)
             {
                 var baseType = type.BaseType;
-                if(baseType != typeof(object))
+                if (baseType != null && baseType != typeof(object))
                 {
                     res = CheckAssignableToCrossBindingAdapters(domain, baseType);
                 }

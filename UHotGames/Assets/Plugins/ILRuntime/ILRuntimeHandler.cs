@@ -27,6 +27,7 @@ public class ILRuntimeHandler
 	void Init()
 	{
 		appdomain = new ILRuntime.Runtime.Enviorment.AppDomain();
+
 #if UNITY_EDITOR
 		//appdomain.DebugService.StartDebugService(56000);
 #endif
@@ -34,7 +35,7 @@ public class ILRuntimeHandler
 	}
 
 	List<string> loadedDlls = new List<string>();
-	public void DoLoadDll(string dll, byte[] dllBytes)
+	public void DoLoadDll(string dll, byte[] dllBytes, byte[] pdbBytes = null)
 	{
 		if (loadedDlls.Contains(dll))
 		{
@@ -42,9 +43,16 @@ public class ILRuntimeHandler
 		}
 		loadedDlls.Add(dll);
 
-		using (System.IO.MemoryStream fs = new MemoryStream(dllBytes))
+		MemoryStream pdb = null;
+#if UNITY_EDITOR
+		if (pdbBytes != null)
 		{
-			appdomain.LoadAssembly(fs, null, new Mono.Cecil.Pdb.PdbReaderProvider());
+			pdb = new MemoryStream(pdbBytes);
+		}
+#endif
+		System.IO.MemoryStream fs = new MemoryStream(dllBytes);
+		{
+			appdomain.LoadAssembly(fs, pdb, new Mono.Cecil.Pdb.PdbReaderProvider());
 		}
 	}
 	unsafe void InitializeILRuntime()
@@ -206,19 +214,19 @@ public class ILRuntimeHandler
 		appdomain.Invoke("AGameBase", "EmitMessage", null, gameObjectName, message);
 	}
 
-    private List<GameObject> Objs = new List<GameObject>();
+	private List<GameObject> Objs = new List<GameObject>();
 	public void OnLoadClass(string entranceClass, GameObject rootObj, string arg = "")
 	{
-        Objs.Add(rootObj);
+		Objs.Add(rootObj);
 		appdomain.Invoke(entranceClass, "SetGameObj", appdomain.Instantiate(entranceClass), rootObj, arg);
 	}
-    public void OnUnloadAll()
-    {
-        foreach (var obj in Objs)
-        {
-            GameObject.Destroy(obj);
-        }
-    }
+	public void OnUnloadAll()
+	{
+		foreach (var obj in Objs)
+		{
+			GameObject.Destroy(obj);
+		}
+	}
 
 	public void SetUnityMessageReceiver(GameObject receiver)
 	{
