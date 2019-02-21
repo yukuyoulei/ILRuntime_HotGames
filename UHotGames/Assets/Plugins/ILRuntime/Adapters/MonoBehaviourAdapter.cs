@@ -119,23 +119,7 @@ public class MonoBehaviourAdapter : CrossBindingAdaptor
 			}
 		}
 
-        IMethod mOnGUIMethod;
-        bool mOnGUIMethodGot;
-        public void OnGUI()
-        {
-            if (!mOnGUIMethodGot)
-            {
-                mOnGUIMethod = instance.Type.GetMethod("OnGUI", 0);
-                mOnGUIMethodGot = true;
-            }
-
-            if (mStartMethod != null)
-            {
-                appdomain.Invoke(mOnGUIMethod, instance, null);
-            }
-        }
-
-        public override string ToString()
+		public override string ToString()
 		{
 			IMethod m = appdomain.ObjectType.GetMethod("ToString", 0);
 			m = instance.Type.GetVirtualMethod(m);

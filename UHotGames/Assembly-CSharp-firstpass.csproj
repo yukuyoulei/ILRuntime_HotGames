@@ -62,6 +62,8 @@
   <ItemGroup>
     <Compile Include="Assets\Plugins\ILRuntime\Adapters\CoroutineAdapter.cs" />
     <Compile Include="Assets\Plugins\ILRuntime\Adapters\IDisposableAdapter.cs" />
+    <Compile Include="Assets\Plugins\ILRuntime\Adapters\ILRegType.cs" />
+    <Compile Include="Assets\Plugins\ILRuntime\Adapters\MaskableGraphicAdapter.cs" />
     <Compile Include="Assets\Plugins\ILRuntime\Adapters\MonoBehaviourAdapter.cs" />
     <Compile Include="Assets\Plugins\ILRuntime\Generated\CLRBindings.cs" />
     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Array_Binding.cs" />

@@ -27,7 +27,6 @@ public class ILRuntimeHandler
 	void Init()
 	{
 		appdomain = new ILRuntime.Runtime.Enviorment.AppDomain();
-
 #if UNITY_EDITOR
 		//appdomain.DebugService.StartDebugService(56000);
 #endif
@@ -70,6 +69,15 @@ public class ILRuntimeHandler
 
 	private void InitDelegates()
 	{
+		ILRegType.RegisterFunctionDelegate(appdomain);		appdomain.DelegateManager.RegisterMethodDelegate<System.String>();		appdomain.DelegateManager.RegisterFunctionDelegate<ILRuntime.Runtime.Intepreter.ILTypeInstance, ILRuntime.Runtime.Intepreter.ILTypeInstance, System.Int32>();
+		appdomain.DelegateManager.RegisterDelegateConvertor<System.Comparison<ILRuntime.Runtime.Intepreter.ILTypeInstance>>((act) =>
+		{
+			return new System.Comparison<ILRuntime.Runtime.Intepreter.ILTypeInstance>((x, y) =>
+			{
+				return ((Func<ILRuntime.Runtime.Intepreter.ILTypeInstance, ILRuntime.Runtime.Intepreter.ILTypeInstance, System.Int32>)act)(x, y);
+			});
+		});
+
 		appdomain.DelegateManager.RegisterDelegateConvertor<System.Threading.ThreadStart>((act) =>
 		{
 			return new System.Threading.ThreadStart(() =>
@@ -210,22 +218,35 @@ public class ILRuntimeHandler
 
 	public void EmitMessage(string message, string gameObjectName = "")
 	{
-		Debug.Log("emit message " + gameObjectName + "/" + message);
-		appdomain.Invoke("AGameBase", "EmitMessage", null, gameObjectName, message);
+		//Debug.Log("emit message " + gameObjectName + "/" + message);
+		appdomain.Invoke("AHotBase", "EmitMessage", null, gameObjectName, message);
 	}
 
-	private List<GameObject> Objs = new List<GameObject>();
-	public void OnLoadClass(string entranceClass, GameObject rootObj, string arg = "")
+	private Dictionary<string, GameObject> dObjs = new Dictionary<string, GameObject>();
+	public void OnLoadClass(string entranceClass, GameObject rootObj, bool CanBeUnloaded = true, string arg = "")
 	{
-		Objs.Add(rootObj);
+		if (CanBeUnloaded)
+		{
+			OnUnloadClass(entranceClass);
+			dObjs.Add(entranceClass, rootObj);
+		}
 		appdomain.Invoke(entranceClass, "SetGameObj", appdomain.Instantiate(entranceClass), rootObj, arg);
 	}
-	public void OnUnloadAll()
+	public void OnUnloadClass(string entranceClass)
 	{
-		foreach (var obj in Objs)
+		if (dObjs.ContainsKey(entranceClass))
 		{
-			GameObject.Destroy(obj);
+			GameObject.Destroy(dObjs[entranceClass]);
+			dObjs.Remove(entranceClass);
 		}
+	}
+	public void OnUnloadAllClasses()
+	{
+		foreach (var d in dObjs)
+		{
+			GameObject.Destroy(d.Value);
+		}
+		dObjs.Clear();
 	}
 
 	public void SetUnityMessageReceiver(GameObject receiver)

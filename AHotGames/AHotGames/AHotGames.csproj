@@ -86,6 +86,7 @@
   <ItemGroup>
     <Compile Include="games\game\MMORPG\ui\UMUICreateAvatar.cs" />
     <Compile Include="games\game\MMORPG\UMMORPG.cs" />
+    <Compile Include="games\uis\UICommonWait.cs" />
     <Compile Include="games\uis\GameLonelyWorld.cs" />
     <Compile Include="games\uis\UIMain.cs" />
     <Compile Include="games\uis\UIAlert.cs" />

@@ -19,7 +19,7 @@ public static class Utils
         return sBuilder.ToString();
     }
 
-    public static string BaseURL = "https://cn1.ydvrgame.com/felement/";
+    public static string BaseURL = "http://fscoding.top/common/";
 
     private static Dictionary<string, string> dErrors;
     public static string ErrorFormat(string error)
@@ -27,7 +27,7 @@ public static class Utils
         if (dErrors == null)
         {
             dErrors = new Dictionary<string, string>();
-            dErrors.Add("2", "无效的token。");
+			dErrors.Add("2", "无效的token。");
             dErrors.Add("1", "账号密码错误。");
             dErrors.Add("-1", "系统错误。");
             dErrors.Add("-2", "重复的用户名。");
