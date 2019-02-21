@@ -9,8 +9,8 @@ public class UMMORPG : AHotBase
 {
 	protected override void InitComponents()
 	{
-		UWebSender.Instance.OnRequest(Utils.BaseURL + "", "", (res) => { }, (err) => { });
-		LoadAnother<UMUICreateAvatar>();
+		/*UWebSender.Instance.OnRequest(Utils.BaseURL + "", "", (res) => { }, (err) => { });
+		LoadAnother<UMUICreateAvatar>();*/
 	}
 }
 
