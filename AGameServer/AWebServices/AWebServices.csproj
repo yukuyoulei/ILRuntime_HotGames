@@ -1,0 +1,272 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{2FD94D03-4038-4F94-829B-B0BA18AA3924}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AWebServices</RootNamespace>
+    <AssemblyName>AWebServices</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <Use64BitIISExpress />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MongoDB.Bson">
+      <HintPath>..\Deploy\bin\MongoDB.Bson.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Driver">
+      <HintPath>..\Deploy\bin\MongoDB.Driver.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Driver.Core">
+      <HintPath>..\Deploy\bin\MongoDB.Driver.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="asmx\Account.asmx" />
+    <Content Include="asmx\Avatar.asmx" />
+    <Content Include="asmx\Entry.asmx" />
+    <Content Include="asmx\Wiki.asmx" />
+    <Content Include="asmx\WSManage.asmx" />
+    <Content Include="Global.asax" />
+    <Content Include="Src\LibUtils\LibUtils.csproj" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="apiweb\WSHandler.cs" />
+    <Compile Include="asmx\Account.asmx.cs">
+      <DependentUpon>Account.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="asmx\Avatar.asmx.cs">
+      <DependentUpon>Avatar.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="asmx\Wiki.asmx.cs">
+      <DependentUpon>Wiki.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="asmx\WSManage.asmx.cs">
+      <DependentUpon>WSManage.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="asmx\Entry.asmx.cs">
+      <DependentUpon>Entry.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Src\LibUtils\ADictionary.cs" />
+    <Compile Include="Src\LibUtils\AIniLoader.cs" />
+    <Compile Include="Src\LibUtils\AOutput.cs" />
+    <Compile Include="Src\LibUtils\ApiDateTime.cs" />
+    <Compile Include="Src\LibUtils\ApiRandom.cs" />
+    <Compile Include="Src\LibUtils\ASessionGenerator.cs" />
+    <Compile Include="Src\LibUtils\AWebServerUtils.cs" />
+    <Compile Include="Src\LibUtils\BZip2\BZip2.cs" />
+    <Compile Include="Src\LibUtils\BZip2\BZip2Constants.cs" />
+    <Compile Include="Src\LibUtils\BZip2\BZip2Exception.cs" />
+    <Compile Include="Src\LibUtils\BZip2\BZip2InputStream.cs" />
+    <Compile Include="Src\LibUtils\BZip2\BZip2OutputStream.cs" />
+    <Compile Include="Src\LibUtils\Calculator.cs" />
+    <Compile Include="Src\LibUtils\CheckCn.cs" />
+    <Compile Include="Src\LibUtils\Checksums\Adler32.cs" />
+    <Compile Include="Src\LibUtils\Checksums\CRC32.cs" />
+    <Compile Include="Src\LibUtils\Checksums\IChecksum.cs" />
+    <Compile Include="Src\LibUtils\Checksums\StrangeCRC.cs" />
+    <Compile Include="Src\LibUtils\CommonUtil.cs" />
+    <Compile Include="Src\LibUtils\ConsoleCmdBase.cs" />
+    <Compile Include="Src\LibUtils\Core\FileSystemScanner.cs" />
+    <Compile Include="Src\LibUtils\Core\INameTransform.cs" />
+    <Compile Include="Src\LibUtils\Core\IScanFilter.cs" />
+    <Compile Include="Src\LibUtils\Core\NameFilter.cs" />
+    <Compile Include="Src\LibUtils\Core\PathFilter.cs" />
+    <Compile Include="Src\LibUtils\Core\StreamUtils.cs" />
+    <Compile Include="Src\LibUtils\Core\WindowsPathUtils.cs" />
+    <Compile Include="Src\LibUtils\CRC.cs" />
+    <Compile Include="Src\LibUtils\CSBitFieldDynamic.cs" />
+    <Compile Include="Src\LibUtils\CSCSV.cs" />
+    <Compile Include="Src\LibUtils\DBByteStream.cs" />
+    <Compile Include="Src\LibUtils\Encryption\PkzipClassic.cs" />
+    <Compile Include="Src\LibUtils\Encryption\ZipAESStream.cs" />
+    <Compile Include="Src\LibUtils\Encryption\ZipAESTransform.cs" />
+    <Compile Include="Src\LibUtils\FormulaStringFx.cs" />
+    <Compile Include="Src\LibUtils\GZip\GZIPConstants.cs" />
+    <Compile Include="Src\LibUtils\GZip\GZipException.cs" />
+    <Compile Include="Src\LibUtils\GZip\GzipInputStream.cs" />
+    <Compile Include="Src\LibUtils\GZip\GzipOutputStream.cs" />
+    <Compile Include="Src\LibUtils\HttpUtility.cs" />
+    <Compile Include="Src\LibUtils\Lzw\LzwConstants.cs" />
+    <Compile Include="Src\LibUtils\Lzw\LzwException.cs" />
+    <Compile Include="Src\LibUtils\Lzw\LzwInputStream.cs" />
+    <Compile Include="Src\LibUtils\MD5String.cs" />
+    <Compile Include="Src\LibUtils\MyMD5.cs" />
+    <Compile Include="Src\LibUtils\NetStates.cs" />
+    <Compile Include="Src\LibUtils\Pair.cs" />
+    <Compile Include="Src\LibUtils\RemoteObject.cs" />
+    <Compile Include="Src\LibUtils\SameDay.cs" />
+    <Compile Include="Src\LibUtils\Singleton.cs" />
+    <Compile Include="Src\LibUtils\StringUtils.cs" />
+    <Compile Include="Src\LibUtils\Tar\InvalidHeaderException.cs" />
+    <Compile Include="Src\LibUtils\Tar\TarArchive.cs" />
+    <Compile Include="Src\LibUtils\Tar\TarBuffer.cs" />
+    <Compile Include="Src\LibUtils\Tar\TarEntry.cs" />
+    <Compile Include="Src\LibUtils\Tar\TarException.cs" />
+    <Compile Include="Src\LibUtils\Tar\TarHeader.cs" />
+    <Compile Include="Src\LibUtils\Tar\TarInputStream.cs" />
+    <Compile Include="Src\LibUtils\Tar\TarOutputStream.cs" />
+    <Compile Include="Src\LibUtils\typeParser.cs" />
+    <Compile Include="Src\LibUtils\UnhandledExceptionCatcher.cs" />
+    <Compile Include="Src\LibUtils\Util_Zip.cs" />
+    <Compile Include="Src\LibUtils\Vector.cs" />
+    <Compile Include="Src\LibUtils\WordFilter.cs" />
+    <Compile Include="Src\LibUtils\Zip\Compression\Deflater.cs" />
+    <Compile Include="Src\LibUtils\Zip\Compression\DeflaterConstants.cs" />
+    <Compile Include="Src\LibUtils\Zip\Compression\DeflaterEngine.cs" />
+    <Compile Include="Src\LibUtils\Zip\Compression\DeflaterHuffman.cs" />
+    <Compile Include="Src\LibUtils\Zip\Compression\DeflaterPending.cs" />
+    <Compile Include="Src\LibUtils\Zip\Compression\Inflater.cs" />
+    <Compile Include="Src\LibUtils\Zip\Compression\InflaterDynHeader.cs" />
+    <Compile Include="Src\LibUtils\Zip\Compression\InflaterHuffmanTree.cs" />
+    <Compile Include="Src\LibUtils\Zip\Compression\PendingBuffer.cs" />
+    <Compile Include="Src\LibUtils\Zip\Compression\Streams\DeflaterOutputStream.cs" />
+    <Compile Include="Src\LibUtils\Zip\Compression\Streams\InflaterInputStream.cs" />
+    <Compile Include="Src\LibUtils\Zip\Compression\Streams\OutputWindow.cs" />
+    <Compile Include="Src\LibUtils\Zip\Compression\Streams\StreamManipulator.cs" />
+    <Compile Include="Src\LibUtils\Zip\FastZip.cs" />
+    <Compile Include="Src\LibUtils\Zip\IEntryFactory.cs" />
+    <Compile Include="Src\LibUtils\Zip\SharpZipBaseException.cs" />
+    <Compile Include="Src\LibUtils\Zip\WindowsNameTransform.cs" />
+    <Compile Include="Src\LibUtils\Zip\ZipConstants.cs" />
+    <Compile Include="Src\LibUtils\Zip\ZipEntry.cs" />
+    <Compile Include="Src\LibUtils\Zip\ZipEntryFactory.cs" />
+    <Compile Include="Src\LibUtils\Zip\ZipException.cs" />
+    <Compile Include="Src\LibUtils\Zip\ZipExtraData.cs" />
+    <Compile Include="Src\LibUtils\Zip\ZipFile.cs" />
+    <Compile Include="Src\LibUtils\Zip\ZipHelperStream.cs" />
+    <Compile Include="Src\LibUtils\Zip\ZipInputStream.cs" />
+    <Compile Include="Src\LibUtils\Zip\ZipNameTransform.cs" />
+    <Compile Include="Src\LibUtils\Zip\ZipOutputStream.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Src\Avatar\AAvatar.cs" />
+    <Compile Include="Src\Avatar\AAvatarManager.cs" />
+    <Compile Include="Src\ADBAccessor.cs" />
+    <Compile Include="Src\ADBManager.cs" />
+    <Compile Include="Src\Components\AComponentBag.cs" />
+    <Compile Include="Src\Components\AComponentBase.cs" />
+    <Compile Include="Src\Avatar\AGameObj.cs" />
+    <Compile Include="Src\Avatar\AParam.cs" />
+    <Compile Include="Src\Components\AComponentParam.cs" />
+    <Compile Include="Src\Defs.cs" />
+    <Compile Include="Src\Managers\AFriendManager.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="Properties\PublishProfiles\AWebServices.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Src\LibUtils\Properties\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>47325</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:47325/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>这台计算机上缺少此项目引用的 NuGet 程序包。使用“NuGet 程序包还原”可下载这些程序包。有关更多信息，请参见 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的文件是 {0}。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

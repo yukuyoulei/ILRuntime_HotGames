@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit http://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>I:\Web\Web</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="Account.asmx">
+      <publishTime>09/13/2018 09:22:24</publishTime>
+    </File>
+    <File Include="bin/AHelloWeb.dll">
+      <publishTime>09/12/2018 18:38:34</publishTime>
+    </File>
+    <File Include="bin/AHelloWeb.pdb">
+      <publishTime>09/12/2018 18:38:34</publishTime>
+    </File>
+    <File Include="bin/AWebServices.dll">
+      <publishTime>10/16/2018 17:22:16</publishTime>
+    </File>
+    <File Include="bin/AWebServices.pdb">
+      <publishTime>10/16/2018 17:22:16</publishTime>
+    </File>
+    <File Include="bin/MongoDB.Bson.dll">
+      <publishTime>12/13/2016 11:52:31</publishTime>
+    </File>
+    <File Include="bin/MongoDB.Driver.Core.dll">
+      <publishTime>12/13/2016 11:52:31</publishTime>
+    </File>
+    <File Include="bin/MongoDB.Driver.dll">
+      <publishTime>12/13/2016 11:52:31</publishTime>
+    </File>
+    <File Include="bin/Newtonsoft.Json.dll">
+      <publishTime>03/24/2018 17:44:14</publishTime>
+    </File>
+    <File Include="Enter.asmx">
+      <publishTime>09/12/2018 18:41:05</publishTime>
+    </File>
+    <File Include="Global.asax">
+      <publishTime>09/12/2018 18:41:05</publishTime>
+    </File>
+    <File Include="LibUtils/LibUtils.csproj">
+      <publishTime>10/20/2017 14:39:21</publishTime>
+    </File>
+    <File Include="RoomManager.asmx">
+      <publishTime>09/12/2018 18:41:05</publishTime>
+    </File>
+    <File Include="User.asmx">
+      <publishTime>09/12/2018 18:41:05</publishTime>
+    </File>
+    <File Include="Account.asmx">
+      <publishTime>09/13/2018 09:22:24</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>10/15/2018 16:37:03</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

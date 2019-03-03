@@ -30,7 +30,8 @@ public class UMMORPG : AHotBase
 			else if (err == "3")
 			{
 				Debug.Log("create avatar");
-				//LoadAnother<UMUICreateAvatar>();
+                UnloadThis();
+				LoadAnother<UMUICreateAvatar>();
 			}
 		}, (err) => { });
 	}

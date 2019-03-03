@@ -1,9 +1,11 @@
-AHotGames/.vs/*
-AHotGames/AHotGames/obj/*
+.vs
+obj
+bin
+.svn
+# **表示忽略多层目录
+AGameServer/**/*.meta
 UHotGames/Library/*
-UHotGames/obj/*
 UHotGames/Temp/*
 UHotGames/Release/*
 UHotGames/ab1/*
 UHotGames/RemoteResources/*
-UHotGames/.vs/*

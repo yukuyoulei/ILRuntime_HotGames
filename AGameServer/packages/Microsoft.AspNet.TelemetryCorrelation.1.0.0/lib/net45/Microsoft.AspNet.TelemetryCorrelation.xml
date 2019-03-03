@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.AspNet.TelemetryCorrelation</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.AspNet.TelemetryCorrelation.ActivityExtensions">
+            <summary>
+            Extensions of Activity class
+            </summary>
+        </member>
+        <member name="F:Microsoft.AspNet.TelemetryCorrelation.ActivityExtensions.RequestIDHeaderName">
+            <summary>
+            Http header name to carry the Request ID.
+            </summary>
+        </member>
+        <member name="F:Microsoft.AspNet.TelemetryCorrelation.ActivityExtensions.CorrelationContextHeaderName">
+            <summary>
+            Http header name to carry the correlation context.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNet.TelemetryCorrelation.ActivityExtensions.Extract(System.Diagnostics.Activity,System.Collections.Specialized.NameValueCollection)">
+            <summary>
+            Reads Request-Id and Correlation-Context headers and sets ParentId and Baggage on Activity.
+            </summary>
+            <param name="activity">Instance of activity that has not been started yet.</param>
+            <param name="requestHeaders">Request headers collection.</param>
+            <returns>true if request was parsed successfully, false - otherwise.</returns>
+        </member>
+        <member name="M:Microsoft.AspNet.TelemetryCorrelation.ActivityExtensions.TryParse(System.Diagnostics.Activity,System.Collections.Specialized.NameValueCollection)">
+            <summary>
+            Reads Request-Id and Correlation-Context headers and sets ParentId and Baggage on Activity.
+            </summary>
+            <param name="activity">Instance of activity that has not been started yet.</param>
+            <param name="requestHeaders">Request headers collection.</param>
+            <returns>true if request was parsed successfully, false - otherwise.</returns>
+        </member>
+        <member name="T:Microsoft.AspNet.TelemetryCorrelation.ActivityHelper">
+            <summary>
+            Activity helper class
+            </summary>
+        </member>
+        <member name="F:Microsoft.AspNet.TelemetryCorrelation.ActivityHelper.AspNetListenerName">
+            <summary>
+            Listener name.
+            </summary>
+        </member>
+        <member name="F:Microsoft.AspNet.TelemetryCorrelation.ActivityHelper.AspNetActivityName">
+            <summary>
+            Activity name for http request.
+            </summary>
+        </member>
+        <member name="F:Microsoft.AspNet.TelemetryCorrelation.ActivityHelper.AspNetActivityStartName">
+            <summary>
+            Event name for the activity start event.
+            </summary>
+        </member>
+        <member name="F:Microsoft.AspNet.TelemetryCorrelation.ActivityHelper.AspNetActivityLostStopName">
+            <summary>
+            Event name for the activity stop event.
+            </summary>
+        </member>
+        <member name="F:Microsoft.AspNet.TelemetryCorrelation.ActivityHelper.ActivityKey">
+            <summary>
+            Key to store the activity in HttpContext.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNet.TelemetryCorrelation.ActivityHelper.RestoreCurrentActivity(System.Diagnostics.Activity)">
+            <summary>
+            It's possible that a request is executed in both native threads and managed threads,
+            in such case Activity.Current will be lost during native thread and managed thread switch.
+            This method is intended to restore the current activity in order to correlate the child
+            activities with the root activity of the request.
+            </summary>
+            <param name="root">Root activity id for the current request.</param>
+            <returns>If it returns an activity, it will be silently stopped with the parent activity</returns>
+        </member>
+        <member name="M:Microsoft.AspNet.TelemetryCorrelation.ActivityHelper.SaveCurrentActivity(System.Web.HttpContext,System.Diagnostics.Activity)">
+            <summary>
+            This should be called after the Activity starts and only for root activity of a request.
+            </summary>
+            <param name="context">Context to save context to.</param>
+            <param name="activity">Activity to save.</param>
+        </member>
+        <member name="T:Microsoft.AspNet.TelemetryCorrelation.TelemetryCorrelationHttpModule">
+            <summary>
+            Http Module sets ambient state using Activity API from DiagnosticsSource package.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNet.TelemetryCorrelation.TelemetryCorrelationHttpModule.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.AspNet.TelemetryCorrelation.TelemetryCorrelationHttpModule.Init(System.Web.HttpApplication)">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.AspNet.TelemetryCorrelation.AspNetTelemetryCorrelationEventSource">
+            <summary>
+            ETW EventSource tracing class.
+            </summary>
+        </member>
+        <member name="F:Microsoft.AspNet.TelemetryCorrelation.AspNetTelemetryCorrelationEventSource.Log">
+            <summary>
+            Instance of the PlatformEventSource class.
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -45,12 +45,10 @@ public class UILogin : AHotBase
             var username = inputUsername.text;
             var password = inputPassword.text;
 
-			UICommonWait.Show();
             UWebSender.Instance.OnRequest(Utils.BaseURL + "accountlogin"
                 , string.Format("username={0}&password={1}", username, Utils.MD5Hash(password))
                 , (result) =>
                 {
-					UICommonWait.Hide();
 					btnLogin.enabled = true;
 
                     var jres = (JObject)JsonConvert.DeserializeObject(result);
@@ -70,7 +68,6 @@ public class UILogin : AHotBase
                 }
                 , (error) =>
                 {
-					UICommonWait.Hide();
 					btnLogin.enabled = true;
                     Debug.Log("web error " + error);
                 });
