@@ -57,7 +57,7 @@ public class UIMain : AHotBase
 		menu.onClick.AddListener(() =>
 		{
 			UnloadThis();
-			LoadAnother<UMUICreateAvatar>();
+			LoadAnother<UMMORPG>();
 		});
 	}
 }

@@ -83,7 +83,7 @@
     <Content Include="asmx\Wiki.asmx" />
     <Content Include="asmx\WSManage.asmx" />
     <Content Include="Global.asax" />
-    <Content Include="Src\LibUtils\LibUtils.csproj" />
+    <None Include="Src\LibUtils\LibUtils.csproj" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

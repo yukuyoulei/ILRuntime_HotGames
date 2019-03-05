@@ -11,7 +11,7 @@ using System.Linq;
 
 public class Enter : MonoBehaviour
 {
-	public static string ConfigURL = "http://fscoding.top/hotgames/Config.txt";
+	public static string ConfigURL = "http://cn1.ydvrgame.com/hotgames/Config.txt";
 	public bool UseAB;
 	private void Start()
 	{

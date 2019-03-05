@@ -156,7 +156,8 @@ namespace AWebServices
         public void avatarcreate(string username, string token, string avatarname)
         {
             avatarname = filtername(avatarname);
-            if (avatarname.Length <= 2)
+            var len = CommonUtil.GetStringLength(avatarname);
+            if (len <= 2 || len > 12)
             {
                 SendError(ErrorDefs.AvatarNameInvalidLength);
                 return;
