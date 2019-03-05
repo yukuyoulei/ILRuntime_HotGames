@@ -1,7 +1,9 @@
 .vs
 obj
 bin
+!AGameServer/Deploy/bin
 .svn
+*.user
 # **表示忽略多层目录
 AGameServer/**/*.meta
 UHotGames/Library/*
