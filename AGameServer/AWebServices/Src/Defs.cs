@@ -28,6 +28,7 @@ public enum ErrorDefs
     TargetTooManyFriends,//对方好友数量已满，目前是可以加20个好友，随时可以调整
     TargetIsNotYourFriend,//对方还不是你的好友
     FindNone,//没有搜索到
+    InvalidSex,//无效的性别 = _ =
 }
 
 public static class InitValueDefs
@@ -59,6 +60,7 @@ public static class InfoNameDefs
 
     public static string AvatarName = "name";
     public static string AvatarGold = "gold";
+    public static string AvatarSex = "sex";
     public static string AvatarMoney = "Money";
     public static string AvatarHead = "head";
     public static string DailyCheckCount = "dcc";

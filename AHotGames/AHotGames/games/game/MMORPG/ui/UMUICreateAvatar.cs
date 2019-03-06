@@ -4,8 +4,6 @@ using System.Linq;
 using System.Text;
 using UnityEngine.UI;
 using UnityEngine;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 public class UMUICreateAvatar : AHotBase
 {
@@ -36,18 +34,33 @@ public class UMUICreateAvatar : AHotBase
             {
                 return;
             }
-            UWebSender.Instance.OnRequest(Utils.BaseURL + "avatarcreate", "username=" + UILogin.CachedUsername + "&token=" + UILogin.token + "&avatarname=" + inputNickname.text, (res) =>
-                  {
-                      var jres = (JObject)JsonConvert.DeserializeObject(res);
-                      if (jres["err"].ToString() == "0")
-                      {
-                          UIAlert.Show("创建角色成功。");
-                      }
-                      else
-                      {
-                          UIAlert.Show("创建角色失败，" + jres["err"]);
-                      }
-                  }, (err) => { });
+
+            UStaticWebRequests.DoCreateAvatar(UILogin.CachedUsername, UILogin.token, inputNickname.text, bfemale ? "1" : "0"
+                , (jcreateres) =>
+                {
+                    UIAlert.Show("创建角色成功，正在进入游戏。", null, null, true, true);
+                    DelayDoSth(() =>
+                    {
+                        UIAlert.Hide();
+                        UStaticWebRequests.DoSelectAvatar(UILogin.CachedUsername, UILogin.token
+                            , (jselres) =>
+                            {
+                                UnloadThis();
+                            }, (err) =>
+                            {
+                                UIAlert.Show("进入游戏失败，" + err);
+                            }, (err) =>
+                            {
+                                UIAlert.Show("进入游戏失败，" + err);
+                            });
+                    }, 3);
+                }, (err) =>
+                {
+                    UIAlert.Show("创建角色失败，" + err);
+                }, (err) =>
+                {
+                    UIAlert.Show("创建角色失败，" + err);
+                });
         });
         var btnReturn = FindWidget<Button>("btnReturn");
         btnReturn.onClick.AddListener(() =>
@@ -56,5 +69,6 @@ public class UMUICreateAvatar : AHotBase
             LoadAnother<UIMain>();
         });
     }
+
 }
 

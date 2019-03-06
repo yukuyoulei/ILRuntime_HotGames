@@ -45,31 +45,25 @@ public class UILogin : AHotBase
             var username = inputUsername.text;
             var password = inputPassword.text;
 
-            UWebSender.Instance.OnRequest(Utils.BaseURL + "accountlogin"
-                , string.Format("username={0}&password={1}", username, Utils.MD5Hash(password))
-                , (result) =>
+            UStaticWebRequests.DoLogin(username, Utils.MD5Hash(password),
+                (jres) =>
                 {
-					btnLogin.enabled = true;
+                    btnLogin.enabled = true;
+                    CachedUsername = jres["username"].ToString();
+                    token = jres["token"].ToString();
 
-                    var jres = (JObject)JsonConvert.DeserializeObject(result);
-                    var err = jres["err"].ToString();
-                    if (err == "0")
-                    {
-                        CachedUsername = jres["username"].ToString();
-                        token = jres["token"].ToString();
-
-                        UnloadThis();
-                        LoadAnother<UIMain>();
-                    }
-                    else
-                    {
-                        UIAlert.Show("登录失败，" + Utils.ErrorFormat(err));
-                    }
+                    UnloadThis();
+                    LoadAnother<UIMain>();
+                }
+                , (err) =>
+                {
+                    btnLogin.enabled = true;
+                    UIAlert.Show("登录失败，" + err);
                 }
                 , (error) =>
                 {
-					btnLogin.enabled = true;
-                    Debug.Log("web error " + error);
+                    btnLogin.enabled = true;
+                    UIAlert.Show("登录失败，网络错误：" + error);
                 });
         });
         var btnRegister = FindWidget<Button>("btnRegister");

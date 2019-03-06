@@ -50,6 +50,7 @@ public class AComponentParam : AComponentBase
             , ADBAccessor.filter_eq(InfoNameDefs.AvatarName, owner.OnGetStringParamValue(InfoNameDefs.AvatarName)),
             Builders<BsonDocument>.Update.Combine(u));
 
+        AOutput.Log("avatar " + owner.OnGetStringParamValue(InfoNameDefs.AvatarName) + " saved " + lDirtyParams.Count + " params");
         lDirtyParams.Clear();
     }
     public void RegistParam(string sparam, EParamType eParamType = EParamType.String)

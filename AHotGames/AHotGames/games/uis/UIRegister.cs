@@ -4,8 +4,6 @@ using System.Linq;
 using System.Text;
 using UnityEngine.UI;
 using UnityEngine;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json;
 
 public class UIRegister : AHotBase
 {
@@ -54,33 +52,26 @@ public class UIRegister : AHotBase
                 UIAlert.Show("密码长度应为6-16个字节。", null, null, true);
                 return;
             }
-            UWebSender.Instance.OnRequest(Utils.BaseURL + "accountregister"
-                , "username=" + inputUsername.text
-                    + "&password=" + Utils.MD5Hash(inputPassword.text)
-                    + "&mail=" + inputEmail.text
-                , (successRes) =>
-                {
-                    var jres = (JObject)JsonConvert.DeserializeObject(successRes);
-                    var err = jres["err"].ToString();
-                    if (err == "0")
+            UStaticWebRequests.DoRegist(inputUsername.text, Utils.MD5Hash(inputPassword.text), inputEmail.text
+                    , (jres) =>
                     {
                         UIAlert.Show("注册成功，请返回登录界面登录。", () =>
                         {
+                            UILogin.CachedUsername = jres["username"].ToString();
+
                             UnloadThis();
 
-                            UILogin.CachedUsername = jres["username"].ToString();
                             LoadAnother<UILogin>();
                         }, null, true);
                     }
-                    else
+                    , (err) =>
                     {
                         UIAlert.Show("注册失败，" + Utils.ErrorFormat(err));
                     }
-                }
-                , (failedRes) =>
-                {
-                    UIAlert.Show("网络错误：" + failedRes + " 请稍后再试。");
-                });
+                    , (failedRes) =>
+                    {
+                        UIAlert.Show("网络错误：" + failedRes + " 请稍后再试。");
+                    });
         });
 
     }

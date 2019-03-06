@@ -39,10 +39,11 @@ public class AAvatar : AGameObj
 		componentParam.RegistParam(InfoNameDefs.AvatarMoney, EParamType.Long);
 		componentParam.RegistParam(InfoNameDefs.DailyCheckCount, EParamType.Long);
 		componentParam.RegistParam(InfoNameDefs.LastDailyCheckTime, EParamType.Long);
-	}
+        componentParam.RegistParam(InfoNameDefs.AvatarSex, EParamType.Int);
+    }
 
-	#region components
-	AComponentParam _componentParam;
+    #region components
+    AComponentParam _componentParam;
 	public AComponentParam componentParam
 	{
 		get
@@ -88,6 +89,7 @@ public class AAvatar : AGameObj
 		InfoNameDefs.AvatarName,
 		InfoNameDefs.AvatarGold,
 		InfoNameDefs.AvatarMoney,
+        InfoNameDefs.AvatarSex,
 		InfoNameDefs.AvatarHead,
 		InfoNameDefs.DailyCheckCount,
 		InfoNameDefs.LastDailyCheckTime,

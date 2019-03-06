@@ -149,17 +149,22 @@ namespace AWebServices
             if (a != null)
             {
                 SendError(a.ToAll());
-                return;
             }
         }
         [WebMethod]
-        public void avatarcreate(string username, string token, string avatarname)
+        public void avatarcreate(string username, string token, string avatarname, string sex)
         {
             avatarname = filtername(avatarname);
             var len = CommonUtil.GetStringLength(avatarname);
             if (len <= 2 || len > 12)
             {
                 SendError(ErrorDefs.AvatarNameInvalidLength);
+                return;
+            }
+            var isex = typeParser.intParse(sex);
+            if (isex != 0 && isex != 1)
+            {
+                SendError(ErrorDefs.InvalidSex);
                 return;
             }
             var check = CheckToken(username, token);
@@ -194,6 +199,7 @@ namespace AWebServices
                     AAvatarManager.Instance.OnAddAvatar(a);
 
                     a.OnSetParamValue(InfoNameDefs.AvatarName, avatarname);
+                    a.OnSetParamValue(InfoNameDefs.AvatarSex, isex);
                     a.OnSetParamValue(InfoNameDefs.AvatarMoney, 1000);
                     a.OnSetParamValue(InfoNameDefs.AvatarGold, 1000);
                     SendError(InfoNameDefs.AvatarName, avatarname);
