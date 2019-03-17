@@ -19,7 +19,7 @@ public class UEmitMessager : MonoBehaviour
 		onReceiveMsg(message);
 	}
 
-	public void OnSendMessage(string message, float delay)
+    public void OnSendMessage(string message, float delay)
 	{
 		StartCoroutine(DelaySendMessage(message, delay));
 	}

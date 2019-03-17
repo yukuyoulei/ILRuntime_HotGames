@@ -45,7 +45,12 @@ public class UMUICreateAvatar : AHotBase
                         UStaticWebRequests.DoSelectAvatar(UILogin.CachedUsername, UILogin.token
                             , (jselres) =>
                             {
+                                var data = new UMRemoteAvatarData();
+                                data.OnFormat(jselres);
+                                UMRemoteDataManager.Instance.OnAdd(data);
                                 UnloadThis();
+
+                                LoadAnother<UMUIMain>();
                             }, (err) =>
                             {
                                 UIAlert.Show("进入游戏失败，" + err);

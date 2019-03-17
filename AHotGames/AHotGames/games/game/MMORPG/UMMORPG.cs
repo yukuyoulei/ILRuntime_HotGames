@@ -12,7 +12,12 @@ public class UMMORPG : AHotBase
         UStaticWebRequests.DoSelectAvatar(UILogin.CachedUsername, UILogin.token
             , (jres) =>
             {
+                var data = new UMRemoteAvatarData();
+                data.OnFormat(jres);
+                UMRemoteDataManager.Instance.OnAdd(data);
 
+                UnloadThis();
+                LoadAnother<UMUIMain>();
             }, (err) =>
             {
                 if (err == "3")
