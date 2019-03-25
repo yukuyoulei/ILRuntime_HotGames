@@ -80,4 +80,6 @@ public static class InfoNameDefs
     public static string SendContent = "c";
     public static string ChatType = "tp";
 
+    public static string SchulteTime = "scTm";
+
 }

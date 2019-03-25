@@ -7,13 +7,37 @@ using UnityEngine;
 
 public class UIMain : AHotBase
 {
-    Button menuCell;
+    private void LoadGame<T>() where T : AHotBase
+    {
+        LoadAnother<T>();
+    }
+    private Dictionary<string, Action> _dGames;
+    private Dictionary<string, Action> dGames
+    {
+        get
+        {
+            if (_dGames == null)
+            {
+                _dGames = new Dictionary<string, Action>();
+                _dGames.Add("舒尔特方格", () =>
+                {
+                    LoadGame<GameSchulte>();
+                });
+                _dGames.Add("RPG游戏", () =>
+                {
+                    LoadAnother<UMMORPG>();
+                });
+            }
+            return _dGames;
+        }
+    }
+
     protected override void InitComponents()
     {
         var textUsername = FindWidget<Text>("textUsername");
         textUsername.text = UILogin.CachedUsername;
 
-        menuCell = FindWidget<Button>("menuCell");
+        var menuCell = FindWidget<Button>("menuCell");
         menuCell.gameObject.SetActive(false);
 
         var btnLogout = FindWidget<Button>("btnLogout");
@@ -34,14 +58,17 @@ public class UIMain : AHotBase
 
         });
 
-        var menu = GameObject.Instantiate(menuCell, menuCell.transform.parent);
-        menu.gameObject.SetActive(true);
-        menu.GetComponentInChildren<Text>().text = "RPG游戏";
-        menu.onClick.AddListener(() =>
+        foreach (var g in dGames)
         {
-            UnloadThis();
-            LoadAnother<UMMORPG>();
-        });
+            var menu = GameObject.Instantiate(menuCell, menuCell.transform.parent);
+            menu.gameObject.SetActive(true);
+            menu.GetComponentInChildren<Text>().text = g.Key;
+            menu.onClick.AddListener(() =>
+            {
+                UnloadThis();
+                g.Value();
+            });
+        }
     }
 }
 

@@ -52,8 +52,30 @@ public class UILogin : AHotBase
                     CachedUsername = jres["username"].ToString();
                     token = jres["token"].ToString();
 
-                    UnloadThis();
-                    LoadAnother<UIMain>();
+                    UStaticWebRequests.DoSelectAvatar(UILogin.CachedUsername, UILogin.token
+                        , (jsel) =>
+                        {
+                            var data = new UMRemoteAvatarData();
+                            data.OnFormat(jsel);
+                            UMRemoteDataManager.Instance.OnAdd(data);
+
+                            UnloadThis();
+                            LoadAnother<UIMain>();
+                        }, (err) =>
+                        {
+                            if (err == "3")
+                            {
+                                UnloadThis();
+                                LoadAnother<UMUICreateAvatar>();
+                            }
+                            else
+                            {
+                                UIAlert.Show("选择角色失败，" + err);
+                            }
+                        }, (err) =>
+                        {
+                            UIAlert.Show("选择角色失败，" + err);
+                        });
                 }
                 , (err) =>
                 {

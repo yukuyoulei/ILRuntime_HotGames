@@ -19,14 +19,6 @@ namespace AWebServices
     // [System.Web.Script.Services.ScriptService]
     public class Avatar : System.Web.Services.WebService
     {
-        private static Avatar sinstance;
-        public static Avatar Instance
-        {
-            get
-            {
-                return sinstance;
-            }
-        }
         public const string TableName = "tavatar";
         public static string dbConnect = ConfigurationManager.AppSettings["avatarconnect"];
         public static string dbName = ConfigurationManager.AppSettings["avatardbname"];
@@ -99,8 +91,6 @@ namespace AWebServices
 
         private AAvatar GetAvatar(string username, string token)
         {
-            sinstance = this;
-
             var check = CheckToken(username, token);
             if (!check)
             {

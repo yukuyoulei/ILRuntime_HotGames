@@ -19,7 +19,7 @@ public static class Utils
         return sBuilder.ToString();
     }
 
-    public static string BaseURL = "http://www.xhthink.com/hotgame/";
+    public static string BaseURL = "http://www.fscoding2019.top/common/";
 
     private static Dictionary<string, string> dErrors;
     public static string ErrorFormat(string error)

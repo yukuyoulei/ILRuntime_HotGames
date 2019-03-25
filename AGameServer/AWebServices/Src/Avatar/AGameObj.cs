@@ -48,7 +48,7 @@ public abstract class AGameObj
             paramComponent.OnSetParamValue(paramname, paramvalue);
         }
     }
-    public void OnSetParamValue(string paramname, float paramvalue)
+    public void OnSetParamValue(string paramname, double paramvalue)
     {
         var paramComponent = OnGetComponent<AComponentParam>();
         if (paramComponent != null)

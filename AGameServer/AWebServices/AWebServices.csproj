@@ -80,6 +80,7 @@
     <Content Include="asmx\Account.asmx" />
     <Content Include="asmx\Avatar.asmx" />
     <Content Include="asmx\Entry.asmx" />
+    <Content Include="asmx\GameServices.asmx" />
     <Content Include="asmx\Wiki.asmx" />
     <Content Include="asmx\WSManage.asmx" />
     <Content Include="Global.asax" />
@@ -96,6 +97,10 @@
     </Compile>
     <Compile Include="asmx\Avatar.asmx.cs">
       <DependentUpon>Avatar.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="asmx\GameServices.asmx.cs">
+      <DependentUpon>GameServices.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="asmx\Wiki.asmx.cs">
