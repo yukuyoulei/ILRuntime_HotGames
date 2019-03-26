@@ -255,7 +255,7 @@ public abstract class AHotBase
     }
     public static void LoadAnotherUI(string uiname)
     {
-        LoadAnotherClass(uiname, "UI/" + uiname + ".prefab");
+        LoadAnotherClass(uiname, "UI/" + uiname + "");
     }
     protected void UnloadThis()
     {

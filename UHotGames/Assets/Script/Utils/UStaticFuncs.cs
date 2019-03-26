@@ -471,12 +471,13 @@ public static class UStaticFuncs
 				return "Android";
 			case RuntimePlatform.IPhonePlayer:
 				return "IOS";
-			case RuntimePlatform.WindowsEditor:
 			case RuntimePlatform.WindowsPlayer:
 				return "Windows";
             case RuntimePlatform.WebGLPlayer:
                 return "WebGL";
-			default:
+			case RuntimePlatform.WindowsEditor:
+                return "Windows";
+            default:
 				return "Windows";
 		}
 	}
