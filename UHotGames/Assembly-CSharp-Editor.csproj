@@ -334,6 +334,9 @@
     <Reference Include="Mono.Cecil.Pdb">
       <HintPath>E:/Projects/git_hotgames/ILRuntime_HotGames/UHotGames/Assets/Plugins/ILRuntime/Dependencies/Mono.Cecil.Pdb.dll</HintPath>
     </Reference>
+    <Reference Include="websocket-sharp">
+      <HintPath>E:/Projects/git_hotgames/ILRuntime_HotGames/UHotGames/Assets/Plugins/WebSocket/websocket-sharp.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEditor.Advertisements">
       <HintPath>C:/Users/fs/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.8/Editor/UnityEditor.Advertisements.dll</HintPath>
     </Reference>

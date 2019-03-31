@@ -90,6 +90,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="apiweb\AWSEnter.cs" />
     <Compile Include="apiweb\WSHandler.cs" />
     <Compile Include="asmx\Account.asmx.cs">
       <DependentUpon>Account.asmx</DependentUpon>

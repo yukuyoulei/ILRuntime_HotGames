@@ -59,6 +59,10 @@ namespace AWebServices
             }
             return "";
         }
+        public static bool OnCheckToken(string username, string token)
+        {
+            return dUserTokens.ContainsKey(username) && dUserTokens[username] == token;
+        }
         void SendError(ErrorDefs error)
         {
             SendError((int)error);

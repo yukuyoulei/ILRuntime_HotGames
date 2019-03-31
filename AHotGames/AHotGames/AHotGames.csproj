@@ -50,6 +50,10 @@
       <HintPath>..\..\UHotGames\Temp\bin\Debug\UnityEngine.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="websocket-sharp">
+      <HintPath>..\..\UHotGames\Temp\bin\Debug/websocket-sharp.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="UnityEngine.AnimationModule">
       <HintPath>..\..\UHotGames\Temp\bin\Debug\UnityEngine.AnimationModule.dll</HintPath>
       <Private>False</Private>
@@ -112,6 +116,7 @@
     <Compile Include="utils\Utils.cs" />
     <Compile Include="utils\UUpdater.cs" />
     <Compile Include="utils\UWebSender.cs" />
+    <Compile Include="websocket\WebSocketConnector.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
