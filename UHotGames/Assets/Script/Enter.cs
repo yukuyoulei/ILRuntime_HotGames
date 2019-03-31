@@ -53,7 +53,7 @@ public class Enter : MonoBehaviour
 						 }
 					 }
 					 return false;
-				 }, true);
+				 });
 			 }
 			 , null, null, true, UStaticFuncs.GetPlatformFolder(Application.platform)
 			 , UStaticFuncs.GetPlatformFolder(Application.platform) + ".manifest");

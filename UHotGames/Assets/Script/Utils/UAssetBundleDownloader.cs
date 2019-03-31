@@ -3,9 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Security.AccessControl;
 using System.Text;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class UAssetBundleDownloader : MonoBehaviour
 {
@@ -21,6 +23,8 @@ public class UAssetBundleDownloader : MonoBehaviour
             return sintance;
         }
     }
+    public static List<string> lPreloads = new List<string>();
+    public static List<string> lBaseResources = new List<string>();
     public void DownloadResources(params string[] resources)
     {
         DownloadResources(null, null, null, resources);
@@ -35,8 +39,26 @@ public class UAssetBundleDownloader : MonoBehaviour
     }
     Dictionary<string, RemoteFileCell> dFileRemoteVersions = new Dictionary<string, RemoteFileCell>();
     long totalBytes;
+    Action<List<string>> downloadComplete;
+    List<string> waitingForDownload;
+    List<string> downloadingResources;
+    void ResetDownloadStatus()
+    {
+        totalBytes = 0;
+        lastDownloadedBytes = 0;
+        downloadStartTime = DateTime.Now;
+        DownloadSpeed = 0;
+        downloadedResources.Clear();
+    }
     private IEnumerator DoCheckRemoteVersion(Action<List<string>> downloadComplete, Action<int, int, float> downloadProgress, Func<string, bool> filter, bool NoDependeces, params string[] resources)
     {
+        yield return new WaitForEndOfFrame();
+
+        this.downloadComplete = downloadComplete;
+        downloading = true;
+
+        ResetDownloadStatus();
+
         if (string.IsNullOrEmpty(UStaticFuncs.DownLoadConfigURL))
         {
             Debug.Log("资源下载地址为空。");
@@ -44,7 +66,7 @@ public class UAssetBundleDownloader : MonoBehaviour
         else
         {
             Debug.Log("正在检查资源版本");
-            var resourcesList = resources.ToList();
+            downloadingResources = resources.ToList();
             if (!NoDependeces)
             {
                 foreach (var r in resources)
@@ -52,11 +74,11 @@ public class UAssetBundleDownloader : MonoBehaviour
                     var files = UAssetBundleDownloader.Instance.OnGetAssetBundleDependeces(r);
                     foreach (var f in files)
                     {
-                        if (resourcesList.Contains(f))
+                        if (downloadingResources.Contains(f))
                         {
                             continue;
                         }
-                        resourcesList.Add(f);
+                        downloadingResources.Add(f);
                     }
                 }
             }
@@ -71,7 +93,7 @@ public class UAssetBundleDownloader : MonoBehaviour
                         url = "file://" + url;
                     }
                 }
-                www = new WWW(url);
+                WWW www = new WWW(url);
                 yield return www;
                 if (string.IsNullOrEmpty(www.error))
                 {
@@ -83,7 +105,7 @@ public class UAssetBundleDownloader : MonoBehaviour
                         var av = t.Split('|');
                         if (av.Length < 3)
                         {
-                            Debug.LogError("remote version file check failed");
+                            continue;
                         }
                         name = av[0];
                         if (name.StartsWith("/") || name.StartsWith("\\"))
@@ -114,62 +136,70 @@ public class UAssetBundleDownloader : MonoBehaviour
             {
                 if (filter != null && filter(rver.Key))
                 {
-                    if (!resourcesList.Contains(rver.Key))
+                    if (!downloadingResources.Contains(rver.Key))
                     {
-                        resourcesList.Add(rver.Key);
+                        downloadingResources.Add(rver.Key);
                     }
                     if (!NoDependeces)
                     {
                         var files = OnGetAssetBundleDependeces(rver.Key);
                         foreach (var f in files)
                         {
-                            if (resourcesList.Contains(f))
+                            if (downloadingResources.Contains(f))
                             {
                                 continue;
                             }
-                            resourcesList.Add(f);
+                            downloadingResources.Add(f);
                         }
                     }
                 }
 
                 var remove = new List<string>();
-                foreach (var n in resourcesList)
+                foreach (var n in downloadingResources)
                 {
-                    if (dAssetBundles.ContainsKey(n)
-                        || !dFileRemoteVersions.ContainsKey(n))
+                    if (!dFileRemoteVersions.ContainsKey(n))
                     {
                         remove.Add(n);
                     }
                 }
                 foreach (var r in remove)
                 {
-                    resourcesList.Remove(r);
+                    downloadingResources.Remove(r);
                 }
             }
 
-            totalBytes = 0;
-            foreach (var r in resourcesList)
+            foreach (var r in downloadingResources)
             {
                 totalBytes += dFileRemoteVersions[r].bytes;
             }
 
             if (dFileRemoteVersions.Count != 0)
             {
-                if (resourcesList.Count == 0)
+                waitingForDownload = new List<string>();
+                waitingForDownload.AddRange(downloadingResources);
+                if (downloadingResources.Count == 0)
                 {
-                    downloadComplete?.Invoke(resourcesList);
+                    OnDownloadComplete(waitingForDownload);
                 }
                 else
                 {
-                    StartToDownloadResources(downloadComplete, downloadProgress, downloadedResources, resourcesList);
-
-#if UNITY_IOS || UNITY_EDITOR
-                    StartCoroutine(DelayUpdateProgress(downloadProgress, downloadedResources, resourcesList));
-#endif
+                    for (var i = 0; i < DownloadHandlerCount && i < downloadingResources.Count; i++)
+                    {
+                        StartToDownloadResources(downloadComplete, downloadProgress);
+                    }
                 }
             }
 
         }
+    }
+    public static int DownloadHandlerCount = 5;
+
+    private void OnDownloadComplete(List<string> resourcesList)
+    {
+        Debug.Log("DownloadComplete using " + (DateTime.Now - downloadStartTime).TotalSeconds.ToString("f2") + "S");
+        downloading = false;
+        ResetDownloadStatus();
+        downloadComplete?.Invoke(resourcesList);
     }
 
     internal void OnUnloadAssetBundles()
@@ -201,41 +231,26 @@ public class UAssetBundleDownloader : MonoBehaviour
         get
         {
             long total = 0;
-            foreach (var d in downloaded)
+            foreach (var d in downloadedResources)
             {
                 total += dFileRemoteVersions[d].bytes;
             }
             return total;
         }
     }
-    private IEnumerator DelayUpdateProgress(Action<int, int, float> downloadProgress, List<string> downloadedResources, List<string> resourcesList)
-    {
-        yield return new WaitForSeconds(0.5f);
-
-        if (downloadedResources.Count < resourcesList.Count)
-        {
-            if (www != null)
-            {
-                if (downloadProgress != null)
-                {
-                    downloadProgress(downloadedResources.Count, resourcesList.Count, www.progress / resourcesList.Count);
-                }
-                else
-                {
-
-                    var progress = (downloadedBytes + www.bytesDownloaded) / totalBytes;
-                }
-
-                StartCoroutine(DelayUpdateProgress(downloadProgress, downloadedResources, resourcesList));
-            }
-        }
-    }
+    long lastDownloadedBytes;
 
     public static bool bShowDownload;
-    WWW www;
-    private void StartToDownloadResources(Action<List<string>> downloadComplete, Action<int, int, float> downloadProgress, List<string> downloadedResources, List<string> resourcesList)
+    List<WWW> lWebReqs = new List<WWW>();
+    private void StartToDownloadResources(Action<List<string>> downloadComplete, Action<int, int, float> downloadProgress)
     {
-        var name = resourcesList[downloadedResources.Count];
+        if (downloadingResources.Count <= 0)
+        {
+            return;
+        }
+        var name = downloadingResources[0];
+        downloadingResources.RemoveAt(0);
+
         if (!dFileRemoteVersions.ContainsKey(name))
         {
             Debug.LogError("无法检测版本：" + name);
@@ -259,7 +274,7 @@ public class UAssetBundleDownloader : MonoBehaviour
             {
                 Debug.Log("正在加载数据，请稍候。");
             }
-            StartCoroutine(DoDownloadResources(downloadComplete, downloadProgress, downloadedResources, resourcesList
+            StartCoroutine(DoDownloadResources(downloadComplete, downloadProgress
                 , durl, download, name, dFileRemoteVersions[name].version));
         }
         else
@@ -272,23 +287,20 @@ public class UAssetBundleDownloader : MonoBehaviour
             {
                 Debug.Log("正在加载数据，请稍候。");
             }
-            OnDownloaded(downloadComplete, downloadProgress, downloadedResources, resourcesList, name);
+            OnDownloaded(downloadComplete, downloadProgress, name);
         }
     }
 
-    List<string> downloaded = new List<string>();
-    private IEnumerator DoDownloadResources(Action<List<string>> downloadComplete, Action<int, int, float> downloadProgress, List<string> downloadedResources, List<string> resourcesList
+    private IEnumerator DoDownloadResources(Action<List<string>> downloadComplete, Action<int, int, float> downloadProgress
         , string url, bool bDownload, string name, string version)
     {
-        if (!url.EndsWith(".manifest")
-            && !downloaded.Contains(name))
+        if (!downloadedResources.Contains(name))
         {
-            www = new WWW(url);
-            yield return www;
-            yield return www.isDone;
-            if (string.IsNullOrEmpty(www.error))
+            WWW webReq = new WWW(url);
+            lWebReqs.Add(webReq);
+            yield return webReq;
+            if (string.IsNullOrEmpty(webReq.error))
             {
-                downloaded.Add(name);
                 if (bDownload)
                 {
                     var filepath = UStaticFuncs.ConfigSaveDir + name;
@@ -297,35 +309,37 @@ public class UAssetBundleDownloader : MonoBehaviour
                     {
                         fi.Directory.Create();
                     }
-                    File.WriteAllBytes(filepath, www.bytes);
+                    File.WriteAllBytes(filepath, webReq.bytes);
                     UFileManager.Instance.OnAddFile(name, version);
                 }
             }
             else
             {
-                Debug.Log("加载远端配置失败，" + www.url + " " + www.error);
+                Debug.Log("加载远端配置失败，" + webReq.url + " " + webReq.error);
             }
-            www.Dispose();
-            www = null;
+            lWebReqs.Remove(webReq);
+            webReq.Dispose();
+            webReq = null;
         }
 
-        OnDownloaded(downloadComplete, downloadProgress, downloadedResources, resourcesList, name);
+        OnDownloaded(downloadComplete, downloadProgress, name);
     }
-    private void OnDownloaded(Action<List<string>> downloadComplete, Action<int, int, float> downloadProgress, List<string> downloadedResources, List<string> resourcesList, string name)
+    List<string> downloadedResources = new List<string>();
+    private void OnDownloaded(Action<List<string>> downloadComplete, Action<int, int, float> downloadProgress, string name)
     {
         downloadedResources.Add(name);
-        if (downloadedResources.Count == resourcesList.Count)
-        {
-            downloadComplete?.Invoke(resourcesList);
-        }
-        else
+        if (downloadingResources.Count > 0)
         {
             if (downloadProgress != null)
             {
-                downloadProgress(downloadedResources.Count, resourcesList.Count, 0);
+                downloadProgress(downloadedResources.Count, waitingForDownload.Count, 0);
             }
 
-            StartToDownloadResources(downloadComplete, downloadProgress, downloadedResources, resourcesList);
+            StartToDownloadResources(downloadComplete, downloadProgress);
+        }
+        else if (downloadedBytes >= totalBytes)
+        {
+            OnDownloadComplete(waitingForDownload);
         }
     }
     AssetBundle manifestBundle;
@@ -458,9 +472,6 @@ public class UAssetBundleDownloader : MonoBehaviour
         return t;
     }
     public static string AssetBundleSuffix = ".ab";
-    public static List<string> lPreloads = new List<string>();
-    public static List<string> lBaseResources = new List<string>();
-
     public AssetBundle OnGetAssetBundle(string assetBundlePath, bool NoDependences = false)
     {
         if (!assetBundlePath.EndsWith(AssetBundleSuffix))
@@ -509,10 +520,44 @@ public class UAssetBundleDownloader : MonoBehaviour
         }
         return ab;
     }
+
+    float deltaTime;
+    DateTime downloadStartTime;
+    long deltaBytes;
+    long lastUpdatedDownloadedBytes;
+    bool downloading;
+    public static long DownloadSpeed;
+    private void Update()
+    {
+        if (!downloading)
+        {
+            return;
+        }
+
+        deltaTime += Time.deltaTime;
+        if (deltaTime > 1)
+        {
+            deltaTime -= 1;
+            var d = lastDownloadedBytes - lastUpdatedDownloadedBytes;
+            if (d > 0)
+            {
+                DownloadSpeed = d;
+            }
+            lastUpdatedDownloadedBytes = lastDownloadedBytes;
+        }
+
+        long downloadedbytes = downloadedBytes;
+        foreach (var webReq in lWebReqs)
+        {
+            downloadedbytes += webReq.bytesDownloaded;
+        }
+
+        var downloadingProgress = (float)((double)lastDownloadedBytes / totalBytes);
+    }
 }
 
 struct RemoteFileCell
 {
     public string version;
-    public Int64 bytes;
+    public long bytes;
 }

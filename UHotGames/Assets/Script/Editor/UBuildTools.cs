@@ -417,163 +417,146 @@ public class UBuildTools : EditorWindow
 		{
 			PlayerPrefs.SetString("sourcepath", value);
 		}
-	}
-	public static void StartBuildAssetBundles()
-	{
-		string sourcePath = Application.dataPath + "/" + assetBundleSourcePath;
-		var buildAssetBundlePath = Path.GetFullPath(Path.Combine(Application.dataPath, "../ab1/"));
-		//ClearAssetBundlesName();
-		packedFile.Clear();
-		string outputPath = Path.Combine(buildAssetBundlePath, Platform.GetPlatformFolder(EditorUserBuildSettings.activeBuildTarget));
-		if (Directory.Exists(outputPath))
-		{
-			Directory.Delete(outputPath, true);
-		}
-		Directory.CreateDirectory(outputPath);
+    }
+    public static void StartBuildAssetBundles()
+    {
+        string sourcePath = Application.dataPath + "/" + assetBundleSourcePath;
+        var buildAssetBundlePath = Path.GetFullPath(Path.Combine(Application.dataPath, "../../ab1/"));
+        //ClearAssetBundlesName();
+        packedFile.Clear();
+        string outputPath = Path.Combine(buildAssetBundlePath, Platform.GetPlatformFolder(EditorUserBuildSettings.activeBuildTarget));
 
-		Pack(sourcePath);
-		if (!Directory.Exists(outputPath))
-		{
-			Directory.CreateDirectory(outputPath);
-		}
-		//根据BuildSetting里面所激活的平台进行打包 设置过AssetBundleName的都会进行打包
-		BuildPipeline.BuildAssetBundles(outputPath, BuildAssetBundleOptions.ForceRebuildAssetBundle, EditorUserBuildSettings.activeBuildTarget);
-		var versions = EnumFileMd5(outputPath, outputPath);
-		File.WriteAllText(outputPath + "/versions.txt", versions);
-		ClearAssetBundlesName();
+        Pack(sourcePath);
+        if (!Directory.Exists(outputPath))
+        {
+            Directory.CreateDirectory(outputPath);
+        }
+        //根据BuildSetting里面所激活的平台进行打包 设置过AssetBundleName的都会进行打包
+        BuildPipeline.BuildAssetBundles(outputPath, BuildAssetBundleOptions.None, EditorUserBuildSettings.activeBuildTarget);
+        var versions = EnumFileMd5(outputPath, outputPath);
+        File.WriteAllText(outputPath + "/versions.txt", versions);
+        System.Diagnostics.Process.Start(buildAssetBundlePath);
 
-		AssetDatabase.Refresh();
+        //ClearAssetBundlesName();
 
-		System.Diagnostics.Process.Start(buildAssetBundlePath);
-	}
-	static void Pack(string source)
-	{
-		//Debug.Log("Pack source " + source);
-		DirectoryInfo folder = new DirectoryInfo(source);
-		FileSystemInfo[] files = folder.GetFileSystemInfos();
-		int length = files.Length;
-		for (int i = 0; i < length; i++)
-		{
-			if (files[i] is DirectoryInfo)
-			{
-				Pack(files[i].FullName);
-			}
-			else
-			{
-				if (!files[i].Name.EndsWith(".meta")
-					&& !files[i].Name.EndsWith(".xlsx"))
-				{
-					fileWithDepends(files[i].FullName);
-				}
-			}
-		}
+        AssetDatabase.Refresh();
 
-		foreach (var d in dDependences)
-		{
-			PackItem(d.Key, AssetImporter.GetAtPath(d.Key));
-		}
-	}
-	public List<string> indepentPrefabs;
-	static List<string> packedFile = new List<string>();
-	static Dictionary<string, int> dDependences = new Dictionary<string, int>();
-	//设置要打包的文件
-	static void fileWithDepends(string source)
-	{
-		if (packedFile.Contains(source))
-		{
-			return;
-		}
-		packedFile.Add(source);
+    }
+    static void Pack(string source)
+    {
+        //Debug.Log("Pack source " + source);
+        DirectoryInfo folder = new DirectoryInfo(source);
+        FileSystemInfo[] files = folder.GetFileSystemInfos();
+        int length = files.Length;
+        for (int i = 0; i < length; i++)
+        {
+            if (files[i] is DirectoryInfo)
+            {
+                Pack(files[i].FullName);
+            }
+            else
+            {
+                if (!files[i].Name.EndsWith(".meta")
+                    && !files[i].Name.EndsWith(".xlsx"))
+                {
+                    fileWithDepends(files[i].FullName);
+                }
+            }
+        }
 
-		string _source = Replace(source);
-		string _assetPath = _source;
-		if (_source.StartsWith(Application.dataPath))
-		{
-			_assetPath = "Assets" + _source.Substring(Application.dataPath.Length);
-		}
-		if (dDependences.ContainsKey(_assetPath))
-		{
-			dDependences[_assetPath]++;
-		}
-		else
-		{
-			dDependences.Add(_assetPath, 1);
-		}
-		//PackItem(_assetPath, AssetImporter.GetAtPath(_assetPath));
+        foreach (var d in dDependences)
+        {
+            PackItem(d.Key, AssetImporter.GetAtPath(d.Key));
+        }
+    }
+    public List<string> indepentPrefabs;
+    static List<string> packedFile = new List<string>();
+    static Dictionary<string, int> dDependences = new Dictionary<string, int>();
+    //设置要打包的文件
+    static void fileWithDepends(string source)
+    {
+        if (packedFile.Contains(source))
+        {
+            return;
+        }
+        packedFile.Add(source);
 
-		//自动获取依赖项并给其资源设置AssetBundleName
-		string[] dps = AssetDatabase.GetDependencies(_assetPath);
-		foreach (var dp in dps)
-		{
-			if (dp.EndsWith(".cs"))
-				continue;
-			AssetImporter assetImporter = AssetImporter.GetAtPath(dp);
-			if (assetImporter is TextureImporter)
-			{
-				TextureImporter tai = assetImporter as TextureImporter;
-				if (!string.IsNullOrEmpty(tai.spritePackingTag))
-				{
-					tai.SetAssetBundleNameAndVariant(tai.spritePackingTag + UAssetBundleDownloader.AssetBundleSuffix, null);
-				}
-				else
-				{
-					if (dDependences.ContainsKey(dp))
-					{
-						dDependences[dp]++;
-					}
-					else
-					{
-						dDependences.Add(dp, 1);
-					}
-					//PackItem(dp, assetImporter);
-				}
-			}
-			else
-			{
-				if (dDependences.ContainsKey(dp))
-				{
-					dDependences[dp]++;
-				}
-				else
-				{
-					dDependences.Add(dp, 1);
-				}
-				//PackItem(dp, assetImporter);
-			}
-		}
-	}
+        string _source = Replace(source);
+        string _assetPath = _source;
+        if (_source.StartsWith(Application.dataPath))
+        {
+            _assetPath = "Assets" + _source.Substring(Application.dataPath.Length);
+        }
+        if (dDependences.ContainsKey(_assetPath))
+        {
+            dDependences[_assetPath]++;
+        }
+        else
+        {
+            dDependences.Add(_assetPath, 1);
+        }
+        //PackItem(_assetPath, AssetImporter.GetAtPath(_assetPath));
 
-	private static void PackItem(string dp, AssetImporter assetImporter)
-	{
-		string pathTmp = dp.Substring("Assets".Length + 1);
-		string assetName = pathTmp.Substring(pathTmp.IndexOf("/") + 1).Replace(" ", "_");
-		assetName = assetName.Replace(Path.GetExtension(assetName), UAssetBundleDownloader.AssetBundleSuffix);
-		assetImporter.SetAssetBundleNameAndVariant(assetName, string.Empty);
+        //自动获取依赖项并给其资源设置AssetBundleName
+        string[] dps = AssetDatabase.GetDependencies(_assetPath);
+        foreach (var dp in dps)
+        {
+            if (dp.EndsWith(".cs"))
+                continue;
+            AssetImporter assetImporter = AssetImporter.GetAtPath(dp);
+            if (assetImporter is TextureImporter)
+            {
+                TextureImporter tai = assetImporter as TextureImporter;
+                if (!string.IsNullOrEmpty(tai.spritePackingTag))
+                {
+                    tai.SetAssetBundleNameAndVariant(tai.spritePackingTag + UAssetBundleDownloader.AssetBundleSuffix, null);
+                }
+                else
+                {
+                    if (dDependences.ContainsKey(dp))
+                    {
+                        dDependences[dp]++;
+                    }
+                    else
+                    {
+                        dDependences.Add(dp, 1);
+                    }
+                    //PackItem(dp, assetImporter);
+                }
+            }
+            else
+            {
+                if (dDependences.ContainsKey(dp))
+                {
+                    dDependences[dp]++;
+                }
+                else
+                {
+                    dDependences.Add(dp, 1);
+                }
+                //PackItem(dp, assetImporter);
+            }
+        }
+    }
 
-		//fileWithDepends(assetImporter.assetPath);
-	}
+    private static void PackItem(string dp, AssetImporter assetImporter)
+    {
+        string pathTmp = dp.Substring("Assets".Length + 1);
+        string assetName = pathTmp.Substring(pathTmp.IndexOf("/") + 1).Replace(" ", "_");
+        assetName = assetName.Replace(Path.GetExtension(assetName), UAssetBundleDownloader.AssetBundleSuffix);
+        assetImporter.SetAssetBundleNameAndVariant(assetName, string.Empty);
 
-	static string Replace(string s)
-	{
-		return s.Replace("\\", "/");
-	}
+        //fileWithDepends(assetImporter.assetPath);
+    }
 
-	static void ClearAssetBundlesName()
-	{
-		int length = AssetDatabase.GetAllAssetBundleNames().Length;
-		string[] oldAssetBundleNames = new string[length];
-		for (int i = 0; i < length; i++)
-		{
-			oldAssetBundleNames[i] = AssetDatabase.GetAllAssetBundleNames()[i];
-		}
-		for (int j = 0; j < oldAssetBundleNames.Length; j++)
-		{
-			AssetDatabase.RemoveAssetBundleName(oldAssetBundleNames[j], true);
-		}
-	}
+    static string Replace(string s)
+    {
+        return s.Replace("\\", "/");
+    }
 
 
-	List<string> containsMaps;
+
+    List<string> containsMaps;
 	string sdir
 	{
 		get
