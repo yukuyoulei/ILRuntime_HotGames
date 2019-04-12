@@ -9,7 +9,22 @@ public class UMMORPG : AHotBase
 {
     protected override void InitComponents()
     {
-        LoadAnother<UMUIMain>();
+        UICommonWait.Show();
+        WebSocketConnector.Instance.OnInit(Utils.WebSocketURL + "username=" + UILogin.CachedUsername + "&token=" + UILogin.token
+            , (openEvt) =>
+            {
+                UICommonWait.Hide();
+                LoadAnother<UMUIMain>();
+            }, (msgEvt) =>
+            {
+                
+            }, (errorEvt) =>
+            {
+                UIAlert.Show("WSError:" + errorEvt.Message);
+            }, (closeMsg) =>
+            {
+                UICommonWait.Hide();
+            });
     }
 }
 

@@ -12,27 +12,31 @@ public class ADBAccessor
     {
         db = ADBManager.Instance.GetDB(connect, dbName);
     }
-    public static FilterDefinition<BsonDocument> filter_Ne<T>(string param, T value)
+    public static FilterDefinition<BsonDocument> filter_empty()
     {
-        return Builders<BsonDocument>.Filter.Ne(param, value);
+        return Builders<BsonDocument>.Filter.Empty;
+    }
+    public static FilterDefinition<BsonDocument> filter_contains(string param)
+    {
+        return Builders<BsonDocument>.Filter.Exists(param);
     }
     public static FilterDefinition<BsonDocument> filter_eq<T>(string param, T value)
     {
         return Builders<BsonDocument>.Filter.Eq(param, value);
     }
-    public static FilterDefinition<BsonDocument> filter_Gt<T>(string param, int value)
+    public static FilterDefinition<BsonDocument> filter_Gt<T>(string param, T value)
     {
         return Builders<BsonDocument>.Filter.Gt(param, value);
     }
-    public static FilterDefinition<BsonDocument> filter_Gte<T>(string param, int value)
+    public static FilterDefinition<BsonDocument> filter_Gte<T>(string param, T value)
     {
         return Builders<BsonDocument>.Filter.Gte(param, value);
     }
-    public static FilterDefinition<BsonDocument> filter_Lt<T>(string param, int value)
+    public static FilterDefinition<BsonDocument> filter_Lt<T>(string param, T value)
     {
         return Builders<BsonDocument>.Filter.Lt(param, value);
     }
-    public static FilterDefinition<BsonDocument> filter_Lte<T>(string param, int value)
+    public static FilterDefinition<BsonDocument> filter_Lte<T>(string param, T value)
     {
         return Builders<BsonDocument>.Filter.Lte(param, value);
     }
@@ -54,6 +58,7 @@ public class ADBAccessor
     {
         return Builders<BsonDocument>.Sort.Ascending(param);
     }
+
     public static UpdateDefinition<BsonDocument> updates_build(params UpdateDefinition<BsonDocument>[] updates)
     {
         var updateBuilder = Builders<BsonDocument>.Update;
@@ -206,11 +211,22 @@ public class ADBAccessor
         }
         return bsonElement;
     }
-    public List<BsonDocument> FindManyData(string collectionName
+    public long Count(string collectionName
         , FilterDefinition<BsonDocument> filter = null
-        , ProjectionDefinition<BsonDocument> projection = null
-        , int limit = 0, int skip = 0
-        , SortDefinition<BsonDocument> sort = null)
+        )
+    {
+        var collection = db.GetCollection<BsonDocument>(collectionName);
+        if (filter == null)
+        {
+            filter = FilterDefinition<BsonDocument>.Empty;
+        }
+        return collection.Count(filter);
+    }
+    public List<BsonDocument> FindManyData(string collectionName
+            , FilterDefinition<BsonDocument> filter = null
+            , ProjectionDefinition<BsonDocument> projection = null
+            , int limit = 0, int skip = 0
+            , SortDefinition<BsonDocument> sort = null)
     {
         string serror = "";
         List<BsonDocument> lBsonElement = new List<BsonDocument>();

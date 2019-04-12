@@ -58,5 +58,6 @@ namespace AWebServices.asmx
             }
             SendError(InfoNameDefs.SchulteTime, avatar.SchulteTime.ToString("f2"));
         }
+
     }
 }

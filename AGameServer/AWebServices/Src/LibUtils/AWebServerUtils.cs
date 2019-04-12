@@ -120,6 +120,10 @@ public static class AWebServerUtils
         result += "}";
         return result.Replace("\"{", "{").Replace("}\"", "}");
     }
+    public static string OnGetJsonError(ErrorDefs error)
+    {
+        return OnGetJsonError(((int)error).ToString());
+    }
     public static string OnGetJsonError(params string[] otherParams)
     {
         var result = "";

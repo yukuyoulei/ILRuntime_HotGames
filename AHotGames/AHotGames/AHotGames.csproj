@@ -88,6 +88,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="games\game\MMORPG\UMMap.cs" />
     <Compile Include="games\game\MMORPG\ui\GameSchulte.cs" />
     <Compile Include="games\game\MMORPG\ui\UMUIMain.cs" />
     <Compile Include="games\game\MMORPG\ui\UMUICreateAvatar.cs" />
@@ -105,6 +106,7 @@
     <Compile Include="games\AEntrance.cs" />
     <Compile Include="games\aempty\AEmptyUI.cs" />
     <Compile Include="utils\AHotDrag.cs" />
+    <Compile Include="utils\ApiDateTime.cs" />
     <Compile Include="utils\ClickButton.cs" />
     <Compile Include="games\aempty\AHotBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

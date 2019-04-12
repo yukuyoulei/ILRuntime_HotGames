@@ -119,6 +119,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Src\Avatar\AAvatar_GameHandler.cs" />
     <Compile Include="Src\LibUtils\ADictionary.cs" />
     <Compile Include="Src\LibUtils\AIniLoader.cs" />
     <Compile Include="Src\LibUtils\AOutput.cs" />
@@ -222,6 +223,7 @@
     <Compile Include="Src\Components\AComponentParam.cs" />
     <Compile Include="Src\Defs.cs" />
     <Compile Include="Src\Managers\AFriendManager.cs" />
+    <Compile Include="Src\Managers\AMapManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

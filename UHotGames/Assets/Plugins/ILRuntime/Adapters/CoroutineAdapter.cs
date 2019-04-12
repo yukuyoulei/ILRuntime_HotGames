@@ -90,27 +90,27 @@ public class CoroutineAdapter : CrossBindingAdaptor
 			}
 		}
 
-		IMethod mDisposeMethod;
-		bool mDisposeMethodGot;
-		public void Dispose()
-		{
-			if (!mDisposeMethodGot)
-			{
-				mDisposeMethod = instance.Type.GetMethod("Dispose", 0);
-				if (mDisposeMethod == null)
-				{
-					mDisposeMethod = instance.Type.GetMethod("System.IDisposable.Dispose", 0);
-				}
-				mDisposeMethodGot = true;
-			}
+        IMethod mDisposeMethod;
+        bool mDisposeMethodGot;
+        public void Dispose()
+        {
+            if (!mDisposeMethodGot)
+            {
+                mDisposeMethod = instance.Type.GetMethod("Dispose", 0);
+                if (mDisposeMethod == null)
+                {
+                    mDisposeMethod = instance.Type.GetMethod("System.IDisposable.Dispose", 0);
+                }
+                mDisposeMethodGot = true;
+            }
 
-			if (mDisposeMethod != null)
-			{
-				appdomain.Invoke(mDisposeMethod, instance, null);
-			}
-		}
+            if (mDisposeMethod != null)
+            {
+                appdomain.Invoke(mDisposeMethod, instance, null);
+            }
+        }
 
-		IMethod mMoveNextMethod;
+        IMethod mMoveNextMethod;
 		bool mMoveNextMethodGot;
 		public bool MoveNext()
 		{

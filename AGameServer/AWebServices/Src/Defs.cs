@@ -13,6 +13,7 @@ public enum ErrorDefs
     DuplicateUsername = -2,//重复的用户名
     DBError = -1,
 
+    NoError = 0,//
     UsernamePasswordMismatch = 1,//账号密码错误
     InvalidToken,//无效的token
     NoAvatar,//没有角色
@@ -29,6 +30,8 @@ public enum ErrorDefs
     TargetIsNotYourFriend,//对方还不是你的好友
     FindNone,//没有搜索到
     InvalidSex,//无效的性别 = _ =
+    MoveInCold,//移动冷却中
+    InvalidMove,//无效的移动
 }
 
 public static class InitValueDefs
@@ -53,33 +56,36 @@ public enum ERankType
 
 public static class InfoNameDefs
 {
-    public static string Username = "username";
-    public static string UserPassword = "pw";
-    public static string UserMail = "mail";
-    public static string UserToken = "token";
+    public const string Username = "username";
+    public const string UserPassword = "pw";
+    public const string UserMail = "mail";
+    public const string UserToken = "token";
 
-    public static string AvatarName = "name";
-    public static string AvatarGold = "gold";
-    public static string AvatarSex = "sex";
-    public static string AvatarMoney = "Money";
-    public static string AvatarHead = "head";
-    public static string DailyCheckCount = "dcc";
-    public static string LastDailyCheckTime = "dcct";
+    public const string AvatarName = "name";
+    public const string AvatarGold = "gold";
+    public const string AvatarSex = "sex";
+    public const string AvatarMoney = "Money";
+    public const string AvatarHead = "head";
+    public const string DailyCheckCount = "dcc";
+    public const string LastDailyCheckTime = "dcct";
 
-    public static string BagSlotPre = "b_";
+    public const string BagSlotPre = "b_";
 
-    public static string RewardSlotPre = "r_";
+    public const string RewardSlotPre = "r_";
 
-    public static string Friend1 = "f1";
-    public static string Friend2 = "f2";
-    public static string FriendRequester = "fr";
+    public const string Friend1 = "f1";
+    public const string Friend2 = "f2";
+    public const string FriendRequester = "fr";
 
-    public static string SenderName = "sn";
-    public static string TargetName = "tn";
-    public static string SendTime = "t";
-    public static string SendContent = "c";
-    public static string ChatType = "tp";
+    public const string SenderName = "sn";
+    public const string TargetName = "tn";
+    public const string SendTime = "t";
+    public const string SendContent = "c";
+    public const string ChatType = "tp";
 
-    public static string SchulteTime = "scTm";
+    public const string SchulteTime = "scTm";
 
+    public const string MapX = "x";
+    public const string MapY = "y";
+    public const string LastMoveTime = "lmt";
 }

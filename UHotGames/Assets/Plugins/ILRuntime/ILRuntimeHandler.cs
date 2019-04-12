@@ -61,8 +61,8 @@ public class ILRuntimeHandler
         SetupCLRRedirection();
 
         //这里做一些ILRuntime的注册
-        appdomain.RegisterCrossBindingAdaptor(new CoroutineAdapter());
         appdomain.RegisterCrossBindingAdaptor(new MonoBehaviourAdapter());
+        appdomain.RegisterCrossBindingAdaptor(new IDisposableAdapter());
 
         ILRuntime.Runtime.Generated.CLRBindings.Initialize(appdomain);
     }
@@ -71,6 +71,38 @@ public class ILRuntimeHandler
     {
         ILRegType.RegisterFunctionDelegate(appdomain);
 
+        #region WebSocket相关
+        appdomain.DelegateManager.RegisterMethodDelegate<System.Object, System.EventArgs>();        appdomain.DelegateManager.RegisterDelegateConvertor<System.EventHandler>((act) =>
+        {
+            return new System.EventHandler((sender, e) =>
+            {
+                ((Action<System.Object, System.EventArgs>)act)(sender, e);
+            });
+        });
+        appdomain.DelegateManager.RegisterMethodDelegate<System.Object, WebSocketSharp.MessageEventArgs>();
+        appdomain.DelegateManager.RegisterDelegateConvertor<System.EventHandler<WebSocketSharp.MessageEventArgs>>((act) =>
+        {
+            return new System.EventHandler<WebSocketSharp.MessageEventArgs>((sender, e) =>
+            {
+                ((Action<System.Object, WebSocketSharp.MessageEventArgs>)act)(sender, e);
+            });
+        });        appdomain.DelegateManager.RegisterMethodDelegate<System.Object, WebSocketSharp.ErrorEventArgs>();
+        appdomain.DelegateManager.RegisterDelegateConvertor<System.EventHandler<WebSocketSharp.ErrorEventArgs>>((act) =>
+        {
+            return new System.EventHandler<WebSocketSharp.ErrorEventArgs>((sender, e) =>
+            {
+                ((Action<System.Object, WebSocketSharp.ErrorEventArgs>)act)(sender, e);
+            });
+        });
+        appdomain.DelegateManager.RegisterMethodDelegate<System.Object, WebSocketSharp.CloseEventArgs>();
+        appdomain.DelegateManager.RegisterDelegateConvertor<System.EventHandler<WebSocketSharp.CloseEventArgs>>((act) =>
+        {
+            return new System.EventHandler<WebSocketSharp.CloseEventArgs>((sender, e) =>
+            {
+                ((Action<System.Object, WebSocketSharp.CloseEventArgs>)act)(sender, e);
+            });
+        });
+        #endregion
         appdomain.DelegateManager.RegisterMethodDelegate<System.String>();
         appdomain.DelegateManager.RegisterMethodDelegate<UnityEngine.GameObject>();
         appdomain.DelegateManager.RegisterFunctionDelegate<ILRuntime.Runtime.Intepreter.ILTypeInstance, ILRuntime.Runtime.Intepreter.ILTypeInstance, System.Int32>();

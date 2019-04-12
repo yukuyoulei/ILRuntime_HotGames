@@ -7,8 +7,14 @@ using UnityEngine;
 
 public class UMUIMain : AHotBase
 {
+    private static UMUIMain sintance;
+    private Action updateParam;
     protected override void InitComponents()
     {
+        sintance = this;
+
+        LoadAnother<UMMap>();
+
         var AvatarHeadIcon = FindWidget<RawImage>("AvatarHeadIcon");
         var sexPrefab = (UMRemoteAvatarData.data.AvatarSex == 1 ? "avatarFemale" : "avatarMale");
         LoadPrefab("UI/UIResources/" + sexPrefab, (obj) =>
@@ -18,14 +24,23 @@ public class UMUIMain : AHotBase
         });
 
         var AvatarName = FindWidget<Text>("AvatarName");
-        AvatarName.text = UMRemoteAvatarData.data.AvatarName;
-
         var GoldValue = FindWidget<Text>("GoldValue");
-        GoldValue.text = UMRemoteAvatarData.data.AvatarGold.ToString();
-
         var MoneyValue = FindWidget<Text>("MoneyValue");
-        MoneyValue.text = UMRemoteAvatarData.data.AvatarMoney.ToString();
+        var AvatarPos = FindWidget<Text>("AvatarPos");
+
+        updateParam = () =>
+        {
+            AvatarName.text = UMRemoteAvatarData.data.AvatarName;
+            GoldValue.text = UMRemoteAvatarData.data.AvatarGold.ToString();
+            MoneyValue.text = UMRemoteAvatarData.data.AvatarMoney.ToString();
+            AvatarPos.text = "x:" + UMRemoteAvatarData.data.MapX + " y:" + UMRemoteAvatarData.data.MapY;
+        };
+        updateParam();
     }
 
+    public static void OnParamUpdate()
+    {
+        sintance?.updateParam?.Invoke();
+    }
 }
 

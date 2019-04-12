@@ -20,6 +20,18 @@ namespace AWebServices
         }
         public WebSocket connect { get; set; }
         public string username { get; set; }
+        private AAvatar _gameAvatar;
+        public AAvatar gameAvatar
+        {
+            get
+            {
+                if (_gameAvatar == null)
+                {
+                    _gameAvatar = AAvatarManager.Instance.OnGetAvatar(username);
+                }
+                return _gameAvatar;
+            }
+        }
         public CancellationTokenSource cancellationTokenSource { get; private set; }
         public string DoHeartBeat()
         {
@@ -116,7 +128,10 @@ namespace AWebServices
                             }
                             #endregion
 
+                            CONNECT_POOL[user].DoHeartBeat();
+
                             string userMsg = Encoding.UTF8.GetString(buffer.Array, 0, result.Count);//发送过来的消息
+                            AOutput.Log("ws receive " + userMsg);
                             if (!userMsg.Contains("?"))
                             {
                                 await AWSEnter.Instance.DoHandler(userMsg, CONNECT_POOL[user], "");

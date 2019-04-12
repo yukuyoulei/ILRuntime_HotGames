@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 
 
-public class AAvatar : AGameObj
+public partial class AAvatar : AGameObj
 {
     public string username;
     public AAvatar(string username, string nickname, BsonDocument dbdocument)
@@ -41,6 +41,9 @@ public class AAvatar : AGameObj
         componentParam.RegistParam(InfoNameDefs.LastDailyCheckTime, EParamType.Long);
         componentParam.RegistParam(InfoNameDefs.AvatarSex, EParamType.Int);
         componentParam.RegistParam(InfoNameDefs.SchulteTime, EParamType.Double);
+        componentParam.RegistParam(InfoNameDefs.LastMoveTime, EParamType.Long);
+        componentParam.RegistParam(InfoNameDefs.MapX, EParamType.Int);
+        componentParam.RegistParam(InfoNameDefs.MapY, EParamType.Int);
     }
 
     #region components
@@ -94,8 +97,22 @@ public class AAvatar : AGameObj
         InfoNameDefs.AvatarHead,
         InfoNameDefs.DailyCheckCount,
         InfoNameDefs.LastDailyCheckTime,
+        InfoNameDefs.LastMoveTime,
+        InfoNameDefs.MapX,
+        InfoNameDefs.MapY,
 
     };
+    public long LastMoveTime
+    {
+        get
+        {
+            return OnGetInt64ParamValue(InfoNameDefs.LastMoveTime);
+        }
+        set
+        {
+            OnSetParamValue(InfoNameDefs.LastMoveTime, value);
+        }
+    }
     public double SchulteTime
     {
         get
@@ -134,6 +151,28 @@ public class AAvatar : AGameObj
         get
         {
             return OnGetStringParamValue(InfoNameDefs.AvatarName);
+        }
+    }
+    public int MapY
+    {
+        get
+        {
+            return OnGetIntParamValue(InfoNameDefs.MapY);
+        }
+        set
+        {
+            OnSetParamValue(InfoNameDefs.MapY, value);
+        }
+    }
+    public int MapX
+    {
+        get
+        {
+            return OnGetIntParamValue(InfoNameDefs.MapX);
+        }
+        set
+        {
+            OnSetParamValue(InfoNameDefs.MapX, value);
         }
     }
     public int AvatarHead

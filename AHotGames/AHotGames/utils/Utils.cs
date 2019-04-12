@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 public static class Utils
 {
+    public static string BaseURL = "http://127.0.0.1/ws/";
+    public static string WebSocketURL = "ws://127.0.0.1/ws/ws.enter?";
+
     public static String MD5Hash(string sInput)
     {
         MD5 md5Hasher = MD5.Create();
@@ -19,7 +22,6 @@ public static class Utils
         return sBuilder.ToString();
     }
 
-    public static string BaseURL = "http://www.fscoding2019.top/common/";
 
     private static Dictionary<string, string> dErrors;
     public static string ErrorFormat(string error)

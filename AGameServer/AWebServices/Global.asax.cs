@@ -17,6 +17,7 @@ namespace AWebServices
         {
             System.Net.HttpWebRequest.DefaultWebProxy = null;
 
+            AWSEnter.Instance.Init();
             AFriendManager.Instance.Init();
 
             AOutput.Instance.RegistOutputDel(OnOutPut);

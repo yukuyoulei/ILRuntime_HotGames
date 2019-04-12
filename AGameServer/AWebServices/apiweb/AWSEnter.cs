@@ -17,31 +17,36 @@ namespace AWebServices
             bInited = true;
 
             RegisterHandlers("ping", OnPing);
+            RegisterHandlers("move", OnMove);
         }
 
-        private async Task OnPing(UserWithToken arg1, string arg2)
+        private async Task OnMove(string method, UserWithToken arg1, string arg2)
+        {
+            await WSHandler.DoSend(arg1, method + "?" + arg1.gameAvatar?.GameHandler_Move(arg2));
+        }
+        private async Task OnPing(string method, UserWithToken arg1, string arg2)
         {
             await WSHandler.DoSend(arg1, arg1.DoHeartBeat());
         }
 
 
-        Dictionary<string, Func<UserWithToken, string, Task>> dActions = new Dictionary<string, Func<UserWithToken, string, Task>>();
-        public void RegisterHandlers(string sCmd, Func<UserWithToken, string, Task> usernameArgAction)
+        Dictionary<string, Func<string, UserWithToken, string, Task>> dActions = new Dictionary<string, Func<string, UserWithToken, string, Task>>();
+        public void RegisterHandlers(string method, Func<string, UserWithToken, string, Task> usernameArgAction)
         {
-            dActions.Add(sCmd.ToLower(), usernameArgAction);
+            dActions.Add(method.ToLower(), usernameArgAction);
         }
-        public async Task DoHandler(string sCmd, UserWithToken username, string arg)
+        public async Task DoHandler(string method, UserWithToken username, string arg)
         {
             try
             {
-                sCmd = sCmd.ToLower();
-                if (dActions.ContainsKey(sCmd))
+                method = method.ToLower();
+                if (dActions.ContainsKey(method))
                 {
-                    await dActions[sCmd](username, arg);
+                    await dActions[method](method, username, arg);
                 }
                 else
                 {
-                    AOutput.LogError("Invalid WSHandler " + sCmd);
+                    AOutput.LogError("Invalid WSHandler " + method);
                 }
             }
             catch (Exception ex)

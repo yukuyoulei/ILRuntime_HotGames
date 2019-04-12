@@ -31,7 +31,7 @@ public class UMRemoteDataManager : Singleton<UMRemoteDataManager>
 public abstract class UMRemoteDataBase
 {
     protected Dictionary<string, string> dValues = new Dictionary<string, string>();
-    public void SetValue(string key, string value) { if (dValues.ContainsKey(key)) dValues[key] = value; dValues.Add(key, value); }
+    public void SetValue(string key, string value) { if (dValues.ContainsKey(key)) dValues[key] = value; else dValues.Add(key, value); }
     protected string GetStringValue(string key) { return dValues.ContainsKey(key) ? dValues[key] : ""; }
     protected int GetIntValue(string key) { return dValues.ContainsKey(key) ? typeParser.intParse(dValues[key]) : 0; }
     protected Int64 GetInt64Value(string key) { return dValues.ContainsKey(key) ? typeParser.Int64Parse(dValues[key]) : 0; }
@@ -39,14 +39,7 @@ public abstract class UMRemoteDataBase
     {
         if (jres != null)
         {
-            if (jres.ContainsKey("err") && jres["err"].ToString() == "0")
-            {
-                JsonFormate(jres);
-            }
-            else if (jres.ContainsKey("err") && jres["err"].ToString() != "0")
-            {
-                UIAlert.Show("解析Json结果出错：" + jres["err"]);
-            }
+            JsonFormate(jres);
         }
     }
     public abstract void JsonFormate(JObject jres);
@@ -54,7 +47,16 @@ public abstract class UMRemoteDataBase
 public class UMRemoteAvatarData : UMRemoteDataBase
 {
     public static UMRemoteAvatarData data { get { return UMRemoteDataManager.Instance.OnGet<UMRemoteAvatarData>(); } }
-    private string[] dataValues = new string[] { "name", "gold", "sex", "Money", "head", "dcc", "dcct" };
+    private static string[] dataValues = new string[] { "name"
+        , "gold"
+        , "sex"
+        , "Money"
+        , "head"
+        , "dcc"
+        , "lmt"
+        , "x"
+        , "y"
+    };
     public string AvatarName { get { return GetStringValue("name"); } }
     public long AvatarGold { get { return GetInt64Value("gold"); } }
     public int AvatarSex { get { return GetIntValue("sex"); } }
@@ -62,12 +64,15 @@ public class UMRemoteAvatarData : UMRemoteDataBase
     public int AvatarHead { get { return GetIntValue("head"); } }
     public int DailyCheckCount { get { return GetIntValue("dcc"); } }
     public long LastDailyCheckTime { get { return GetInt64Value("dcct"); } }
+    public long LastMoveTime { get { return GetInt64Value("lmt"); } }
+    public int MapX { get { return GetIntValue("x"); } }
+    public int MapY { get { return GetIntValue("y"); } }
 
     public override void JsonFormate(JObject jres)
     {
         foreach (var v in dataValues)
         {
-            if (jres.ContainsKey(v))
+            if (jres[v] != null)
             {
                 SetValue(v, jres[v].ToString());
             }
