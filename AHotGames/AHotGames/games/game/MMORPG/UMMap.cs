@@ -126,7 +126,6 @@ public class UMMap : AHotBase
     Vector2 startPoint;
     Vector2 endPoint;
     Vector3 startPos;
-    DateTime startTime;
     private void DoMove(Vector2 oldPos, Vector2 newPos)
     {
         if (oldPos == newPos)
@@ -140,8 +139,7 @@ public class UMMap : AHotBase
             startPoint = oldPos;
             startPos = MapCellRoot.transform.localPosition;
         }
-        var n = DateTime.Now;
-        startTime = n;
+        var startTime = DateTime.Now;
         if (!isMoving)
         {
             isMoving = true;

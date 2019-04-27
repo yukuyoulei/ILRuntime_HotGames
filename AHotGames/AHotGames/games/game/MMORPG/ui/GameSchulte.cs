@@ -20,30 +20,6 @@ public class GameSchulte : AHotBase
         {
             BestTime.text = "Best Time:" + fBestTime.ToString("f2");
         };
-        UWebSender.Instance.OnRequest(Utils.BaseURL + "avatarsingleinfo", "username="
-            + UILogin.CachedUsername + "&token=" + UILogin.token + "&infoname=scTm"
-            , (res) =>
-            {
-                var jres = (JObject)JsonConvert.DeserializeObject(res);
-                if (jres["err"].ToString() == "0")
-                {
-                    if (jres.ContainsKey("scTm"))
-                    {
-                        var tm = typeParser.doubleParse(jres["scTm"].ToString());
-                        if (tm > 0.01)
-                        {
-                            fBestTime = tm;
-                            actionRefreshBestTime();
-                        }
-                    }
-                }
-
-                doReorder();
-            }
-            , (err) =>
-            {
-                UIAlert.Show("请求属性失败：" + err);
-            });
 
         var Time = FindWidget<Text>("Time");
         Time.text = "";
@@ -62,7 +38,7 @@ public class GameSchulte : AHotBase
 
         var CurCount = 0;
         var Contents = FindWidget<GridLayoutGroup>("Contents");
-        var cell = FindWidget<Button>(Contents.transform, "Schulte");
+        var cell = FindWidget<RawImage>(Contents.transform, "Schulte");
         cell.gameObject.SetActive(false);
         var lRawPos = new Vector3[cellCount];
         var lCells = new GameObject[cellCount];
@@ -73,19 +49,21 @@ public class GameSchulte : AHotBase
             if (lCells[i] == null)
             {
                 c = GameObject.Instantiate(cell.gameObject, cell.transform.parent);
+                c.gameObject.SetActive(true);
                 var text = FindWidget<Text>(c.transform, "Name");
+                text.raycastTarget = false;
                 text.text = (i + 1).ToString();
                 var idx = i;
-                var btn = c.GetComponent<Button>();
-                btn.onClick.AddListener(() =>
+                var image = c.GetComponent<RawImage>();
+                var hotdrag = RegistDragFunc(image, null, () =>
                 {
+                    Debug.Log("drag");
                     if (idx != CurCount)
                     {
                         return;
                     }
                     CurCount++;
-                    btn.enabled = false;
-                    btn.targetGraphic.color = Color.grey;
+                    image.color = Color.grey;
                     text.color = Color.grey;
                     if (CurCount == 1)
                     {
@@ -121,7 +99,8 @@ public class GameSchulte : AHotBase
                             return false;
                         });
                     }
-                });
+                }, () => { }, () => { }, true, () => { });
+                hotdrag.disableDragImage = true;
                 lCells[i] = c;
             }
             else
@@ -137,6 +116,31 @@ public class GameSchulte : AHotBase
             {
                 lRawPos[i] = lCells[i].transform.position;
             }
+            UWebSender.Instance.OnRequest(Utils.BaseURL + "avatarsingleinfo", "username="
+                + UILogin.CachedUsername + "&token=" + UILogin.token + "&infoname=scTm"
+                , (res) =>
+                {
+                    var jres = (JObject)JsonConvert.DeserializeObject(res);
+                    if (jres["err"].ToString() == "0")
+                    {
+                        if (jres.ContainsKey("scTm"))
+                        {
+                            var tm = typeParser.doubleParse(jres["scTm"].ToString());
+                            if (tm > 0.01)
+                            {
+                                fBestTime = tm;
+                                actionRefreshBestTime();
+                            }
+                        }
+                    }
+
+                    doReorder();
+                }
+                , (err) =>
+                {
+                    UIAlert.Show("请求属性失败：" + err);
+                });
+
         }, 0.1f);
 
         List<int> lPos = new List<int>();
@@ -154,11 +158,10 @@ public class GameSchulte : AHotBase
                 {
                     continue;
                 }
-                var btn = lCells[lPos.Count].GetComponent<Button>();
-                btn.transform.position = lRawPos[idx];
-                btn.targetGraphic.color = Color.white;
-                btn.enabled = true;
-                FindWidget<Text>(btn.transform, "Name").color = Color.green;
+                var image = lCells[lPos.Count].GetComponent<RawImage>();
+                image.transform.position = lRawPos[idx];
+                image.color = Color.white;
+                FindWidget<Text>(image.transform, "Name").color = Color.green;
                 lPos.Add(idx);
                 if (lPos.Count == cellCount)
                 {
