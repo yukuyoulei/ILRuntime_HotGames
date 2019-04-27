@@ -72,7 +72,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224827715297726200}
   m_Layer: 5
-  m_Name: Cells
+  m_Name: MapCellRoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

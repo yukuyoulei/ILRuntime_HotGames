@@ -11,25 +11,24 @@ public class UMMap : AHotBase
 {
     long localLastMoveTime;
     RawImage MapCell;
-    Dictionary<string, RawImage> dCells = new Dictionary<string, RawImage>();
-    Transform AvatarPos;
+    Dictionary<int, Dictionary<int, RawImage>> dCells = new Dictionary<int, Dictionary<int, RawImage>>();
+    Transform MapCellRoot;
+    const int col = 14;
+    const int row = 10;
     protected override void InitComponents()
     {
-        var col = 14;
-        var row = 10;
         MapCell = FindWidget<RawImage>("MapCell");
         MapCell.gameObject.SetActive(false);
-        AvatarPos = FindWidget<Transform>("AvatarPos");
-        for (var i = 0; i < row; i++)
+        MapCellRoot = FindWidget<Transform>("MapCellRoot");
+        for (var y = 0; y < row; y++)
         {
-            for (var j = 0; j < col; j++)
+            for (var x = 0; x < col; x++)
             {
-                var cell = GameObject.Instantiate(MapCell.gameObject, MapCell.transform.parent).GetComponent<RawImage>();
-                cell.name = i + "," + j;
-                dCells.Add(cell.name, cell);
-                cell.transform.localPosition = new Vector3((j - col / 2) * MapCell.rectTransform.sizeDelta.x
-                    , (i - row / 2) * MapCell.rectTransform.sizeDelta.y);
-                cell.gameObject.SetActive(true);
+                if (!dCells.ContainsKey(x))
+                {
+                    dCells.Add(x, new Dictionary<int, RawImage>());
+                }
+                AddCell(x, y);
             }
         }
 
@@ -54,7 +53,7 @@ public class UMMap : AHotBase
             }
             if (Input.GetKeyDown(KeyCode.S))
             {
-                if (!CheckMove(0, 1))
+                if (!CheckMove(0, -1))
                 {
                     return false;
                 }
@@ -62,7 +61,7 @@ public class UMMap : AHotBase
             }
             if (Input.GetKeyDown(KeyCode.W))
             {
-                if (!CheckMove(0, -1))
+                if (!CheckMove(0, 1))
                 {
                     return false;
                 }
@@ -71,8 +70,26 @@ public class UMMap : AHotBase
             return false;
         });
     }
+    private void AddCell(int x, int y)
+    {
+        var cell = GameObject.Instantiate(MapCell.gameObject, MapCell.transform.parent).GetComponent<RawImage>();
+        cell.name = x + "," + y;
+        dCells[x].Add(y, cell);
+        cell.transform.localPosition = new Vector3((x - col / 2) * MapCell.rectTransform.sizeDelta.x
+            , (y - row / 2) * MapCell.rectTransform.sizeDelta.y);
+        cell.gameObject.SetActive(true);
+    }
+    bool bSetRawPos = false;
+    int rawX = 0, rawY = 0;
+    int deltaX, deltaY;
     private void OnMoveCb(string obj)
     {
+        if (!bSetRawPos)
+        {
+            bSetRawPos = true;
+            rawX = UMRemoteAvatarData.data.MapX;
+            rawY = UMRemoteAvatarData.data.MapY;
+        }
         var jres = (JObject)JsonConvert.DeserializeObject(obj);
         if (jres["err"] != null && jres["err"].ToString() == "0")
         {
@@ -81,6 +98,22 @@ public class UMMap : AHotBase
             var newPos = new Vector2(UMRemoteAvatarData.data.MapX, UMRemoteAvatarData.data.MapY);
             UMUIMain.OnParamUpdate();
 
+            deltaX += (int)(newPos.x - oldPos.x);
+            deltaY += (int)(newPos.y - oldPos.y);
+            for (var x = 0; x < col; x++)
+            {
+                if (!dCells.ContainsKey(deltaX + x))
+                {
+                    dCells.Add(deltaX + x, new Dictionary<int, RawImage>());
+                }
+                for (var y = 0; y < row; y++)
+                {
+                    if (!dCells[deltaX + x].ContainsKey(deltaY + y))
+                    {
+                        AddCell(deltaX + x, deltaY + y);
+                    }
+                }
+            }
             DoMove(oldPos, newPos);
         }
         else
@@ -89,46 +122,48 @@ public class UMMap : AHotBase
         }
     }
 
+    bool isMoving;
+    Vector2 startPoint;
+    Vector2 endPoint;
+    Vector3 startPos;
+    DateTime startTime;
     private void DoMove(Vector2 oldPos, Vector2 newPos)
     {
         if (oldPos == newPos)
         {
             return;
         }
-        Debug.Log("move from " + oldPos + " to " + newPos);
-        var n = DateTime.Now;
-        var start = n;
-        addUpdateAction(() =>
+
+        endPoint = newPos;
+        if (!isMoving)
         {
-            if ((DateTime.Now - start).TotalSeconds > 1)
-            {
-                return true;
-            }
-            var delta = (DateTime.Now - n).TotalSeconds;
-            n = DateTime.Now;
-            AvatarPos.Translate((newPos - oldPos) * (float)delta * MapCell.rectTransform.sizeDelta.x);
-            return false;
-        });
+            startPoint = oldPos;
+            startPos = MapCellRoot.transform.localPosition;
+        }
+        var n = DateTime.Now;
+        startTime = n;
+        if (!isMoving)
+        {
+            isMoving = true;
+            var v = -(endPoint - startPoint) * MapCell.rectTransform.sizeDelta.x;
+            var target = startPos + new Vector3(v.x, v.y);
+            addUpdateAction(() =>
+              {
+                  if ((DateTime.Now - startTime).TotalSeconds > 1)
+                  {
+                      MapCellRoot.localPosition = target;
+                      isMoving = false;
+                      return true;
+                  }
+                  var delta = (DateTime.Now - startTime).TotalSeconds;
+                  MapCellRoot.localPosition = Vector3.Lerp(startPos, target, (float)delta);
+                  return false;
+              });
+        }
     }
 
     private bool CheckMove(int deltax, int deltay)
     {
-        if (deltax == 0)
-        {
-            var y = UMRemoteAvatarData.data.MapY + deltay;
-            if (y > 5 || y < -5)
-            {
-                return false;
-            }
-        }
-        else if (deltay == 0)
-        {
-            var x = UMRemoteAvatarData.data.MapX + deltax;
-            if (x > 7 || x < -7)
-            {
-                return false;
-            }
-        }
         return localLastMoveTime <= ApiDateTime.SecondsFromBegin();
     }
 }
