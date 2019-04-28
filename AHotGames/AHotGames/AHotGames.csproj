@@ -88,6 +88,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="games\game\MMORPG\ui\UMUISettings.cs" />
     <Compile Include="games\game\MMORPG\UMMap.cs" />
     <Compile Include="games\game\MMORPG\ui\GameSchulte.cs" />
     <Compile Include="games\game\MMORPG\ui\UMUIMain.cs" />

@@ -188,7 +188,7 @@ public abstract class AHotBase
         }
     }
     static Dictionary<string, List<Action<GameObject>>> dPendingActions = new Dictionary<string, List<Action<GameObject>>>();
-    protected void LoadPrefab(string prefabName, Action<GameObject> action)
+    protected static void LoadPrefab(string prefabName, Action<GameObject> action)
     {
         if (!dPendingActions.ContainsKey(prefabName))
         {
