@@ -50,6 +50,10 @@
       <HintPath>..\..\UHotGames\Temp\bin\Debug\UnityEngine.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="UnityEngine.AssetBundleModule">
+      <HintPath>..\..\UHotGames\Temp\bin\Debug\UnityEngine.AssetBundleModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="websocket-sharp">
       <HintPath>..\..\UHotGames\Temp\bin\Debug/websocket-sharp.dll</HintPath>
       <Private>False</Private>
@@ -95,6 +99,7 @@
     <Compile Include="games\game\MMORPG\ui\UMUICreateAvatar.cs" />
     <Compile Include="games\game\MMORPG\UMMORPG.cs" />
     <Compile Include="games\game\MMORPG\UMRemoteDataManager.cs" />
+    <Compile Include="games\uis\UDownloader.cs" />
     <Compile Include="games\uis\ParamNameDefs.cs" />
     <Compile Include="games\uis\UStaticWebRequests.cs" />
     <Compile Include="games\uis\UICommonWait.cs" />
@@ -114,6 +119,7 @@
     <Compile Include="utils\Singleton.cs" />
     <Compile Include="utils\typeParser.cs" />
     <Compile Include="utils\UEmitMessager.cs" />
+    <Compile Include="utils\UHotLog.cs" />
     <Compile Include="utils\UOnGUIer.cs" />
     <Compile Include="utils\UStaticFuncs.cs" />
     <Compile Include="utils\Utils.cs" />

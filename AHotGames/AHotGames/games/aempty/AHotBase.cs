@@ -305,4 +305,43 @@ public abstract class AHotBase
         public Action action;
         public float delay;
     }
+
+    protected void OnDownloadText(string url, Action<string> downloadedAction, Action<string> errorAction = null)
+    {
+        var www = new WWW(url);
+        addUpdateAction(() =>
+        {
+            if (www.isDone)
+            {
+                if (string.IsNullOrEmpty(www.error))
+                    downloadedAction?.Invoke(www.text);
+                else
+                {
+                    UHotLog.Log($"{url} error {www.error}");
+                    errorAction?.Invoke(www.error);
+                }
+                return true;
+            }
+            return false;
+        });
+    }
+    protected void OnDownloadAssetbundle(string url, Action<AssetBundle> downloadedAction, Action<string> errorAction = null)
+    {
+        var www = new WWW(url);
+        addUpdateAction(() =>
+        {
+            if (www.isDone)
+            {
+                if (string.IsNullOrEmpty(www.error))
+                    downloadedAction?.Invoke(www.assetBundle);
+                else
+                {
+                    UHotLog.Log($"{url} error {www.error}");
+                    errorAction?.Invoke(www.error);
+                }
+                return true;
+            }
+            return false;
+        });
+    }
 }

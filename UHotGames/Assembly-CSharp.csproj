@@ -161,6 +161,7 @@
     <Compile Include="Assets\Script\Utils\MonoInstancePool.cs" />
     <Compile Include="Assets\Script\Utils\UAssetBundleDownloader.cs" />
     <Compile Include="Assets\Script\Utils\UConfigManager.cs" />
+    <Compile Include="Assets\Script\Utils\UCopyFilesFromStreamingAssets.cs" />
     <Compile Include="Assets\Script\Utils\UEmitMessage.cs" />
     <Compile Include="Assets\Script\Utils\UFileManager.cs" />
     <Compile Include="Assets\Script\Utils\UStaticFuncs.cs" />

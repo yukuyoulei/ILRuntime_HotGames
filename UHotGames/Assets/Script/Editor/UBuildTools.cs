@@ -312,12 +312,23 @@ public class UBuildTools : EditorWindow
 		assetBundleSourcePath = EditorGUILayout.TextField(assetBundleSourcePath);
 		EditorGUILayout.LabelField(" ", GUILayout.Width(20));
 		EditorGUILayout.EndHorizontal();
+
 		if (GUILayout.Button("Build AssetBundles"))
 		{
 			StartBuildAssetBundles();
 		}
 
-		EditorGUILayout.Space();
+        EditorGUILayout.Space();
+        EditorGUILayout.LabelField("From:	" + GetAssetBundleTargetPath());
+        EditorGUILayout.LabelField("To:	" + GetAssetBundleStreamingPath());
+        if (GUILayout.Button("Copy AssetBundles", GUILayout.Width(position.width - 20)))
+        {
+            CopyDir(GetAssetBundleTargetPath(), GetAssetBundleStreamingPath());
+            EditorUtility.DisplayDialog("完成", "拷贝完成。", "确定");
+        }
+
+
+        EditorGUILayout.Space();
 		EditorGUILayout.LabelField("相册提示:");
 		photo = GUILayout.TextArea(photo, GUILayout.Width(position.width - 4));
 
@@ -401,8 +412,21 @@ public class UBuildTools : EditorWindow
 		}
 		EditorGUILayout.EndScrollView();
 	}
+    private static string GetAssetBundleStreamingPath()
+    {
+        return Application.streamingAssetsPath + "/" + Platform.GetPlatformFolder(EditorUserBuildSettings.activeBuildTarget);
+    }
+    private static string GetAssetBundleSourcePath()
+    {
+        return Application.dataPath + "/" + assetBundleSourcePath;
+    }
+    private static string GetAssetBundleTargetPath()
+    {
+        var p = Path.GetFullPath(Path.Combine(Application.dataPath, "../../ab1/"));
+        return Path.Combine(p, Platform.GetPlatformFolder(EditorUserBuildSettings.activeBuildTarget)); ;
+    }
 
-	static string assetBundleSourcePath
+    static string assetBundleSourcePath
 	{
 		get
 		{
@@ -420,11 +444,10 @@ public class UBuildTools : EditorWindow
     }
     public static void StartBuildAssetBundles()
     {
-        string sourcePath = Application.dataPath + "/" + assetBundleSourcePath;
-        var buildAssetBundlePath = Path.GetFullPath(Path.Combine(Application.dataPath, "../../ab1/"));
-        //ClearAssetBundlesName();
+        string sourcePath = GetAssetBundleSourcePath();
+        string outputPath = GetAssetBundleTargetPath();
+
         packedFile.Clear();
-        string outputPath = Path.Combine(buildAssetBundlePath, Platform.GetPlatformFolder(EditorUserBuildSettings.activeBuildTarget));
 
         Pack(sourcePath);
         if (!Directory.Exists(outputPath))
@@ -432,15 +455,20 @@ public class UBuildTools : EditorWindow
             Directory.CreateDirectory(outputPath);
         }
         //根据BuildSetting里面所激活的平台进行打包 设置过AssetBundleName的都会进行打包
-        BuildPipeline.BuildAssetBundles(outputPath, BuildAssetBundleOptions.None, EditorUserBuildSettings.activeBuildTarget);
+        BuildPipeline.BuildAssetBundles(outputPath
+#if UNITY_ANDROID
+			, BuildAssetBundleOptions.UncompressedAssetBundle
+#else
+            , BuildAssetBundleOptions.None
+#endif
+            , EditorUserBuildSettings.activeBuildTarget);
         var versions = EnumFileMd5(outputPath, outputPath);
         File.WriteAllText(outputPath + "/versions.txt", versions);
-        System.Diagnostics.Process.Start(buildAssetBundlePath);
+        System.Diagnostics.Process.Start(outputPath);
 
         //ClearAssetBundlesName();
 
         AssetDatabase.Refresh();
-
     }
     static void Pack(string source)
     {

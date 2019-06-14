@@ -11,62 +11,77 @@ using System.Linq;
 
 public class Enter : MonoBehaviour
 {
-	public static string ConfigURL = "http://www.fscoding2019.top/hotgame/Config.txt";
-	public bool UseAB;
-	private void Start()
-	{
-		ConfigDownloader.Instance.StartToDownload(ConfigURL, () =>
-		 {
-			 ParseConfigs();
+    public static string ConfigURL = "http://www.fscoding2019.top/hotgame/Config.txt";
+    public bool UseAB;
+    private void Start()
+    {
+        if (!PlayerPrefs.HasKey("firstlaunch" + Utils_Plugins.Util_GetBundleVersion()))
+        {
+            MonoInstancePool.getInstance<UCopyFilesFromStreamingAssets>().OnCopy("versions.txt", UStaticFuncs.ConfigSaveDir, () =>
+            {
+                InitRemoteConfig();
+                PlayerPrefs.SetInt("firstlaunch" + Utils_Plugins.Util_GetBundleVersion(), 1);
+            });
+        }
+        else
+        {
+            InitRemoteConfig();
+        }
+    }
 
-			 Debug.Log("UConfigManager.bUsingAb " + UConfigManager.bUsingAb);
+    private void InitRemoteConfig()
+    {
+        ConfigDownloader.Instance.StartToDownload(ConfigURL, () =>
+        {
+            ParseConfigs();
 
-			 UAssetBundleDownloader.Instance.DownloadResources((l1) =>
-			 {
-				 UAssetBundleDownloader.Instance.DownloadResources((l2) =>
-				 {
-					 var dll = "Dll/AHotGames";
-					 byte[] pdbBytes = null;
+            Debug.Log("UConfigManager.bUsingAb " + UConfigManager.bUsingAb);
+            UAssetBundleDownloader.Instance.DownloadResources((l1) =>
+            {
+                UAssetBundleDownloader.Instance.DownloadResources((l2) =>
+                {
+                    var dll = "Dll/AHotGames";
+                    byte[] pdbBytes = null;
 #if UNITY_EDITOR
-					 if (!UConfigManager.bUsingAb)
-					 {
-						 dll += ".bytes";
-					 }
-					 pdbBytes = System.IO.File.ReadAllBytes("Assets/RemoteResources/Dll/AHotGames.pdb");
+                    if (!UConfigManager.bUsingAb)
+                    {
+                        dll += ".bytes";
+                    }
+                    pdbBytes = System.IO.File.ReadAllBytes("Assets/RemoteResources/Dll/AHotGames.pdb");
 #endif
-					 ILRuntimeHandler.Instance.DoLoadDll("ahotmages"
-						 , UAssetBundleDownloader.Instance.OnLoadAsset<TextAsset>(dll).bytes, pdbBytes);
+                    ILRuntimeHandler.Instance.DoLoadDll("ahotmages"
+                        , UAssetBundleDownloader.Instance.OnLoadAsset<TextAsset>(dll).bytes, pdbBytes);
 
-					 ILRuntimeHandler.Instance.SetUnityMessageReceiver(MonoInstancePool.getInstance<UEmitMessage>(true).gameObject);
+                    ILRuntimeHandler.Instance.SetUnityMessageReceiver(MonoInstancePool.getInstance<UEmitMessage>(true).gameObject);
 
-					 ILRuntimeHandler.Instance.OnLoadClass("AEntrance", new GameObject("AEntrance"));
-				 }
-				 , null, (arg) =>
-				 {
-					 var preloads = ConfigDownloader.Instance.OnGetValue("preloads");
-					 var lPreloads = preloads.Split(',').ToList();
-					 foreach (var p in lPreloads)
-					 {
-						 if (arg.ToLower().StartsWith(p.ToLower()))
-						 {
-							 return true;
-						 }
-					 }
-					 return false;
-				 });
-			 }
-			 , null, null, true, UStaticFuncs.GetPlatformFolder(Application.platform)
-			 , UStaticFuncs.GetPlatformFolder(Application.platform) + ".manifest");
+                    ILRuntimeHandler.Instance.OnLoadClass("AEntrance", new GameObject("AEntrance"));
+                }
+                , null, (arg) =>
+                {
+                    var preloads = ConfigDownloader.Instance.OnGetValue("preloads");
+                    var lPreloads = preloads.Split(',').ToList();
+                    foreach (var p in lPreloads)
+                    {
+                        if (arg.ToLower().StartsWith(p.ToLower()))
+                        {
+                            return true;
+                        }
+                    }
+                    return false;
+                });
+            }
+            , null, null, true, UStaticFuncs.GetPlatformFolder(Application.platform)
+            , UStaticFuncs.GetPlatformFolder(Application.platform) + ".manifest");
 
-		 }, () => { Debug.LogError("下载配置文件失败。"); });
-	}
+        }, () => { Debug.LogError("下载配置文件失败。"); });
+    }
 
-	private void ParseConfigs()
-	{
-		UConfigManager.bUsingAb = ConfigDownloader.Instance.OnGetIntValue("useab") == 1;
+    private void ParseConfigs()
+    {
+        UConfigManager.bUsingAb = ConfigDownloader.Instance.OnGetIntValue("useab") == 1;
 
 #if UNITY_EDITOR
-		UConfigManager.bUsingAb = UseAB;
+        UConfigManager.bUsingAb = UseAB;
 #endif
-	}
+    }
 }
