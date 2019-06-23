@@ -33,7 +33,7 @@ public class GameSchulte : AHotBase
         btnReturn.onClick.AddListener(() =>
         {
             UnloadThis();
-            LoadAnother<UIMain>();
+            LoadAnotherUI<UIMain>();
         });
 
         var CurCount = 0;

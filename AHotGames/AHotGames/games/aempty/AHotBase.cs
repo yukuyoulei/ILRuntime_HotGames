@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,8 +11,17 @@ public abstract class AHotBase
     public static AHotBase curGame;
     public static string strArg;
     protected bool bDestroying;
-    public void SetGameObj(GameObject gameObj, string arg)
+    public void SetGameObj(GameObject gameObj, string arg = "")
     {
+        if (arg == "true")
+        {
+            Environment.UseAB = true;
+        }
+        else if (arg == "false")
+        {
+            Environment.UseAB = false;
+        }
+
         if (dGameObjects.ContainsKey(gameObj.name))
         {
             dGameObjects[gameObj.name] = gameObj;
@@ -249,9 +259,20 @@ public abstract class AHotBase
         Debug.Log("send message to unity:" + smsg);
         SendMessageToUnityReceiver(smsg);
     }
-    public static void LoadAnother<T>() where T : AHotBase
+    public static T LoadUI<T>() where T : AHotBase, new()
     {
-        LoadAnotherUI(typeof(T).Name);
+        GameObject obj = UHotAssetBundleLoader.Instance.OnLoadAsset<GameObject>("UI/" + typeof(T).Name);
+        if (obj == null)
+        {
+            return null;
+        }
+        var t = new T();
+        t.SetGameObj(GameObject.Instantiate(obj), "");
+        return t;
+    }
+    public static T LoadAnotherUI<T>() where T : AHotBase, new()
+    {
+        return LoadUI<T>();
     }
     public static void LoadAnotherUI(string uiname)
     {
@@ -306,42 +327,4 @@ public abstract class AHotBase
         public float delay;
     }
 
-    protected void OnDownloadText(string url, Action<string> downloadedAction, Action<string> errorAction = null)
-    {
-        var www = new WWW(url);
-        addUpdateAction(() =>
-        {
-            if (www.isDone)
-            {
-                if (string.IsNullOrEmpty(www.error))
-                    downloadedAction?.Invoke(www.text);
-                else
-                {
-                    UHotLog.Log($"{url} error {www.error}");
-                    errorAction?.Invoke(www.error);
-                }
-                return true;
-            }
-            return false;
-        });
-    }
-    protected void OnDownloadAssetbundle(string url, Action<AssetBundle> downloadedAction, Action<string> errorAction = null)
-    {
-        var www = new WWW(url);
-        addUpdateAction(() =>
-        {
-            if (www.isDone)
-            {
-                if (string.IsNullOrEmpty(www.error))
-                    downloadedAction?.Invoke(www.assetBundle);
-                else
-                {
-                    UHotLog.Log($"{url} error {www.error}");
-                    errorAction?.Invoke(www.error);
-                }
-                return true;
-            }
-            return false;
-        });
-    }
 }

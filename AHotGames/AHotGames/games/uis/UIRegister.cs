@@ -14,7 +14,7 @@ public class UIRegister : AHotBase
         {
             UnloadThis();
 
-            LoadAnother<UILogin>();
+            LoadAnotherUI<UILogin>();
         });
 
         var inputUsername = FindWidget<InputField>("inputUsername");
@@ -61,7 +61,7 @@ public class UIRegister : AHotBase
 
                             UnloadThis();
 
-                            LoadAnother<UILogin>();
+                            LoadAnotherUI<UILogin>();
                         }, null, true);
                     }
                     , (err) =>

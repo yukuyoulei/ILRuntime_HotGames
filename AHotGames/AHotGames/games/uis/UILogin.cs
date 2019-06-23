@@ -60,13 +60,13 @@ public class UILogin : AHotBase
                             UMRemoteDataManager.Instance.OnAdd(data);
 
                             UnloadThis();
-                            LoadAnother<UIMain>();
+                            LoadAnotherUI<UIMain>();
                         }, (err) =>
                         {
                             if (err == "3")
                             {
                                 UnloadThis();
-                                LoadAnother<UMUICreateAvatar>();
+                                LoadAnotherUI<UMUICreateAvatar>();
                             }
                             else
                             {
@@ -93,7 +93,7 @@ public class UILogin : AHotBase
         {
             UnloadThis();
 
-            LoadAnother<UIRegister>();
+            LoadAnotherUI<UIRegister>();
         });
     }
 }

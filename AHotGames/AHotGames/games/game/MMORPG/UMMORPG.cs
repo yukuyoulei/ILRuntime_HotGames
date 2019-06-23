@@ -14,7 +14,7 @@ public class UMMORPG : AHotBase
             , (openEvt) =>
             {
                 UICommonWait.Hide();
-                LoadAnother<UMUIMain>();
+                LoadAnotherUI<UMUIMain>();
             }, (msgEvt) =>
             {
                 

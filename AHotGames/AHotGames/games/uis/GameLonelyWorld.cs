@@ -15,7 +15,7 @@ public class GameLonelyWorld : AHotBase
         {
             UnloadThis();
 
-            LoadAnother<UIMain>();
+            LoadAnotherUI<UIMain>();
         });
 
         Role = UStaticFuncs.FindChild(gameObj.transform, "Role");

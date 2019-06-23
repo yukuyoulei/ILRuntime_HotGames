@@ -50,7 +50,7 @@ public class UMUICreateAvatar : AHotBase
                                 UMRemoteDataManager.Instance.OnAdd(data);
                                 UnloadThis();
 
-                                LoadAnother<UMUIMain>();
+                                LoadAnotherUI<UMUIMain>();
                             }, (err) =>
                             {
                                 UIAlert.Show("进入游戏失败，" + err);
@@ -71,7 +71,7 @@ public class UMUICreateAvatar : AHotBase
         btnReturn.onClick.AddListener(() =>
         {
             UnloadThis();
-            LoadAnother<UIMain>();
+            LoadAnotherUI<UIMain>();
         });
     }
 

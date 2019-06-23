@@ -39,7 +39,7 @@ public class UICommonWait : AHotBase
 	{
 		if (sinstance == null)
 		{
-			LoadAnother<UICommonWait>();
+			LoadAnotherUI<UICommonWait>();
 		}
 	}
 	public static void Hide()

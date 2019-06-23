@@ -26,7 +26,7 @@ public class UMUIMain : AHotBase
     {
         sintance = this;
 
-        LoadAnother<UMMap>();
+        LoadAnotherUI<UMMap>();
 
         {
             var AvatarHeadIcon = FindWidget<RawImage>("AvatarHeadIcon");
@@ -36,7 +36,7 @@ public class UMUIMain : AHotBase
             var AvatarHeadIcon = FindWidget<Button>("AvatarHeadIcon");
             AvatarHeadIcon.onClick.AddListener(() =>
             {
-                LoadAnother<UMUISettings>();
+                LoadAnotherUI<UMUISettings>();
             });
         }
 

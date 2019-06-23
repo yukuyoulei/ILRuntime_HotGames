@@ -7,9 +7,9 @@ using UnityEngine;
 
 public class UIMain : AHotBase
 {
-    private void LoadGame<T>() where T : AHotBase
+    private void LoadGame<T>() where T : AHotBase, new()
     {
-        LoadAnother<T>();
+        LoadAnotherUI<T>();
     }
     private Dictionary<string, Action> _dGames;
     private Dictionary<string, Action> dGames
@@ -25,7 +25,7 @@ public class UIMain : AHotBase
                 });
                 _dGames.Add("RPG游戏", () =>
                 {
-                    LoadAnother<UMMORPG>();
+                    LoadAnotherUI<UMMORPG>();
                 });
             }
             return _dGames;
@@ -47,7 +47,7 @@ public class UIMain : AHotBase
                 , (jres) =>
                 {
                     UnloadThis();
-                    LoadAnother<UILogin>();
+                    LoadAnotherUI<UILogin>();
                 }, (err) =>
                 {
                     UIAlert.Show("注销失败：" + Utils.ErrorFormat(err));

@@ -28,7 +28,7 @@ public class UMUISettings : AHotBase
         btnLogout.onClick.AddListener(() =>
         {
             UnloadAllClasses();
-            LoadAnother<UILogin>();
+            LoadAnotherUI<UILogin>();
         });
     }
 }

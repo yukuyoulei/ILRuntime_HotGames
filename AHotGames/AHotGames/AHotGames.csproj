@@ -99,6 +99,7 @@
     <Compile Include="games\game\MMORPG\ui\UMUICreateAvatar.cs" />
     <Compile Include="games\game\MMORPG\UMMORPG.cs" />
     <Compile Include="games\game\MMORPG\UMRemoteDataManager.cs" />
+    <Compile Include="games\uis\UILoading.cs" />
     <Compile Include="games\uis\UDownloader.cs" />
     <Compile Include="games\uis\ParamNameDefs.cs" />
     <Compile Include="games\uis\UStaticWebRequests.cs" />
@@ -116,10 +117,13 @@
     <Compile Include="utils\ClickButton.cs" />
     <Compile Include="games\aempty\AHotBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="utils\Environment.cs" />
     <Compile Include="utils\Singleton.cs" />
     <Compile Include="utils\typeParser.cs" />
     <Compile Include="utils\UEmitMessager.cs" />
+    <Compile Include="utils\UHotAssetBundleLoader.cs" />
     <Compile Include="utils\UHotLog.cs" />
+    <Compile Include="utils\ULocalFileManager.cs" />
     <Compile Include="utils\UOnGUIer.cs" />
     <Compile Include="utils\UStaticFuncs.cs" />
     <Compile Include="utils\Utils.cs" />
