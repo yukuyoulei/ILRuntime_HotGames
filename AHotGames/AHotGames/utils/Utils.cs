@@ -9,8 +9,8 @@ using UnityEngine;
 
 public static class Utils
 {
-    public static string BaseURL = "http://127.0.0.1/ab/";
-    public static string WebURL = "http://127.0.0.1/w/";
+    public static string BaseURL = "http://www.fscoding.xyz/hotgame/cdn/";
+    public static string WebURL = "http://127.0.0.1/ws/";
     public static string WebSocketURL = "ws://127.0.0.1/ws/ws.enter?";
 
     public static String MD5Hash(string sInput)

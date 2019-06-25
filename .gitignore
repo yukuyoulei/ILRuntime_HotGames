@@ -11,11 +11,6 @@ UHotGames/Temp/*
 UHotGames/Release/*
 UHotGames/ab1/*
 UHotGames/RemoteResources/*
-UHotGames/Assembly-CSharp.csproj
-UHotGames/Assembly-CSharp-firstpass.csproj
-UHotGames/Assembly-CSharp-Editor.csproj
-UHotGames/Assembly-CSharp-Editor-firstpass.csproj
-UHotGames/UHotGames.csproj
-UHotGames/UHotGames.Editor.csproj
-UHotGames/UHotGames.Editor.Plugins.csproj
-UHotGames/UHotGames.Plugins.csproj
+UHotGames/Assets/StreamingAssets/*
+ab1/*
+*.csproj
