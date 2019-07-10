@@ -211,7 +211,7 @@ public class UHotAssetBundleLoader : AHotBase
 			{
 				var deps = OnGetAssetBundleDependeces(res);
 				UHotLog.Log($"{res} has {deps.Length} deps");
-				foreach (var dep in lNeedDownload)
+				foreach (var dep in deps)
 				{
 					if (!lNeedDownload.Contains(dep))
 					{
