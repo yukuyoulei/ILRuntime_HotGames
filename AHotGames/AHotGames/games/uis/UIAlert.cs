@@ -21,13 +21,13 @@ public class UIAlert : AHotBase
 		btnConfirm.onClick.AddListener(() =>
 		{
 			actionConfirm?.Invoke();
-			UnloadThis();
+			OnUnloadThis();
 		});
 		btnCancel = FindWidget<Button>("btnCancel");
 		btnCancel.onClick.AddListener(() =>
 		{
 			actionCancel?.Invoke();
-			UnloadThis();
+			OnUnloadThis();
 		});
 
 		if (bHideConfirmButton)

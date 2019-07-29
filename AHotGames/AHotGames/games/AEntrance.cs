@@ -12,22 +12,26 @@ public class AEntrance : AHotBase
 		PreDownloadResources();
 	}
 
+	private string[] preloadResources = new string[] {
+		  "ui/uilogin.ab"
+		, "dll/ahotgames.ab"
+	};
 	private void PreDownloadResources()
 	{
 		UHotAssetBundleLoader.Instance.OnDownloadResources(new List<string> { Utils.GetPlatformFolder(Application.platform)
 			, Utils.GetPlatformFolder(Application.platform)+ ".manifest" }, () =>
 		{
 			UHotAssetBundleLoader.Instance.OnDownloadResources(new List<string> { "ui/uiloading.ab" }, () =>
-			{
-				LoadUI<UILoading>();
+		   {
+			   LoadUI<UILoading>();
 
-				UHotAssetBundleLoader.Instance.OnDownloadResources(new List<string> { "ui/uilogin.ab" }, () =>
-				{
-					UILoading.UnloadThis();
+			   UHotAssetBundleLoader.Instance.OnDownloadResources(new List<string>(preloadResources), () =>
+			   {
+				   UILoading.Instance?.OnUnloadThis();
 
-					LoadUI<UILogin>();
-				}, null);
-			}, null);
+				   LoadUI<UILogin>();
+			   }, null);
+		   }, null);
 		}, null);
 	}
 }

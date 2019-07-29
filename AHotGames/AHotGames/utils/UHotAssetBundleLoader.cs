@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class UHotAssetBundleLoader : AHotBase
 {
@@ -24,7 +25,7 @@ public class UHotAssetBundleLoader : AHotBase
 	}
 	public T OnLoadAsset<T>(string path) where T : UnityEngine.Object
 	{
-		if (!Environment.UseAB)
+		if (!Environment.UseAB && Environment.IsEditor)
 		{
 			LoadAnotherClass(Utils.GetAssetBundleName(path), path);
 			return null;
@@ -159,7 +160,7 @@ public class UHotAssetBundleLoader : AHotBase
 	private Dictionary<string, AssetBundle> dAssetBundles = new Dictionary<string, AssetBundle>();
 	private List<string> lDownloaded = new List<string>();
 	Dictionary<string, string> dRemoteVersions = new Dictionary<string, string>();
-	public void OnDownloadResources(List<string> lResources, Action downloaded, Action<float> progress)
+	public void OnDownloadResources(List<string> lResources, Action downloaded, Action<float> progress = null)
 	{
 		if (!Environment.UseAB)
 		{
@@ -169,19 +170,22 @@ public class UHotAssetBundleLoader : AHotBase
 		if (dRemoteVersions.Count == 0)
 		{
 			OnDownloadText(Utils.GetPlatformFolder(Application.platform) + "/versions", (content) =>
-			  {
-				  var acontent = content.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
-				  foreach (var c in acontent)
-				  {
-					  var ac = c.Split('|');
-					  if (ac.Length < 2)
-					  {
-						  continue;
-					  }
-					  dRemoteVersions.Add(ac[0], ac[1]);
-				  }
-				  DoCheckVersions(lResources, downloaded, progress);
-			  });
+			{
+				var acontent = content.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+				foreach (var c in acontent)
+				{
+					var ac = c.Split('|');
+					if (ac.Length < 2)
+					{
+						continue;
+					}
+					if (!dRemoteVersions.ContainsKey(ac[0]))
+					{
+						dRemoteVersions.Add(ac[0], ac[1]);
+					}
+				}
+				DoCheckVersions(lResources, downloaded, progress);
+			});
 		}
 		else
 		{
@@ -198,6 +202,7 @@ public class UHotAssetBundleLoader : AHotBase
 			{
 				res = $"/{r}";
 			}
+			res = res.ToLower();
 			if (!dRemoteVersions.ContainsKey(res))
 			{
 				continue;
@@ -205,12 +210,12 @@ public class UHotAssetBundleLoader : AHotBase
 			var file = ULocalFileManager.Instance.OnGetFile(res);
 			if (file == null || file.version != dRemoteVersions[res])
 			{
+				UDebugHotLog.Log($"{res} need download");
 				lNeedDownload.Add(res);
 			}
 			if (res.EndsWith(AssetBundleSuffix))
 			{
 				var deps = OnGetAssetBundleDependeces(res);
-				UHotLog.Log($"{res} has {deps.Length} deps");
 				foreach (var dep in deps)
 				{
 					if (!lNeedDownload.Contains(dep))
@@ -222,7 +227,6 @@ public class UHotAssetBundleLoader : AHotBase
 						}
 						if (!dRemoteVersions.ContainsKey(rdep))
 						{
-							UHotLog.Log($"Cannot find {rdep} remote version");
 							continue;
 						}
 						file = ULocalFileManager.Instance.OnGetFile(rdep);
@@ -234,22 +238,25 @@ public class UHotAssetBundleLoader : AHotBase
 				}
 			}
 		}
+		totalCount = lNeedDownload.Count;
+		UDebugHotLog.Log($"totalCount {totalCount}");
 		DoDownloadResources(lNeedDownload, downloaded, progress);
 	}
-	private void DoDownloadResources(List<string> lResources, Action downloaded, Action<float> progress)
+	int totalCount;
+	private void DoDownloadResources(List<string> lWaitingForDownload, Action downloaded, Action<float> progress)
 	{
-		if (lResources.Count > 0)
+		if (lWaitingForDownload.Count > 0)
 		{
 			var resource = "";
 			do
 			{
-				if (lResources.Count == 0)
+				if (lWaitingForDownload.Count == 0)
 				{
 					resource = "";
 					break;
 				}
-				resource = lResources[0];
-				lResources.RemoveAt(0);
+				resource = lWaitingForDownload[0];
+				lWaitingForDownload.RemoveAt(0);
 			}
 			while (dAssetBundles.ContainsKey(resource));
 
@@ -260,20 +267,29 @@ public class UHotAssetBundleLoader : AHotBase
 					, (res) =>
 					{
 						lDownloaded.Add(res);
-						OnDownloadResources(lResources, downloaded, progress);
+						DoDownloadResources(lWaitingForDownload, downloaded, progress);
 					}
 					, (err) =>
 					{
 						//lResources.Add(resource);
-						OnDownloadResources(lResources, downloaded, progress);
+						DoDownloadResources(lWaitingForDownload, downloaded, progress);
 					}
 					, (p) =>
 					{
-						fProgress = (float)lDownloaded.Count / (lDownloaded.Count + lResources.Count) + p;
+						fProgress = (float)lDownloaded.Count / totalCount + p / totalCount;
+						if (progress != null)
+						{
+							progress(fProgress);
+						}
+						else
+						{
+							UILoading.Instance?.OnSetProgress(fProgress);
+						}
 					});
 				return;
 			}
 		}
+		totalCount = 0;
 		lDownloaded.Clear();
 		fProgress = -1;
 		progress?.Invoke(1);
@@ -312,14 +328,20 @@ public class UHotAssetBundleLoader : AHotBase
 				}
 				else
 				{
-					UHotLog.Log($"{url} error {www.error}");
+					UDebugHotLog.Log($"{url} error {www.error}");
 					errorAction?.Invoke(www.error);
 				}
 				return true;
 			}
 			else
 			{
-				progressAction?.Invoke(www.progress);
+				if (progressAction != null)
+					progressAction(www.progress);
+				else
+				{
+					UDebugHotLog.Log($"OnDownloadBytes process {www.progress}");
+					UILoading.Instance?.OnSetProgress(www.progress);
+				}
 			}
 			return false;
 		});
@@ -344,7 +366,7 @@ public class UHotAssetBundleLoader : AHotBase
 				}
 				else
 				{
-					UHotLog.Log($"{www.url} error {www.error}");
+					UDebugHotLog.Log($"{www.url} error {www.error}");
 					errorAction?.Invoke(www.error);
 				}
 				return true;

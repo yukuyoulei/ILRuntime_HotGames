@@ -2,12 +2,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
 public abstract class AHotBase
 {
-	protected GameObject gameObj;
+	public GameObject gameObj;
 	public static AHotBase curGame;
 	public static string strArg;
 	protected bool bDestroying;
@@ -16,14 +17,15 @@ public abstract class AHotBase
 	{
 		sinstance = this;
 
-		if (arg == "true")
+		if (arg.Equals("true", StringComparison.CurrentCultureIgnoreCase))
 		{
 			Environment.UseAB = true;
 		}
-		else if (arg == "false")
+		else if (arg.Equals("false", StringComparison.CurrentCultureIgnoreCase))
 		{
 			Environment.UseAB = false;
 		}
+		UDebugHotLog.Log($"Environment.UseAB {Environment.UseAB} arg {arg}");
 
 		if (dGameObjects.ContainsKey(gameObj.name))
 		{
@@ -85,6 +87,10 @@ public abstract class AHotBase
 	}
 	private void initUUpdater()
 	{
+		if (gameObj == null)
+		{
+			return;
+		}
 		if (updater == null)
 		{
 			updater = gameObj.AddComponent<UUpdater>();
@@ -100,10 +106,18 @@ public abstract class AHotBase
 					var remove = new List<Func<bool>>();
 					foreach (var u in updateActions)
 					{
-						if (u())
+						/*try
+						{*/
+							if (u())
+							{
+								remove.Add(u);
+							}
+						/*}
+						catch (Exception ex)
 						{
+							UDebugHotLog.Log($"update error:\r\n{this.GetType().FullName}\r\n{ex.Message}\r\n{ex.StackTrace}");
 							remove.Add(u);
-						}
+						}*/
 					}
 					foreach (var r in remove)
 					{
@@ -113,12 +127,17 @@ public abstract class AHotBase
 			};
 		}
 	}
+	protected void DelayDoSth(float delay, Action sth)
+	{
+		DelayDoSth(sth, delay);
+	}
 	protected void DelayDoSth(Action sth, float delay)
 	{
-		var n = DateTime.Now;
+		var delta = 0f;
 		addUpdateAction(() =>
 		{
-			if ((DateTime.Now - n).TotalSeconds > delay)
+			delta += Time.deltaTime;
+			if (delta > delay)
 			{
 				sth();
 				return true;
@@ -136,14 +155,18 @@ public abstract class AHotBase
 	{
 		return UStaticFuncs.FindChildComponent<T>(gameObj.transform, widgetName);
 	}
-	public T FindWidget<T>(Transform trans, string widgetName) where T : Component
+	public static T FindWidget<T>(Transform trans, string widgetName) where T : Component
 	{
 		return UStaticFuncs.FindChildComponent<T>(trans, widgetName);
 	}
 
 	protected void ShowWidget(string widgetName, bool bShow)
 	{
-		var w = UStaticFuncs.FindChildComponent<Component>(gameObj.transform, widgetName);
+		ShowWidget(gameObj.transform, widgetName, bShow);
+	}
+	protected void ShowWidget(Transform parent, string widgetName, bool bShow)
+	{
+		var w = UStaticFuncs.FindChildComponent<Component>(parent, widgetName);
 		if (w != null)
 		{
 			w.gameObject.SetActive(bShow);
@@ -154,6 +177,10 @@ public abstract class AHotBase
 	static void SetUnityMessageReceiver(GameObject receiver)
 	{
 		msgReceiver = receiver;
+	}
+	public static void SendInvokeToUnityReceiver(string gameObjName, string message, string argument = "")
+	{
+		SendMessageToUnityReceiver($"invoke|{gameObjName}:{message}{(string.IsNullOrEmpty(argument) ? "" : $":{argument}")}");
 	}
 	public static void SendMessageToUnityReceiver(string message)
 	{
@@ -169,7 +196,8 @@ public abstract class AHotBase
 	{
 		if (string.IsNullOrEmpty(gameobjName))
 		{
-			foreach (var g in dGameObjects.Values)
+			var allObjs = dGameObjects.Values.ToList();
+			foreach (var g in allObjs)
 			{
 				if (g == null)
 				{
@@ -262,11 +290,25 @@ public abstract class AHotBase
 		Debug.Log("send message to unity:" + smsg);
 		SendMessageToUnityReceiver(smsg);
 	}
-	public static T LoadUI<T>() where T : AHotBase, new()
+	public static T LoadUI<T>(string prefabPath) where T : AHotBase, new()
 	{
-		GameObject obj = UHotAssetBundleLoader.Instance.OnLoadAsset<GameObject>("UI/" + typeof(T).Name);
+		GameObject obj = UHotAssetBundleLoader.Instance.OnLoadAsset<GameObject>(prefabPath);
 		if (obj == null)
 		{
+			UDebugHotLog.Log($"cannot find prefab {prefabPath}");
+			return null;
+		}
+		var t = new T();
+		t.SetGameObj(GameObject.Instantiate(obj), "");
+		return t;
+	}
+	public static T LoadUI<T>() where T : AHotBase, new()
+	{
+		var path = "UI/" + typeof(T).Name;
+		GameObject obj = UHotAssetBundleLoader.Instance.OnLoadAsset<GameObject>(path);
+		if (obj == null)
+		{
+			UDebugHotLog.Log($"cannot find prefab {path}");
 			return null;
 		}
 		var t = new T();
@@ -281,7 +323,7 @@ public abstract class AHotBase
 	{
 		LoadAnotherClass(uiname, "UI/" + uiname + "");
 	}
-	protected void OnUnloadThis()
+	public virtual void OnUnloadThis()
 	{
 		bDestroying = true;
 
@@ -307,20 +349,21 @@ public abstract class AHotBase
 	}
 	protected void DoStarOperations()
 	{
-		var n = DateTime.Now;
+		var n = 0f;
 		addUpdateAction(() =>
 		{
 			if (operationList.Count == 0)
 			{
 				return true;
 			}
-			if ((DateTime.Now - n).TotalSeconds < operationList[0].delay)
+			n += Time.deltaTime;
+			if (n < operationList[0].delay)
 			{
 				return false;
 			}
+			n -= operationList[0].delay;
 			operationList[0].action();
 			operationList.RemoveAt(0);
-			n = DateTime.Now;
 			return false;
 		});
 	}
@@ -330,12 +373,4 @@ public abstract class AHotBase
 		public float delay;
 	}
 
-	public static void UnloadThis()
-	{
-		if (sinstance == null)
-		{
-			return;
-		}
-		sinstance.OnUnloadThis();
-	}
 }

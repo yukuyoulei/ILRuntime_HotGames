@@ -19,14 +19,14 @@ public class UIMain : AHotBase
             if (_dGames == null)
             {
                 _dGames = new Dictionary<string, Action>();
-                _dGames.Add("舒尔特方格", () =>
+                /*_dGames.Add("舒尔特方格", () =>
                 {
                     LoadGame<GameSchulte>();
                 });
                 _dGames.Add("RPG游戏", () =>
                 {
                     LoadAnotherUI<UMMORPG>();
-                });
+                });*/
             }
             return _dGames;
         }
@@ -46,7 +46,7 @@ public class UIMain : AHotBase
             UStaticWebRequests.DoLogout(UILogin.CachedUsername, UILogin.token
                 , (jres) =>
                 {
-                    UnloadThis();
+					OnUnloadThis();
                     LoadAnotherUI<UILogin>();
                 }, (err) =>
                 {
@@ -65,7 +65,7 @@ public class UIMain : AHotBase
             menu.GetComponentInChildren<Text>().text = g.Key;
             menu.onClick.AddListener(() =>
             {
-                UnloadThis();
+				OnUnloadThis();
                 g.Value();
             });
         }

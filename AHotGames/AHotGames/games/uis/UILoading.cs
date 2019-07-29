@@ -7,36 +7,56 @@ using UnityEngine;
 
 public class UILoading : AHotBase
 {
-    Text TextContent;
-    Slider Progress;
-    protected override void InitComponents()
-    {
-        TextContent = FindWidget<Text>("TextContent");
-        Progress = FindWidget<Slider>("Progress");
-        Progress.value = 0;
+	private static UILoading sinstance;
+	public static UILoading Instance
+	{
+		get
+		{
+			return sinstance;
+		}
+	}
+	Text TextContent;
+	Image Progress;
+	protected override void InitComponents()
+	{
+		sinstance = this;
 
-        addUpdateAction(() =>
-        {
-            if (UHotAssetBundleLoader.Instance.fProgress == -1)
-            {
-                return false;
-            }
-            var p = UHotAssetBundleLoader.Instance.fProgress;
-            if (p >= 1)
-            {
-                actionAfterLoaded?.Invoke();
-                UnloadThis();
-                actionAfterLoaded = null;
-                return true;
-            }
-            Progress.value = p;
-            return false;
-        });
-    }
-    static Action actionAfterLoaded;
-    public static void OnSetLoadingActions(Action afterLoadedAction)
-    {
-        actionAfterLoaded = afterLoadedAction;
-    }
+		TextContent = FindWidget<Text>("TextContent");
+		TextContent.text = "";
+		Progress = FindWidget<Image>("SliderProgress");
+		Progress.fillAmount = 0;
+	}
+	public override void OnUnloadThis()
+	{
+		if (Progress.fillAmount == 0)
+		{
+			base.OnUnloadThis();
+			return;
+		}
+		addUpdateAction(() =>
+		{
+			if (Progress == null)
+			{
+				return true;
+			}
+			if (Progress.fillAmount < 1)
+			{
+				Progress.fillAmount += Time.deltaTime / 100;
+				return false;
+			}
+			Progress.fillAmount = 1;
+			base.OnUnloadThis();
+			return true;
+		});
+	}
+	public void OnSetJindu(string str)
+	{
+		UDebugHotLog.Log($"OnSetJindu [{str}]");
+	}
+	public void OnSetProgress(float p)
+	{
+		Progress.fillAmount = p;
+		TextContent.text = $"{(p * 100).ToString("f1")}%";
+	}
 }
 

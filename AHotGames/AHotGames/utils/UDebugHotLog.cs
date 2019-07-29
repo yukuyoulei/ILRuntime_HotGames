@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-public static class UHotLog
+public static class UDebugHotLog
 {
 	public static void Log(string log)
 	{

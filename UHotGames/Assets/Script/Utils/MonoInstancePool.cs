@@ -68,4 +68,12 @@ public static class MonoInstancePool
 
 		return obj.AddComponent<T>() as T;
 	}
+	public static GameObject OnGetInstance(string name)
+	{
+		if (sInstancePool.ContainsKey(name))
+		{
+			return sInstancePool[name].gameObject;
+		}
+		return null;
+	}
 }

@@ -12,7 +12,7 @@ public class UIRegister : AHotBase
         var btnReturn = FindWidget<Button>("btnReturn");
         btnReturn.onClick.AddListener(() =>
         {
-            UnloadThis();
+			OnUnloadThis();
 
             LoadAnotherUI<UILogin>();
         });
@@ -59,7 +59,7 @@ public class UIRegister : AHotBase
                         {
                             UILogin.CachedUsername = jres["username"].ToString();
 
-                            UnloadThis();
+							OnUnloadThis();
 
                             LoadAnotherUI<UILogin>();
                         }, null, true);

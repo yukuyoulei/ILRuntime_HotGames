@@ -28,7 +28,7 @@ public class ILRuntimeHandler
     {
         appdomain = new ILRuntime.Runtime.Enviorment.AppDomain();
 #if UNITY_EDITOR
-        //appdomain.DebugService.StartDebugService(56000);
+        appdomain.DebugService.StartDebugService(56000);
 #endif
         InitializeILRuntime();
     }
