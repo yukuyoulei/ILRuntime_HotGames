@@ -14,6 +14,7 @@ public class AEntrance : AHotBase
 
 	private string[] preloadResources = new string[] {
 		  "ui/uilogin.ab"
+
 		, "dll/ahotgames.ab"
 	};
 	private void PreDownloadResources()

@@ -152,7 +152,7 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    Standalone: com.Company.ProductName
+    Standalone: com.fs.hotgame
     WebGL: com.Company.ProductName
     iOS: com.Company.ProductName
   buildNumber:

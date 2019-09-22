@@ -60,6 +60,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Script\Editor\SVNUtils.cs" />
     <Compile Include="Assets\Script\Editor\UBuildTools.cs" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>I:/PersonalGit/ILRuntime_HotGames/UHotGames/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
@@ -336,6 +337,9 @@
     </Reference>
     <Reference Include="websocket-sharp">
       <HintPath>I:/PersonalGit/ILRuntime_HotGames/UHotGames/Assets/Plugins/WebSocket/websocket-sharp.dll</HintPath>
+    </Reference>
+    <Reference Include="zxing.unity">
+      <HintPath>I:/PersonalGit/ILRuntime_HotGames/UHotGames/Assets/Plugins/zxing/zxing.unity.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.Advertisements">
       <HintPath>C:/Users/yukuy/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.8/Editor/UnityEditor.Advertisements.dll</HintPath>

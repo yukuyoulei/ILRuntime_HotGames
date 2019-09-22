@@ -74,5 +74,8 @@ public class CommonUtil
 		}
 		return iCount;
 	}
-
+	public static string filtername(string name)
+	{
+		return name.Trim().Replace(",", "").Replace("/", "").Replace("\\", "").Replace("-", "").Replace(".", "");
+	}
 }

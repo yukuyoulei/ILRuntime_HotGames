@@ -20,7 +20,18 @@ public class UILogin : AHotBase
 			PlayerPrefs.SetString("un", value);
 		}
 	}
-	public static string token { get; set; }
+
+	public static string token
+	{
+		get
+		{
+			return PlayerPrefs.GetString("token");
+		}
+		set
+		{
+			PlayerPrefs.SetString("token", value);
+		}
+	}
 	protected override void InitComponents()
 	{
 		var inputUsername = FindWidget<InputField>("inputUsername");
@@ -49,27 +60,10 @@ public class UILogin : AHotBase
 				(jres) =>
 				{
 					btnLogin.enabled = true;
-					CachedUsername = jres["username"].ToString();
+					CachedUsername = username;
 					token = jres["token"].ToString();
 
-					UStaticWebRequests.DoSelectAvatar(UILogin.CachedUsername, UILogin.token
-						, (jsel) =>
-						{
-
-						}, (err) =>
-						{
-							if (err == "3")
-							{
-								//create avatar
-							}
-							else
-							{
-								UIAlert.Show("选择角色失败，" + err);
-							}
-						}, (err) =>
-						{
-							UIAlert.Show("选择角色失败，" + err);
-						});
+					OnSelectAvatar();
 				}
 				, (err) =>
 				{
@@ -89,6 +83,49 @@ public class UILogin : AHotBase
 
 			LoadAnotherUI<UIRegister>();
 		});
+
+		if (!string.IsNullOrEmpty(token))
+		{
+			inputPassword.text = "******";
+			btnLogin.enabled = false;
+			UStaticWebRequests.OnWebRequest("Login/CheckToken", "username=" + CachedUsername + "&token=" + token, jobj =>
+			{
+				OnSelectAvatar();
+			},
+			jfail =>
+			{
+				btnLogin.enabled = true;
+				inputPassword.text = "";
+				token = "";
+			});
+		}
+	}
+
+	private void OnSelectAvatar()
+	{
+		UStaticWebRequests.DoSelectAvatar(UILogin.CachedUsername, UILogin.token
+			, (jsel) =>
+			{
+				OnUnloadThis();
+
+				URemoteData.OnReceiveAvatarData(jsel["avatar"].ToString());
+				LoadAnotherUI<UIMain>();
+			}, (err) =>
+			{
+				if (err == "3")
+				{
+					OnUnloadThis();
+
+					LoadAnotherUI<UICreateAvatar>();
+				}
+				else
+				{
+					UIAlert.Show("选择角色失败，" + err);
+				}
+			}, (err) =>
+			{
+				UIAlert.Show("选择角色失败，" + err);
+			});
 	}
 }
 

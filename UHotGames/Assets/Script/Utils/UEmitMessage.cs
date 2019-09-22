@@ -26,7 +26,7 @@ public class UEmitMessage : MonoBehaviour
 		else if (amsg[0] == "loadprefab")
 		{
 			var obj = UAssetBundleDownloader.Instance.OnLoadAsset<GameObject>(amsg[1]);
-			if (!obj)
+			if (obj == null)
 			{
 				obj = new GameObject(amsg[1]);
 			}
@@ -60,7 +60,15 @@ public class UEmitMessage : MonoBehaviour
 							{
 								obj = tr.gameObject;
 							}
+                            else
+                            {
+                                Debug.Log($"cannot find {aobj[1]}");
+                            }
 						}
+                        else
+                        {
+                            Debug.Log($"cannot find {aobj[0]}");
+                        }
 					}
 					else
 					{

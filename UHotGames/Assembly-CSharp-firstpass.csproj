@@ -150,6 +150,15 @@
     <Compile Include="Assets\Plugins\ILRuntime\ILRuntime\Runtime\Stack\StackFrame.cs" />
     <Compile Include="Assets\Plugins\ILRuntime\ILRuntime\Runtime\Stack\StackObject.cs" />
     <Compile Include="Assets\Plugins\ILRuntime\ILRuntimeHandler.cs" />
+    <Compile Include="Assets\Plugins\iOS\iap\SDK_AppleInApp.cs" />
+    <Compile Include="Assets\Plugins\NativeGallery\Android\NGCallbackHelper.cs" />
+    <Compile Include="Assets\Plugins\NativeGallery\Android\NGMediaReceiveCallbackAndroid.cs" />
+    <Compile Include="Assets\Plugins\NativeGallery\Android\NGPermissionCallbackAndroid.cs" />
+    <Compile Include="Assets\Plugins\NativeGallery\iOS\NGMediaReceiveCallbackiOS.cs" />
+    <Compile Include="Assets\Plugins\NativeGallery\iOS\NGMediaSaveCallbackiOS.cs" />
+    <Compile Include="Assets\Plugins\NativeGallery\NativeGallery.cs" />
+    <None Include="Assets\Plugins\WeChat\iOS\README.txt" />
+    <None Include="Assets\Plugins\WeChat\Android\AndroidManifest.xml" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>I:/PersonalGit/ILRuntime_HotGames/UHotGames/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>
@@ -374,6 +383,9 @@
     </Reference>
     <Reference Include="websocket-sharp">
       <HintPath>I:/PersonalGit/ILRuntime_HotGames/UHotGames/Assets/Plugins/WebSocket/websocket-sharp.dll</HintPath>
+    </Reference>
+    <Reference Include="zxing.unity">
+      <HintPath>I:/PersonalGit/ILRuntime_HotGames/UHotGames/Assets/Plugins/zxing/zxing.unity.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Analytics">
       <HintPath>C:/Users/yukuy/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.analytics@2.0.16/UnityEngine.Analytics.dll</HintPath>

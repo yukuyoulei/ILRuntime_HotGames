@@ -265,7 +265,6 @@ public abstract class AHotBase
 		if (drag == null)
 		{
 			drag = dragObj.gameObject.AddComponent<AHotDrag>();
-			drag.DontSyncDrag = DontSyncDrag;
 		}
 		drag.onDragBegin += beginDrag;
 		drag.onDragEnd += endDrag;
@@ -279,7 +278,6 @@ public abstract class AHotBase
 			return drag;
 		}
 		var drag1 = dragDropObj.gameObject.AddComponent<AHotDrag>();
-		drag1.DontSyncDrag = DontSyncDrag;
 		drag1.onDragDrop += dropDrag;
 		return drag;
 	}
@@ -290,7 +288,7 @@ public abstract class AHotBase
 		Debug.Log("send message to unity:" + smsg);
 		SendMessageToUnityReceiver(smsg);
 	}
-	public static T LoadUI<T>(string prefabPath) where T : AHotBase, new()
+	public static T LoadClass<T>(string prefabPath) where T : AHotBase, new()
 	{
 		GameObject obj = UHotAssetBundleLoader.Instance.OnLoadAsset<GameObject>(prefabPath);
 		if (obj == null)

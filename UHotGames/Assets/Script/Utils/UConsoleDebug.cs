@@ -11,7 +11,7 @@ public class UConsoleDebug : MonoBehaviour
 
 	private void Application_logMessageReceived(string condition, string stackTrace, LogType type)
 	{
-		slog = $"[{System.DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")}] {condition} \r\n {slog} ";
+		slog = $"{slog} \r\n [{ApiDateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")}] {condition}";
 		if (slog.Length > 3000)
 		{
 			slog = slog.Substring(0, 3000);

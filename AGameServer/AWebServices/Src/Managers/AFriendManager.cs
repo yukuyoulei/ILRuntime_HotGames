@@ -15,7 +15,7 @@ public class AFriendManager : Singleton<AFriendManager>
         }
         bInited = true;
 
-        var res = AWebServices.Avatar.dbavatar.FindManyData(TableName, null, null);
+        var res = ADatabaseConfigsManager.avatarDB.FindManyData(TableName, null, null);
         foreach (var r in res)
         {
             var f1 = r[InfoNameDefs.Friend1].AsString;
@@ -76,7 +76,7 @@ public class AFriendManager : Singleton<AFriendManager>
                 dMyRequests[f2].Remove(f1);
             }
 
-            AWebServices.Avatar.dbavatar.DeleteOneData(TableName
+            ADatabaseConfigsManager.avatarDB.DeleteOneData(TableName
                 , ADBAccessor.filter_eq(InfoNameDefs.Friend1, f2)
                 & ADBAccessor.filter_eq(InfoNameDefs.Friend2, f1)
                 & ADBAccessor.filter_eq(InfoNameDefs.FriendRequester, f2));
@@ -107,7 +107,7 @@ public class AFriendManager : Singleton<AFriendManager>
 
     private void DoSaveFriend(string f1, string f2, string requester = "")
     {
-        AWebServices.Avatar.dbavatar.UpdateOneData(TableName
+        ADatabaseConfigsManager.avatarDB.UpdateOneData(TableName
             , (ADBAccessor.filter_eq(InfoNameDefs.Friend1, f1) & ADBAccessor.filter_eq(InfoNameDefs.Friend2, f2))
                 | (ADBAccessor.filter_eq(InfoNameDefs.Friend1, f2) & ADBAccessor.filter_eq(InfoNameDefs.Friend2, f1))
             , ADBAccessor.updates_build(ADBAccessor.update(InfoNameDefs.Friend1, f1)
@@ -215,7 +215,7 @@ public class AFriendManager : Singleton<AFriendManager>
         {
             dFriends[f2].Remove(f1);
         }
-        AWebServices.Avatar.dbavatar.DeleteOneData(TableName, (ADBAccessor.filter_eq(InfoNameDefs.Friend1, f1)
+        ADatabaseConfigsManager.avatarDB.DeleteOneData(TableName, (ADBAccessor.filter_eq(InfoNameDefs.Friend1, f1)
                     & ADBAccessor.filter_eq(InfoNameDefs.Friend2, f2))
                 | (ADBAccessor.filter_eq(InfoNameDefs.Friend1, f2)
                     & ADBAccessor.filter_eq(InfoNameDefs.Friend2, f1)));
@@ -235,7 +235,7 @@ public class AFriend
 
         if (!dFriendInfos.ContainsKey(f1))
         {
-            var res = AWebServices.Avatar.dbavatar.FindOneData(AWebServices.Avatar.TableName
+            var res = ADatabaseConfigsManager.avatarDB.FindOneData(ADatabaseConfigsManager.tAvatarData
                 , ADBAccessor.filter_eq(InfoNameDefs.AvatarName, f1), ADBAccessor.projections(InfoNameDefs.AvatarHead, InfoNameDefs.Username));
             if (res != null)
             {
@@ -254,7 +254,7 @@ public class AFriend
         }
         if (!dFriendInfos.ContainsKey(f2))
         {
-            var res = AWebServices.Avatar.dbavatar.FindOneData(AWebServices.Avatar.TableName
+            var res = ADatabaseConfigsManager.avatarDB.FindOneData(ADatabaseConfigsManager.tAvatarData
                 , ADBAccessor.filter_eq(InfoNameDefs.AvatarName, f2), ADBAccessor.projections(InfoNameDefs.AvatarHead, InfoNameDefs.Username));
             if (res != null)
             {

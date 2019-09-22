@@ -12,7 +12,7 @@ public class AComponentBag : AComponentBase
 	}
 	public override void InitComponent()
 	{
-		var result = Avatar.dbavatar.FindOneData(tableName, ADBAccessor.filter_eq(InfoNameDefs.AvatarName, owner.OnGetStringParamValue(InfoNameDefs.AvatarName)), null);
+		var result = ADatabaseConfigsManager.avatarDB.FindOneData(tableName, ADBAccessor.filter_eq(InfoNameDefs.AvatarName, owner.OnGetStringParamValue(InfoNameDefs.AvatarName)), null);
 		if (result != null && result.Contains(InfoNameDefs.AvatarName))
 		{
 			foreach (var r in result)
@@ -27,7 +27,7 @@ public class AComponentBag : AComponentBase
 		}
 		else
 		{
-			Avatar.dbavatar.UpdateOneData(tableName, ADBAccessor.filter_eq(InfoNameDefs.AvatarName, owner.OnGetStringParamValue(InfoNameDefs.AvatarName))
+			ADatabaseConfigsManager.avatarDB.UpdateOneData(tableName, ADBAccessor.filter_eq(InfoNameDefs.AvatarName, owner.OnGetStringParamValue(InfoNameDefs.AvatarName))
 				, ADBAccessor.updates_build(ADBAccessor.update(InfoNameDefs.AvatarName, owner.OnGetStringParamValue(InfoNameDefs.AvatarName))), true);
 		}
 	}
@@ -40,12 +40,12 @@ public class AComponentBag : AComponentBase
 		{
 			dItems.Remove(itemID);
 
-			Avatar.dbavatar.UpdateOneData(tableName, ADBAccessor.filter_eq(InfoNameDefs.AvatarName, owner.OnGetStringParamValue(InfoNameDefs.AvatarName)),
+			ADatabaseConfigsManager.avatarDB.UpdateOneData(tableName, ADBAccessor.filter_eq(InfoNameDefs.AvatarName, owner.OnGetStringParamValue(InfoNameDefs.AvatarName)),
 				ADBAccessor.updates_build(ADBAccessor.update(InfoNameDefs.BagSlotPre + itemID, 0, false)));
 		}
 		else
 		{
-			Avatar.dbavatar.UpdateOneData(tableName, ADBAccessor.filter_eq(InfoNameDefs.AvatarName, owner.OnGetStringParamValue(InfoNameDefs.AvatarName)),
+			ADatabaseConfigsManager.avatarDB.UpdateOneData(tableName, ADBAccessor.filter_eq(InfoNameDefs.AvatarName, owner.OnGetStringParamValue(InfoNameDefs.AvatarName)),
 				ADBAccessor.updates_build(ADBAccessor.update(InfoNameDefs.BagSlotPre + itemID, dItems[itemID])), true);
 		}
 	}

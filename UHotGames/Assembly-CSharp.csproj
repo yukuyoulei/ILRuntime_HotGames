@@ -61,6 +61,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Script\Enter.cs" />
+    <Compile Include="Assets\Script\SDK\AndroidStatusBar.cs" />
+    <Compile Include="Assets\Script\SDK\SDK_Orientation.cs" />
+    <Compile Include="Assets\Script\SDK\SDK_Photo.cs" />
+    <Compile Include="Assets\Script\SDK\SDK_QRCode.cs" />
+    <Compile Include="Assets\Script\SDK\SDK_WeChat.cs" />
+    <Compile Include="Assets\Script\UI\Base\UIBase.cs" />
+    <Compile Include="Assets\Script\UI\CommonUI\UIAlert.cs" />
+    <Compile Include="Assets\Script\UI\UIWidgets\BaseImage.cs" />
+    <Compile Include="Assets\Script\UI\UIWidgets\CircleImage.cs" />
+    <Compile Include="Assets\Script\UI\UIWidgets\SetPropertyUtilityExt.cs" />
+    <Compile Include="Assets\Script\UI\UIWidgets\UICurve.cs" />
+    <Compile Include="Assets\Script\UI\UIWidgets\UICurveTester.cs" />
+    <Compile Include="Assets\Script\UI\UIWidgets\UShake.cs" />
+    <Compile Include="Assets\Script\Utils\AntiScriptSplit.cs" />
     <Compile Include="Assets\Script\Utils\CApplicationQuit.cs" />
     <Compile Include="Assets\Script\Utils\ConfigDownloader.cs" />
     <Compile Include="Assets\Script\Utils\Events\UEventListener.cs" />
@@ -159,15 +173,19 @@
     <Compile Include="Assets\Script\Utils\LibUtils\Zip\ZipNameTransform.cs" />
     <Compile Include="Assets\Script\Utils\LibUtils\Zip\ZipOutputStream.cs" />
     <Compile Include="Assets\Script\Utils\MonoInstancePool.cs" />
+    <Compile Include="Assets\Script\Utils\NestedScrollRectUtil.cs" />
+    <Compile Include="Assets\Script\Utils\TextSpacing.cs" />
     <Compile Include="Assets\Script\Utils\UAssetBundleDownloader.cs" />
+    <Compile Include="Assets\Script\Utils\UAutoSplitChildren.cs" />
+    <Compile Include="Assets\Script\Utils\UAutoStrechHeight.cs" />
     <Compile Include="Assets\Script\Utils\UConfigManager.cs" />
     <Compile Include="Assets\Script\Utils\UConsoleDebug.cs" />
     <Compile Include="Assets\Script\Utils\UCopyFilesFromStreamingAssets.cs" />
     <Compile Include="Assets\Script\Utils\UEmitMessage.cs" />
     <Compile Include="Assets\Script\Utils\UFileManager.cs" />
+    <Compile Include="Assets\Script\Utils\UFindMissingScripts.cs" />
     <Compile Include="Assets\Script\Utils\UStaticFuncs.cs" />
     <Compile Include="Assets\Script\Utils\Utils_Plugins.cs" />
-    <None Include="Assets\StreamingAssets\Windows\versions.txt" />
     <None Include="Assets\link.xml" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>I:/PersonalGit/ILRuntime_HotGames/UHotGames/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
@@ -393,6 +411,9 @@
     </Reference>
     <Reference Include="websocket-sharp">
       <HintPath>I:/PersonalGit/ILRuntime_HotGames/UHotGames/Assets/Plugins/WebSocket/websocket-sharp.dll</HintPath>
+    </Reference>
+    <Reference Include="zxing.unity">
+      <HintPath>I:/PersonalGit/ILRuntime_HotGames/UHotGames/Assets/Plugins/zxing/zxing.unity.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Analytics">
       <HintPath>C:/Users/yukuy/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.analytics@2.0.16/UnityEngine.Analytics.dll</HintPath>

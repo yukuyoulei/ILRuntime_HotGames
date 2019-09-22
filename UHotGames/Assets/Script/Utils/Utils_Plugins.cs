@@ -57,54 +57,7 @@ public static class Utils_Plugins
 #endif
 	public static string Util_GetBundleVersion()
 	{
-#if UNITY_EDITOR
-#if UNITY_IOS
-		return PlayerSettings.iOS.buildNumber;
-#elif UNITY_STANDALONE
-		if (!Directory.Exists(Application.streamingAssetsPath))
-		{
-			Directory.CreateDirectory(Application.streamingAssetsPath);
-		}
-		if (File.Exists(Application.streamingAssetsPath + "/Version"))
-		{
-			return File.ReadAllText(Application.streamingAssetsPath + "/Version");
-		}
-		return PlayerSettings.bundleVersion;
-#else
-		return PlayerSettings.bundleVersion;
-#endif
-#elif UNITY_IOS && !UNITY_EDITOR
-		return GetBundleVersion();
-#elif UNITY_ANDROID
-		AndroidJavaClass jc = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
-		AndroidJavaObject jo = jc.GetStatic<AndroidJavaObject>("currentActivity");
-		string pkName = jo.Call<string>("getPackageName");
-		string sversion =
-			jo.Call<AndroidJavaObject>("getPackageManager")
-				.Call<AndroidJavaObject>("getPackageInfo", pkName, 0)
-				.Get<string>("versionName");
-        Debug.Log("- -!!! 当前版本号:" + sversion);
-		return sversion;
-#else
-		if (!Directory.Exists(Application.streamingAssetsPath))
-		{
-			Directory.CreateDirectory(Application.streamingAssetsPath);
-		}
-		if (File.Exists(Application.streamingAssetsPath + "/Version"))
-		{
-			return File.ReadAllText(Application.streamingAssetsPath + "/Version");
-		}
-		return "win";
-		return Application.platform.ToString();
-#endif
-	}
-	public static string Util_GetVersionNumber()
-	{
-#if UNITY_IOS && !UNITY_EDITOR
-		return GetVersionNumber();
-#else
-		return "0";
-#endif
+        return Application.version;
 	}
 
 #if UNITY_STANDALONE
