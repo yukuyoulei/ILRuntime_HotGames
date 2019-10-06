@@ -92,6 +92,7 @@
   <ItemGroup>
     <Compile Include="games\data\Defs.cs" />
     <Compile Include="games\data\URemoteData.cs" />
+    <Compile Include="games\game\ULifeInBottle.cs" />
     <Compile Include="games\game\UMMO.cs" />
     <Compile Include="games\uis\UILoading.cs" />
     <Compile Include="games\uis\UDownloader.cs" />
@@ -106,6 +107,7 @@
     <Compile Include="games\uis\UIFirst.cs" />
     <Compile Include="games\AEntrance.cs" />
     <Compile Include="games\aempty\AEmptyUI.cs" />
+    <Compile Include="games\uis\widgets\WExpSlider.cs" />
     <Compile Include="utils\AHotDrag.cs" />
     <Compile Include="utils\ApiDateTime.cs" />
     <Compile Include="utils\ClickButton.cs" />
@@ -118,6 +120,7 @@
     <Compile Include="utils\UHotAssetBundleLoader.cs" />
     <Compile Include="utils\UDebugHotLog.cs" />
     <Compile Include="utils\ULocalFileManager.cs" />
+    <Compile Include="utils\UOnDestroy.cs" />
     <Compile Include="utils\UOnGUIer.cs" />
     <Compile Include="utils\UStaticFuncs.cs" />
     <Compile Include="utils\Utils.cs" />

@@ -9,19 +9,27 @@ public class UMMO : AHotBase
 {
 	Button btnGetQuestion;
 	Button btnAnswer;
+	Button btnReturn;
 	InputField inputAnswer;
-	Image expProgress;
-	Text textExp;
+	WExpSlider expSlider;
 	protected override void InitComponents()
 	{
+		var tr = FindWidget<Transform>("expBg");
+		expSlider = new WExpSlider();
+		expSlider.SetGameObj(tr.gameObject);
+
 		FindWidget<Text>("textAvatarname").text = URemoteData.AvatarName;
 		FindWidget<Text>("textLevel").text = URemoteData.AvatarLevel;
 
-		expProgress = FindWidget<Image>("expProgress");
-		textExp = FindWidget<Text>("textExp");
-		textExp.text = "";
-
 		inputAnswer = FindWidget<InputField>("inputAnswer");
+
+		btnReturn = FindWidget<Button>("btnReturn");
+		btnReturn.onClick.AddListener(() =>
+		{
+			OnUnloadThis();
+
+			LoadAnotherUI<UIMain>();
+		});
 
 		btnGetQuestion = FindWidget<Button>("btnGetQuestion");
 		btnGetQuestion.onClick.AddListener(() =>
@@ -67,25 +75,6 @@ public class UMMO : AHotBase
 			});
 		});
 
-		URemoteData.ListeningParam(InfoNameDefs.CurExp, ShowCurExp);
-		URemoteData.ListeningParam(InfoNameDefs.MaxExp, ShowCurExp);
-
-		RefreshUI();
-	}
-
-	private void RefreshUI()
-	{
-		ShowCurExp();
-	}
-
-	private void ShowCurExp()
-	{
-		if (URemoteData.MaxExp == 0)
-		{
-			return;
-		}
-		textExp.text = URemoteData.CurExp + "/" + URemoteData.MaxExp;
-		expProgress.fillAmount = URemoteData.CurExp / (float)URemoteData.MaxExp;
 	}
 }
 

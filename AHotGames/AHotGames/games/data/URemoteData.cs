@@ -61,6 +61,14 @@ public static class URemoteData
 		}
 		dListeners[param].Add(changed);
 	}
+	public static void CancelListeningParam(string param, Action changed)
+	{
+		if (!dListeners.ContainsKey(param))
+		{
+			return;
+		}
+		dListeners[param].Remove(changed);
+	}
 	public static void OnParamChnaged(string param)
 	{
 		List<Action> lremove = new List<Action>();

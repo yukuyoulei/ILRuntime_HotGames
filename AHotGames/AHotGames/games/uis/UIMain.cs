@@ -20,6 +20,7 @@ public class UIMain : AHotBase
 			{
 				_dGames = new Dictionary<string, Action>();
 				AddGame<UMMO>("MMO");
+				AddGame<ULifeInBottle>("瓶中人生");
 			}
 			return _dGames;
 		}
