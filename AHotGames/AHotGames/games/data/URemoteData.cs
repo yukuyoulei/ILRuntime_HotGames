@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
 public static class URemoteData
 {
@@ -12,7 +13,10 @@ public static class URemoteData
 	public static void OnReceiveAvatarData(string sjson)
 	{
 		var obj = JsonConvert.DeserializeObject(sjson) as JObject;
-		curAvatarData = new UAvatarData(obj);
+		if (curAvatarData == null)
+			curAvatarData = new UAvatarData(obj);
+		else
+			curAvatarData.DeserializeParamJson(obj);
 	}
 	public static void OnRemoveAvatarData()
 	{
@@ -98,12 +102,16 @@ public class UAvatarData
 		}
 		return dParams[param];
 	}
-	private void DeserializeParamJson(JObject obj)
+	public void DeserializeParamJson(JObject obj)
 	{
 		var enumerator = obj.GetEnumerator();
 		while (enumerator.MoveNext())
 		{
-			if (enumerator.Current.Value.Type == JTokenType.String)
+			if (enumerator.Current.Value.Type == JTokenType.String
+				|| enumerator.Current.Value.Type == JTokenType.Integer
+				|| enumerator.Current.Value.Type == JTokenType.Float
+				|| enumerator.Current.Value.Type == JTokenType.Boolean
+				)
 			{
 				OnSetParam(enumerator.Current.Key, enumerator.Current.Value.ToString());
 			}

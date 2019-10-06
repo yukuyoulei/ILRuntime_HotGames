@@ -69,6 +69,12 @@ public class UMMO : AHotBase
 
 		URemoteData.ListeningParam(InfoNameDefs.CurExp, ShowCurExp);
 		URemoteData.ListeningParam(InfoNameDefs.MaxExp, ShowCurExp);
+
+		RefreshUI();
+	}
+
+	private void RefreshUI()
+	{
 		ShowCurExp();
 	}
 

@@ -24,6 +24,7 @@ public static class UStaticWebRequests
 	public static void DoLogout(string username, string token
 		, Action<JObject> onSuccess = null, Action<string> onFail = null, Action<string> onErr = null)
 	{
+		URemoteData.OnRemoveAvatarData();
 		OnWebRequest("Login/Logout", "username=" + username + "&token=" + token
 			, onSuccess, onFail, onErr);
 
