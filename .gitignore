@@ -14,3 +14,7 @@ UHotGames/RemoteResources/*
 UHotGames/Assets/StreamingAssets/*
 ab1/*
 *.csproj
+UHotGames/Assembly-CSharp-Editor-firstpass.csproj
+UHotGames/Assembly-CSharp-Editor.csproj
+UHotGames/Assembly-CSharp-firstpass.csproj
+UHotGames/Assembly-CSharp.csproj
