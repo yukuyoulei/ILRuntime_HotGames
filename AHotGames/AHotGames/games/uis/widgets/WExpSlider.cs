@@ -22,7 +22,6 @@ public class WExpSlider : AHotBase
 
 		gameObj.AddComponent<UOnDestroy>().actionOnDestroy = () =>
 		{
-			UDebugHotLog.Log("UOnDestroyUOnDestroyUOnDestroyUOnDestroyUOnDestroyUOnDestroyUOnDestroyUOnDestroyUOnDestroyUOnDestroy");
 			URemoteData.CancelListeningParam(InfoNameDefs.CurExp, ShowCurExp);
 			URemoteData.CancelListeningParam(InfoNameDefs.MaxExp, ShowCurExp);
 		};
