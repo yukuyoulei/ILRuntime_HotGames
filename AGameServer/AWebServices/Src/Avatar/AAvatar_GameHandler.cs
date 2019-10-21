@@ -80,7 +80,8 @@ public partial class AAvatar
 			var a = res["qa"].ToString();
 			if (a == answer)
 			{
-				OnAddExp(AvatarLevel);
+				var ia = typeParser.intParse(a);
+				OnAddExp(ia > AvatarLevel ? ia : AvatarLevel);
 				return true;
 			}
 		}
@@ -91,18 +92,30 @@ public partial class AAvatar
 	{
 		if (AvatarLevel < 10)
 		{
-			var ileft = ApiRandom.Instance.Next(AvatarLevel * 10) + 1;
-			var iright = ApiRandom.Instance.Next(AvatarLevel * 10) + 1;
-			SetOneParam("qa", ileft + iright);
-			return $"{ileft}+{iright}";
+			return DoGetQuestion_JiaFa();
 		}
 		else
 		{
-			var ileft = ApiRandom.Instance.Next(AvatarLevel) + 1;
-			var iright = ApiRandom.Instance.Next(AvatarLevel) + 1;
-			SetOneParam("qa", ileft * iright);
-			return $"{ileft}×{iright}";
+			if (ApiRandom.Instance.Next(4) == 0)
+			{
+				return DoGetQuestion_JiaFa();
+			}
+			return DoGetQuestion_ChengFa();
 		}
+	}
+	private string DoGetQuestion_ChengFa()
+	{
+		var ileft = ApiRandom.Instance.Next(AvatarLevel) + 1;
+		var iright = ApiRandom.Instance.Next(AvatarLevel) + 1;
+		SetOneParam("qa", ileft * iright);
+		return $"{ileft}×{iright}";
+	}
+	private string DoGetQuestion_JiaFa()
+	{
+		var ileft = ApiRandom.Instance.Next(AvatarLevel * 10) + 1;
+		var iright = ApiRandom.Instance.Next(AvatarLevel * 10) + 1;
+		SetOneParam("qa", ileft + iright);
+		return $"{ileft}+{iright}";
 	}
 
 	private void SetOneParam(string paramname, int value)
