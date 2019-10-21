@@ -33,6 +33,7 @@ public class UICreateAvatar : AHotBase
 		{
 			OnUnloadThis();
 
+			URemoteData.OnLogout();
 			LoadAnotherUI<UILogin>();
 		});
 

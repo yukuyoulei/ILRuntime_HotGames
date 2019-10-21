@@ -53,6 +53,11 @@ public abstract class AHotBase
 			}
 		});
 
+		gameObj.AddComponent<UOnDestroy>().actionOnDestroy = () =>
+		{
+			OnDestroy();
+		};
+
 		InitComponents();
 	}
 
@@ -371,4 +376,7 @@ public abstract class AHotBase
 		public float delay;
 	}
 
+	protected virtual void OnDestroy()
+	{
+	}
 }

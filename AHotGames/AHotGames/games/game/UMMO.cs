@@ -19,7 +19,7 @@ public class UMMO : AHotBase
 		expSlider.SetGameObj(tr.gameObject);
 
 		FindWidget<Text>("textAvatarname").text = URemoteData.AvatarName;
-		FindWidget<Text>("textLevel").text = URemoteData.AvatarLevel;
+		ShowLevel();
 
 		inputAnswer = FindWidget<InputField>("inputAnswer");
 
@@ -75,6 +75,18 @@ public class UMMO : AHotBase
 			});
 		});
 
+
+		URemoteData.ListeningParam(InfoNameDefs.AvatarLevel, ShowLevel);
+
+	}
+	protected override void OnDestroy()
+	{
+		URemoteData.CancelListeningParam(InfoNameDefs.AvatarLevel, ShowLevel);
+	}
+
+	private void ShowLevel()
+	{
+		FindWidget<Text>("textLevel").text = URemoteData.AvatarLevel;
 	}
 }
 

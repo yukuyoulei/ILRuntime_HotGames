@@ -89,6 +89,11 @@ public static class URemoteData
 			}
 		}
 	}
+	public static void OnLogout()
+	{
+		UILogin.token = "";
+		curAvatarData = null;
+	}
 }
 public class UAvatarData
 {

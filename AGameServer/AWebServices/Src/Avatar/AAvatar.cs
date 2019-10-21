@@ -349,6 +349,7 @@ public partial class AAvatar : AGameObj
 	private void DoLevelUp()
 	{
 		AvatarLevel++;
+		MaxEXP = MaxEXP;
 	}
 }
 

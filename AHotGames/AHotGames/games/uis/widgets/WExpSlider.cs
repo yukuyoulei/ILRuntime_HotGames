@@ -27,6 +27,12 @@ public class WExpSlider : AHotBase
 		};
 	}
 
+	protected override void OnDestroy()
+	{
+		URemoteData.CancelListeningParam(InfoNameDefs.CurExp, ShowCurExp);
+		URemoteData.CancelListeningParam(InfoNameDefs.MaxExp, ShowCurExp);
+	}
+
 	private void RefreshUI()
 	{
 		ShowCurExp();
