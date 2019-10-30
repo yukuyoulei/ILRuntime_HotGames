@@ -43,9 +43,9 @@ public class SDK_WeChat : MonoBehaviour
     private extern static string WechatPayWeChatInitialize(string appid);*/
 #endif
 
-	public const string appid = "wxb244f08e7ca02c21";
-	private const string appsecret = "62a0584a3ffc03f9a08e782bc75d5918";
-	private const string partnerid = "1504873861";
+	public const string appid = "wxb244f08e73ca02c21";
+	private const string appsecret = "62a0584a3ffc03f39a08e782bc75d5918";
+	private const string partnerid = "150487113861";
 	void Start()
 	{
 #if UNITY_ANDROID

@@ -20,7 +20,9 @@ public class UIMain : AHotBase
 			{
 				_dGames = new Dictionary<string, Action>();
 				AddGame<UMMO>("MMO");
-				AddGame<ULifeInBottle>("瓶中人生");
+				//AddGame<ULifeInBottle>("瓶中人生");
+				AddGame<UCardGame>("老牛赶大车");
+				AddGame<UBigOrSmall>("买大小");
 			}
 			return _dGames;
 		}
@@ -33,13 +35,31 @@ public class UIMain : AHotBase
 		});
 	}
 
+	Text textGold;
 	protected override void InitComponents()
 	{
 		var textUsername = FindWidget<Text>("textUsername");
-		textUsername.text = UILogin.CachedUsername;
+		textUsername.text = URemoteData.AvatarName;
+		textGold = FindWidget<Text>("textGold");
+		RefreshGold();
 
 		var menuCell = FindWidget<Button>("menuCell");
 		menuCell.gameObject.SetActive(false);
+
+		var btnRank = FindWidget<Button>("btnRank");
+		btnRank.onClick.AddListener(() =>
+		{
+			LoadAnotherUI<UIRank>();
+		});
+
+		var btnCheck = FindWidget<Button>("btnCheck");
+		btnCheck.onClick.AddListener(() =>
+		{
+			UStaticWebRequests.OnWebRequest("Avatar/DailyCheck", $"username={UILogin.CachedUsername}&token={UILogin.token}", jobj =>
+			{
+				URemoteData.OnReceiveAvatarData(jobj["avatar"]);
+			});
+		});
 
 		var btnLogout = FindWidget<Button>("btnLogout");
 		btnLogout.onClick.AddListener(() =>
@@ -70,6 +90,17 @@ public class UIMain : AHotBase
 				g.Value();
 			});
 		}
+
+		URemoteData.ListeningParam(InfoNameDefs.AvatarGold, RefreshGold);
+	}
+	protected override void OnDestroy()
+	{
+		URemoteData.CancelListeningParam(InfoNameDefs.AvatarGold, RefreshGold);
+	}
+
+	private void RefreshGold()
+	{
+		textGold.text = URemoteData.OnGetParam(InfoNameDefs.AvatarGold);
 	}
 }
 

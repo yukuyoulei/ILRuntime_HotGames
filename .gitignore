@@ -18,3 +18,14 @@ UHotGames/Assembly-CSharp-Editor-firstpass.csproj
 UHotGames/Assembly-CSharp-Editor.csproj
 UHotGames/Assembly-CSharp-firstpass.csproj
 UHotGames/Assembly-CSharp.csproj
+AGameServer/AWebServices/Properties/PublishProfiles/FolderProfile.pubxml.user
+AGameServer/Deploy/Web.config
+UHotGames/Assembly-CSharp-Editor-firstpass.csproj
+UHotGames/Assembly-CSharp-Editor.csproj
+UHotGames/Assembly-CSharp-firstpass.csproj
+UHotGames/Assembly-CSharp.csproj
+UHotGames/Assets/Arts/UI.meta
+UHotGames/Assets/Script/Utils/LibUtils/Properties.meta
+UHotGames/Assets/StreamingAssets.meta
+UHotGames/ProjectSettings/ProjectVersion.txt
+*.user

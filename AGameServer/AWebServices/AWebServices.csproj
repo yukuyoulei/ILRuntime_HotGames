@@ -101,6 +101,8 @@
     <Compile Include="apiweb\WebApiConfig.cs" />
     <Compile Include="apiweb\WSHandler.cs" />
     <Compile Include="api\AvatarController.cs" />
+    <Compile Include="api\GitloginController.cs" />
+    <Compile Include="api\RankController.cs" />
     <Compile Include="api\QuestionController.cs" />
     <Compile Include="api\LoginController.cs" />
     <Compile Include="Global.asax.cs">

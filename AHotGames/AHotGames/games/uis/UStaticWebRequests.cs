@@ -52,6 +52,7 @@ public static class UStaticWebRequests
 			if (err == "0")
 			{
 				onSuccess?.Invoke(jres);
+				if (jres.ContainsKey("avatar") && jres["avatar"] != null) URemoteData.OnReceiveAvatarData(jres["avatar"]);
 			}
 			else
 			{

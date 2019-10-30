@@ -48,7 +48,7 @@ namespace AWebServices.api
 			var res = avatar.OnAnswer(answer);
 			if (res)
 			{
-				return ResultToJson.GetJsonResponse("avatar", ResultToJson.JsonFormat(avatar.GetDirtyParams()));
+				return avatar.GetDiryParamResponse();
 			}
 			return ResultToJson.GetErrorJsonResponse("wrong");
 		}

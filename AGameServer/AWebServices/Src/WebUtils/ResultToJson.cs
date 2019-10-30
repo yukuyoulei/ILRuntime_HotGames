@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -18,7 +19,7 @@ public class ResultToJson
 			{
 				o[astr[i]] = astr[i + 1];
 			}
-			return o.ToString();
+			return o.ToString().Replace("\r","").Replace("\n", "");
 		}
 		else
 		{
@@ -26,9 +27,28 @@ public class ResultToJson
 		}
 
 	}
-	public static string JsonFormat(JObject obj)
+	public static JObject JsonFormatArray(string tag, List<List<string>> astrs)
 	{
-		return obj.ToString();
+		var obj = new JObject();
+		var a = new JArray();
+		foreach (var astr in astrs)
+		{
+			if (astr.Count % 2 == 0)
+			{
+				var o = new JObject();
+				for (var i = 0; i < astr.Count; i += 2)
+				{
+					o[astr[i]] = astr[i + 1];
+				}
+				a.Add(o);
+			}
+			else
+			{
+				return null;
+			}
+		}
+		obj[tag] = a;
+		return obj;
 	}
 	public static HttpResponseMessage GetErrorJsonResponse(ErrorDefs err)
 	{
@@ -40,13 +60,19 @@ public class ResultToJson
 	}
 	public static HttpResponseMessage GetErrorJsonResponse(string err = "0")
 	{
-		String str = JsonFormat(new string[] { "err", err });
+		var str = JsonFormat(new string[] { "err", err });
 		HttpResponseMessage result = new HttpResponseMessage { Content = new StringContent(str, Encoding.GetEncoding("UTF-8"), "application/json") };
+		return result;
+	}
+	public static HttpResponseMessage GetJsonResponse(JObject jobj)
+	{
+		jobj["err"] = 0;
+		HttpResponseMessage result = new HttpResponseMessage { Content = new StringContent(jobj.ToString(), Encoding.GetEncoding("UTF-8"), "application/json") };
 		return result;
 	}
 	public static HttpResponseMessage GetJsonResponse(params string[] astr)
 	{
-		String str = JsonFormat(astr);
+		var str = JsonFormat(astr);
 		HttpResponseMessage result = new HttpResponseMessage { Content = new StringContent(str, Encoding.GetEncoding("UTF-8"), "application/json") };
 		return result;
 	}

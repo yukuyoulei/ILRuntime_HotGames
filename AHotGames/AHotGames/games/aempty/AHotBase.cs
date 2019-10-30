@@ -113,10 +113,10 @@ public abstract class AHotBase
 					{
 						/*try
 						{*/
-							if (u())
-							{
-								remove.Add(u);
-							}
+						if (u())
+						{
+							remove.Add(u);
+						}
 						/*}
 						catch (Exception ex)
 						{
@@ -330,6 +330,7 @@ public abstract class AHotBase
 	{
 		bDestroying = true;
 
+		if (gameObj == null) return;
 		if (dGameObjects.ContainsKey(gameObj.name))
 		{
 			dGameObjects.Remove(gameObj.name);

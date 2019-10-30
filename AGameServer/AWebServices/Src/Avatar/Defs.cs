@@ -32,11 +32,15 @@ public enum ErrorDefs
 	InvalidSex,//无效的性别 = _ =
 	MoveInCold,//移动冷却中
 	InvalidMove,//无效的移动
+	DailyChecked, //已经签到
+	NotEnoughGold, //金币不足
 }
 
 public static class InitValueDefs
 {
 	public const int MaxFriends = 20;
+	public const int CaiDaXiaoCost = 100;
+	public static int[] CaiDaXiaoMultis = new int[] { 1, 3, 5, 10 };
 
 }
 public enum EParamType
@@ -92,4 +96,7 @@ public static class InfoNameDefs
 	public const string MapX = "x";
 	public const string MapY = "y";
 	public const string LastMoveTime = "lmt";
+
+	public const string CaiDaXiaoTotalCount = "ccxtc";
+	public const string DailyCheckTotalCount = "dctc";
 }

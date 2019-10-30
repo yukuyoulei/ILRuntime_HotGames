@@ -161,6 +161,10 @@ public class UHotAssetBundleLoader : AHotBase
 	private Dictionary<string, AssetBundle> dAssetBundles = new Dictionary<string, AssetBundle>();
 	private List<string> lDownloaded = new List<string>();
 	Dictionary<string, string> dRemoteVersions = new Dictionary<string, string>();
+	public void OnDownloadResources(Action downloaded, params string[] resources)
+	{
+		OnDownloadResources(resources.ToList(), downloaded);
+	}
 	public void OnDownloadResources(List<string> lResources, Action downloaded, Action<float> progress = null)
 	{
 		if (!Environment.UseAB)

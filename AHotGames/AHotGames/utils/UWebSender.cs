@@ -108,7 +108,7 @@ public class UWebSender : MonoBehaviour
 						UIAlert.Show($"{url}请求返回空。");
 						return;
 					}
-					Debug.Log($"url {url} result {result}");
+					Debug.Log($"url {uri} result {result}");
 					//lock (lockObj)
 					{
 						callbacksProducing.Add(() =>

@@ -45,18 +45,24 @@ public class ADBAccessor
     /// </summary>
     /// <param name="param">降序属性</param>
     /// <returns></returns>
-    public static SortDefinition<BsonDocument> sort_Descending(string param)
+    public static SortDefinition<BsonDocument> sort_Descending(params string[] param)
     {
-        return Builders<BsonDocument>.Sort.Descending(param);
+		SortDefinition<BsonDocument>[] sorts = new SortDefinition<BsonDocument>[param.Length];
+		for (var i = 0; i < param.Length; i++)
+			sorts[i] = Builders<BsonDocument>.Sort.Descending(param[i]);
+		return Builders<BsonDocument>.Sort.Combine(sorts);
     }
     /// <summary>
     /// 升序
     /// </summary>
     /// <param name="param">升序属性</param>
     /// <returns></returns>
-    public static SortDefinition<BsonDocument> sort_Ascending(string param)
+    public static SortDefinition<BsonDocument> sort_Ascending(params string[] param)
     {
-        return Builders<BsonDocument>.Sort.Ascending(param);
+		SortDefinition<BsonDocument>[] sorts = new SortDefinition<BsonDocument>[param.Length];
+		for (var i = 0; i < param.Length; i++)
+			sorts[i] = Builders<BsonDocument>.Sort.Ascending(param[i]);
+		return Builders<BsonDocument>.Sort.Combine(sorts);
     }
 
     public static UpdateDefinition<BsonDocument> updates_build(params UpdateDefinition<BsonDocument>[] updates)

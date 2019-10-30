@@ -93,17 +93,17 @@ public class ApiDateTime
 
     //返回：判断现在与参数是否在同周
     //参数iSeconds：任意的秒数
-    public static bool IsSameWeek(int iSeconds)
+    public static bool IsSameWeek(long iSeconds)
     {
         const int THREEDAY_SECONDS = 3 * 24 * 3600;
         const int WEEK_SECONDS = 7 * 24 * 3600;
         iSeconds += THREEDAY_SECONDS;
-        int iSecondsOther = SecondsFromBegin() + THREEDAY_SECONDS;
+        long iSecondsOther = SecondsFromBegin() + THREEDAY_SECONDS;
         return iSeconds / WEEK_SECONDS == iSecondsOther / WEEK_SECONDS;
     }
 
     //判断两个时间点是否在同周  added by haoshubin at 2012-11-17
-    public static bool IsSameWeek(int iSeconds1, int iSeconds2)
+    public static bool IsSameWeek(long iSeconds1, long iSeconds2)
     {
         const int THREEDAY_SECONDS = 3 * 24 * 3600;
         const int WEEK_SECONDS = 7 * 24 * 3600;
@@ -114,7 +114,7 @@ public class ApiDateTime
 
     //返回：判断现在与参数是否在同天
     //参数iSeconds：任意的秒数
-    public static bool IsSameDay(int iSeconds, int deltaSeconds = 10800)
+    public static bool IsSameDay(long iSeconds, int deltaSeconds = 10800)
     {
         const int DAY_SECONDS = 24 * 3600;
         return (SecondsFromBegin() - deltaSeconds) / DAY_SECONDS == (iSeconds - deltaSeconds) / DAY_SECONDS;
@@ -122,7 +122,7 @@ public class ApiDateTime
 
     //返回：判断现在到参数超过1天
     //参数iSeconds：任意的秒数
-    public static bool IsMoreThanOneDay(int iSeconds, int deltaSeconds = 10800)
+    public static bool IsMoreThanOneDay(long iSeconds, int deltaSeconds = 10800)
     {
         const int DAY_SECONDS = 24 * 3600;
         return (SecondsFromBegin() - deltaSeconds) / DAY_SECONDS == (iSeconds - deltaSeconds + DAY_SECONDS) / DAY_SECONDS || (SecondsFromBegin() - deltaSeconds) / DAY_SECONDS == (iSeconds - deltaSeconds) / DAY_SECONDS;
@@ -137,7 +137,7 @@ public class ApiDateTime
     //以两天为一个时间间隔
     //返回：判断现在与参数是否在同一个时间间隔
     //参数iSeconds：任意的秒数
-    public static bool IsSameTwoDays(int iSeconds)
+    public static bool IsSameTwoDays(long iSeconds)
     {
         const int TWODAY_SECONDS = 2 * 24 * 3600;
         return iSeconds / TWODAY_SECONDS == SecondsFromBegin() / TWODAY_SECONDS;
@@ -166,14 +166,14 @@ public class ApiDateTime
     }
 
     //返回是否在两天内
-    public static bool IsBetweenTwoDays(int iSeconds)
+    public static bool IsBetweenTwoDays(long iSeconds)
     {
         const int TWODAY_SECONDS = 2 * 24 * 3600;
         return Math.Abs((int)(iSeconds - SecondsFromBegin())) <= TWODAY_SECONDS;
     }
 
     //返回是否在连续的两天内
-    public static bool IsInContinuousTwoDays(int iSeconds)
+    public static bool IsInContinuousTwoDays(long iSeconds)
     {
         const int ONEDAY_SECONDS = 24 * 3600;
         return Math.Abs((int)(iSeconds / ONEDAY_SECONDS - SecondsFromBegin() / ONEDAY_SECONDS)) == 1;

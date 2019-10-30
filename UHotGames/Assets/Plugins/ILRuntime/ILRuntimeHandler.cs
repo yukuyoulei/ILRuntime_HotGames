@@ -102,8 +102,18 @@ public class ILRuntimeHandler
                 ((Action<System.Object, WebSocketSharp.CloseEventArgs>)act)(sender, e);
             });
         });
-        #endregion
-        appdomain.DelegateManager.RegisterMethodDelegate<System.String>();
+
+
+		#endregion
+		appdomain.DelegateManager.RegisterMethodDelegate<System.Boolean>();
+		appdomain.DelegateManager.RegisterDelegateConvertor<UnityEngine.Events.UnityAction<System.Boolean>>((act) =>
+		{
+			return new UnityEngine.Events.UnityAction<System.Boolean>((arg0) =>
+			{
+				((Action<System.Boolean>)act)(arg0);
+			});
+		});
+		appdomain.DelegateManager.RegisterMethodDelegate<System.String>();
         appdomain.DelegateManager.RegisterMethodDelegate<UnityEngine.GameObject>();
         appdomain.DelegateManager.RegisterFunctionDelegate<ILRuntime.Runtime.Intepreter.ILTypeInstance, ILRuntime.Runtime.Intepreter.ILTypeInstance, System.Int32>();
         appdomain.DelegateManager.RegisterDelegateConvertor<System.Comparison<ILRuntime.Runtime.Intepreter.ILTypeInstance>>((act) =>

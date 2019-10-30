@@ -152,7 +152,8 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    Standalone: com.fs.hotgame
+    Android: com.fs.ilruntime
+    Standalone: com.Company.ProductName
     WebGL: com.Company.ProductName
     iOS: com.Company.ProductName
   buildNumber:
@@ -547,6 +548,7 @@ PlayerSettings:
   platformArchitecture:
     iOS: 2
   scriptingBackend:
+    Android: 0
     iOS: 1
   il2cppCompilerConfiguration: {}
   incrementalIl2cppBuild: {}

@@ -76,5 +76,34 @@ namespace AWebServices.api
 				return ResultToJson.GetErrorJsonResponse(ErrorDefs.DBError);
 			}
 		}
+		[HttpGet]
+		public HttpResponseMessage DailyCheck(string username, string token)
+		{
+			if (!ATokenManager.Instance.OnCheckToken(username, token))
+			{
+				return ResultToJson.GetErrorJsonResponse("Invalid token.");
+			}
+			var avatar = AAvatarManager.Instance.OnGetAvatar(username);
+			if (avatar == null)
+			{
+				return ResultToJson.GetErrorJsonResponse(ErrorDefs.NoAvatar);
+			}
+			return avatar.OnDailyCheck();
+		}
+		[HttpGet]
+		public HttpResponseMessage CaiDaXiao(string username, string token, int multi, int isBig)
+		{
+			if (!ATokenManager.Instance.OnCheckToken(username, token))
+			{
+				return ResultToJson.GetErrorJsonResponse("Invalid token.");
+			}
+			var avatar = AAvatarManager.Instance.OnGetAvatar(username);
+			if (avatar == null)
+			{
+				return ResultToJson.GetErrorJsonResponse(ErrorDefs.NoAvatar);
+			}
+
+			return avatar.OnCaiDaXiao(multi, isBig);
+		}
 	}
 }

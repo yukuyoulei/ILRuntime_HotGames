@@ -51,6 +51,8 @@ public partial class AAvatar : AGameObj
 		componentParam.RegistParam(InfoNameDefs.AvatarLevel, EParamType.Int);
 		componentParam.RegistParam(InfoNameDefs.CurExp, EParamType.Long);
 		componentParam.RegistParam(InfoNameDefs.MaxExp, EParamType.Long, false);
+		componentParam.RegistParam(InfoNameDefs.CaiDaXiaoTotalCount, EParamType.Long, false);
+		componentParam.RegistParam(InfoNameDefs.DailyCheckTotalCount, EParamType.Long, false);
 	}
 
 	#region components

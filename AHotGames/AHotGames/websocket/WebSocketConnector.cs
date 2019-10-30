@@ -28,7 +28,6 @@ public class WebSocketConnector : MonoBehaviour
     private bool bConnected { get; set; }
     private static bool receive = false;
     Action<string> closeAction;
-    private static bool bHeartbeat;
     private static List<Action> callbacks = new List<Action>();
     private static object lockObj = new object();
     public void OnInit(string wsurl, Action<EventArgs> openAction, Action<MessageEventArgs> msgAction
@@ -96,6 +95,7 @@ public class WebSocketConnector : MonoBehaviour
             bConnecting = false;
             bConnected = false;
 
+			closeAction?.Invoke(e.Reason);
             UnityEngine.Debug.Log("OnClose:" + e.Reason);
         };
         bConnecting = true;

@@ -9,6 +9,7 @@ using Newtonsoft.Json.Linq;
 
 public class UILogin : AHotBase
 {
+	public static string CachedUsernameAndTokenArguments { get { return $"username={CachedUsername}&token={token}"; } }
 	public static string CachedUsername
 	{
 		get

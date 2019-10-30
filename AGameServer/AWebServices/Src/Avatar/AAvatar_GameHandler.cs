@@ -1,7 +1,9 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Web;
 
 public partial class AAvatar
@@ -59,16 +61,17 @@ public partial class AAvatar
 		return AWebServerUtils.OnGetJsonError(l.ToArray());
 	}
 
-	internal string[] GetDirtyParams()
+	internal JObject GetDirtyParams()
 	{
-		var l = new List<string>();
 		var ps = componentParam.ParamsNeedToSync;
+		var obj = new JObject();
 		foreach (var p in ps)
 		{
-			l.Add(p);
-			l.Add(OnGetStringParamValue(p));
+			obj[p] = OnGetStringParamValue(p);
 		}
-		return l.ToArray();
+		var res = new JObject();
+		res["avatar"] = obj;
+		return res;
 	}
 
 	internal bool OnAnswer(string answer)
@@ -116,6 +119,46 @@ public partial class AAvatar
 		var iright = ApiRandom.Instance.Next(AvatarLevel * 10) + 1;
 		SetOneParam("qa", ileft + iright);
 		return $"{ileft}+{iright}";
+	}
+
+	internal HttpResponseMessage OnDailyCheck()
+	{
+		if (ApiDateTime.IsSameDay(LastDailyCheckTime))
+		{
+			return ResultToJson.GetErrorJsonResponse(ErrorDefs.DailyChecked);
+		}
+		LastDailyCheckTime = ApiDateTime.SecondsFromBegin();
+		AvatarGold += 1000;
+		return GetDiryParamResponse();
+	}
+	public HttpResponseMessage GetDiryParamResponse(params string[] extraParams)
+	{
+		var obj = GetDirtyParams();
+		if (extraParams.Length > 0)
+		{
+			if (extraParams.Length % 2 != 0) throw new Exception("Invalid extraParam length");
+			for (var i = 0; i < extraParams.Length; i += 2)
+			{
+				obj[extraParams[i]] = extraParams[i + 1];
+			}
+		}
+		return ResultToJson.GetJsonResponse(obj);
+	}
+
+	internal HttpResponseMessage OnCaiDaXiao(int multi, int isBig)
+	{
+		if (!InitValueDefs.CaiDaXiaoMultis.Contains(multi)) return ResultToJson.GetErrorJsonResponse($"multi {multi}");
+		if (AvatarGold < multi * InitValueDefs.CaiDaXiaoCost) return ResultToJson.GetErrorJsonResponse(ErrorDefs.NotEnoughGold);
+		int rdm = ApiRandom.Instance.Next(6);
+		if ((isBig == 1 && rdm >= 3) || (isBig == 0 && rdm < 3))
+		{
+			AvatarGold += multi * InitValueDefs.CaiDaXiaoCost;
+		}
+		else
+		{
+			AvatarGold -= multi * InitValueDefs.CaiDaXiaoCost;
+		}
+		return GetDiryParamResponse("res", rdm.ToString());
 	}
 
 	private void SetOneParam(string paramname, int value)

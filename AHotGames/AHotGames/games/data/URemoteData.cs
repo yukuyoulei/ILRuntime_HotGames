@@ -10,13 +10,17 @@ using UnityEngine;
 public static class URemoteData
 {
 	static UAvatarData curAvatarData;
+	public static void OnReceiveAvatarData(JToken obj)
+	{
+		curAvatarData.DeserializeParamJson(obj as JObject);
+	}
 	public static void OnReceiveAvatarData(string sjson)
 	{
 		var obj = JsonConvert.DeserializeObject(sjson) as JObject;
 		if (curAvatarData == null)
 			curAvatarData = new UAvatarData(obj);
 		else
-			curAvatarData.DeserializeParamJson(obj);
+			OnReceiveAvatarData(obj);
 	}
 	public static void OnRemoveAvatarData()
 	{
@@ -50,6 +54,10 @@ public static class URemoteData
 		{
 			return typeParser.intParse(curAvatarData?.OnGetParam(InfoNameDefs.MaxExp), 0);
 		}
+	}
+	public static string OnGetParam(string paramname)
+	{
+		return curAvatarData?.OnGetParam(paramname);
 	}
 
 	private static Dictionary<string, List<Action>> dListeners = new Dictionary<string, List<Action>>();
@@ -117,6 +125,7 @@ public class UAvatarData
 	}
 	public void DeserializeParamJson(JObject obj)
 	{
+		if (obj == null) return;
 		var enumerator = obj.GetEnumerator();
 		while (enumerator.MoveNext())
 		{
