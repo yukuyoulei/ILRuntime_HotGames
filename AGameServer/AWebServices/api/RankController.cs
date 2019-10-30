@@ -43,7 +43,7 @@ namespace AWebServices.api
 			var icount = typeParser.intParse(count);
 			if (icount > 10 || icount < 1)
 				icount = 10;
-			var ttop = ADatabaseConfigsManager.avatarDB.FindManyData(ADatabaseConfigsManager.tAvatarData, ADBAccessor.filter_Gte(InfoNameDefs.AvatarLevel, 0), ADBAccessor.projections(InfoNameDefs.AvatarName, InfoNameDefs.AvatarGold), icount, 0, ADBAccessor.sort_Descending(InfoNameDefs.AvatarLevel, InfoNameDefs.CurExp, InfoNameDefs.AvatarGold));
+			var ttop = ADatabaseConfigsManager.avatarDB.FindManyData(ADatabaseConfigsManager.tAvatarData, ADBAccessor.filter_Gte(InfoNameDefs.AvatarLevel, 0), ADBAccessor.projections(InfoNameDefs.AvatarName, InfoNameDefs.AvatarGold), icount, 0, ADBAccessor.sort_Descending(InfoNameDefs.AvatarGold));
 			List<List<string>> lresults = new List<List<string>>();
 			foreach (var t in ttop)
 			{

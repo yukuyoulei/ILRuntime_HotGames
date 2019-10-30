@@ -31,7 +31,13 @@ public class UIMain : AHotBase
 	{
 		_dGames.Add(gameLabel, () =>
 		{
-			LoadGame<T>("Game/" + typeof(T).Name);
+			var gamename = typeof(T).Name;
+			UICommonWait.Show();
+			UHotAssetBundleLoader.Instance.OnDownloadResources(() =>
+			{
+				UICommonWait.Hide();
+				LoadGame<T>("Game/" + gamename);
+			}, "game/" + gamename);
 		});
 	}
 

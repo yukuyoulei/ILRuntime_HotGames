@@ -205,7 +205,11 @@ public class UHotAssetBundleLoader : AHotBase
 			var res = r.ToLower();
 			if (!res.StartsWith("/"))
 			{
-				res = $"/{r}";
+				res = $"/{res}";
+			}
+			if (!res.StartsWith(UHotAssetBundleLoader.AssetBundleSuffix))
+			{
+				res = $"{res}{UHotAssetBundleLoader.AssetBundleSuffix}";
 			}
 			if (!dRemoteVersions.ContainsKey(res))
 			{

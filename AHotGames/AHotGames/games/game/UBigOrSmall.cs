@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine.UI;
 using UnityEngine;
+using Newtonsoft.Json.Linq;
 
 public class UBigOrSmall : AHotBase
 {
@@ -35,15 +36,15 @@ public class UBigOrSmall : AHotBase
 		small.onValueChanged.AddListener(value => { bsmall = value; });
 
 		var multis = FindWidget<Transform>("multis");
-		var multiSelected = new Dictionary<int, bool>();
-		var multiWidgets = new Dictionary<int, Toggle>();
+		var curMulti = 0;
 		foreach (var w in InitValueDefs.CaiDaXiaoMultis)
 		{
 			var t = FindWidget<Toggle>(multis, $"m{w}");
-			multiWidgets.Add(w, t);
+			var tw = w;
 			t.onValueChanged.AddListener((value) =>
 			{
-				multiSelected[w] = value;
+				if (value) curMulti = tw;
+				else if (curMulti == tw) curMulti = 0;
 			});
 		}
 
@@ -51,13 +52,8 @@ public class UBigOrSmall : AHotBase
 		btnConfirm.onClick.AddListener(() =>
 		{
 			if (!bbig && !bsmall) return;
-			int sel = 0;
-			foreach (var kv in multiSelected)
-			{
-				if (kv.Value) sel = kv.Key;
-			}
-			if (sel == 0) return;
-			UStaticWebRequests.OnWebRequest("Avatar/CaiDaXiao", $"{UILogin.CachedUsernameAndTokenArguments}&multi={sel}&isBig={(bbig ? "1" : "0")}", jobj =>
+			if (curMulti == 0) return;
+			UStaticWebRequests.OnWebRequest("Avatar/CaiDaXiao", $"{UILogin.CachedUsernameAndTokenArguments}&multi={curMulti}&isBig={(bbig ? "1" : "0")}", jobj =>
 			{
 				var res = jobj["res"].ToString();
 				UIAlert.Show($"猜大小结果：{res}");
