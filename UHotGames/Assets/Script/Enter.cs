@@ -12,11 +12,7 @@ using UnityEngine.UI;
 
 public class Enter : MonoBehaviour
 {
-#if UNITY_EDITOR
-	public static string ConfigURL = "http://10.6.60.244/hotgame/Config.txt";
-#else
 	public static string ConfigURL = "http://fscoding.xyz/hotgame/Config.txt";
-#endif
 	public bool UseAB;
 	private Transform trUIAlert;
 	private void Start()

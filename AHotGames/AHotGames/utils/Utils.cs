@@ -13,7 +13,8 @@ using UnityEngine.Video;
 
 public static class Utils
 {
-	public static string BaseURL = "http://www.fscoding.xyz/hotgameapis/api/";
+	public static string BaseURL_Res = "http://www.fscoding.xyz/hotgame/cdn/";
+	public static string BaseURL_APIs = "http://www.fscoding.xyz/hotgameapis/api/";
 	public static string WebSocketURL = "ws://www.fscoding.xyz/hotgameapis/ws/ws.enter?";
 
 	public static String MD5Hash(string sInput)

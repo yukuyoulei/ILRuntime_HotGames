@@ -314,7 +314,7 @@ public class UHotAssetBundleLoader : AHotBase
 		{
 			return null;
 		}
-		var url = Utils.BaseURL + Utils.GetPlatformFolder(Application.platform) + resource;
+		var url = Utils.BaseURL_Res + Utils.GetPlatformFolder(Application.platform) + resource;
 		var www = new WWW(url);
 		addUpdateAction(() =>
 		{
@@ -360,7 +360,7 @@ public class UHotAssetBundleLoader : AHotBase
 		{
 			return null;
 		}
-		var url = Utils.BaseURL + resource + $".txt?{ApiDateTime.SecondsFromBegin()}";
+		var url = Utils.BaseURL_Res + resource + $".txt?{ApiDateTime.SecondsFromBegin()}";
 		var www = new WWW(url);
 		addUpdateAction(() =>
 		{

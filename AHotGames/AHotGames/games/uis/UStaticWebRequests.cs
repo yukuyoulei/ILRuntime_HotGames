@@ -45,7 +45,7 @@ public static class UStaticWebRequests
 	public static void OnWebRequest(string reqUrl, string content
 		, Action<JObject> onSuccess = null, Action<string> onFail = null, Action<string> onErr = null)
 	{
-		UWebSender.OnRequest(Utils.BaseURL + reqUrl, content, (res) =>
+		UWebSender.OnRequest(Utils.BaseURL_APIs + reqUrl, content, (res) =>
 		{
 			var jres = res;
 			var err = jres["err"].ToString();
