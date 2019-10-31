@@ -56,6 +56,21 @@ public class UCardGame : AHotBase
 
 		ShowWidget("otherinfo", false);
 		URemoteData.ListeningParam(InfoNameDefs.AvatarLevel, ShowLevel);
+
+		UICommonWait.Show();
+		WebSocketConnector.Instance.OnInit(Utils.WebSocketURL + UILogin.CachedUsernameAndTokenArguments, evt =>
+		{
+			UICommonWait.Hide();
+
+		}, msgEvt =>
+		{
+		}, errEvt =>
+		{
+			UICommonWait.Hide();
+		}, closeEvt =>
+		{
+			UICommonWait.Hide();
+		});
 	}
 	protected override void OnDestroy()
 	{

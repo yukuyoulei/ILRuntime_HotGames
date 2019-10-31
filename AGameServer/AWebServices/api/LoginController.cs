@@ -58,7 +58,7 @@ namespace AWebServices.api
 				return ResultToJson.GetErrorJsonResponse("Username registered.");
 			}
 			var token = AWebServerUtils.GetEncryptCode(12);
-			ADatabaseConfigsManager.userDB.UpdateOneData(ADatabaseConfigsManager.tUserData, ADBAccessor.filter_eq(InfoNameDefs.Username, username)
+			var ures = ADatabaseConfigsManager.userDB.UpdateOneData(ADatabaseConfigsManager.tUserData, ADBAccessor.filter_eq(InfoNameDefs.Username, username)
 				, ADBAccessor.updates_build(
 					ADBAccessor.update(InfoNameDefs.UserToken, token)
 					, ADBAccessor.update(InfoNameDefs.Username, username)
@@ -66,6 +66,7 @@ namespace AWebServices.api
 					, ADBAccessor.update(InfoNameDefs.UserPassword, MD5String.Hash32(password))
 				)
 				, true);
+			if (!ures) return ResultToJson.GetErrorJsonResponse(ErrorDefs.DBError);
 
 			ATokenManager.Instance.OnSetToken(username, token);
 			return ResultToJson.GetJsonResponse(InfoNameDefs.Username, username, InfoNameDefs.UserToken, token);

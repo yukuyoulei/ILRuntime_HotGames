@@ -35,7 +35,7 @@ namespace AWebServices.api
 			{
 				return ResultToJson.GetErrorJsonResponse(ErrorDefs.NoAvatar);
 			}
-			return ResultToJson.GetJsonResponse("avatar", ResultToJson.JsonFormat(avatar.ToAll()));
+			return avatar.GetDiryParamResponse();
 		}
 		[HttpGet]
 		public HttpResponseMessage CreateAvatar(string username, string token, string avatarname, string sex)
@@ -72,7 +72,7 @@ namespace AWebServices.api
 			{
 				var avatar = AAvatarManager.Instance.OnCreateAvatar(username, avatarname, isex);
 				if (avatar != null)
-					return ResultToJson.GetJsonResponse("avatar", ResultToJson.JsonFormat(avatar.ToAll()));
+					return avatar.GetDiryParamResponse();
 				return ResultToJson.GetErrorJsonResponse(ErrorDefs.DBError);
 			}
 		}
