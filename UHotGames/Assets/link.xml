@@ -6,4 +6,5 @@
   <assembly fullname="UnityEngine.UIModule" preserve="all"/>
   <assembly fullname="UnityEngine.UnityWebRequestWWWModule" preserve="all"/>
   <assembly fullname="websocket-sharp" preserve="all"/>
+  <assembly fullname="Newtonsoft.Json" preserve="all"/>
 </linker>
