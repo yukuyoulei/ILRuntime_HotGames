@@ -21,7 +21,6 @@ public class AEntrance : AHotBase
 		, "ui/uiwait.ab"
 		, "ui/uicreateavatar.ab"
 		, "ui/uicommonwait.ab"
-		, "ui/uiloading.ab"
 		, "ui/uiregister.ab"
 	};
 	private void PreDownloadResources()
@@ -29,17 +28,22 @@ public class AEntrance : AHotBase
 		UHotAssetBundleLoader.Instance.OnDownloadResources(new List<string> { Utils.GetPlatformFolder(Application.platform)
 			, Utils.GetPlatformFolder(Application.platform)+ ".manifest" }, () =>
 		{
-			UHotAssetBundleLoader.Instance.OnDownloadResources(new List<string> { "ui/uiloading.ab" }, () =>
-		   {
-			   LoadUI<UILoading>();
+			UHotAssetBundleLoader.Instance.OnDownloadResources(new List<string> { "ui/uidebugconsole.ab" }, () =>
+			{
+				LoadUI<UIDebugConsole>();
 
-			   UHotAssetBundleLoader.Instance.OnDownloadResources(new List<string>(preloadResources), () =>
-			   {
-				   UILoading.Instance?.OnUnloadThis();
+				UHotAssetBundleLoader.Instance.OnDownloadResources(new List<string> { "ui/uiloading.ab" }, () =>
+				{
+					LoadUI<UILoading>();
 
-				   LoadUI<UILogin>();
-			   }, null);
-		   }, null);
+					UHotAssetBundleLoader.Instance.OnDownloadResources(new List<string>(preloadResources), () =>
+					{
+						UILoading.Instance?.OnUnloadThis();
+
+						LoadUI<UILogin>();
+					}, null);
+				}, null);
+			}, null);
 		}, null);
 	}
 }

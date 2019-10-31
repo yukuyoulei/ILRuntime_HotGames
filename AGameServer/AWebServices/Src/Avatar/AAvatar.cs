@@ -1,7 +1,9 @@
 ﻿using MongoDB.Bson;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Web;
 
 
@@ -346,6 +348,44 @@ public partial class AAvatar : AGameObj
 			}
 		}
 
+	}
+
+	internal JObject GetDirtyParams()
+	{
+		var ps = componentParam.ParamsNeedToSync;
+		var obj = new JObject();
+		foreach (var p in ps)
+		{
+			obj[p] = OnGetStringParamValue(p);
+		}
+		var res = new JObject();
+		res["avatar"] = obj;
+		return res;
+	}
+	public HttpResponseMessage GetDiryParamResponse(params string[] extraParams)
+	{
+		var obj = GetDirtyParams();
+		if (extraParams.Length > 0)
+		{
+			if (extraParams.Length % 2 != 0) throw new Exception("Invalid extraParam length");
+			for (var i = 0; i < extraParams.Length; i += 2)
+			{
+				obj[extraParams[i]] = extraParams[i + 1];
+			}
+		}
+		return ResultToJson.GetJsonResponse(obj);
+	}
+	public HttpResponseMessage GetAllParamResponse()
+	{
+		var ps = componentParam.AllParamsToSync;
+		var obj = new JObject();
+		foreach (var p in ps)
+		{
+			obj[p] = OnGetStringParamValue(p);
+		}
+		var res = new JObject();
+		res["avatar"] = obj;
+		return ResultToJson.GetJsonResponse(res);
 	}
 
 	private void DoLevelUp()

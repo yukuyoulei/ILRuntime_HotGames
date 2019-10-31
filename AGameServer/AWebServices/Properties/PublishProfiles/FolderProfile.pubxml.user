@@ -37,10 +37,10 @@
       <publishTime>10/20/2018 15:21:45</publishTime>
     </File>
     <File Include="bin/AWebServices.dll">
-      <publishTime>10/31/2019 19:56:30</publishTime>
+      <publishTime>10/31/2019 20:16:25</publishTime>
     </File>
     <File Include="bin/AWebServices.pdb">
-      <publishTime>10/31/2019 19:56:30</publishTime>
+      <publishTime>10/31/2019 20:16:25</publishTime>
     </File>
     <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
       <publishTime>10/21/2019 16:43:09</publishTime>
@@ -163,7 +163,7 @@
       <publishTime>12/24/2018 20:45:58</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>10/31/2019 19:41:57</publishTime>
+      <publishTime>10/31/2019 20:11:13</publishTime>
     </File>
   </ItemGroup>
 </Project>

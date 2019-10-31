@@ -61,19 +61,6 @@ public partial class AAvatar
 		return AWebServerUtils.OnGetJsonError(l.ToArray());
 	}
 
-	internal JObject GetDirtyParams()
-	{
-		var ps = componentParam.ParamsNeedToSync;
-		var obj = new JObject();
-		foreach (var p in ps)
-		{
-			obj[p] = OnGetStringParamValue(p);
-		}
-		var res = new JObject();
-		res["avatar"] = obj;
-		return res;
-	}
-
 	internal bool OnAnswer(string answer)
 	{
 		var res = ADatabaseConfigsManager.avatarDB.FindOneData(ADatabaseConfigsManager.tAvatarData
@@ -120,7 +107,6 @@ public partial class AAvatar
 		SetOneParam("qa", ileft + iright);
 		return $"{ileft}+{iright}";
 	}
-
 	internal HttpResponseMessage OnDailyCheck()
 	{
 		if (ApiDateTime.IsSameDay(LastDailyCheckTime))
@@ -130,19 +116,6 @@ public partial class AAvatar
 		LastDailyCheckTime = ApiDateTime.SecondsFromBegin();
 		AvatarGold += 1000;
 		return GetDiryParamResponse();
-	}
-	public HttpResponseMessage GetDiryParamResponse(params string[] extraParams)
-	{
-		var obj = GetDirtyParams();
-		if (extraParams.Length > 0)
-		{
-			if (extraParams.Length % 2 != 0) throw new Exception("Invalid extraParam length");
-			for (var i = 0; i < extraParams.Length; i += 2)
-			{
-				obj[extraParams[i]] = extraParams[i + 1];
-			}
-		}
-		return ResultToJson.GetJsonResponse(obj);
 	}
 
 	internal HttpResponseMessage OnCaiDaXiao(int multi, int isBig)
