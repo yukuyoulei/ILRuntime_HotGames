@@ -14,10 +14,19 @@ public class UCardGame : AHotBase
 	Text textOtherLevel;
 	Text textOtherAvatarname;
 	Text textOtherCardCount;
+	Button btnJoinRoom;
 
 	Transform cardcell;
+	RawImage mycard;
 	protected override void InitComponents()
 	{
+		mycard = FindWidget<RawImage>("mycard");
+		var bgpath = "Images/Pai/bg1";
+		UHotAssetBundleLoader.Instance.OnDownloadResources(() =>
+		{
+			mycard.texture = UHotAssetBundleLoader.Instance.OnLoadAsset<Texture2D>(bgpath);
+		}, bgpath);
+
 		textMyCardCount = FindWidget<Text>("textMyCardCount");
 		textMyCardCount.text = "0";
 
@@ -39,6 +48,12 @@ public class UCardGame : AHotBase
 			OnUnloadThis();
 
 			LoadAnotherUI<UIMain>();
+		});
+
+		btnJoinRoom = FindWidget<Button>("btnJoinRoom");
+		btnJoinRoom.onClick.AddListener(() =>
+		{
+			WebSocketConnector.Instance.OnRemoteCall("joinRoom", "", OnJoinRoomCB);
 		});
 
 		cardcell = FindWidget<Transform>("cardcell");
@@ -74,6 +89,12 @@ public class UCardGame : AHotBase
 			UICommonWait.Hide();
 		});
 	}
+
+	private void OnJoinRoomCB(string obj)
+	{
+		btnJoinRoom.gameObject.SetActive(false);
+	}
+
 	protected override void OnDestroy()
 	{
 		URemoteData.CancelListeningParam(InfoNameDefs.AvatarLevel, ShowLevel);

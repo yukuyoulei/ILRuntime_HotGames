@@ -25,7 +25,6 @@ public abstract class AHotBase
 		{
 			Environment.UseAB = false;
 		}
-		UDebugHotLog.Log($"Environment.UseAB {Environment.UseAB} arg {arg}");
 
 		if (dGameObjects.ContainsKey(gameObj.name))
 		{
@@ -44,11 +43,15 @@ public abstract class AHotBase
 		{
 			onReceiveMsg?.Invoke(msg);
 
-			var amsg = msg.Split(':');
+			var amsg = msg.Split(new char[] { ':' }, 2);
 			switch (amsg[0])
 			{
 				case "op":
 					receiveOpMsg(amsg[1] == "1");
+					break;
+				case "targetRuntime":
+					Utils.TargetRuntimeInEditor = amsg[1];
+					UDebugHotLog.Log($"Utils.TargetRuntimeInEditor {Utils.TargetRuntimeInEditor}");
 					break;
 			}
 		});

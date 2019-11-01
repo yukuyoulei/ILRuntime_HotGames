@@ -56,8 +56,11 @@ public static class Utils
 			return Application.persistentDataPath + "/" + GetPlatformFolder(Application.platform) + "/";
 		}
 	}
+	public static string TargetRuntimeInEditor = "";
 	public static string GetPlatformFolder(RuntimePlatform target)
 	{
+		if (Environment.IsEditor && !string.IsNullOrEmpty(TargetRuntimeInEditor)) return TargetRuntimeInEditor;
+
 		switch (target)
 		{
 			case RuntimePlatform.Android:

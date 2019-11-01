@@ -115,7 +115,7 @@ public class WebSocketConnector : MonoBehaviour
 		}).Start();
 	}
 
-	public void Send(string msg)
+	private void Send(string msg)
 	{
 		new Task(() =>
 		{
@@ -192,17 +192,23 @@ public class WebSocketConnector : MonoBehaviour
 	{
 		if (dResponses.ContainsKey(method.ToLower()))
 		{
-			dResponses[method.ToLower()](argument);
+			callbacks.Add(() =>
+			{
+				dResponses[method.ToLower()](argument);
+			});
 		}
 	}
 	public void OnRemoteCall(string method, string arguments, Action<string> response)
 	{
-		if (dResponses.ContainsKey(method.ToLower()))
+		new Task(() =>
 		{
-			dResponses.Remove(method.ToLower());
-		}
-		dResponses.Add(method.ToLower(), response);
+			if (dResponses.ContainsKey(method.ToLower()))
+			{
+				dResponses.Remove(method.ToLower());
+			}
+			dResponses.Add(method.ToLower(), response);
 
-		Send(method + "?" + arguments);
+			Send(method + "?" + arguments);
+		}).Start();
 	}
 }

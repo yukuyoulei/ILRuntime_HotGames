@@ -151,6 +151,13 @@ public class Enter : MonoBehaviour
 		ILRuntimeHandler.Instance.OnLoadClass("AEntrance", new GameObject("AEntrance"), false, UConfigManager.bUsingAb.ToString());
 		ILRuntimeHandler.Instance.EmitMessage(bIsLocal ? "local" : "remote");
 		ILRuntimeHandler.Instance.EmitMessage($"resPath:{ConfigDownloader.Instance.OnGetValue("resPath")}");
+#if UNITY_EDITOR
+#if UNITY_IOS
+		ILRuntimeHandler.Instance.EmitMessage("targetRuntime:IOS", "AEntrance");
+#elif UNITY_ANDROID
+		ILRuntimeHandler.Instance.EmitMessage("targetRuntime:Android", "AEntrance");
+#endif
+#endif
 	}
 
 	void CheckNewVersion()

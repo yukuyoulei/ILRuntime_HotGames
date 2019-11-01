@@ -55,7 +55,8 @@ public class UILoading : AHotBase
 	}
 	public void OnSetProgress(float p)
 	{
-		Progress.fillAmount = p;
+		if (Progress != null)
+			Progress.fillAmount = p;
 		if (TextContent != null)
 			TextContent.text = $"{(p * 100).ToString("f1")}%";
 	}
