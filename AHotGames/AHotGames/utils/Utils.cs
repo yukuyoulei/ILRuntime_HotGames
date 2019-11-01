@@ -13,9 +13,9 @@ using UnityEngine.Video;
 
 public static class Utils
 {
-	public static string BaseURL_Res = "http://www.fscoding.xyz/hotgame/cdn/";
+	public static string BaseURL_Res { get { return Environment.IsEditor ? "http://127.0.0.1/hotgame/" : "http://www.fscoding.xyz/hotgame/"; } }
 	public static string BaseURL_APIs { get { return Environment.IsEditor ? "http://127.0.0.1/hotgameapis/api/" : "http://www.fscoding.xyz/hotgameapis/api/"; } }
-	public static string WebSocketURL { get { return Environment.IsEditor? "ws://127.0.0.1/hotgameapis/ws/ws.enter?" : "ws://www.fscoding.xyz/hotgameapis/ws/ws.enter?"; } }
+	public static string WebSocketURL { get { return Environment.IsEditor ? "ws://127.0.0.1/hotgameapis/ws/ws.enter?" : "ws://www.fscoding.xyz/hotgameapis/ws/ws.enter?"; } }
 
 	public static String MD5Hash(string sInput)
 	{
@@ -50,7 +50,7 @@ public static class Utils
 		get
 		{
 			if (Environment.IsEditor)
-				return new DirectoryInfo(Application.dataPath).FullName + "/../RemoteResources/";
+				return new DirectoryInfo(Application.dataPath).FullName + "/../AB/RemoteResources/";
 			else if (Application.platform == RuntimePlatform.WindowsPlayer)
 				return new DirectoryInfo(Application.dataPath).FullName + "/../../AB/" + GetPlatformFolder(Application.platform) + "/";
 			return Application.persistentDataPath + "/" + GetPlatformFolder(Application.platform) + "/";

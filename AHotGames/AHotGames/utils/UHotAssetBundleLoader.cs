@@ -167,6 +167,7 @@ public class UHotAssetBundleLoader : AHotBase
 	}
 	public void OnDownloadResources(List<string> lResources, Action downloaded, Action<float> progress = null)
 	{
+		UDebugHotLog.Log($"OnDownloadResources {string.Join(",", lResources)}");
 		if (!Environment.UseAB)
 		{
 			downloaded?.Invoke();
@@ -207,10 +208,11 @@ public class UHotAssetBundleLoader : AHotBase
 			{
 				res = $"/{res}";
 			}
-			if (!res.StartsWith(UHotAssetBundleLoader.AssetBundleSuffix))
+			if (!res.EndsWith(UHotAssetBundleLoader.AssetBundleSuffix))
 			{
 				res = $"{res}{UHotAssetBundleLoader.AssetBundleSuffix}";
 			}
+			UDebugHotLog.Log($"check version res {res}");
 			if (!dRemoteVersions.ContainsKey(res))
 			{
 				continue;

@@ -141,6 +141,7 @@
   <PropertyGroup>
     <PostBuildEvent>del $(TargetDir)*.bytes
 ren $(TargetDir)*.dll *.bytes
-</PostBuildEvent>
+xcopy /r /y $(TargetDir)*.bytes $(TargetDir)..\..\..\..\ab1
+xcopy /r /y $(TargetDir)*.pdb $(TargetDir)..\..\..\..\ab1</PostBuildEvent>
   </PropertyGroup>
 </Project>

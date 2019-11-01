@@ -48,10 +48,12 @@ public class UCardGame : AHotBase
 		{
 			var obj = GameObject.Instantiate(cardcell, cardcell.parent);
 			obj.gameObject.SetActive(true);
+			var rawimage = obj.GetComponent<RawImage>();
+			var texturePath = $"Images/Pai/b{i + 1}";
 			UHotAssetBundleLoader.Instance.OnDownloadResources(() =>
 			{
-				UDebugHotLog.Log($"UHotAssetBundleLoader.Instance.OnDownloadResources");
-			}, $"Images/Pai/b{i + 1}");
+				rawimage.texture = UHotAssetBundleLoader.Instance.OnLoadAsset<Texture2D>(texturePath);
+			}, texturePath);
 		}
 
 		ShowWidget("otherinfo", false);
