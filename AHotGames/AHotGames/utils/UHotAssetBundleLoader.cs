@@ -28,8 +28,7 @@ public class UHotAssetBundleLoader : AHotBase
 	{
 		if (!Environment.UseAB && Environment.IsEditor)
 		{
-			LoadAnotherClass(Utils.GetAssetBundleName(path), path);
-			return null;
+			return Utils.LoadAsset<T>(path);
 		}
 		else
 		{

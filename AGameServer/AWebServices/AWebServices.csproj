@@ -111,6 +111,8 @@
     <Compile Include="Src\Avatar\AAvatar_GameHandler.cs" />
     <Compile Include="Src\Avatar\Defs.cs" />
     <Compile Include="Src\Managers\ADatabaseConfigManager.cs" />
+    <Compile Include="Src\Managers\Rooms\ARoomCard1.cs" />
+    <Compile Include="Src\Managers\Rooms\ARoomManager.cs" />
     <Compile Include="Src\Managers\ATokenManager.cs" />
     <Compile Include="Src\LibUtils\ADictionary.cs" />
     <Compile Include="Src\LibUtils\AIniLoader.cs" />
@@ -215,6 +217,7 @@
     <Compile Include="Src\Components\AComponentParam.cs" />
     <Compile Include="Src\Managers\AFriendManager.cs" />
     <Compile Include="Src\Managers\AMapManager.cs" />
+    <Compile Include="Src\Managers\Rooms\Cards\ACards.cs" />
     <Compile Include="Src\WebUtils\ResultToJson.cs" />
   </ItemGroup>
   <ItemGroup>

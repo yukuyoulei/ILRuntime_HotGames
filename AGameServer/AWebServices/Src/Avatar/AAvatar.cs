@@ -11,6 +11,7 @@ public partial class AAvatar : AGameObj
 {
 	public string username;
 	public string nickname;
+	public bool bAI;
 	public AAvatar(string username, string nickname, BsonDocument dbdocument)
 	{
 		this.username = username;
@@ -57,6 +58,23 @@ public partial class AAvatar : AGameObj
 		componentParam.RegistParam(InfoNameDefs.DailyCheckTotalCount, EParamType.Long, false);
 	}
 
+	public AWebServices.UserWithToken client
+	{
+		get
+		{
+			if (!AWebServices.WSHandler.CONNECT_POOL.ContainsKey(username)) return null;
+			return AWebServices.WSHandler.CONNECT_POOL[username];
+		}
+	}
+	public bool IsOffline { get { return client == null; } }
+	public void OnSendToClient(string method, string msg)
+	{
+		if (client == null) return;
+		var task = client.OnSend(method + "?" + msg);
+		if (task != null && !task.IsCompleted)
+			task.Start();
+	}
+
 	#region components
 	AComponentParam _componentParam;
 	public AComponentParam componentParam
@@ -73,10 +91,9 @@ public partial class AAvatar : AGameObj
 
 	internal void OnTick()
 	{
-		if (componentParam == null)
-		{
-			return;
-		}
+		if (componentParam == null) return;
+		if (bAI) return;
+
 		componentParam.OnSave();
 	}
 
@@ -161,6 +178,7 @@ public partial class AAvatar : AGameObj
 	{
 		get
 		{
+			if (bAI) return nickname;
 			return OnGetStringParamValue(InfoNameDefs.AvatarName);
 		}
 	}
@@ -392,6 +410,14 @@ public partial class AAvatar : AGameObj
 	{
 		AvatarLevel++;
 		MaxEXP = MaxEXP;
+	}
+
+	internal JObject GetSimpleInfo(ARoomBase aRoomBase)
+	{
+		var jinfo = new JObject();
+		jinfo[InfoNameDefs.AvatarName] = AvatarName;
+		jinfo[InfoNameDefs.AvatarLevel] = AvatarLevel;
+		return jinfo;
 	}
 }
 

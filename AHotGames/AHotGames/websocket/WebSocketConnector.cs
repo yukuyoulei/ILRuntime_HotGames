@@ -28,7 +28,7 @@ public class WebSocketConnector : MonoBehaviour
 	private bool bConnected { get; set; }
 	private static bool receive = false;
 	Action<string> closeAction;
-	private static List<Action> callbacks = new List<Action>();
+	private static List<Action> callbackAdd = new List<Action>();
 	private static object lockObj = new object();
 	public void OnInit(string wsurl, Action<EventArgs> openAction, Action<MessageEventArgs> msgAction
 		, Action<ErrorEventArgs> errorAction, Action<string> closeAction)
@@ -48,7 +48,7 @@ public class WebSocketConnector : MonoBehaviour
 			bConnected = true;
 			lock (lockObj)
 			{
-				callbacks.Add(() =>
+				callbackAdd.Add(() =>
 				{
 					UICommonWait.Hide();
 					openAction(e);
@@ -67,7 +67,7 @@ public class WebSocketConnector : MonoBehaviour
 				UnityEngine.Debug.Log("OnMessage:" + (e.IsText ? e.Data : e.RawData.Length.ToString()));
 				lock (lockObj)
 				{
-					callbacks.Add(() =>
+					callbackAdd.Add(() =>
 					{
 						msgAction(e);
 
@@ -85,7 +85,7 @@ public class WebSocketConnector : MonoBehaviour
 			UnityEngine.Debug.Log("OnError:" + e.Message);
 			lock (lockObj)
 			{
-				callbacks.Add(() =>
+				callbackAdd.Add(() =>
 				{
 					errorAction(e);
 				});
@@ -102,7 +102,7 @@ public class WebSocketConnector : MonoBehaviour
 		bConnecting = true;
 		UnityEngine.Debug.Log("ws.Connect() " + wsurl);
 		UICommonWait.Show();
-		new Task(() =>
+		new Thread(new ThreadStart(() =>
 		{
 			try
 			{
@@ -112,15 +112,15 @@ public class WebSocketConnector : MonoBehaviour
 			{
 				UnityEngine.Debug.Log("connect failed:" + wsurl);
 			}
-		}).Start();
+		})).Start();
 	}
 
 	private void Send(string msg)
 	{
-		new Task(() =>
+		new Thread(new ThreadStart(() =>
 		{
 			ws.Send(msg);
-		}).Start();
+		})).Start();
 	}
 	public void OnClose()
 	{
@@ -166,49 +166,58 @@ public class WebSocketConnector : MonoBehaviour
 			catch { }
 		}
 
-		if (callbacks.Count == 0)
+		if (callbackAdd.Count == 0)
 		{
 			return;
 		}
+		var cb = callbackAdd[0];
+		callbackAdd.RemoveAt(0);
 		lock (lockObj)
 		{
-			foreach (var cb in callbacks)
+			/*try
+			{*/
+				cb();
+			/*}
+			catch (Exception ex)
 			{
-				try
-				{
-					cb();
-				}
-				catch (Exception ex)
-				{
-					UnityEngine.Debug.Log("callback invoke error:" + ex.Message);
-					UnityEngine.Debug.Log(ex.StackTrace);
-				}
-			}
-			callbacks.Clear();
+				UnityEngine.Debug.Log("callback invoke error:" + ex.Message);
+				UnityEngine.Debug.Log(ex.StackTrace);
+			}*/
 		}
 	}
 	static Dictionary<string, Action<string>> dResponses = new Dictionary<string, Action<string>>();
-	private void OnResponse(string method, string argument)
+	private void OnResponse(string responseMethod, string argument)
 	{
-		if (dResponses.ContainsKey(method.ToLower()))
+		if (dResponses.ContainsKey(responseMethod.ToLower()))
 		{
-			callbacks.Add(() =>
+			callbackAdd.Add(() =>
 			{
-				dResponses[method.ToLower()](argument);
+				dResponses[responseMethod.ToLower()](argument);
 			});
 		}
 	}
-	public void OnRemoteCall(string method, string arguments, Action<string> response)
+	public void OnRegisterResponse(string responseMethod, Action<string> response)
 	{
-		new Task(() =>
+		if (dResponses.ContainsKey(responseMethod.ToLower()))
 		{
-			if (dResponses.ContainsKey(method.ToLower()))
+			dResponses.Remove(responseMethod.ToLower());
+		}
+		dResponses.Add(responseMethod.ToLower(), response);
+	}
+	public void OnRemoteCall(string method, string arguments, string responseMethod = "", Action<string> response = null)
+	{
+		new Thread(new ThreadStart(() =>
+		{
+			if (!string.IsNullOrEmpty(responseMethod))
 			{
-				dResponses.Remove(method.ToLower());
+				if (dResponses.ContainsKey(responseMethod.ToLower()))
+				{
+					dResponses.Remove(responseMethod.ToLower());
+				}
+				dResponses.Add(responseMethod.ToLower(), response);
 			}
-			dResponses.Add(method.ToLower(), response);
 
 			Send(method + "?" + arguments);
-		}).Start();
+		})).Start();
 	}
 }

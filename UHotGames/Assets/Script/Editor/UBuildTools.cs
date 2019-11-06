@@ -157,7 +157,17 @@ public class UBuildTools : EditorWindow
 			}
 		}
 	}
-
+	bool bUsingLocalCDN
+	{
+		get
+		{
+			return PlayerPrefs.GetInt("USE_LOCAL_CDN") == 1;
+		}
+		set
+		{
+			PlayerPrefs.SetInt("USE_LOCAL_CDN", value ? 1 : 0);
+		}
+	}
 	bool bUsingIL2CPP
 	{
 		get
@@ -294,6 +304,8 @@ public class UBuildTools : EditorWindow
 		EditorGUILayout.LabelField("包地址", GUILayout.Width(50));
 		targetBuildDir = EditorGUILayout.TextField(targetBuildDir);
 		GUILayout.EndHorizontal();
+
+		bUsingLocalCDN = EditorGUILayout.ToggleLeft("是否使用本地CDN", bUsingLocalCDN);
 
 		bUsingIL2CPP = EditorGUILayout.ToggleLeft("是否使用IL2CPP", bUsingIL2CPP);
 		if (GUILayout.Button("Build"))
@@ -485,7 +497,7 @@ public class UBuildTools : EditorWindow
 #if UNITY_ANDROID
 			, BuildAssetBundleOptions.ChunkBasedCompression
 #else
-            , BuildAssetBundleOptions.ChunkBasedCompression
+			, BuildAssetBundleOptions.ChunkBasedCompression
 #endif
 			, EditorUserBuildSettings.activeBuildTarget);
 		var versions = EnumFileMd5(outputPath, outputPath);
@@ -759,22 +771,22 @@ public class UBuildTools : EditorWindow
 		dict.SetString("NSCameraUsageDescription", "需要启用摄像头拍摄上传老师布置的书写作业。");
 		dict.SetString("NSMicrophoneUsageDescription", "需要启用麦克风录制老师布置的朗读作业。");
 
-        {
-            PlistElementArray parray = plistDocument.root.CreateArray("CFBundleURLTypes");
-            dict = parray.AddDict();
-            dict.SetString("CFBundleTypeRole", "Editor");
-            dict.SetString("CFBundleURLName", "weixin");
-            PlistElementArray array2 = dict.CreateArray("CFBundleURLSchemes");
-            array2.AddString(SDK_WeChat.appid);  //weixin
-        }
+		{
+			PlistElementArray parray = plistDocument.root.CreateArray("CFBundleURLTypes");
+			dict = parray.AddDict();
+			dict.SetString("CFBundleTypeRole", "Editor");
+			dict.SetString("CFBundleURLName", "weixin");
+			PlistElementArray array2 = dict.CreateArray("CFBundleURLSchemes");
+			array2.AddString(SDK_WeChat.appid);  //weixin
+		}
 
-        {
-            PlistElementArray parray = plistDocument.root.CreateArray("LSApplicationQueriesSchemes");
-            parray.AddString("wechat");
-            parray.AddString("weixin");
-        }
+		{
+			PlistElementArray parray = plistDocument.root.CreateArray("LSApplicationQueriesSchemes");
+			parray.AddString("wechat");
+			parray.AddString("weixin");
+		}
 
-        plistDocument.WriteToFile(spath + "/Info.plist");
+		plistDocument.WriteToFile(spath + "/Info.plist");
 #endif
 
 		if (string.IsNullOrEmpty(sresult) || sresult == "Succeeded")

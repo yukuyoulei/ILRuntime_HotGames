@@ -51,8 +51,13 @@ namespace AWebServices
 			if (cancellationTokenSource != null
 				&& !cancellationTokenSource.IsCancellationRequested)
 			{
+				ARoomManager.Instance.OnOffline(username);
 				cancellationTokenSource.Cancel();
 			}
+		}
+		public async Task OnSend(string msg)
+		{
+			await WSHandler.DoSend(this, msg);
 		}
 	}
 	public class WSHandler : IHttpHandler
@@ -218,7 +223,7 @@ namespace AWebServices
 			}
 		}
 
-		public static async Task DoSend(string user, string msg)
+		public static async Task DoSend(string user, string msg = "")
 		{
 			if (!CONNECT_POOL.ContainsKey(user))
 			{
@@ -226,7 +231,7 @@ namespace AWebServices
 			}
 			await DoSend(CONNECT_POOL[user], msg);
 		}
-		public static async Task DoSend(UserWithToken user, string msg)
+		public static async Task DoSend(UserWithToken user, string msg = "")
 		{
 			if (user == null || user.connect == null)
 			{

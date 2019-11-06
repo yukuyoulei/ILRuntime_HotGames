@@ -40,6 +40,10 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="UnityEditor">
+      <HintPath>..\..\UHotGames\Temp\bin\Debug\UnityEditor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="UnityEngine">
       <HintPath>..\..\UHotGames\Temp\bin\Debug\UnityEngine.dll</HintPath>
       <Private>False</Private>
@@ -92,6 +96,7 @@
   <ItemGroup>
     <Compile Include="games\data\Defs.cs" />
     <Compile Include="games\data\URemoteData.cs" />
+    <Compile Include="games\game\Cards\ACards.cs" />
     <Compile Include="games\game\Novel\Novels.cs" />
     <Compile Include="games\game\UBigOrSmall.cs" />
     <Compile Include="games\game\ULifeInBottle.cs" />

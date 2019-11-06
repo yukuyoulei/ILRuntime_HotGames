@@ -43,6 +43,16 @@ namespace AWebServices
 					AAvatarManager.Instance.OnTick();
 				}
 			})).Start();
+
+
+			new Thread(new ThreadStart(() =>
+			{
+				while (true)
+				{
+					Thread.Sleep(30);
+					ARoomManager.Instance.OnTick();
+				}
+			})).Start();
 		}
 		private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
 		{

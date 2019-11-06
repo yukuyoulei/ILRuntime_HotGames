@@ -61,6 +61,20 @@ public partial class AAvatar
 		return AWebServerUtils.OnGetJsonError(l.ToArray());
 	}
 
+	internal void GameHandler_RoomOperation(string arg3)
+	{
+		var room = ARoomManager.Instance.OnGetRoom(username);
+		if (room == null) return;
+		room.OnOperation(username, arg3);
+	}
+
+	internal void GameHandler_JoinRoom(string roomType)
+	{
+		ARoomManager.Instance.OnExit(username);
+		var room = ARoomManager.Instance.OnCreate(roomType);
+		ARoomManager.Instance.OnEnter(this, room);
+	}
+
 	internal bool OnAnswer(string answer)
 	{
 		var res = ADatabaseConfigsManager.avatarDB.FindOneData(ADatabaseConfigsManager.tAvatarData

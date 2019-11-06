@@ -8,6 +8,7 @@ using UnityEngine.UI;
 
 public abstract class AHotBase
 {
+	public static System.Random random = new System.Random();
 	public GameObject gameObj;
 	public static AHotBase curGame;
 	public static string strArg;
@@ -383,4 +384,28 @@ public abstract class AHotBase
 	protected virtual void OnDestroy()
 	{
 	}
+
+	protected void MoveTo(Transform tc, Vector3 to, float moveSeconds = 1, Space space = Space.World)
+	{
+		var startTime = ApiDateTime.Now;
+		var rawp = space == Space.World ? tc.position : tc.localPosition;
+		addUpdateAction(() =>
+		{
+			if (space == Space.World)
+				tc.position = Vector3.Lerp(rawp, to, (float)(ApiDateTime.Now - startTime).TotalSeconds / moveSeconds);
+			else
+				tc.localPosition = Vector3.Lerp(rawp, to, (float)(ApiDateTime.Now - startTime).TotalSeconds / moveSeconds);
+
+			var bend = (ApiDateTime.Now - startTime).TotalSeconds > moveSeconds;
+			if (bend)
+			{
+				if (space == Space.World)
+					tc.position = to;
+				else
+					tc.localPosition = to;
+			}
+			return bend;
+		});
+	}
+
 }

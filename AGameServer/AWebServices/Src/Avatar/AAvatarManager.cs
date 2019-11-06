@@ -27,6 +27,10 @@ public class AAvatarManager : Singleton<AAvatarManager>
 		}
 		return LoadFromDB(username);
 	}
+	public bool HasAvatar(string username)
+	{
+		return dAvatars.ContainsKey(username);
+	}
 	private AAvatar LoadFromDB(string username)
 	{
 		var result = ADatabaseConfigsManager.avatarDB.FindOneData(ADatabaseConfigsManager.tAvatarData, ADBAccessor.filter_eq(InfoNameDefs.Username, username), null);
