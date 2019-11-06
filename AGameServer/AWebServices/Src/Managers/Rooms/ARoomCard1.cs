@@ -138,7 +138,8 @@ public class ARoomCard1 : ARoomBase
 			for (var i = lOuts.Count - 2; i >= 0; i--)
 			{
 				lCardsToFetch.Add(lOuts[i].content);
-				if (lOuts[i].number == c.number)
+				if (lOuts[i].number == c.number 
+					|| c.color == ACards.EColor.Joker && lOuts[i].color == ACards.EColor.Joker)
 				{
 					ifetch = i;
 					fetchedTurn = curTurn;

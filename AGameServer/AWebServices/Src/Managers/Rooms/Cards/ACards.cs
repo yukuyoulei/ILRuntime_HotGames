@@ -18,11 +18,11 @@ public struct ACards
 			return $"Images/Pai/{content + 1}";
 		}
 	}
-	public int color
+	public EColor color
 	{
 		get
 		{
-			return content / 13;
+			return (EColor)(content / 13);
 		}
 	}
 	public int number
