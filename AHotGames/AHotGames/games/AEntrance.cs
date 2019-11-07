@@ -16,12 +16,13 @@ public class AEntrance : AHotBase
 		  "ui/uilogin.ab"
 
 		, "ui/uirank.ab"
-		, "ui/uialert.ab"
 		, "ui/uimain.ab"
 		, "ui/uiwait.ab"
-		, "ui/uicreateavatar.ab"
-		, "ui/uicommonwait.ab"
+		, "ui/uialert.ab"
 		, "ui/uiregister.ab"
+		, "ui/uicommontips.ab"
+		, "ui/uicommonwait.ab"
+		, "ui/uicreateavatar.ab"
 	};
 	private void PreDownloadResources()
 	{

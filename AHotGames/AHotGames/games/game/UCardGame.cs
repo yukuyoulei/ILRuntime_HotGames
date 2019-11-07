@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using UnityEngine;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System;
 
 public class UCardGame : AHotBase
 {
@@ -30,7 +31,7 @@ public class UCardGame : AHotBase
 		{
 			if (whosTurn != UILogin.CachedUsername)
 			{
-				UIAlert.Show("轮到对方出牌了。");
+				UICommonTips.AddTip("还没轮到你出牌。");
 				return;
 			}
 			mycard.color = Color.grey;
@@ -177,6 +178,8 @@ public class UCardGame : AHotBase
 			MoveTo(c, Vector3.zero, 0.2f, Space.Self);
 		}
 
+		var fu = jobj.ContainsKey("fu") ? jobj["fu"].ToString() : "";
+
 		if (jobj.ContainsKey("out"))
 		{
 			var sout = jobj["out"].ToString();
@@ -201,31 +204,14 @@ public class UCardGame : AHotBase
 				}
 				if (acards.Length < lOutModels.Count)
 				{
-					var fu = jobj.ContainsKey("fu") ? jobj["fu"].ToString() : "";
-					for (var i = acards.Length; i < lOutModels.Count; i++)
-					{
-						if (string.IsNullOrEmpty(fu))
-							ReturnCardToPool(lOutModels[i]);
-						else
-						{
-							var from = fu == UILogin.CachedUsername ? mycard : othercard;
-							var c = lOutModels[i].GetChild(0);
-							MoveTo(c, from.transform.position, 0.2f, Space.World, () =>
-							{
-								ReturnCardToPool(c.parent);
-							});
-						}
-					}
+					ReturnCards(acards.Length, fu);
 					lOutModels.RemoveRange(acards.Length, lOutModels.Count - acards.Length);
 					lCardContents.RemoveRange(acards.Length, lCardContents.Count - acards.Length);
 				}
 			}
 			else
 			{
-				for (var i = 0; i < lOutModels.Count; i++)
-				{
-					ReturnCardToPool(lOutModels[i]);
-				}
+				ReturnCards(0, fu);
 				lOutModels.Clear();
 				lCardContents.Clear();
 			}
@@ -253,6 +239,24 @@ public class UCardGame : AHotBase
 		whosTurn = jobj["curTurn"].ToString();
 		mycard.color = whosTurn == UILogin.CachedUsername ? Color.white : Color.grey;
 		othercard.color = whosTurn == otherUsername ? Color.white : Color.grey;
+	}
+
+	private void ReturnCards(int length, string fu)
+	{
+		for (var i = length; i < lOutModels.Count; i++)
+		{
+			if (string.IsNullOrEmpty(fu))
+				ReturnCardToPool(lOutModels[i]);
+			else
+			{
+				var from = fu == UILogin.CachedUsername ? mycard : othercard;
+				var c = lOutModels[i].GetChild(0);
+				MoveTo(c, from.transform.position, 0.2f, Space.World, () =>
+				{
+					ReturnCardToPool(c.parent);
+				});
+			}
+		}
 	}
 
 	private string whosTurn;
