@@ -14,10 +14,7 @@ public class UUpdater : MonoBehaviour
 	public Action onUpdate;
 	public void Update()
 	{
-		if (onUpdate != null)
-		{
-			onUpdate();
-		}
+		onUpdate?.Invoke();
 	}
 }
 

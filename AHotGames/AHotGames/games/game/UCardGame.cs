@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 using Newtonsoft.Json;
@@ -204,9 +201,20 @@ public class UCardGame : AHotBase
 				}
 				if (acards.Length < lOutModels.Count)
 				{
+					var fu = jobj.ContainsKey("fu") ? jobj["fu"].ToString() : "";
 					for (var i = acards.Length; i < lOutModels.Count; i++)
 					{
-						ReturnCardToPool(lOutModels[i]);
+						if (string.IsNullOrEmpty(fu))
+							ReturnCardToPool(lOutModels[i]);
+						else
+						{
+							var from = fu == UILogin.CachedUsername ? mycard : othercard;
+							var c = lOutModels[i].GetChild(0);
+							MoveTo(c, from.transform.position, 0.2f, Space.World, () =>
+							{
+								ReturnCardToPool(c.parent);
+							});
+						}
 					}
 					lOutModels.RemoveRange(acards.Length, lOutModels.Count - acards.Length);
 					lCardContents.RemoveRange(acards.Length, lCardContents.Count - acards.Length);

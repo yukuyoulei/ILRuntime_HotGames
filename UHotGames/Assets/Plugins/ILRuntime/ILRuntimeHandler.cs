@@ -1,5 +1,4 @@
 ﻿using ILRuntime.Runtime.Intepreter;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -271,12 +270,10 @@ public class ILRuntimeHandler
 
 	public void EmitMessage(string message, string gameObjectName = "")
 	{
-		//Debug.Log("emit message " + gameObjectName + "/" + message);
 		appdomain.Invoke("AHotBase", "EmitMessage", null, gameObjectName, message);
 	}
 	public void EmitGameObject(string prefabName, GameObject obj, string gameObjectName = "")
 	{
-		//Debug.Log("emit message " + gameObjectName + "/" + message);
 		appdomain.Invoke("AHotBase", "EmitGameObject", null, gameObjectName, prefabName, obj);
 	}
 	private Dictionary<string, GameObject> dObjs = new Dictionary<string, GameObject>();

@@ -1,14 +1,7 @@
-﻿using ILRuntime.Runtime.Intepreter;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using System.IO;
 using UnityEngine;
-using ILRuntime.Runtime.Stack;
-using ILRuntime.CLR.Method;
-using ILRuntime.CLR.TypeSystem;
-using System;
 using System.Linq;
-using UnityEngine.UI;
 
 public class Enter : MonoBehaviour
 {

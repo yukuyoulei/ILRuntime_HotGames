@@ -1,15 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Net;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
-using UnityEngine.Video;
 
 public static class Utils
 {
@@ -17,7 +13,7 @@ public static class Utils
 	public static string BaseURL_APIs { get { return PlayerPrefs.GetInt("USE_LOCAL_CDN") == 1 ? "http://127.0.0.1/hotgameapis/api/" : "http://www.fscoding.xyz/hotgameapis/api/"; } }
 	public static string WebSocketURL { get { return PlayerPrefs.GetInt("USE_LOCAL_CDN") == 1 ? "ws://127.0.0.1/hotgameapis/ws/ws.enter?" : "ws://www.fscoding.xyz/hotgameapis/ws/ws.enter?"; } }
 
-	public static String MD5Hash(string sInput)
+	public static string MD5Hash(string sInput)
 	{
 		MD5 getmd5 = new MD5CryptoServiceProvider();
 		byte[] targetStr = getmd5.ComputeHash(UnicodeEncoding.UTF8.GetBytes(sInput));
@@ -50,9 +46,9 @@ public static class Utils
 		get
 		{
 			if (Environment.IsEditor)
-				return new DirectoryInfo(Application.dataPath).FullName + "/../AB/RemoteResources/";
+				return new System.IO.DirectoryInfo(Application.dataPath).FullName + "/../AB/RemoteResources/";
 			else if (Application.platform == RuntimePlatform.WindowsPlayer)
-				return new DirectoryInfo(Application.dataPath).FullName + "/../../AB/" + GetPlatformFolder(Application.platform) + "/";
+				return new System.IO.DirectoryInfo(Application.dataPath).FullName + "/../../AB/" + GetPlatformFolder(Application.platform) + "/";
 			return Application.persistentDataPath + "/" + GetPlatformFolder(Application.platform) + "/";
 		}
 	}
@@ -327,13 +323,13 @@ public static class Utils
 		}
 		byte[] bs = Encoding.UTF8.GetBytes(arguments);
 		req.ContentLength = bs.Length;
-		using (Stream reqStream = req.GetRequestStream())
+		using (System.IO.Stream reqStream = req.GetRequestStream())
 		{
 			reqStream.Write(bs, 0, bs.Length);
 		}
 		using (WebResponse wr = req.GetResponse())
 		{
-			var result = new StreamReader(wr.GetResponseStream(), Encoding.UTF8).ReadToEnd();
+			var result = new System.IO.StreamReader(wr.GetResponseStream(), Encoding.UTF8).ReadToEnd();
 			return result;
 		}
 	}
@@ -344,7 +340,7 @@ public static class Utils
 			return null;
 		var spath = Application.dataPath + "/RemoteResources/" + path;
 		var dir = spath.Substring(0, spath.LastIndexOf("/"));
-		var afiles = Directory.EnumerateFiles(dir);
+		var afiles = System.IO.Directory.EnumerateFiles(dir);
 		foreach (var f in afiles)
 		{
 			if (f.Replace("\\", "/").Contains(path.Replace("\\", "/")))

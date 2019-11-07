@@ -385,7 +385,7 @@ public abstract class AHotBase
 	{
 	}
 
-	protected void MoveTo(Transform tc, Vector3 to, float moveSeconds = 1, Space space = Space.World)
+	protected void MoveTo(Transform tc, Vector3 to, float moveSeconds = 1, Space space = Space.World, Action endAction = null)
 	{
 		var startTime = ApiDateTime.Now;
 		var rawp = space == Space.World ? tc.position : tc.localPosition;
@@ -403,6 +403,8 @@ public abstract class AHotBase
 					tc.position = to;
 				else
 					tc.localPosition = to;
+
+				endAction?.Invoke();
 			}
 			return bend;
 		});
