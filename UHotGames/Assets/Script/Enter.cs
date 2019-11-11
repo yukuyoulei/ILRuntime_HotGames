@@ -19,7 +19,7 @@ public class Enter : MonoBehaviour
 		MonoInstancePool.getInstance<SDK_WeChat>(true);
 
 		trUIAlert = UStaticFuncs.FindChildComponent<Transform>(transform, "UIAlert");
-
+		fprocessing = 0.1f;
 #if UNITY_IOS
 		MonoInstancePool.getInstance<SDK_AppleInApp>(true);
 #endif
@@ -55,6 +55,8 @@ public class Enter : MonoBehaviour
 			bIsLocal = false;
 
 			ParseConfig();
+
+			fprocessing = 0.2f;
 		}, () =>
 		{
 			bIsLocal = true;
@@ -92,6 +94,7 @@ public class Enter : MonoBehaviour
 	WWW www;
 	IEnumerator OnDownloadDll(string dllPath, float delay = 0)
 	{
+		fprocessing = 0.4f;
 		if (delay > 0)
 		{
 			yield return new WaitForSeconds(delay);
@@ -131,15 +134,18 @@ public class Enter : MonoBehaviour
 	}
 	IEnumerator DelayLoadDll(byte[] bytes, byte[] pdbBytes)
 	{
+		fprocessing = 0.5f;
 		yield return new WaitForEndOfFrame();
 
 		ILRuntimeHandler.Instance.DoLoadDll("AHotGames", bytes, pdbBytes);
+		fprocessing = 0.7f;
 
 		ILRuntimeHandler.Instance.SetUnityMessageReceiver(MonoInstancePool.getInstance<UEmitMessage>(true).gameObject);
 
 		ILRuntimeHandler.Instance.OnLoadClass("AEntrance", new GameObject("AEntrance"), false, UConfigManager.bUsingAb.ToString());
 		ILRuntimeHandler.Instance.EmitMessage(bIsLocal ? "local" : "remote");
 		ILRuntimeHandler.Instance.EmitMessage($"resPath:{ConfigDownloader.Instance.OnGetValue("resPath")}");
+		fprocessing = 0.8f;
 #if UNITY_EDITOR
 #if UNITY_IOS
 		ILRuntimeHandler.Instance.EmitMessage("targetRuntime:IOS", "AEntrance");
@@ -147,6 +153,7 @@ public class Enter : MonoBehaviour
 		ILRuntimeHandler.Instance.EmitMessage("targetRuntime:Android", "AEntrance");
 #endif
 #endif
+		fprocessing = 1f;
 	}
 
 	void CheckNewVersion()
@@ -241,5 +248,42 @@ public class Enter : MonoBehaviour
 			return typeParser.intParse(alocal[i]) < typeParser.intParse(aremote[i]);
 		}
 		return alocal.Length < aremote.Length;
+	}
+
+	Texture2D _bg;
+	Texture2D bg
+	{
+		get
+		{
+			if (_bg == null)
+			{
+				_bg = new Texture2D(1, 1);
+			}
+			return _bg;
+		}
+	}
+	Texture2D _point;
+	Texture2D point
+	{
+		get
+		{
+			if (_point == null)
+			{
+				_point = new Texture2D(1, 1);
+				_point.SetPixel(0, 0, Color.cyan);
+				_point.Apply();
+			}
+			return _point;
+		}
+	}
+	float fprocessing = 0;
+	float x = 0;
+	void OnGUI()
+	{
+		if (fprocessing >= 1) return;
+		GUI.DrawTexture(new Rect(0, Screen.height - Screen.height / 20 - 10, Screen.width, Screen.height / 20), bg);
+		if (x < fprocessing)
+			x += Time.deltaTime * 20;
+		GUI.DrawTexture(new Rect(5, Screen.height - Screen.height / 20 - 5, x, Screen.height / 20 - 10), point);
 	}
 }
