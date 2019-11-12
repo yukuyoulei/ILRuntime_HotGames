@@ -280,10 +280,10 @@ public class Enter : MonoBehaviour
 	float x = 0;
 	void OnGUI()
 	{
-		if (fprocessing >= 1) return;
+		if (x >= 1) return;
 		GUI.DrawTexture(new Rect(0, Screen.height - Screen.height / 20 - 10, Screen.width, Screen.height / 20), bg);
 		if (x < fprocessing)
-			x += Time.deltaTime * 20;
-		GUI.DrawTexture(new Rect(5, Screen.height - Screen.height / 20 - 5, x, Screen.height / 20 - 10), point);
+			x += Time.deltaTime * 0.5f;
+		GUI.DrawTexture(new Rect(5, Screen.height - Screen.height / 20 - 5, Screen.width * x - 10, Screen.height / 20 - 10), point);
 	}
 }
