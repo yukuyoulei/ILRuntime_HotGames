@@ -7,16 +7,37 @@ using System.Web;
 
 public class ARoomManager : Singleton<ARoomManager>
 {
+	public int Count { get { return lRooms.Count; } }
+	private List<ARoomBase> lRooms = new List<ARoomBase>();
 	Dictionary<string, Func<ARoomBase>> dCreations = new Dictionary<string, Func<ARoomBase>>();
 	public ARoomManager()
 	{
 		dCreations.Add("老牛赶大车", () => { return new ARoomCard1(); });
 	}
+	List<ARoomBase> removingRooms = new List<ARoomBase>();
 	public void OnTick()
 	{
-		foreach (var r in dRooms.Values)
+		foreach (var r in lRooms)
 		{
-			r.OnTick();
+			if (r.disposing)
+			{
+				removingRooms.Add(r);
+			}
+			else
+			{
+				r.OnTick();
+			}
+		}
+		foreach (var r in removingRooms)
+		{
+			lRooms.Remove(r);
+			foreach (var u in r.lUsernames)
+			{
+				if (dRooms.ContainsKey(u))
+				{
+					dRooms.Remove(u);
+				}
+			}
 		}
 	}
 	private Dictionary<string, ARoomBase> dRooms = new Dictionary<string, ARoomBase>();
@@ -24,26 +45,36 @@ public class ARoomManager : Singleton<ARoomManager>
 	{
 		var room = dCreations[roomType]();
 		room.roomType = roomType;
+		lRooms.Add(room);
 		return room;
 	}
-	public void OnEnter(AAvatar avatar, ARoomBase room)
+	public void OnEnter(AAvatar avatar, string roomType)
 	{
 		if (!avatar.bAI)
 		{
 			if (dRooms.ContainsKey(avatar.username))
 			{
-				if (dRooms[avatar.username].roomType != room.roomType)
+				if (dRooms[avatar.username].roomType != roomType)
 				{
+					AOutput.Log($"avatar.username enter different room {roomType}");
 					dRooms[avatar.username].OnExit(avatar.username);
 					dRooms.Remove(avatar.username);
 				}
 			}
 
+			ARoomBase room = null;
 			if (!dRooms.ContainsKey(avatar.username))
+			{
+				room = OnCreate(roomType);
 				dRooms.Add(avatar.username, room);
+			}
+			else
+			{
+				room = dRooms[avatar.username];
+			}
+			room.OnEnter(avatar);
 		}
 
-		room.OnEnter(avatar);
 	}
 
 	public ARoomBase OnGetRoom(string username, string roomType = "")
@@ -70,7 +101,12 @@ public class ARoomManager : Singleton<ARoomManager>
 	internal void OnOffline(string username)
 	{
 		AOutput.Log($"OnOffline {username}");
-		OnExit(username);
+		if (!dRooms.ContainsKey(username))
+		{
+			return;
+		}
+		var room = dRooms[username];
+		room.OnOffline(username);
 	}
 
 	public void OnExit(string username)
@@ -91,18 +127,20 @@ public class ARoomManager : Singleton<ARoomManager>
 }
 public abstract class ARoomBase
 {
+	public bool IsEmpty { get; set; }
 	public string roomType { get; set; }
 	protected virtual int FullNumber { get { return 2; } }
 	public bool IsFull { get { return FullNumber <= lUsernames.Count + dAIs.Count; } }
-	protected List<string> lUsernames = new List<string>();
+	public List<string> lUsernames = new List<string>();
 	protected Dictionary<string, AAvatar> dAIs = new Dictionary<string, AAvatar>();
 	public void OnEnter(AAvatar avatar)
 	{
-		if (lUsernames.Contains(avatar.username)) return;
 		if (avatar.bAI)
 			dAIs.Add(avatar.username, avatar);
 
-		lUsernames.Add(avatar.username);
+		if (!lUsernames.Contains(avatar.username))
+			lUsernames.Add(avatar.username);
+
 		BroadcastUserEntrance(avatar);
 		DoEnter(avatar);
 
@@ -149,10 +187,10 @@ public abstract class ARoomBase
 	}
 	protected abstract void DoExit(string username);
 
-	protected bool bStarted = false;
 	private void OnStart()
 	{
-		bStarted = true;
+		if (eSession != ESession.Waiting) return;
+		eSession = ESession.Started;
 		DoStart();
 	}
 	protected abstract void DoStart();
@@ -170,8 +208,37 @@ public abstract class ARoomBase
 			avatar.OnSendToClient(method, msg);
 		}
 	}
-	public abstract void OnTick();
 
+	List<string> timeoutOfflines = new List<string>();
+	public virtual void OnTick()
+	{
+		TickOfflineUsers();
+	}
+
+	private void TickOfflineUsers()
+	{
+		if (dOfflineUsers.Count == 0)
+			return;
+		{
+			foreach (var o in dOfflineUsers)
+			{
+				if ((ApiDateTime.Now - o.Value).TotalMinutes > 30)
+				{
+					timeoutOfflines.Add(o.Key);
+				}
+			}
+			if (timeoutOfflines.Count > 0)
+			{
+				foreach (var o in timeoutOfflines)
+				{
+					ARoomManager.Instance.OnExit(o);
+					dOfflineUsers.Remove(o);
+				}
+				timeoutOfflines.Clear();
+
+			}
+		}
+	}
 	protected void DoDismiss()
 	{
 		ARoomManager.Instance.OnRemove(this);
@@ -183,8 +250,15 @@ public abstract class ARoomBase
 	{
 		BroadcastToAll("dismissed", "");
 
+		dOfflineUsers.Clear();
 		lUsernames.Clear();
 		dAIs.Clear();
+	}
+
+	protected Dictionary<string, DateTime> dOfflineUsers = new Dictionary<string, DateTime>();
+	internal void OnOffline(string username)
+	{
+		dOfflineUsers[username] = ApiDateTime.Now;
 	}
 
 	protected ESession eSession;
@@ -194,4 +268,6 @@ public abstract class ARoomBase
 		Started,
 		Ended,
 	}
+
+	public bool disposing { get; set; }
 }

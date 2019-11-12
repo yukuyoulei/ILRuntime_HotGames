@@ -70,9 +70,7 @@ public partial class AAvatar
 
 	internal void GameHandler_JoinRoom(string roomType)
 	{
-		ARoomManager.Instance.OnExit(username);
-		var room = ARoomManager.Instance.OnCreate(roomType);
-		ARoomManager.Instance.OnEnter(this, room);
+		ARoomManager.Instance.OnEnter(this, roomType);
 	}
 
 	internal bool OnAnswer(string answer)

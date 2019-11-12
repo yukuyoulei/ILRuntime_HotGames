@@ -105,6 +105,7 @@
     <Compile Include="api\RankController.cs" />
     <Compile Include="api\QuestionController.cs" />
     <Compile Include="api\LoginController.cs" />
+    <Compile Include="api\RoomController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

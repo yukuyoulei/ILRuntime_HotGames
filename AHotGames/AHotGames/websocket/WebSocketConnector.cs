@@ -122,17 +122,31 @@ public class WebSocketConnector : MonoBehaviour
 			ws.Send(msg);
 		})).Start();
 	}
+	public void OnCloseImmediately()
+	{
+		if (!bConnected) return;
+		ws?.Close();
+	}
 	public void OnClose()
 	{
 		if (!bConnected)
 		{
 			return;
 		}
+		bConnected = false;
 		this.closeAction = null;
 		UnityEngine.Debug.Log("ws close on purpose.");
 		if (ws != null)
 		{
-			ws.Close();
+			UICommonWait.Show();
+			new Task(() =>
+			{
+				ws.Close();
+				callbackAdd.Add(() =>
+				{
+					UICommonWait.Hide();
+				});
+			}).Start();
 		}
 	}
 	private void Start()
@@ -176,7 +190,7 @@ public class WebSocketConnector : MonoBehaviour
 		{
 			/*try
 			{*/
-				cb();
+			cb();
 			/*}
 			catch (Exception ex)
 			{

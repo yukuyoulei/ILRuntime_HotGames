@@ -10,21 +10,36 @@ public class ARoomCard1 : ARoomBase
 	List<DateTime> removes = new List<DateTime>();
 	public override void OnTick()
 	{
-		foreach (var kv in dActions)
+		TickActions();
+	}
+
+	private void TickActions()
+	{
+		if (dActions.Count == 0)
+			return;
 		{
-			if (kv.Key < ApiDateTime.Now)
+			foreach (var kv in dActions)
 			{
-				removes.Add(kv.Key);
+				if (kv.Key < ApiDateTime.Now)
+				{
+					removes.Add(kv.Key);
+				}
+			}
+			if (removes.Count > 0)
+			{
+				foreach (var k in removes)
+				{
+					foreach (var a in dActions[k])
+						a();
+					dActions.Remove(k);
+				}
+				removes.Clear();
+
 			}
 		}
-		foreach (var k in removes)
-		{
-			foreach (var a in dActions[k])
-				a();
-			dActions.Remove(k);
-		}
-		removes.Clear();
 	}
+
+
 	private void DelayDo(float seconds, Action doAction)
 	{
 		var t = ApiDateTime.Now.AddSeconds(seconds);
@@ -35,24 +50,26 @@ public class ARoomCard1 : ARoomBase
 
 	protected override void DoEnter(AAvatar avatar)
 	{
-		if (eSession != ESession.Waiting)
+		if (eSession == ESession.Waiting)
 		{
-			return;
-		}
-		if (IsFull)
-		{
-			eSession = ESession.Started;
-			DelayDo(1, StartToFaPai);
-		}
-		else if (!IsFull && ai == null)
-		{
-			DelayDo(1, () =>
+			if (IsFull)
+			{
+				eSession = ESession.Started;
+				DelayDo(1, StartToFaPai);
+			}
+			else if (!IsFull && ai == null)
 			{
 				ai = new ARoomCard1Avatar("AI1", "AI陪练", null);
-				OnEnter(ai);
-			});
+				DelayDo(1, () =>
+				{
+					OnEnter(ai);
+				});
+			}
 		}
-
+		else if (eSession == ESession.Started)
+		{
+			SyncCards();
+		}
 	}
 
 	Dictionary<string, List<int>> dCards = new Dictionary<string, List<int>>();
@@ -91,8 +108,16 @@ public class ARoomCard1 : ARoomBase
 	int curTurn = 0;
 	private void CheckProcess()
 	{
+		foreach (var kv in dCards)
+		{
+			if (kv.Value.Count == 0)
+			{
+				OnResult(kv.Key);
+				return;
+			}
+		}
 		var a = GetCurTurn();
-		if (a.bAI)
+		if (a != null && a.bAI)
 		{
 			DelayDo(1, DoAI);
 		}
@@ -101,14 +126,8 @@ public class ARoomCard1 : ARoomBase
 	private void DoAI()
 	{
 		var ai = GetCurTurn();
-		if (dCards[ai.username].Count == 0)
-		{
-			OnResult(ai.AvatarName);
-		}
-		else
-		{
-			ChuPai(ai.username);
-		}
+		if (ai == null) return;
+		ChuPai(ai.username);
 	}
 
 	private void ChuPai(string username)
@@ -136,7 +155,7 @@ public class ARoomCard1 : ARoomBase
 			for (var i = lOuts.Count - 2; i >= 0; i--)
 			{
 				lCardsToFetch.Add(lOuts[i].content);
-				if (lOuts[i].number == c.number 
+				if (lOuts[i].number == c.number
 					|| c.color == ACards.EColor.Joker && lOuts[i].color == ACards.EColor.Joker)
 				{
 					ifetch = i;
@@ -176,12 +195,14 @@ public class ARoomCard1 : ARoomBase
 		jobj["loser"] = loser;
 		BroadcastToAll("result", jobj.ToString());
 
+		eSession = ESession.Ended;
 		DelayDo(2, DoDismiss);
 	}
 
 	private AAvatar GetCurTurn()
 	{
 		if (curTurn == -1) return null;
+		if (curTurn >= lUsernames.Count) return null;
 		var l = lUsernames[curTurn];
 		if (dAIs.ContainsKey(l)) return dAIs[l];
 		return AAvatarManager.Instance.OnGetAvatar(l);

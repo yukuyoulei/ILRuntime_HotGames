@@ -136,7 +136,6 @@ namespace AWebServices
 							CONNECT_POOL[user].DoHeartBeat();
 
 							string userMsg = Encoding.UTF8.GetString(buffer.Array, 0, result.Count);//发送过来的消息
-							AOutput.Log("ws receive " + userMsg);
 							if (!userMsg.Contains("?"))
 							{
 								await AWSEnter.Instance.DoHandler(userMsg, CONNECT_POOL[user], "");

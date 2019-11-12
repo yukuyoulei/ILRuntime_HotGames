@@ -64,6 +64,7 @@ public class UCardGame : AHotBase
 		btnReturn = FindWidget<Button>("btnReturn");
 		btnReturn.onClick.AddListener(() =>
 		{
+			WebSocketConnector.Instance.OnClose();
 			OnUnloadThis();
 
 			LoadAnotherUI<UIMain>();
@@ -72,7 +73,7 @@ public class UCardGame : AHotBase
 		btnJoinRoom = FindWidget<Button>("btnJoinRoom");
 		btnJoinRoom.onClick.AddListener(() =>
 		{
-			WebSocketConnector.Instance.OnRemoteCall("joinRoom", "老牛赶大车", "enter", OnJoinRoomCB);
+			WebSocketConnector.Instance.OnRemoteCall("joinRoom", "老牛赶大车");
 		});
 
 		cardcell = FindWidget<Transform>("cardcell");
@@ -91,12 +92,11 @@ public class UCardGame : AHotBase
 		{
 		}, errEvt =>
 		{
-			UICommonWait.Hide();
 		}, closeEvt =>
 		{
-			UICommonWait.Hide();
 		});
 
+		WebSocketConnector.Instance.OnRegisterResponse("enter", OnJoinRoomCB);
 		WebSocketConnector.Instance.OnRegisterResponse("cardsync", OnCardsSync);
 		WebSocketConnector.Instance.OnRegisterResponse("result", OnResult);
 		WebSocketConnector.Instance.OnRegisterResponse("dismissed", OnDismissed);
@@ -266,7 +266,7 @@ public class UCardGame : AHotBase
 	{
 		btnJoinRoom.gameObject.SetActive(false);
 		var jobj = JsonConvert.DeserializeObject(obj) as JObject;
-		if (jobj.ContainsKey("info"))
+		if (jobj.ContainsKey("infos"))
 		{
 			var jenter = jobj["infos"] as JArray;
 			foreach (var jo in jenter)
@@ -295,7 +295,7 @@ public class UCardGame : AHotBase
 	protected override void OnDestroy()
 	{
 		URemoteData.CancelListeningParam(InfoNameDefs.AvatarLevel, ShowLevel);
-		WebSocketConnector.Instance.OnClose();
+		WebSocketConnector.Instance.OnCloseImmediately();
 	}
 
 	private void ShowLevel()
