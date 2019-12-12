@@ -7,7 +7,6 @@ using System;
 
 public class UCardGame : AHotBase
 {
-	Button btnReturn;
 	Text textMyLevel;
 	Text textMyAvatarname;
 	Text textMyCardCount;
@@ -61,14 +60,7 @@ public class UCardGame : AHotBase
 		textOtherLevel = FindWidget<Text>("textOtherLevel");
 		textOtherAvatarname = FindWidget<Text>("textOtherAvatarname");
 
-		btnReturn = FindWidget<Button>("btnReturn");
-		btnReturn.onClick.AddListener(() =>
-		{
-			WebSocketConnector.Instance.OnClose();
-			OnUnloadThis();
-
-			LoadAnotherUI<UIMain>();
-		});
+		RegisterReturnButton();
 
 		btnJoinRoom = FindWidget<Button>("btnJoinRoom");
 		btnJoinRoom.onClick.AddListener(() =>
@@ -101,7 +93,12 @@ public class UCardGame : AHotBase
 		WebSocketConnector.Instance.OnRegisterResponse("result", OnResult);
 		WebSocketConnector.Instance.OnRegisterResponse("dismissed", OnDismissed);
 	}
+	protected override void OnReturn()
+	{
+		WebSocketConnector.Instance.OnClose();
 
+		base.OnReturn();
+	}
 	private void OnDismissed(string obj)
 	{
 		UIAlert.Show("房间已解散。", OnClearRoom, null, true);

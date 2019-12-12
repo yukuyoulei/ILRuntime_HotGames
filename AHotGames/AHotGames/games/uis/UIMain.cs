@@ -23,6 +23,7 @@ public class UIMain : AHotBase
 				//AddGame<ULifeInBottle>("瓶中人生");
 				AddGame<UCardGame>("老牛赶大车");
 				AddGame<UBigOrSmall>("买大小");
+				AddGame<U2048>("2048");
 			}
 			return _dGames;
 		}

@@ -96,6 +96,7 @@
   <ItemGroup>
     <Compile Include="games\data\Defs.cs" />
     <Compile Include="games\data\URemoteData.cs" />
+    <Compile Include="games\game\U2048.cs" />
     <Compile Include="games\game\Cards\ACards.cs" />
     <Compile Include="games\game\Novel\Novels.cs" />
     <Compile Include="games\game\UBigOrSmall.cs" />
@@ -120,10 +121,12 @@
     <Compile Include="games\aempty\AEmptyUI.cs" />
     <Compile Include="games\uis\widgets\WExpSlider.cs" />
     <Compile Include="utils\AHotDrag.cs" />
+    <Compile Include="utils\AOutput.cs" />
     <Compile Include="utils\ApiDateTime.cs" />
     <Compile Include="utils\ClickButton.cs" />
     <Compile Include="games\aempty\AHotBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="utils\CRC.cs" />
     <Compile Include="utils\Environment.cs" />
     <Compile Include="utils\Singleton.cs" />
     <Compile Include="utils\typeParser.cs" />

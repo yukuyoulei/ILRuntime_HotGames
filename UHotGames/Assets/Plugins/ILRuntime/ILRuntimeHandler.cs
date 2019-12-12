@@ -60,8 +60,9 @@ public class ILRuntimeHandler
 		SetupCLRRedirection();
 
 		//这里做一些ILRuntime的注册
-		appdomain.RegisterCrossBindingAdaptor(new MonoBehaviourAdapter());
 		appdomain.RegisterCrossBindingAdaptor(new IDisposableAdapter());
+		appdomain.RegisterCrossBindingAdaptor(new MonoBehaviourAdapter());
+		appdomain.RegisterCrossBindingAdaptor(new IAsyncStateMachineClassInheritanceAdaptor());
 
 		ILRuntime.Runtime.Generated.CLRBindings.Initialize(appdomain);
 	}
@@ -106,7 +107,31 @@ public class ILRuntimeHandler
 
 
 
+
+
+
+
+
+
 		#endregion
+		appdomain.DelegateManager.RegisterMethodDelegate<System.IAsyncResult>();
+		appdomain.DelegateManager.RegisterMethodDelegate<System.Object, System.UnhandledExceptionEventArgs>();
+		appdomain.DelegateManager.RegisterDelegateConvertor<System.UnhandledExceptionEventHandler>((act) =>
+		{
+			return new System.UnhandledExceptionEventHandler((sender, e) =>
+			{
+				((Action<System.Object, System.UnhandledExceptionEventArgs>)act)(sender, e);
+			});
+		});
+
+		appdomain.DelegateManager.RegisterMethodDelegate<ILRuntime.Runtime.Intepreter.ILTypeInstance, ILRuntime.Runtime.Intepreter.ILTypeInstance>();
+		appdomain.DelegateManager.RegisterMethodDelegate<System.Object>();		appdomain.DelegateManager.RegisterDelegateConvertor<System.Threading.WaitCallback>((act) =>
+		{
+			return new System.Threading.WaitCallback((state) =>
+			{
+				((Action<System.Object>)act)(state);
+			});
+		});
 		appdomain.DelegateManager.RegisterMethodDelegate<System.Boolean>();
 		appdomain.DelegateManager.RegisterDelegateConvertor<UnityEngine.Events.UnityAction<System.Boolean>>((act) =>
 		{

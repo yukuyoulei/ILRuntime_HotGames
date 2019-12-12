@@ -410,4 +410,19 @@ public abstract class AHotBase
 		});
 	}
 
+	protected void RegisterReturnButton()
+	{
+		var btnReturn = FindWidget<Button>("btnReturn");
+		if (btnReturn == null) return;
+		btnReturn.onClick.AddListener(() =>
+		{
+			OnReturn();
+		});
+	}
+	protected virtual void OnReturn()
+	{
+		OnUnloadThis();
+
+		LoadAnotherUI<UIMain>();
+	}
 }

@@ -16,35 +16,35 @@ public class UILoading : AHotBase
 		}
 	}
 	Text TextContent;
-	Image Progress;
+	Image imageProgress;
 	protected override void InitComponents()
 	{
 		sinstance = this;
 
 		TextContent = FindWidget<Text>("TextContent");
 		TextContent.text = "";
-		Progress = FindWidget<Image>("SliderProgress");
-		Progress.fillAmount = 0;
+		imageProgress = FindWidget<Image>("SliderProgress");
+		imageProgress.fillAmount = 0;
 	}
 	public override void OnUnloadThis()
 	{
-		if (Progress.fillAmount == 0)
+		if (imageProgress.fillAmount == 0)
 		{
 			base.OnUnloadThis();
 			return;
 		}
 		addUpdateAction(() =>
 		{
-			if (Progress == null)
+			if (imageProgress == null)
 			{
 				return true;
 			}
-			if (Progress.fillAmount < 1)
+			if (imageProgress.fillAmount < 1)
 			{
-				Progress.fillAmount += Time.deltaTime / 100;
+				imageProgress.fillAmount += Time.deltaTime / 100;
 				return false;
 			}
-			Progress.fillAmount = 1;
+			imageProgress.fillAmount = 1;
 			base.OnUnloadThis();
 			return true;
 		});
@@ -55,8 +55,8 @@ public class UILoading : AHotBase
 	}
 	public void OnSetProgress(float p)
 	{
-		if (Progress != null)
-			Progress.fillAmount = p;
+		if (imageProgress != null)
+			imageProgress.fillAmount = p;
 		if (TextContent != null)
 			TextContent.text = $"{(p * 100).ToString("f1")}%";
 	}

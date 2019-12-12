@@ -4,11 +4,13 @@ using System.Linq;
 using System.Text;
 using UnityEngine.UI;
 using UnityEngine;
+using System.Threading.Tasks;
 
 public class AEntrance : AHotBase
 {
 	protected override void InitComponents()
 	{
+		AOutput.Register(UDebugHotLog.Log);
 		PreDownloadResources();
 	}
 

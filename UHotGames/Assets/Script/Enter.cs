@@ -14,7 +14,6 @@ public class Enter : MonoBehaviour
         MonoInstancePool.getInstance<SDK_Orientation>(true).ShowBar();
 #endif
 		Screen.fullScreen = true;
-		MonoInstancePool.getInstance<SDK_Photo>(true);
 		MonoInstancePool.getInstance<AntiScriptSplit>(true);
 		MonoInstancePool.getInstance<SDK_WeChat>(true);
 
@@ -27,7 +26,6 @@ public class Enter : MonoBehaviour
 		gameObject.AddComponent<UConsoleDebug>();
 #if !UNITY_WEBGL
 		var fa = "fa" + Utils_Plugins.Util_GetBundleVersion();
-		AOutput.Log($"local version {fa}");
 		if (!PlayerPrefs.HasKey(fa))
 		{
 			AOutput.Log($"start copy files {fa}");
