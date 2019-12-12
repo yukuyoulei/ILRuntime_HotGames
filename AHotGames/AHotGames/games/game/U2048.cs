@@ -52,11 +52,13 @@ public class U2048 : AHotBase
 			var iv = downPos.y - Input.mousePosition.y;
 			if (Math.Abs(ih) > Math.Abs(iv))
 			{
+				if (Math.Abs(ih) < 20) return false;
 				if (ih < 0) OnLeft();
 				else OnRight();
 			}
 			else
 			{
+				if (Math.Abs(iv) < 20) return false;
 				if (iv < 0) OnUp();
 				else OnDown();
 			}
@@ -73,67 +75,7 @@ public class U2048 : AHotBase
 		return false;
 	}
 
-	private void OnDown()
-	{
-		var bHasEmptySlot = false;
-		for (var j = 0; j < 3; j++)
-		{
-			for (var i = 1; i >= 0; i--)
-				if (numbers[i * 3 + j] != 0 && numbers[(i + 1) * 3 + j] == 0)
-				{
-					bHasEmptySlot = true;
-					break;
-				}
-			if (bHasEmptySlot)
-				break;
-		}
-		if (!bHasEmptySlot)
-		{
-			var bHasSameNumber = false;
-			for (var j = 0; j < 3; j++)
-			{
-				for (var i = 1; i >= 0; i--)
-					if (numbers[i * 3 + j] != 0
-						&& numbers[(i + 1) * 3 + j] == numbers[i * 3 + j])
-					{
-						bHasSameNumber = true;
-						break;
-					}
-				if (bHasSameNumber)
-					break;
-			}
-			if (!bHasSameNumber)
-				return;
-		}
-
-		for (var j = 0; j < 3; j++)
-		{
-			for (var i = 1; i >= 0; i--)
-			{
-				var ito = (i + 1) * 3 + j;
-				var ifrom = i * 3 + j;
-				if (numbers[ifrom] == 0
-					|| (numbers[ito] != 0 && numbers[ito] != numbers[ifrom]))
-					continue;
-				numbers[ito] += numbers[ifrom];
-				numbers[ifrom] = 0;
-				AOutput.Log($"ifrom {ifrom} ito {ito}");
-
-				slots[ifrom].SetAsLastSibling();
-				var inum = numbers[ito];
-				var endTr = slots[ito];
-				var replaceTr = dBlocks.ContainsKey(ito) ? dBlocks[ito] : null;
-				BlockFromTo(ifrom, ito);
-				MoveTo(dBlocks[ito], endTr.position, moveTime, Space.World, () =>
-				{
-					SetNumber(ito, inum, dBlocks[ito]);
-					if (replaceTr != null) ReturnBlockToPool(replaceTr);
-				});
-			}
-		}
-	}
-
-	private void OnUp()
+	private bool OnUp(bool check = false)
 	{
 		var bHasEmptySlot = false;
 		for (var j = 0; j < 3; j++)
@@ -163,8 +105,10 @@ public class U2048 : AHotBase
 					break;
 			}
 			if (!bHasSameNumber)
-				return;
+				return false;
 		}
+
+		if (check) return true;
 
 		for (var j = 0; j < 3; j++)
 		{
@@ -191,15 +135,15 @@ public class U2048 : AHotBase
 				});
 			}
 		}
+		return true;
 	}
-
-	private void OnRight()
+	private bool OnDown(bool check = false)
 	{
 		var bHasEmptySlot = false;
-		for (var j = 1; j >= 0; j--)
+		for (var j = 0; j < 3; j++)
 		{
-			for (var i = 0; i < 3; i++)
-				if (numbers[i * 3 + j] != 0 && numbers[i * 3 + j + 1] == 0)
+			for (var i = 1; i >= 0; i--)
+				if (numbers[i * 3 + j] != 0 && numbers[(i + 1) * 3 + j] == 0)
 				{
 					bHasEmptySlot = true;
 					break;
@@ -210,11 +154,11 @@ public class U2048 : AHotBase
 		if (!bHasEmptySlot)
 		{
 			var bHasSameNumber = false;
-			for (var j = 1; j >= 0; j--)
+			for (var j = 0; j < 3; j++)
 			{
-				for (var i = 0; i < 3; i++)
+				for (var i = 1; i >= 0; i--)
 					if (numbers[i * 3 + j] != 0
-						&& numbers[i * 3 + j + 1] == numbers[i * 3 + j])
+						&& numbers[(i + 1) * 3 + j] == numbers[i * 3 + j])
 					{
 						bHasSameNumber = true;
 						break;
@@ -223,14 +167,16 @@ public class U2048 : AHotBase
 					break;
 			}
 			if (!bHasSameNumber)
-				return;
+				return false;
 		}
 
-		for (var j = 1; j >= 0; j--)
+		if (check) return true;
+
+		for (var j = 0; j < 3; j++)
 		{
-			for (var i = 0; i < 3; i++)
+			for (var i = 1; i >= 0; i--)
 			{
-				var ito = i * 3 + j + 1;
+				var ito = (i + 1) * 3 + j;
 				var ifrom = i * 3 + j;
 				if (numbers[ifrom] == 0
 					|| (numbers[ito] != 0 && numbers[ito] != numbers[ifrom]))
@@ -251,10 +197,9 @@ public class U2048 : AHotBase
 				});
 			}
 		}
+		return true;
 	}
-
-	float moveTime = 0.2f;
-	private void OnLeft()
+	private bool OnLeft(bool check = false)
 	{
 		var bHasEmptySlot = false;
 		for (var j = 1; j < 3; j++)
@@ -284,8 +229,10 @@ public class U2048 : AHotBase
 					break;
 			}
 			if (!bHasSameNumber)
-				return;
+				return false;
 		}
+
+		if (check) return true;
 
 		for (var j = 1; j < 3; j++)
 		{
@@ -312,6 +259,69 @@ public class U2048 : AHotBase
 				});
 			}
 		}
+		return true;
+	}
+	private bool OnRight(bool check = false)
+	{
+		var bHasEmptySlot = false;
+		for (var j = 1; j >= 0; j--)
+		{
+			for (var i = 0; i < 3; i++)
+				if (numbers[i * 3 + j] != 0 && numbers[i * 3 + j + 1] == 0)
+				{
+					bHasEmptySlot = true;
+					break;
+				}
+			if (bHasEmptySlot)
+				break;
+		}
+		if (!bHasEmptySlot)
+		{
+			var bHasSameNumber = false;
+			for (var j = 1; j >= 0; j--)
+			{
+				for (var i = 0; i < 3; i++)
+					if (numbers[i * 3 + j] != 0
+						&& numbers[i * 3 + j + 1] == numbers[i * 3 + j])
+					{
+						bHasSameNumber = true;
+						break;
+					}
+				if (bHasSameNumber)
+					break;
+			}
+			if (!bHasSameNumber)
+				return false;
+		}
+
+		if (check) return true;
+
+		for (var j = 1; j >= 0; j--)
+		{
+			for (var i = 0; i < 3; i++)
+			{
+				var ito = i * 3 + j + 1;
+				var ifrom = i * 3 + j;
+				if (numbers[ifrom] == 0
+					|| (numbers[ito] != 0 && numbers[ito] != numbers[ifrom]))
+					continue;
+				numbers[ito] += numbers[ifrom];
+				numbers[ifrom] = 0;
+				AOutput.Log($"ifrom {ifrom} ito {ito}");
+
+				slots[ifrom].SetAsLastSibling();
+				var inum = numbers[ito];
+				var endTr = slots[ito];
+				var replaceTr = dBlocks.ContainsKey(ito) ? dBlocks[ito] : null;
+				BlockFromTo(ifrom, ito);
+				MoveTo(dBlocks[ito], endTr.position, moveTime, Space.World, () =>
+				{
+					SetNumber(ito, inum, dBlocks[ito]);
+					if (replaceTr != null) ReturnBlockToPool(replaceTr);
+				});
+			}
+		}
+		return true;
 	}
 
 	private void BlockFromTo(int ifrom, int ito)
@@ -322,6 +332,7 @@ public class U2048 : AHotBase
 		dBlocks.Remove(ifrom);
 	}
 
+	float moveTime = 0.2f;
 	private void ReturnBlockToPool(Transform block)
 	{
 		blockPools.Enqueue(block);
@@ -353,6 +364,22 @@ public class U2048 : AHotBase
 		var b = GetOneBlockFromPool();
 		dBlocks.Add(ic, b);
 		SetNumber(ic, inum, b);
+
+		if (dBlocks.Count == 9)
+		{
+			DelayDoSth(0.5f, () =>
+			{
+				if (OnUp(true))
+					return;
+				if (OnLeft(true))
+					return;
+				if (OnDown(true))
+					return;
+				if (OnRight(true))
+					return;
+				OnGameOver(false);
+			});
+		}
 	}
 
 	private void SetNumber(int ic, int inum, Transform b)
@@ -366,7 +393,10 @@ public class U2048 : AHotBase
 
 		if (inum >= 2048)
 		{
-			OnGameOver(true);
+			DelayDoSth(0.5f, () =>
+			{
+				OnGameOver(true);
+			});
 		}
 	}
 
@@ -390,7 +420,7 @@ public class U2048 : AHotBase
 	{
 		for (var i = 0; i < slotCount; i++)
 		{
-			numbers[slotCount] = 0;
+			numbers[i] = 0;
 			if (i < dBlocks.Count)
 			{
 				dBlocks[i].gameObject.SetActive(false);
@@ -400,7 +430,13 @@ public class U2048 : AHotBase
 		dBlocks.Clear();
 
 		bStart = true;
+		bMoving = true;
 		SpawnNewCell();
+
+		DelayDoSth(0.1f, () =>
+		{
+			bMoving = false;
+		});
 	}
 }
 
