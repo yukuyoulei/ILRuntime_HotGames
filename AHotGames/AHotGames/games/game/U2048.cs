@@ -16,9 +16,16 @@ public class U2048 : AHotBase
 	Transform[] slots = new Transform[slotCount];
 	Dictionary<int, Transform> dBlocks = new Dictionary<int, Transform>();
 	Queue<Transform> blockPools = new Queue<Transform>();
+
+	Text labelAlert;
+	Button btnRestart;
 	protected override void InitComponents()
 	{
 		RegisterReturnButton();
+
+		labelAlert = FindWidget<Text>("labelAlert");
+		btnRestart = FindWidget<Button>("btnRestart");
+		btnRestart.onClick.AddListener(ClearCells);
 
 		blockTemp = FindWidget<Transform>("block");
 		blockTemp.gameObject.SetActive(false);
@@ -342,6 +349,8 @@ public class U2048 : AHotBase
 	List<int> emptyCells = new List<int>();
 	private void SpawnNewCell()
 	{
+		ShowWidget("alert", false);
+
 		if (!bStart) return;
 
 		emptyCells.Clear();
@@ -406,14 +415,16 @@ public class U2048 : AHotBase
 		{
 			return blockPools.Dequeue();
 		}
-		return GameObject.Instantiate(blockTemp);
+		return GameObject.Instantiate(blockTemp, blockTemp.parent);
 	}
 
 	private void OnGameOver(bool bSuccess)
 	{
+		ShowWidget("alert", true);
+
 		bStart = false;
 		bMoving = false;
-		UIAlert.Show(bSuccess ? "成功。" : "失败。", ClearCells, null, true);
+		labelAlert.text = bSuccess ? "成功。" : "失败。";
 	}
 
 	private void ClearCells()
