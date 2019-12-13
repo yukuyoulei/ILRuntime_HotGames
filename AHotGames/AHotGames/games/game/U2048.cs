@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 
 public class U2048 : AHotBase
 {
-	const int slotCount = 9;
+	const int rc = 4;
+	const int slotCount = rc * rc;
 	int[] numbers = new int[slotCount];
 	bool bStart = false;
 
@@ -85,10 +86,10 @@ public class U2048 : AHotBase
 	private bool OnUp(bool check = false)
 	{
 		var bHasEmptySlot = false;
-		for (var j = 0; j < 3; j++)
+		for (var j = 0; j < rc; j++)
 		{
-			for (var i = 1; i < 3; i++)
-				if (numbers[i * 3 + j] != 0 && numbers[(i - 1) * 3 + j] == 0)
+			for (var i = 1; i < rc; i++)
+				if (numbers[i * rc + j] != 0 && numbers[(i - 1) * rc + j] == 0)
 				{
 					bHasEmptySlot = true;
 					break;
@@ -99,11 +100,11 @@ public class U2048 : AHotBase
 		if (!bHasEmptySlot)
 		{
 			var bHasSameNumber = false;
-			for (var j = 0; j < 3; j++)
+			for (var j = 0; j < rc; j++)
 			{
-				for (var i = 1; i < 3; i++)
-					if (numbers[i * 3 + j] != 0
-						&& numbers[(i - 1) * 3 + j] == numbers[i * 3 + j])
+				for (var i = 1; i < rc; i++)
+					if (numbers[i * rc + j] != 0
+						&& numbers[(i - 1) * rc + j] == numbers[i * rc + j])
 					{
 						bHasSameNumber = true;
 						break;
@@ -117,12 +118,12 @@ public class U2048 : AHotBase
 
 		if (check) return true;
 
-		for (var j = 0; j < 3; j++)
+		for (var j = 0; j < rc; j++)
 		{
-			for (var i = 1; i < 3; i++)
+			for (var i = 1; i < rc; i++)
 			{
-				var ito = (i - 1) * 3 + j;
-				var ifrom = i * 3 + j;
+				var ito = (i - 1) * rc + j;
+				var ifrom = i * rc + j;
 				if (numbers[ifrom] == 0
 					|| (numbers[ito] != 0 && numbers[ito] != numbers[ifrom]))
 					continue;
@@ -147,10 +148,10 @@ public class U2048 : AHotBase
 	private bool OnDown(bool check = false)
 	{
 		var bHasEmptySlot = false;
-		for (var j = 0; j < 3; j++)
+		for (var j = 0; j < rc; j++)
 		{
-			for (var i = 1; i >= 0; i--)
-				if (numbers[i * 3 + j] != 0 && numbers[(i + 1) * 3 + j] == 0)
+			for (var i = rc - 2; i >= 0; i--)
+				if (numbers[i * rc + j] != 0 && numbers[(i + 1) * rc + j] == 0)
 				{
 					bHasEmptySlot = true;
 					break;
@@ -161,11 +162,11 @@ public class U2048 : AHotBase
 		if (!bHasEmptySlot)
 		{
 			var bHasSameNumber = false;
-			for (var j = 0; j < 3; j++)
+			for (var j = 0; j < rc; j++)
 			{
 				for (var i = 1; i >= 0; i--)
-					if (numbers[i * 3 + j] != 0
-						&& numbers[(i + 1) * 3 + j] == numbers[i * 3 + j])
+					if (numbers[i * rc + j] != 0
+						&& numbers[(i + 1) * rc + j] == numbers[i * rc + j])
 					{
 						bHasSameNumber = true;
 						break;
@@ -179,18 +180,17 @@ public class U2048 : AHotBase
 
 		if (check) return true;
 
-		for (var j = 0; j < 3; j++)
+		for (var j = 0; j < rc; j++)
 		{
-			for (var i = 1; i >= 0; i--)
+			for (var i = rc - 2; i >= 0; i--)
 			{
-				var ito = (i + 1) * 3 + j;
-				var ifrom = i * 3 + j;
+				var ito = (i + 1) * rc + j;
+				var ifrom = i * rc + j;
 				if (numbers[ifrom] == 0
 					|| (numbers[ito] != 0 && numbers[ito] != numbers[ifrom]))
 					continue;
 				numbers[ito] += numbers[ifrom];
 				numbers[ifrom] = 0;
-				AOutput.Log($"ifrom {ifrom} ito {ito}");
 
 				slots[ifrom].SetAsLastSibling();
 				var inum = numbers[ito];
@@ -209,10 +209,10 @@ public class U2048 : AHotBase
 	private bool OnLeft(bool check = false)
 	{
 		var bHasEmptySlot = false;
-		for (var j = 1; j < 3; j++)
+		for (var j = 1; j < rc; j++)
 		{
-			for (var i = 0; i < 3; i++)
-				if (numbers[i * 3 + j] != 0 && numbers[i * 3 + j - 1] == 0)
+			for (var i = 0; i < rc; i++)
+				if (numbers[i * rc + j] != 0 && numbers[i * rc + j - 1] == 0)
 				{
 					bHasEmptySlot = true;
 					break;
@@ -223,11 +223,11 @@ public class U2048 : AHotBase
 		if (!bHasEmptySlot)
 		{
 			var bHasSameNumber = false;
-			for (var j = 1; j < 3; j++)
+			for (var j = 1; j < rc; j++)
 			{
-				for (var i = 0; i < 3; i++)
-					if (numbers[i * 3 + j] != 0
-						&& numbers[i * 3 + j - 1] == numbers[i * 3 + j])
+				for (var i = 0; i < rc; i++)
+					if (numbers[i * rc + j] != 0
+						&& numbers[i * rc + j - 1] == numbers[i * rc + j])
 					{
 						bHasSameNumber = true;
 						break;
@@ -241,12 +241,12 @@ public class U2048 : AHotBase
 
 		if (check) return true;
 
-		for (var j = 1; j < 3; j++)
+		for (var j = 1; j < rc; j++)
 		{
-			for (var i = 0; i < 3; i++)
+			for (var i = 0; i < rc; i++)
 			{
-				var ito = i * 3 + j - 1;
-				var ifrom = i * 3 + j;
+				var ito = i * rc + j - 1;
+				var ifrom = i * rc + j;
 				if (numbers[ifrom] == 0
 					|| (numbers[ito] != 0 && numbers[ito] != numbers[ifrom]))
 					continue;
@@ -271,10 +271,10 @@ public class U2048 : AHotBase
 	private bool OnRight(bool check = false)
 	{
 		var bHasEmptySlot = false;
-		for (var j = 1; j >= 0; j--)
+		for (var j = rc - 2; j >= 0; j--)
 		{
-			for (var i = 0; i < 3; i++)
-				if (numbers[i * 3 + j] != 0 && numbers[i * 3 + j + 1] == 0)
+			for (var i = 0; i < rc; i++)
+				if (numbers[i * rc + j] != 0 && numbers[i * rc + j + 1] == 0)
 				{
 					bHasEmptySlot = true;
 					break;
@@ -285,11 +285,11 @@ public class U2048 : AHotBase
 		if (!bHasEmptySlot)
 		{
 			var bHasSameNumber = false;
-			for (var j = 1; j >= 0; j--)
+			for (var j = rc - 2; j >= 0; j--)
 			{
-				for (var i = 0; i < 3; i++)
-					if (numbers[i * 3 + j] != 0
-						&& numbers[i * 3 + j + 1] == numbers[i * 3 + j])
+				for (var i = 0; i < rc; i++)
+					if (numbers[i * rc + j] != 0
+						&& numbers[i * rc + j + 1] == numbers[i * rc + j])
 					{
 						bHasSameNumber = true;
 						break;
@@ -303,12 +303,12 @@ public class U2048 : AHotBase
 
 		if (check) return true;
 
-		for (var j = 1; j >= 0; j--)
+		for (var j = rc - 2; j >= 0; j--)
 		{
-			for (var i = 0; i < 3; i++)
+			for (var i = 0; i < rc; i++)
 			{
-				var ito = i * 3 + j + 1;
-				var ifrom = i * 3 + j;
+				var ito = i * rc + j + 1;
+				var ifrom = i * rc + j;
 				if (numbers[ifrom] == 0
 					|| (numbers[ito] != 0 && numbers[ito] != numbers[ifrom]))
 					continue;
@@ -367,14 +367,12 @@ public class U2048 : AHotBase
 		}
 
 		var ic = emptyCells[random.Next(emptyCells.Count)];
-		if (dBlocks.Count == 0)
-			ic = 4;
 		var inum = random.Next(2) + 1;
 		var b = GetOneBlockFromPool();
 		dBlocks.Add(ic, b);
 		SetNumber(ic, inum, b);
 
-		if (dBlocks.Count == 9)
+		if (dBlocks.Count == slotCount)
 		{
 			DelayDoSth(0.5f, () =>
 			{
