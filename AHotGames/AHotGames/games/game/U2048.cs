@@ -164,7 +164,7 @@ public class U2048 : AHotBase
 			var bHasSameNumber = false;
 			for (var j = 0; j < rc; j++)
 			{
-				for (var i = 1; i >= 0; i--)
+				for (var i = rc - 2; i >= 0; i--)
 					if (numbers[i * rc + j] != 0
 						&& numbers[(i + 1) * rc + j] == numbers[i * rc + j])
 					{
