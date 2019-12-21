@@ -155,7 +155,7 @@ PlayerSettings:
     Android: com.fs.ilruntime
     Standalone: com.Company.ProductName
     WebGL: com.Company.ProductName
-    iOS: com.Company.ProductName
+    iOS: com.fs.ilruntime
   buildNumber:
     Standalone: 1.0.2
     iOS: 1

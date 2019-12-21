@@ -5,7 +5,7 @@ using System.Linq;
 
 public class Enter : MonoBehaviour
 {
-	public static string ConfigURL { get { return PlayerPrefs.GetInt("USE_LOCAL_CDN") == 1 ? "http://127.0.0.1/hotgame/Config.txt" : "http://fscoding.xyz/hotgame/Config.txt"; } }
+	public static string ConfigURL { get { return PlayerPrefs.GetInt("USE_LOCAL_CDN") == 1 ? "http://127.0.0.1/hotgame/Config.txt" : "https://yukuyoulei.github.io/ILRuntime_HotGames/ab1/Config.txt"; } }
 	public bool UseAB;
 	private Transform trUIAlert;
 	private void Start()
