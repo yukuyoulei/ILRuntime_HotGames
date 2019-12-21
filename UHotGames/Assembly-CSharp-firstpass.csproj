@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Plugins\ILRuntime\Adapters\CoroutineAdapter.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Adapters\IAsyncStateMachineClassInheritanceAdaptor.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Adapters\IDisposableAdapter.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Adapters\ILRegType.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Adapters\MaskableGraphicAdapter.cs" />
@@ -144,12 +145,6 @@
      <Compile Include="Assets\Plugins\ILRuntime\ILRuntime\Runtime\Stack\StackObject.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\ILRuntimeHandler.cs" />
      <Compile Include="Assets\Plugins\iOS\iap\SDK_AppleInApp.cs" />
-     <Compile Include="Assets\Plugins\NativeGallery\Android\NGCallbackHelper.cs" />
-     <Compile Include="Assets\Plugins\NativeGallery\Android\NGMediaReceiveCallbackAndroid.cs" />
-     <Compile Include="Assets\Plugins\NativeGallery\Android\NGPermissionCallbackAndroid.cs" />
-     <Compile Include="Assets\Plugins\NativeGallery\iOS\NGMediaReceiveCallbackiOS.cs" />
-     <Compile Include="Assets\Plugins\NativeGallery\iOS\NGMediaSaveCallbackiOS.cs" />
-     <Compile Include="Assets\Plugins\NativeGallery\NativeGallery.cs" />
      <None Include="Assets\Plugins\WeChat\iOS\README.txt" />
      <None Include="Assets\Plugins\WeChat\Android\AndroidManifest.xml" />
  <Reference Include="UnityEditor.StandardEvents">
@@ -365,14 +360,14 @@
  <Reference Include="Newtonsoft.Json">
  <HintPath>E:/personal/ILRuntime_HotGames/ILRuntime_HotGames/UHotGames/Assets/Plugins/Newtonsoft.Json.dll</HintPath>
  </Reference>
- <Reference Include="Mono.Cecil">
- <HintPath>E:/personal/ILRuntime_HotGames/ILRuntime_HotGames/UHotGames/Assets/Plugins/ILRuntime/Dependencies/Mono.Cecil.dll</HintPath>
+ <Reference Include="ILRuntim.Mono.Cecil">
+ <HintPath>E:/personal/ILRuntime_HotGames/ILRuntime_HotGames/UHotGames/Assets/Plugins/ILRuntime/Dependencies/ILRuntim.Mono.Cecil.dll</HintPath>
  </Reference>
- <Reference Include="Mono.Cecil.Mdb">
- <HintPath>E:/personal/ILRuntime_HotGames/ILRuntime_HotGames/UHotGames/Assets/Plugins/ILRuntime/Dependencies/Mono.Cecil.Mdb.dll</HintPath>
+ <Reference Include="ILRuntime.Mono.Cecil.Mdb">
+ <HintPath>E:/personal/ILRuntime_HotGames/ILRuntime_HotGames/UHotGames/Assets/Plugins/ILRuntime/Dependencies/ILRuntime.Mono.Cecil.Mdb.dll</HintPath>
  </Reference>
- <Reference Include="Mono.Cecil.Pdb">
- <HintPath>E:/personal/ILRuntime_HotGames/ILRuntime_HotGames/UHotGames/Assets/Plugins/ILRuntime/Dependencies/Mono.Cecil.Pdb.dll</HintPath>
+ <Reference Include="ILRuntime.Mono.Cecil.Pdb">
+ <HintPath>E:/personal/ILRuntime_HotGames/ILRuntime_HotGames/UHotGames/Assets/Plugins/ILRuntime/Dependencies/ILRuntime.Mono.Cecil.Pdb.dll</HintPath>
  </Reference>
  <Reference Include="websocket-sharp">
  <HintPath>E:/personal/ILRuntime_HotGames/ILRuntime_HotGames/UHotGames/Assets/Plugins/WebSocket/websocket-sharp.dll</HintPath>

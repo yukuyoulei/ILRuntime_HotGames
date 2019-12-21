@@ -1,0 +1,254 @@
+ManifestFileVersion: 0
+CRC: 1036059861
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: dll/ahotgames.ab
+      Dependencies: {}
+    Info_1:
+      Name: common.ab
+      Dependencies: {}
+    Info_2:
+      Name: ui.ab
+      Dependencies: {}
+    Info_3:
+      Name: images/light.ab
+      Dependencies: {}
+    Info_4:
+      Name: images/mapbg.ab
+      Dependencies: {}
+    Info_5:
+      Name: images/btn5.ab
+      Dependencies: {}
+    Info_6:
+      Name: ui/uiresources/avatarmale.ab
+      Dependencies:
+        Dependency_0: common.ab
+    Info_7:
+      Name: ui/uiresources/avatarfemale.ab
+      Dependencies:
+        Dependency_0: common.ab
+    Info_8:
+      Name: ui/uialert.ab
+      Dependencies: {}
+    Info_9:
+      Name: ui/uimain.ab
+      Dependencies: {}
+    Info_10:
+      Name: ui/uicommonwait.ab
+      Dependencies: {}
+    Info_11:
+      Name: ui/uilogin.ab
+      Dependencies: {}
+    Info_12:
+      Name: ui/uiregister.ab
+      Dependencies: {}
+    Info_13:
+      Name: ui/uiloading.ab
+      Dependencies:
+        Dependency_0: ui.ab
+    Info_14:
+      Name: firstui.ab
+      Dependencies: {}
+    Info_15:
+      Name: tdefault.ab
+      Dependencies: {}
+    Info_16:
+      Name: game/ucardgame.ab
+      Dependencies:
+        Dependency_0: ui.ab
+    Info_17:
+      Name: game/ulifeinbottle.ab
+      Dependencies:
+        Dependency_0: tdefault.ab
+    Info_18:
+      Name: game/ummo.ab
+      Dependencies:
+        Dependency_0: ui.ab
+        Dependency_1: tdefault.ab
+    Info_19:
+      Name: images/pai/bg1.ab
+      Dependencies: {}
+    Info_20:
+      Name: images/pai/bg2.ab
+      Dependencies: {}
+    Info_21:
+      Name: ui/uicreateavatar.ab
+      Dependencies: {}
+    Info_22:
+      Name: ui/uirank.ab
+      Dependencies: {}
+    Info_23:
+      Name: game/ubigorsmall.ab
+      Dependencies: {}
+    Info_24:
+      Name: ui/uidebugconsole.ab
+      Dependencies: {}
+    Info_25:
+      Name: images/pai/1.ab
+      Dependencies: {}
+    Info_26:
+      Name: images/pai/10.ab
+      Dependencies: {}
+    Info_27:
+      Name: images/pai/11.ab
+      Dependencies: {}
+    Info_28:
+      Name: images/pai/12.ab
+      Dependencies: {}
+    Info_29:
+      Name: images/pai/13.ab
+      Dependencies: {}
+    Info_30:
+      Name: images/pai/14.ab
+      Dependencies: {}
+    Info_31:
+      Name: images/pai/15.ab
+      Dependencies: {}
+    Info_32:
+      Name: images/pai/16.ab
+      Dependencies: {}
+    Info_33:
+      Name: images/pai/17.ab
+      Dependencies: {}
+    Info_34:
+      Name: images/pai/18.ab
+      Dependencies: {}
+    Info_35:
+      Name: images/pai/19.ab
+      Dependencies: {}
+    Info_36:
+      Name: images/pai/2.ab
+      Dependencies: {}
+    Info_37:
+      Name: images/pai/20.ab
+      Dependencies: {}
+    Info_38:
+      Name: images/pai/21.ab
+      Dependencies: {}
+    Info_39:
+      Name: images/pai/22.ab
+      Dependencies: {}
+    Info_40:
+      Name: images/pai/23.ab
+      Dependencies: {}
+    Info_41:
+      Name: images/pai/24.ab
+      Dependencies: {}
+    Info_42:
+      Name: images/pai/25.ab
+      Dependencies: {}
+    Info_43:
+      Name: images/pai/26.ab
+      Dependencies: {}
+    Info_44:
+      Name: images/pai/27.ab
+      Dependencies: {}
+    Info_45:
+      Name: images/pai/28.ab
+      Dependencies: {}
+    Info_46:
+      Name: images/pai/29.ab
+      Dependencies: {}
+    Info_47:
+      Name: images/pai/3.ab
+      Dependencies: {}
+    Info_48:
+      Name: images/pai/30.ab
+      Dependencies: {}
+    Info_49:
+      Name: images/pai/31.ab
+      Dependencies: {}
+    Info_50:
+      Name: images/pai/32.ab
+      Dependencies: {}
+    Info_51:
+      Name: images/pai/33.ab
+      Dependencies: {}
+    Info_52:
+      Name: images/pai/34.ab
+      Dependencies: {}
+    Info_53:
+      Name: images/pai/35.ab
+      Dependencies: {}
+    Info_54:
+      Name: images/pai/36.ab
+      Dependencies: {}
+    Info_55:
+      Name: images/pai/37.ab
+      Dependencies: {}
+    Info_56:
+      Name: images/pai/38.ab
+      Dependencies: {}
+    Info_57:
+      Name: images/pai/39.ab
+      Dependencies: {}
+    Info_58:
+      Name: images/pai/4.ab
+      Dependencies: {}
+    Info_59:
+      Name: images/pai/40.ab
+      Dependencies: {}
+    Info_60:
+      Name: images/pai/41.ab
+      Dependencies: {}
+    Info_61:
+      Name: images/pai/42.ab
+      Dependencies: {}
+    Info_62:
+      Name: images/pai/43.ab
+      Dependencies: {}
+    Info_63:
+      Name: images/pai/44.ab
+      Dependencies: {}
+    Info_64:
+      Name: images/pai/45.ab
+      Dependencies: {}
+    Info_65:
+      Name: images/pai/46.ab
+      Dependencies: {}
+    Info_66:
+      Name: images/pai/47.ab
+      Dependencies: {}
+    Info_67:
+      Name: images/pai/48.ab
+      Dependencies: {}
+    Info_68:
+      Name: images/pai/49.ab
+      Dependencies: {}
+    Info_69:
+      Name: images/pai/5.ab
+      Dependencies: {}
+    Info_70:
+      Name: images/pai/50.ab
+      Dependencies: {}
+    Info_71:
+      Name: images/pai/51.ab
+      Dependencies: {}
+    Info_72:
+      Name: images/pai/52.ab
+      Dependencies: {}
+    Info_73:
+      Name: images/pai/53.ab
+      Dependencies: {}
+    Info_74:
+      Name: images/pai/54.ab
+      Dependencies: {}
+    Info_75:
+      Name: images/pai/6.ab
+      Dependencies: {}
+    Info_76:
+      Name: images/pai/7.ab
+      Dependencies: {}
+    Info_77:
+      Name: images/pai/8.ab
+      Dependencies: {}
+    Info_78:
+      Name: images/pai/9.ab
+      Dependencies: {}
+    Info_79:
+      Name: ui/uicommontips.ab
+      Dependencies: {}
+    Info_80:
+      Name: game/u2048.ab
+      Dependencies: {}

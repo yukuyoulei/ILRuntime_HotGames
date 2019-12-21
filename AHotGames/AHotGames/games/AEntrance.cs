@@ -44,6 +44,7 @@ public class AEntrance : AHotBase
 						UILoading.Instance?.OnUnloadThis();
 
 						LoadUI<UILogin>();
+						//LoadClass<USanXiao>("Game/USanXiao");
 					}, null);
 				}, null);
 			}, null);

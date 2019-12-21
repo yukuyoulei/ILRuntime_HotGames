@@ -1,0 +1,19 @@
+ManifestFileVersion: 0
+CRC: 1348179899
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 9cc030b7c2c638f2edf03c96d104c5ee
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: ea5a42e0fd8ea905efa7aa926a3b8944
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+Assets:
+- Assets/Arts/Images/marqueeBg.png
+- Assets/Arts/Images/nameBg.png
+Dependencies: []

@@ -1,0 +1,27 @@
+ManifestFileVersion: 0
+CRC: 1480917873
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: e93bc93d936c38beebf81e46246b421c
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 73b1bbc5956f820062d0babb01c08cc8
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: -98529514, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 222
+  Script: {instanceID: 0}
+- Class: 224
+  Script: {instanceID: 0}
+Assets:
+- Assets/RemoteResources/UI/UIResources/avatarMale.prefab
+Dependencies:
+- E:/personal/ILRuntime_HotGames/ILRuntime_HotGames/ab1/IOS/common.ab

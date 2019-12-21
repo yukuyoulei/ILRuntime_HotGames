@@ -1,0 +1,18 @@
+ManifestFileVersion: 0
+CRC: 1489704992
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: bfac5d257fad336a8e955071489be9f2
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: ea5a42e0fd8ea905efa7aa926a3b8944
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+Assets:
+- Assets/RemoteResources/Images/Pai/2.bmp
+Dependencies: []

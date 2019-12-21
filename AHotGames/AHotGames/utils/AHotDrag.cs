@@ -99,6 +99,7 @@ public class AHotDrag : MonoBehaviour
 		}
 		if (!graphic.raycastTarget)
 		{
+			lastPosition = Vector3.zero;
 			return;
 		}
 		if (Input.GetMouseButtonDown(0))
@@ -168,10 +169,6 @@ public class AHotDrag : MonoBehaviour
 			{
 				return;
 			}
-			if (onDraging != null)
-			{
-				onDraging();
-			}
 			if (!disableDragImage)
 			{
 				var p = transform.position;
@@ -181,8 +178,12 @@ public class AHotDrag : MonoBehaviour
 
 				lastPosition = Input.mousePosition;
 			}
-		}
-		else
+            if (onDraging != null)
+            {
+                onDraging();
+            }
+        }
+        else
 		{
 			if (disableDraging)
 			{

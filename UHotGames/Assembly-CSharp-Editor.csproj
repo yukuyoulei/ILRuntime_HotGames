@@ -319,14 +319,14 @@
  <Reference Include="Newtonsoft.Json">
  <HintPath>E:/personal/ILRuntime_HotGames/ILRuntime_HotGames/UHotGames/Assets/Plugins/Newtonsoft.Json.dll</HintPath>
  </Reference>
- <Reference Include="Mono.Cecil">
- <HintPath>E:/personal/ILRuntime_HotGames/ILRuntime_HotGames/UHotGames/Assets/Plugins/ILRuntime/Dependencies/Mono.Cecil.dll</HintPath>
+ <Reference Include="ILRuntim.Mono.Cecil">
+ <HintPath>E:/personal/ILRuntime_HotGames/ILRuntime_HotGames/UHotGames/Assets/Plugins/ILRuntime/Dependencies/ILRuntim.Mono.Cecil.dll</HintPath>
  </Reference>
- <Reference Include="Mono.Cecil.Mdb">
- <HintPath>E:/personal/ILRuntime_HotGames/ILRuntime_HotGames/UHotGames/Assets/Plugins/ILRuntime/Dependencies/Mono.Cecil.Mdb.dll</HintPath>
+ <Reference Include="ILRuntime.Mono.Cecil.Mdb">
+ <HintPath>E:/personal/ILRuntime_HotGames/ILRuntime_HotGames/UHotGames/Assets/Plugins/ILRuntime/Dependencies/ILRuntime.Mono.Cecil.Mdb.dll</HintPath>
  </Reference>
- <Reference Include="Mono.Cecil.Pdb">
- <HintPath>E:/personal/ILRuntime_HotGames/ILRuntime_HotGames/UHotGames/Assets/Plugins/ILRuntime/Dependencies/Mono.Cecil.Pdb.dll</HintPath>
+ <Reference Include="ILRuntime.Mono.Cecil.Pdb">
+ <HintPath>E:/personal/ILRuntime_HotGames/ILRuntime_HotGames/UHotGames/Assets/Plugins/ILRuntime/Dependencies/ILRuntime.Mono.Cecil.Pdb.dll</HintPath>
  </Reference>
  <Reference Include="websocket-sharp">
  <HintPath>E:/personal/ILRuntime_HotGames/ILRuntime_HotGames/UHotGames/Assets/Plugins/WebSocket/websocket-sharp.dll</HintPath>

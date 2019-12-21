@@ -448,4 +448,3 @@ public class U2048 : AHotBase
 		});
 	}
 }
-

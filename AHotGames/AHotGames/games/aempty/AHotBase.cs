@@ -268,7 +268,7 @@ public abstract class AHotBase
 			UStaticFuncs.EmitButtonClick(dButtons[msg]);
 		});
 	}
-	protected AHotDrag RegistDragFunc(Graphic dragObj, Graphic dragDropObj, Action beginDrag, Action endDrag, Action dropDrag, bool DontSyncDrag = false, Action draging = null)
+	protected AHotDrag RegistDragFunc(Graphic dragObj, Graphic dragDropObj, Action beginDrag, Action endDrag, Action dropDrag, Action draging = null)
 	{
 		var drag = dragObj.gameObject.GetComponent<AHotDrag>();
 		if (drag == null)

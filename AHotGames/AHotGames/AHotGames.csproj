@@ -96,6 +96,7 @@
   <ItemGroup>
     <Compile Include="games\data\Defs.cs" />
     <Compile Include="games\data\URemoteData.cs" />
+    <Compile Include="games\game\USanXiao.cs" />
     <Compile Include="games\game\U2048.cs" />
     <Compile Include="games\game\Cards\ACards.cs" />
     <Compile Include="games\game\Novel\Novels.cs" />
