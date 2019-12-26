@@ -31,8 +31,8 @@ public class UILogin : AHotBase
 		set
 		{
 			PlayerPrefs.SetString("token", value);
-		}
-	}
+        }
+    }
 	protected override void InitComponents()
 	{
 		var inputUsername = FindWidget<InputField>("inputUsername");

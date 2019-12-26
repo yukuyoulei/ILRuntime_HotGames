@@ -99,12 +99,15 @@ public class AHotDrag : MonoBehaviour
 		}
 		if (!graphic.raycastTarget)
 		{
-			lastPosition = Vector3.zero;
+			if (bDraging)
+			{
+				lastPosition = Vector3.zero;
+				onDragEnd?.Invoke();
+			}
 			return;
 		}
 		if (Input.GetMouseButtonDown(0))
 		{
-
 			if (disableDraging)
 			{
 				return;

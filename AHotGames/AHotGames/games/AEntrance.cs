@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 public class AEntrance : AHotBase
 {
-	protected override void InitComponents()
+    protected override void InitComponents()
 	{
 		AOutput.Register(UDebugHotLog.Log);
 		PreDownloadResources();
@@ -44,7 +44,6 @@ public class AEntrance : AHotBase
 						UILoading.Instance?.OnUnloadThis();
 
 						LoadUI<UILogin>();
-						//LoadClass<USanXiao>("Game/USanXiao");
 					}, null);
 				}, null);
 			}, null);
