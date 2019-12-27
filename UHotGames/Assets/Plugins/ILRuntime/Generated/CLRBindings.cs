@@ -147,7 +147,6 @@ namespace ILRuntime.Runtime.Generated
             System_IO_Directory_Binding.Register(app);
             System_Collections_Generic_IEnumerable_1_String_Binding.Register(app);
             System_Collections_Generic_IEnumerator_1_String_Binding.Register(app);
-            UnityEditor_AssetDatabase_Binding.Register(app);
             System_Threading_Thread_Binding.Register(app);
             System_Action_1_Byte_Array_Binding.Register(app);
             WebSocketSharp_WebSocket_Binding.Register(app);
