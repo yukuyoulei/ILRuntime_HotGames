@@ -10,7 +10,7 @@ using UnityEngine.UI;
 public static class Utils
 {
 	public static string BaseURL_Res { get { return PlayerPrefs.GetInt("USE_LOCAL_CDN") == 1 ? "http://127.0.0.1/hotgame/" : "http://www.fscoding.xyz/hotgame/cdn/"; } }
-	public static string BaseURL_APIs { get { return PlayerPrefs.GetInt("USE_LOCAL_CDN") == 1 ? "http://127.0.0.1/hotgameapis/api/" : "http://114.118.22.213/hotgameapis/api/"; } }
+	public static string BaseURL_APIs { get { return PlayerPrefs.GetInt("USE_LOCAL_CDN") == 1 ? "http://127.0.0.1/hotgameapis/api/" : "http://www.fscoding.xyz/hotgameapis/api/"; } }
 	public static string WebSocketURL { get { return PlayerPrefs.GetInt("USE_LOCAL_CDN") == 1 ? "ws://127.0.0.1/hotgameapis/ws/ws.enter?" : "ws://114.118.22.213/hotgameapis/ws/ws.enter?"; } }
 
 	public static string MD5Hash(string sInput)

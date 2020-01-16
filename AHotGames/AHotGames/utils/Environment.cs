@@ -6,7 +6,7 @@ public static class Environment
     {
         get
         {
-            return Application.platform == RuntimePlatform.WindowsEditor;
+            return Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.OSXEditor;
         }
     }
     private static bool _UseAB = false;

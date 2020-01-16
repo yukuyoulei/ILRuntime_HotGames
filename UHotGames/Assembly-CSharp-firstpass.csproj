@@ -163,7 +163,6 @@
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_TimeSpan_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Type_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_UInt16_Binding.cs" />
-     <Compile Include="Assets\Plugins\ILRuntime\Generated\UnityEditor_AssetDatabase_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\UnityEngine_Application_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\UnityEngine_AssetBundle_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\UnityEngine_AssetBundleManifest_Binding.cs" />

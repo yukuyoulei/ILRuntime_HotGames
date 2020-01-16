@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 3560917028
+CRC: 3805018062
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: e5b7b4675bed93186622ed27ccaa4f34
+    Hash: 085ab513f597fda8b53a20f4687c4a48
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 7a3c973b85699a4f0e06ee5dacf114fa
+    Hash: e7c9bddf7325eb6ab992c6e488e2f4e4
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -18,9 +18,15 @@ ClassTypes:
 - Class: 48
   Script: {instanceID: 0}
 - Class: 114
+  Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+- Class: 114
   Script: {fileID: 1980459831, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 - Class: 114
   Script: {fileID: 1301386320, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+- Class: 114
+  Script: {fileID: -2095666955, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+- Class: 114
+  Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 - Class: 114
   Script: {fileID: -98529514, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 - Class: 114
@@ -29,6 +35,8 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 128
   Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
 - Class: 222
   Script: {instanceID: 0}
 - Class: 223
@@ -36,6 +44,5 @@ ClassTypes:
 - Class: 224
   Script: {instanceID: 0}
 Assets:
-- Assets/RemoteResources/UI/UICommonWait.prefab
-Dependencies:
-- E:/personal/ILRuntime_HotGames/ILRuntime_HotGames/ab1/IOS/tdefault.ab
+- Assets/RemoteResources/Game/USanXiao.prefab
+Dependencies: []

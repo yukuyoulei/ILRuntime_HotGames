@@ -64,7 +64,6 @@ public abstract class AHotBase
 
 		InitComponents();
 	}
-
 	protected virtual void receiveOpMsg(bool bOp)
 	{
 		enableAllGraphicRaycasters(bOp);
@@ -297,7 +296,7 @@ public abstract class AHotBase
 		Debug.Log("send message to unity:" + smsg);
 		SendMessageToUnityReceiver(smsg);
 	}
-	public static T LoadClass<T>(string prefabPath) where T : AHotBase, new()
+	public static T LoadClass<T>(string prefabPath, Action<T> action = null) where T : AHotBase, new()
 	{
 		GameObject obj = UHotAssetBundleLoader.Instance.OnLoadAsset<GameObject>(prefabPath);
 		if (obj == null)
@@ -307,24 +306,22 @@ public abstract class AHotBase
 		}
 		var t = new T();
 		t.SetGameObj(GameObject.Instantiate(obj), "");
+		action?.Invoke(t);
 		return t;
 	}
-	public static T LoadUI<T>() where T : AHotBase, new()
+	public static void LoadUI<T>(Action<T> action = null) where T : AHotBase, new()
 	{
+		UICommonWait.Show();
 		var path = "UI/" + typeof(T).Name;
-		GameObject obj = UHotAssetBundleLoader.Instance.OnLoadAsset<GameObject>(path);
-		if (obj == null)
+		UHotAssetBundleLoader.Instance.OnDownloadResources(() =>
 		{
-			UDebugHotLog.Log($"cannot find prefab {path}");
-			return null;
-		}
-		var t = new T();
-		t.SetGameObj(GameObject.Instantiate(obj), "");
-		return t;
+			UICommonWait.Hide();
+			LoadClass<T>(path, action);
+		}, path);
 	}
-	public static T LoadAnotherUI<T>() where T : AHotBase, new()
+	public static void LoadAnotherUI<T>(Action<T> actionLoadComplete = null) where T : AHotBase, new()
 	{
-		return LoadUI<T>();
+		LoadUI<T>(actionLoadComplete);
 	}
 	public static void LoadAnotherUI(string uiname)
 	{

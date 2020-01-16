@@ -7,9 +7,9 @@ using UnityEngine;
 
 public class UIMain : AHotBase
 {
-	private T LoadGame<T>(string path) where T : AHotBase, new()
+	private void LoadGame<T>(string path) where T : AHotBase, new()
 	{
-		return LoadClass<T>(path);
+		LoadClass<T>(path);
 	}
 	private Dictionary<string, Action> _dGames;
 	private Dictionary<string, Action> dGames

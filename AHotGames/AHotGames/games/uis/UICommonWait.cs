@@ -12,30 +12,30 @@ public class UICommonWait : AHotBase
 	{
 		sinstance = this;
 
-		var textProgress = FindWidget<Text>("textProgress");
+		var circle = FindWidget<Transform>("circle");
 
 		addUpdateAction(() =>
 		{
-			var euler = textProgress.transform.localEulerAngles;
+			var euler = circle.localEulerAngles;
 			euler.z -= Time.deltaTime * 100;
-			textProgress.transform.localEulerAngles = euler;
+			circle.localEulerAngles = euler;
 			return false;
 		});
 	}
 	public static void Show()
 	{
 		if (sinstance == null)
-		{
-			LoadAnotherUI<UICommonWait>();
-		}
+			UHotAssetBundleLoader.Instance.OnDownloadResources(() =>
+			{
+				sinstance = LoadClass<UICommonWait>("UI/UICommonWait");
+			}, "UI/UICommonWait");
+		else
+			sinstance.gameObj.SetActive(true);
 	}
 	public static void Hide()
 	{
 		if (sinstance != null)
-		{
-			GameObject.Destroy(sinstance.gameObj);
-			sinstance = null;
-		}
+			sinstance.gameObj.SetActive(false);
 	}
 }
 

@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 1036059861
+CRC: 183257443
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -36,7 +36,8 @@ AssetBundleManifest:
       Dependencies: {}
     Info_10:
       Name: ui/uicommonwait.ab
-      Dependencies: {}
+      Dependencies:
+        Dependency_0: tdefault.ab
     Info_11:
       Name: ui/uilogin.ab
       Dependencies: {}
@@ -251,4 +252,7 @@ AssetBundleManifest:
       Dependencies: {}
     Info_80:
       Name: game/u2048.ab
+      Dependencies: {}
+    Info_81:
+      Name: game/usanxiao.ab
       Dependencies: {}

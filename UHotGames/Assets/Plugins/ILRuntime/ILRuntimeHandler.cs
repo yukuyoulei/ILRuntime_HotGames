@@ -105,15 +105,15 @@ public class ILRuntimeHandler
 			});
 		});
 
+		#endregion        appdomain.DelegateManager.RegisterFunctionDelegate<System.Reflection.MethodInfo, System.Boolean>();
+		appdomain.DelegateManager.RegisterDelegateConvertor<System.Predicate<System.Reflection.MethodInfo>>((act) =>
+		{
+			return new System.Predicate<System.Reflection.MethodInfo>((obj) =>
+			{
+				return ((Func<System.Reflection.MethodInfo, System.Boolean>)act)(obj);
+			});
+		});
 
-
-
-
-
-
-
-
-		#endregion
 		appdomain.DelegateManager.RegisterMethodDelegate<System.IAsyncResult>();
 		appdomain.DelegateManager.RegisterMethodDelegate<System.Object, System.UnhandledExceptionEventArgs>();
 		appdomain.DelegateManager.RegisterDelegateConvertor<System.UnhandledExceptionEventHandler>((act) =>

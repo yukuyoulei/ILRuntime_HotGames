@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 3710551843
+CRC: 139035106
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: b47fec9328656796aab007f8b839c0bf
+    Hash: 17b0ecb217e6ef4f1ca3cfd5ddd8be6c
   TypeTreeHash:
     serializedVersion: 2
     Hash: ea5a42e0fd8ea905efa7aa926a3b8944
@@ -15,4 +15,5 @@ ClassTypes:
   Script: {instanceID: 0}
 Assets:
 - Assets/Arts/Images/btn3.png
+- Assets/Arts/Images/loading.png
 Dependencies: []

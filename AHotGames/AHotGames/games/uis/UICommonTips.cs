@@ -19,10 +19,8 @@ public class UICommonTips : AHotBase
 
 	public static void AddTip(string content)
 	{
-		if (sinstance == null) sinstance = LoadAnotherUI<UICommonTips>();
-		if (sinstance == null) return;
-
-		sinstance.DoAddTip(content);
+		if (sinstance == null) LoadAnotherUI<UICommonTips>(instance => { sinstance = instance; sinstance.DoAddTip(content); });
+		else sinstance.DoAddTip(content);
 	}
 
 	private void DoAddTip(string content)
@@ -39,7 +37,7 @@ public class UICommonTips : AHotBase
 				return true;
 			}
 			var p = cell.transform.localPosition;
-			p.y += Time.deltaTime * ((ApiDateTime.Now - start).TotalSeconds > 0.1 ? 20 : 1000);
+			p.y += Time.deltaTime * ((ApiDateTime.Now - start).TotalSeconds > 0.1 ? 20 : 100);
 			cell.transform.localPosition = p;
 			return false;
 		});
