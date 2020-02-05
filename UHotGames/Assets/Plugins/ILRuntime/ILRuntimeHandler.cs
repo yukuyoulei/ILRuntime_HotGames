@@ -105,7 +105,17 @@ public class ILRuntimeHandler
 			});
 		});
 
-		#endregion        appdomain.DelegateManager.RegisterFunctionDelegate<System.Reflection.MethodInfo, System.Boolean>();
+
+
+
+
+
+
+
+		#endregion        appdomain.DelegateManager.RegisterMethodDelegate<global::IDisposableAdapter.Adaptor>();
+		appdomain.DelegateManager.RegisterFunctionDelegate<System.Threading.Tasks.Task>();
+
+		appdomain.DelegateManager.RegisterFunctionDelegate<System.Reflection.MethodInfo, System.Boolean>();
 		appdomain.DelegateManager.RegisterDelegateConvertor<System.Predicate<System.Reflection.MethodInfo>>((act) =>
 		{
 			return new System.Predicate<System.Reflection.MethodInfo>((obj) =>
@@ -131,7 +141,8 @@ public class ILRuntimeHandler
 			{
 				((Action<System.Object>)act)(state);
 			});
-		});
+		});
+
 		appdomain.DelegateManager.RegisterMethodDelegate<System.Boolean>();
 		appdomain.DelegateManager.RegisterDelegateConvertor<UnityEngine.Events.UnityAction<System.Boolean>>((act) =>
 		{

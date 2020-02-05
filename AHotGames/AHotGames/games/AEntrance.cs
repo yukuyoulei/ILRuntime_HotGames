@@ -11,6 +11,10 @@ public class AEntrance : AHotBase
     protected override void InitComponents()
 	{
 		AOutput.Register(UDebugHotLog.Log);
+
+		var i = UWebSender.Instance;
+		LibClient.AClientApp.Init(new AOnlineSubsystem());
+
 		PreDownloadResources();
 	}
 

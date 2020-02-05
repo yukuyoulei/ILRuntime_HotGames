@@ -26,6 +26,10 @@ public class UWebSender : MonoBehaviour
 			return sinstance;
 		}
 	}
+	public void AddProducingAction(Action a)
+	{
+		callbacksProducing.Add(a);
+	}
 	public static void OnAddProducingAction(Action a)
 	{
 		callbacksProducing.Add(a);

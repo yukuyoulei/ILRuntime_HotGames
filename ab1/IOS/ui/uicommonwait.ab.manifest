@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 3560917028
+CRC: 645877024
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: e5b7b4675bed93186622ed27ccaa4f34
+    Hash: d8b104cf8d8ea9ba73f70357acc445af
   TypeTreeHash:
     serializedVersion: 2
     Hash: 7a3c973b85699a4f0e06ee5dacf114fa
@@ -38,4 +38,4 @@ ClassTypes:
 Assets:
 - Assets/RemoteResources/UI/UICommonWait.prefab
 Dependencies:
-- E:/personal/ILRuntime_HotGames/ILRuntime_HotGames/ab1/IOS/tdefault.ab
+- G:/ProjectsGit/ILRuntime_HotGames/ab1/IOS/tdefault.ab

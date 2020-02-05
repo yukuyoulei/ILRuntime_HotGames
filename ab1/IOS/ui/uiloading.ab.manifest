@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 806524805
+CRC: 3829556842
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 820b48c5cae701aa12ddcb4511cb24d1
+    Hash: be2ad8afd6fad0208c715f7a57b9fef2
   TypeTreeHash:
     serializedVersion: 2
     Hash: 24a7f6be4f61ae7e0253d3264986f039
@@ -42,4 +42,4 @@ ClassTypes:
 Assets:
 - Assets/RemoteResources/UI/UILoading.prefab
 Dependencies:
-- E:/personal/ILRuntime_HotGames/ILRuntime_HotGames/ab1/IOS/ui.ab
+- G:/ProjectsGit/ILRuntime_HotGames/ab1/IOS/ui.ab
