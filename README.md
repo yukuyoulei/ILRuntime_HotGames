@@ -1,3 +1,36 @@
+客户端收到的网络回调已经可以安全的发送到主线程进行处理。
+分发事件
+        UEventListener.Instance.OnDispatchEvent
+        例子：
+```C#
+        UEventListener.Instance.OnDispatchEvent(UEvents.CreateAvatar, new EventCreateAvatar() { eResult = eResult, info = info });
+```
+
+注册事件
+        UEventListener.Instance.OnRegisterEvent
+        例子：
+```C#
+        UEventListener.Instance.OnRegisterEvent(UEvents.CreateAvatar, OnCreateAvatarCb);
+```
+```C#
+        private void OnCreateAvatarCb(UEventBase obj)
+        {
+                var res = obj as EventCreateAvatar;
+                UICommonTips.AddTip($"Create avatar {res.eResult}");
+                if (res.eResult == PktCreateAvatarResult.EResult.Success)
+                {
+                        OnUnloadThis();
+                        LoadAnotherUI<UIMinerMain>();
+                }
+        }
+```
+
+UEvents.cs中预定义好事件名以及事件体，以规避传递object。
+
+Hail China!
+===
+***
+
 ACommonServer使用简要说明：
 
 AProtoGen/bin/Debug/proto.txt 是示例中的协议体，双击build.bat会生成自带序列化/反序列化实现的各个协议，以此来应对ILRuntime本身对序列化/反序列带来的一些限制，支持message中声明枚举，支持嵌套自定义的message，支持List（提交的例子中都有）。
@@ -10,31 +43,25 @@ LibServer/Enter/Handlers.cs 中是服务器端注册的客户端的请求
 目前进度：
 当前版本主要实现的是网络层以及ILRuntime中的协议解析，具体服务器端业务逻辑还没开始展开，客户端接收的回调是在子线程，不能直接在Unity主线程中使用，需要发送到主线程，也还没做，下一次提交将会找一个比较好的方式实现。
 
-Hail China!
-================================================================
-
+***
 主项目作为入口完全热更的功能已基本上完成，目前项目中是一个可以登录，可以注册，可以创建角色，可以进行简单问答获得经验，然后可以升级的小游戏，主要目的还是为了验证热更功能，目前发现的最主要的问题是从热更Load的所有资源需要手动管理（Load的资源依赖的其他资源会自动下载，不需要手动管理），如果有遗漏的话可能会报空，目前打算对这一部分再做深度的研究（包括判空之后自动下载，不过感觉可能会影响体验）
 
-================================================================
-
+***
 提交了从StreamingAssets拷贝资源的类
 
 开始探索将包括更新资源等所有可能的逻辑移到热更层，主项目只留下入口以及SDK等无法热更的部分。
 
-================================================================
-
+***
 苹果审核已通过，我的做法是将登录界面和主界面以及它们的依赖预先放到StreamingAssets目录下，第一次启动时将它们释放到PersistanceData目录下，因为东西不多，所以释放的很快。据说如果释放资源时间比较长的话也会被拒，大家注意。
 
 现在的框架里还没有这一部分功能，稍候会加入。
 
-================================================================
-
+***
 一个很尴尬的问题，我在公司项目用这个框架实现了所有UI功能的热更（很完美，完全可用），但是提交苹果审核的时候被拒，原因是启动时下载了过多资源 ::>_<::
 
 我现在在做的工作是将一部分已经实现热更，可以下载的UI，比如登录界面修改为在包里直接埋好的，以保证启动的时候可以先登个录，登录成功后再下载一些资源，进入主界面。不知道这样是否可以，下午提交，再次等待审核。
 
-================================================================
-
+***
 # ILRuntime_HotGames
 基于ILRuntime的热更新能力实现的可以直接使用的框架。
 
