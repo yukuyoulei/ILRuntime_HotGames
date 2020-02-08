@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using LibCommon;
 
 namespace AClient
 {
@@ -16,7 +16,7 @@ namespace AClient
 
 		private void OnLogin(string[] sCmds)
 		{
-			AClientApis.OnLogin(sCmds[1], sCmds[2], LibPacket.PktLoginRequest.EPartnerID.Test);
+			AClientApis.OnLogin(sCmds[1], sCmds[2], EPartnerID.Test);
 		}
 	}
 }

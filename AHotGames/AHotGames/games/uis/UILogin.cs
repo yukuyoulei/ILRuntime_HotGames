@@ -34,45 +34,49 @@ public class UILogin : AHotBase
 			PlayerPrefs.SetString("token", value);
 		}
 	}
-	InputField inputUsername;
-	InputField inputPassword;
 	protected override void InitComponents()
 	{
-		UICommonWait.Show();
-		Task.Run(async () =>
-		{
-			if (!LibClient.AClientApp.bConnected)
-				await LibClient.AClientApp.StartClient();
-			UWebSender.Instance.AddProducingAction(() =>
-			{
-				UICommonWait.Hide();
-			});
-		});
-
-		inputUsername = FindWidget<InputField>("inputUsername");
+		var inputUsername = FindWidget<InputField>("inputUsername");
 		if (!string.IsNullOrEmpty(CachedUsername))
 		{
 			inputUsername.text = CachedUsername;
 		}
 
-		inputPassword = FindWidget<InputField>("inputPassword");
+		var inputPassword = FindWidget<InputField>("inputPassword");
 		var btnLogin = FindWidget<Button>("btnLogin");
 		btnLogin.onClick.AddListener(() =>
 		{
-			Task.Run(async () =>
+			if (string.IsNullOrEmpty(inputUsername.text))
 			{
-				if (!LibClient.AClientApp.bConnected)
-					await LibClient.AClientApp.StartClient();
-
-				if (!LibClient.AClientApp.bConnected)
-				{
-					AOutput.Log($"连接失败！");
-					return;
-				}
-
-				UWebSender.Instance.AddProducingAction(OnLogin);
-			});
+				return;
+			}
+			if (string.IsNullOrEmpty(inputPassword.text))
+			{
+				return;
+			}
 			btnLogin.enabled = false;
+			var username = inputUsername.text;
+			var password = inputPassword.text;
+
+			UStaticWebRequests.DoLogin(username, Utils.MD5Hash(password),
+				(jres) =>
+				{
+					btnLogin.enabled = true;
+					CachedUsername = username;
+					token = jres["token"].ToString();
+
+					OnSelectAvatar();
+				}
+				, (err) =>
+				{
+					btnLogin.enabled = true;
+					UIAlert.Show("登录失败，" + err);
+				}
+				, (error) =>
+				{
+					btnLogin.enabled = true;
+					UIAlert.Show("登录失败，网络错误：" + error);
+				});
 		});
 		var btnRegister = FindWidget<Button>("btnRegister");
 		btnRegister.onClick.AddListener(() =>
@@ -97,20 +101,6 @@ public class UILogin : AHotBase
 				token = "";
 			});
 		}
-	}
-	private void OnLogin()
-	{
-		if (string.IsNullOrEmpty(inputUsername.text))
-		{
-			return;
-		}
-		if (string.IsNullOrEmpty(inputPassword.text))
-		{
-			return;
-		}
-		var username = inputUsername.text;
-		var password = inputPassword.text;
-		AClientApis.OnLogin(username, MD5String.Hash32(password), LibPacket.PktLoginRequest.EPartnerID.Test);
 	}
 
 	private void OnSelectAvatar()

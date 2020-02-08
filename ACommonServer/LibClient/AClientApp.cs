@@ -3,11 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using LibPacket;
+using LibClient.GameObj;
 
 namespace LibClient
 {
 	public static class AClientApp
 	{
+		public static AAvatarClient myAvatar;
 		public static AClientComm clientComm;
 		static AConnection connection;
 		public static void Init(AClientComm comm)
@@ -22,7 +24,18 @@ namespace LibClient
 		private static void RegisterNotifies()
 		{
 			RegistPacketResponers<PktItemNotify>(rcvItemNotify);
+			RegistPacketResponers<PktParamUpdate>(rcvParamUpdate);
 		}
+
+		private static void rcvParamUpdate(PktParamUpdate obj)
+		{
+			foreach (var pu in obj.lInfos)
+			{
+
+				myAvatar.componentParam.OnSetParamValue(pu.paramName, pu.paramValue);
+			}
+		}
+
 		private static void rcvItemNotify(PktItemNotify itemNotify)
 		{
 			clientComm.rcvItemNotify(itemNotify);
@@ -31,8 +44,11 @@ namespace LibClient
 
 		private static void Engine_OnClientDisconnected(ClientConnection client)
 		{
-			clientComm.resultServerDisconnected();
+			if (!bCloseOnPurpose)
+				clientComm.resultServerDisconnected();
+			bCloseOnPurpose = false;
 			connection = null;
+			myAvatar = null;
 		}
 
 		public static async System.Threading.Tasks.Task StartClient(string ip = "127.0.0.1", int port = 999)
@@ -47,7 +63,7 @@ namespace LibClient
 				return connection != null ? connection.IsConnected : false;
 			}
 		}
-
+		
 		public static void RemoteCall<T>(PktBase pkt, Action<T> response)
 			where T : PktBase, new()
 		{
@@ -64,6 +80,13 @@ namespace LibClient
 		{
 			if (AFactoryPacket.Instance.GetCaller(PktBase.GetPktDef(typeof(T))) == null)
 				AFactoryPacket.Instance.RegistPackets(new Caller<T>((resp, t) => { response(t); }));
+		}
+
+		private static bool bCloseOnPurpose;
+		internal static void OnDisconnect()
+		{
+			bCloseOnPurpose = true;
+			System.Threading.Tasks.Task.Run(async () => { await connection.Close(); });
 		}
 	}
 }

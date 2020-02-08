@@ -296,7 +296,8 @@ public abstract class AHotBase
 		Debug.Log("send message to unity:" + smsg);
 		SendMessageToUnityReceiver(smsg);
 	}
-	public static T LoadClass<T>(string prefabPath, Action<T> action = null) where T : AHotBase, new()
+	private static List<AHotBase> loadedClasses = new List<AHotBase>();
+	public static T LoadClass<T>(string prefabPath, Action<T> action = null, bool bCanNotAntoDestroy = false) where T : AHotBase, new()
 	{
 		GameObject obj = UHotAssetBundleLoader.Instance.OnLoadAsset<GameObject>(prefabPath);
 		if (obj == null)
@@ -307,21 +308,23 @@ public abstract class AHotBase
 		var t = new T();
 		t.SetGameObj(GameObject.Instantiate(obj), "");
 		action?.Invoke(t);
+		if (!bCanNotAntoDestroy)
+			loadedClasses.Add(t);
 		return t;
 	}
-	public static void LoadUI<T>(Action<T> action = null) where T : AHotBase, new()
+	public static void LoadUI<T>(Action<T> action = null, bool bCanNotAntoDestroy = false) where T : AHotBase, new()
 	{
 		UICommonWait.Show();
 		var path = "UI/" + typeof(T).Name;
 		UHotAssetBundleLoader.Instance.OnDownloadResources(() =>
 		{
 			UICommonWait.Hide();
-			LoadClass<T>(path, action);
+			LoadClass<T>(path, action, bCanNotAntoDestroy);
 		}, path);
 	}
-	public static void LoadAnotherUI<T>(Action<T> actionLoadComplete = null) where T : AHotBase, new()
+	public static void LoadAnotherUI<T>(Action<T> actionLoadComplete = null, bool bCanNotAntoDestroy = false) where T : AHotBase, new()
 	{
-		LoadUI<T>(actionLoadComplete);
+		LoadUI<T>(actionLoadComplete, bCanNotAntoDestroy);
 	}
 	public static void LoadAnotherUI(string uiname)
 	{
@@ -340,7 +343,11 @@ public abstract class AHotBase
 	}
 	public static void UnloadAllClasses()
 	{
-		SendMessageToUnityReceiver("unloadall");
+		foreach (var c in loadedClasses)
+		{
+			GameObject.Destroy(c.gameObj);
+		}
+		loadedClasses.Clear();
 	}
 
 	protected void OnInvokeFunc(string funcName)

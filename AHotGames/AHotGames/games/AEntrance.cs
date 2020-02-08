@@ -12,7 +12,8 @@ public class AEntrance : AHotBase
 	{
 		AOutput.Register(UDebugHotLog.Log);
 
-		var i = UWebSender.Instance;
+		var i = UEventListener.Instance;
+
 		LibClient.AClientApp.Init(new AOnlineSubsystem());
 
 		PreDownloadResources();
@@ -47,7 +48,8 @@ public class AEntrance : AHotBase
 					{
 						UILoading.Instance?.OnUnloadThis();
 
-						LoadUI<UILogin>();
+						//LoadUI<UILogin>();
+						LoadUI<UIMinerLogin>();
 					}, null);
 				}, null);
 			}, null);

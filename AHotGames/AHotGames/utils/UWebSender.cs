@@ -11,31 +11,8 @@ using System.Threading;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class UWebSender : MonoBehaviour
+public class UWebSender : Singleton<UWebSender>
 {
-	private static UWebSender sinstance;
-	public static UWebSender Instance
-	{
-		get
-		{
-			if (sinstance == null)
-			{
-				var obj = new GameObject("UWebSender");
-				sinstance = obj.AddComponent<UWebSender>();
-			}
-			return sinstance;
-		}
-	}
-	public void AddProducingAction(Action a)
-	{
-		callbacksProducing.Add(a);
-	}
-	public static void OnAddProducingAction(Action a)
-	{
-		callbacksProducing.Add(a);
-	}
-	private static List<Action> callbacksProducing = new List<Action>();
-	private static List<Action> callbacksConsuming = new List<Action>();
 	public static void OnDownloadBytes(string url, string scontent, Action<byte[]> actionResult, Action<string> actionFailed = null)
 	{
 		UICommonWait.Show();
@@ -64,7 +41,7 @@ public class UWebSender : MonoBehaviour
 						offset += n;
 					}
 
-					callbacksProducing.Add(() =>
+					UEventListener.OnAddProducingAction(() =>
 					{
 						if (actionResult != null)
 							actionResult(buf);
@@ -76,7 +53,7 @@ public class UWebSender : MonoBehaviour
 				Debug.Log($"web sender error:{ex.Message}\r\n{ex.StackTrace}");
 				//lock (lockObj)
 				{
-					callbacksProducing.Add(() =>
+					UEventListener.OnAddProducingAction(() =>
 					{
 						if (actionFailed != null)
 							actionFailed(ex.Message);
@@ -115,7 +92,7 @@ public class UWebSender : MonoBehaviour
 					Debug.Log($"url {uri} result {result}");
 					//lock (lockObj)
 					{
-						callbacksProducing.Add(() =>
+						UEventListener.OnAddProducingAction(() =>
 						{
 							actionResult(JsonConvert.DeserializeObject(result) as JObject);
 						});
@@ -127,7 +104,7 @@ public class UWebSender : MonoBehaviour
 				Debug.Log($"web sender WebException:{ex.Message}\r\n{ex.StackTrace}");
 				//lock (lockObj)
 				{
-					callbacksProducing.Add(() =>
+					UEventListener.OnAddProducingAction(() =>
 					{
 						UIAlert.Show($"请求失败：{url} Web崩溃信息：{ex.Message}");
 						if (actionFailed != null)
@@ -141,7 +118,7 @@ public class UWebSender : MonoBehaviour
 				Debug.Log($"web sender error:{ex.Message}\r\n{ex.StackTrace}");
 				//lock (lockObj)
 				{
-					callbacksProducing.Add(() =>
+					UEventListener.OnAddProducingAction(() =>
 					{
 						UIAlert.Show($"请求失败：{url} 崩溃信息：{ex.Message}");
 						if (actionFailed != null)
@@ -153,37 +130,6 @@ public class UWebSender : MonoBehaviour
 		}
 		)).Start();
 	}
-
-	private void Start()
-	{
-
-	}
-	private void Update()
-	{
-		if (callbacksProducing.Count == 0)
-		{
-			return;
-		}
-		//lock (lockObj)
-		{
-			callbacksConsuming.AddRange(callbacksProducing);
-			foreach (var c in callbacksConsuming)
-			{
-				callbacksProducing.Remove(c);
-			}
-			foreach (var cb in callbacksConsuming)
-			{
-				//if (cb.Target != null)
-				{
-					cb();
-				}
-			}
-			callbacksConsuming.Clear();
-
-			UICommonWait.Hide();
-		}
-	}
-
 	public static void OnGet(string url, Action<Newtonsoft.Json.Linq.JObject> actionResult, Action<string> actionFailed = null)
 	{
 		Instance.DoGet(url, actionResult, actionFailed);
@@ -209,7 +155,7 @@ public class UWebSender : MonoBehaviour
 					Debug.Log($"url {url} result {result}");
 					//lock (lockObj)
 					{
-						callbacksProducing.Add(() =>
+						UEventListener.OnAddProducingAction(() =>
 						{
 							//result = FilterResult(result);
 							Debug.Log($"url {url} FilterResult {result.URLDecode()}");
@@ -224,7 +170,7 @@ public class UWebSender : MonoBehaviour
 				Debug.Log($"web sender WebException:{ex.Message}\r\n{ex.StackTrace}");
 				//lock (lockObj)
 				{
-					callbacksProducing.Add(() =>
+					UEventListener.OnAddProducingAction(() =>
 					{
 						UIAlert.Show($"请求失败：{url} Web崩溃信息：{ex.Message}");
 						if (actionFailed != null)
@@ -238,7 +184,7 @@ public class UWebSender : MonoBehaviour
 				Debug.Log($"web sender error:{ex.Message}\r\n{ex.StackTrace}");
 				//lock (lockObj)
 				{
-					callbacksProducing.Add(() =>
+					UEventListener.OnAddProducingAction(() =>
 					{
 						UIAlert.Show($"请求失败：{url} 崩溃信息：{ex.Message}");
 						if (actionFailed != null)

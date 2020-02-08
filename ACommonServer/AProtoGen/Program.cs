@@ -252,17 +252,24 @@ namespace ProtoGen
 					i++;
 				}
 
-				var sserialize = "\n\t\t\tthis.stream = ms;"
-					;
-				var sdeserialize = "\n\t\t\tthis.stream = ms;" +
-					"\n\t\t\tvar tag = 0;" +
-					"\n\t\t\twhile (reader.BaseStream.Position < reader.BaseStream.Length && (tag = reader.ReadInt32()) != 0)" +
-					"\n\t\t\t{" +
-					"\n\t\t\t\tswitch (tag)" +
-					"\n\t\t\t\t{"
-					;
+				var sserialize = "";
+				var sdeserialize = "";
 				foreach (ProtoParamCell ppc in cell.lParams)
 				{
+					if (string.IsNullOrEmpty(sserialize))
+					{
+						sserialize = "\n\t\t\tthis.stream = ms;";
+					}
+					if (string.IsNullOrEmpty(sdeserialize))
+					{
+						sdeserialize = "\n\t\t\tthis.stream = ms;" +
+								"\n\t\t\tvar tag = 0;" +
+								"\n\t\t\twhile (reader.BaseStream.Position < reader.BaseStream.Length && (tag = reader.ReadInt32()) != 0)" +
+								"\n\t\t\t{" +
+								"\n\t\t\t\tswitch (tag)" +
+								"\n\t\t\t\t{"
+								;
+					}
 					string sparam = "\n\t\t" + "private " + ppc.paramType + " _" + ppc.paramName;
 					sdeserialize += $"\n\t\t\t\t\tcase {ppc.paramIndex}:"
 						+ "\n\t\t\t\t\t{";
@@ -378,6 +385,11 @@ namespace ProtoGen
 					sproto += "\n";
 				}
 
+				if (!string.IsNullOrEmpty(sdeserialize))
+				{
+					sdeserialize += "\n\t\t\t\t}" +
+									"\n\t\t\t}";
+				}
 				sproto += "\n\t\tpublic override void Serialize(MemoryStream ms)" +
 					"\n\t\t{" +
 					sserialize +
@@ -385,8 +397,6 @@ namespace ProtoGen
 					"\n\t\tpublic override void Deserialize(MemoryStream ms)" +
 					"\n\t\t{" +
 					sdeserialize +
-					"\n\t\t\t\t}" +
-					"\n\t\t\t}" +
 					"\n\t\t}"
 					;
 				sproto += "\n\t}\n";

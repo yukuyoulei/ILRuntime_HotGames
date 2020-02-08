@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using LibNet;
+using LibCommon;
 
 namespace ACommonServers
 {
@@ -11,10 +12,15 @@ namespace ACommonServers
 	{
 		static void Main(string[] args)
 		{
+			var sport = args.Length > 0 ? args[0] : "999";
+			InitValueDefs.dbconnect = args.Length > 1 ? args[1] : "mongodb://127.0.0.1:27018";
+			InitValueDefs.dbname = args.Length > 2 ? args[2] : "common";
+
+			AOutput.bIsConsole = true;
 			AOutput.Instance.RegistOutputDel((log, elv) => Console.WriteLine(log));
 
 			EngineServer.Instance.EngineInit();
-			EngineServer.Instance.ServerStartUp(999, EngineServer.EServerType.GatewayServer);
+			EngineServer.Instance.ServerStartUp(typeParser.intParse(sport), EngineServer.EServerType.GatewayServer);
 
 			Handlers.Instance.Init();
 			EngineServer.Instance.RegistSubSystem(Handlers.Instance);

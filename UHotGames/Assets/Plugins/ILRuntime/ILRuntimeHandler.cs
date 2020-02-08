@@ -112,7 +112,16 @@ public class ILRuntimeHandler
 
 
 
-		#endregion        appdomain.DelegateManager.RegisterMethodDelegate<global::IDisposableAdapter.Adaptor>();
+
+
+
+
+
+
+		#endregion
+
+		appdomain.DelegateManager.RegisterMethodDelegate<ILRuntime.Runtime.Intepreter.ILTypeInstance>();
+		appdomain.DelegateManager.RegisterMethodDelegate<global::IDisposableAdapter.Adaptor>();
 		appdomain.DelegateManager.RegisterFunctionDelegate<System.Threading.Tasks.Task>();
 
 		appdomain.DelegateManager.RegisterFunctionDelegate<System.Reflection.MethodInfo, System.Boolean>();

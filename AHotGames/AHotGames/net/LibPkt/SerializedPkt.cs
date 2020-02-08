@@ -5,11 +5,6 @@ namespace LibPacket
 {
 	public class PktLoginRequest : PktBase
 	{
-		public enum EPartnerID
-		{
-			Test,
-			Normal,
-		}
 		private string _username = "";
 		public string username
 		{
@@ -24,8 +19,8 @@ namespace LibPacket
 			set{_password = value;}
 		}
 
-		private EPartnerID _ePartnerID = default(EPartnerID);
-		public EPartnerID ePartnerID
+		private int _ePartnerID = default(int);
+		public int ePartnerID
 		{
 			get{return _ePartnerID;}
 			set{_ePartnerID = value;}
@@ -47,7 +42,7 @@ namespace LibPacket
 			if (ePartnerID != 0)
 			{
 				writer.Write(3);
-				writer.Write((int)ePartnerID);
+				writer.Write(ePartnerID);
 			}
 		}
 		public override void Deserialize(MemoryStream ms)
@@ -70,7 +65,7 @@ namespace LibPacket
 					}
 					case 3:
 					{
-						ePartnerID = (EPartnerID)reader.ReadInt32();
+						ePartnerID = reader.ReadInt32();
 						break;
 					}
 				}
@@ -80,8 +75,8 @@ namespace LibPacket
 
 	public class PktLoginResult : PktBase
 	{
-		private PktLoginRequest.EPartnerID _ePartnerID = default(PktLoginRequest.EPartnerID);
-		public PktLoginRequest.EPartnerID ePartnerID
+		private int _ePartnerID = default(int);
+		public int ePartnerID
 		{
 			get{return _ePartnerID;}
 			set{_ePartnerID = value;}
@@ -101,20 +96,13 @@ namespace LibPacket
 			set{_bSuccess = value;}
 		}
 
-		private string _token = "";
-		public string token
-		{
-			get{return _token;}
-			set{_token = value;}
-		}
-
 		public override void Serialize(MemoryStream ms)
 		{
 			this.stream = ms;
 			if (ePartnerID != 0)
 			{
 				writer.Write(3);
-				writer.Write((int)ePartnerID);
+				writer.Write(ePartnerID);
 			}
 			if (!string.IsNullOrEmpty(uid))
 			{
@@ -125,11 +113,6 @@ namespace LibPacket
 			{
 				writer.Write(2);
 				writer.Write(bSuccess);
-			}
-			if (!string.IsNullOrEmpty(token))
-			{
-				writer.Write(4);
-				writer.Write(token);
 			}
 		}
 		public override void Deserialize(MemoryStream ms)
@@ -142,7 +125,7 @@ namespace LibPacket
 				{
 					case 3:
 					{
-						ePartnerID = (PktLoginRequest.EPartnerID)reader.ReadInt32();
+						ePartnerID = reader.ReadInt32();
 						break;
 					}
 					case 1:
@@ -153,11 +136,6 @@ namespace LibPacket
 					case 2:
 					{
 						bSuccess = reader.ReadBoolean();
-						break;
-					}
-					case 4:
-					{
-						token = reader.ReadString();
 						break;
 					}
 				}
@@ -181,6 +159,13 @@ namespace LibPacket
 			set{_avatarName = value;}
 		}
 
+		private List<ParamInfo> _lInfos = new List<ParamInfo>();
+		public List<ParamInfo> lInfos
+		{
+			get{return _lInfos;}
+			set{_lInfos = value;}
+		}
+
 		public override void Serialize(MemoryStream ms)
 		{
 			this.stream = ms;
@@ -193,6 +178,19 @@ namespace LibPacket
 			{
 				writer.Write(2);
 				writer.Write(avatarName);
+			}
+			if (lInfos.Count > 0)
+			{
+				writer.Write(3);
+				writer.Write(lInfos.Count);
+				foreach (var __item in lInfos)
+				{
+					var m = new MemoryStream();
+					__item.Serialize(m);
+					var bs = m.ToArray();
+					writer.Write(bs.Length);
+					writer.Write(bs);
+				}
 			}
 		}
 		public override void Deserialize(MemoryStream ms)
@@ -213,6 +211,18 @@ namespace LibPacket
 						avatarName = reader.ReadString();
 						break;
 					}
+					case 3:
+					{
+						var count = reader.ReadInt32();
+						for (var i = 0; i < count; i++)
+						{
+							var __item = new ParamInfo();
+							var c = reader.ReadInt32();
+							__item.Deserialize(new MemoryStream(reader.ReadBytes(c)));
+							lInfos.Add(__item);
+						}
+						break;
+					}
 				}
 			}
 		}
@@ -220,54 +230,11 @@ namespace LibPacket
 
 	public class PktEnterGameRequest : PktBase
 	{
-		private PktLoginRequest.EPartnerID _ePartnerID = default(PktLoginRequest.EPartnerID);
-		public PktLoginRequest.EPartnerID ePartnerID
-		{
-			get{return _ePartnerID;}
-			set{_ePartnerID = value;}
-		}
-
-		private string _uid = "";
-		public string uid
-		{
-			get{return _uid;}
-			set{_uid = value;}
-		}
-
 		public override void Serialize(MemoryStream ms)
 		{
-			this.stream = ms;
-			if (ePartnerID != 0)
-			{
-				writer.Write(3);
-				writer.Write((int)ePartnerID);
-			}
-			if (!string.IsNullOrEmpty(uid))
-			{
-				writer.Write(1);
-				writer.Write(uid);
-			}
 		}
 		public override void Deserialize(MemoryStream ms)
 		{
-			this.stream = ms;
-			var tag = 0;
-			while (reader.BaseStream.Position < reader.BaseStream.Length && (tag = reader.ReadInt32()) != 0)
-			{
-				switch (tag)
-				{
-					case 3:
-					{
-						ePartnerID = (PktLoginRequest.EPartnerID)reader.ReadInt32();
-						break;
-					}
-					case 1:
-					{
-						uid = reader.ReadString();
-						break;
-					}
-				}
-			}
 		}
 	}
 
@@ -306,6 +273,42 @@ namespace LibPacket
 						info = new AvatarInfo();
 						var c = reader.ReadInt32();
 						info.Deserialize(new MemoryStream(reader.ReadBytes(c)));
+						break;
+					}
+				}
+			}
+		}
+	}
+
+	public class PktServerMessage : PktBase
+	{
+		private string _message = "";
+		public string message
+		{
+			get{return _message;}
+			set{_message = value;}
+		}
+
+		public override void Serialize(MemoryStream ms)
+		{
+			this.stream = ms;
+			if (!string.IsNullOrEmpty(message))
+			{
+				writer.Write(1);
+				writer.Write(message);
+			}
+		}
+		public override void Deserialize(MemoryStream ms)
+		{
+			this.stream = ms;
+			var tag = 0;
+			while (reader.BaseStream.Position < reader.BaseStream.Length && (tag = reader.ReadInt32()) != 0)
+			{
+				switch (tag)
+				{
+					case 1:
+					{
+						message = reader.ReadString();
 						break;
 					}
 				}
@@ -409,6 +412,228 @@ namespace LibPacket
 							var c = reader.ReadInt32();
 							__item.Deserialize(new MemoryStream(reader.ReadBytes(c)));
 							lItems.Add(__item);
+						}
+						break;
+					}
+				}
+			}
+		}
+	}
+
+	public class PktCreateAvatarRequest : PktBase
+	{
+		private string _avatarName = "";
+		public string avatarName
+		{
+			get{return _avatarName;}
+			set{_avatarName = value;}
+		}
+
+		private int _sex = default(int);
+		public int sex
+		{
+			get{return _sex;}
+			set{_sex = value;}
+		}
+
+		public override void Serialize(MemoryStream ms)
+		{
+			this.stream = ms;
+			if (!string.IsNullOrEmpty(avatarName))
+			{
+				writer.Write(1);
+				writer.Write(avatarName);
+			}
+			if (sex != 0)
+			{
+				writer.Write(2);
+				writer.Write(sex);
+			}
+		}
+		public override void Deserialize(MemoryStream ms)
+		{
+			this.stream = ms;
+			var tag = 0;
+			while (reader.BaseStream.Position < reader.BaseStream.Length && (tag = reader.ReadInt32()) != 0)
+			{
+				switch (tag)
+				{
+					case 1:
+					{
+						avatarName = reader.ReadString();
+						break;
+					}
+					case 2:
+					{
+						sex = reader.ReadInt32();
+						break;
+					}
+				}
+			}
+		}
+	}
+
+	public class PktCreateAvatarResult : PktBase
+	{
+		public enum EResult
+		{
+			Success,
+			MaxCount,
+			SameName,
+		}
+		private EResult _eResult = default(EResult);
+		public EResult eResult
+		{
+			get{return _eResult;}
+			set{_eResult = value;}
+		}
+
+		private AvatarInfo _info = null;
+		public AvatarInfo info
+		{
+			get{return _info;}
+			set{_info = value;}
+		}
+
+		public override void Serialize(MemoryStream ms)
+		{
+			this.stream = ms;
+			if (eResult != 0)
+			{
+				writer.Write(2);
+				writer.Write((int)eResult);
+			}
+			if (info != null)
+			{
+				writer.Write(1);
+				var m = new MemoryStream();
+				info.Serialize(m);
+				var bs = m.ToArray();
+				writer.Write(bs.Length);
+				writer.Write(bs);
+			}
+		}
+		public override void Deserialize(MemoryStream ms)
+		{
+			this.stream = ms;
+			var tag = 0;
+			while (reader.BaseStream.Position < reader.BaseStream.Length && (tag = reader.ReadInt32()) != 0)
+			{
+				switch (tag)
+				{
+					case 2:
+					{
+						eResult = (EResult)reader.ReadInt32();
+						break;
+					}
+					case 1:
+					{
+						info = new AvatarInfo();
+						var c = reader.ReadInt32();
+						info.Deserialize(new MemoryStream(reader.ReadBytes(c)));
+						break;
+					}
+				}
+			}
+		}
+	}
+
+	public class ParamInfo : PktBase
+	{
+		private string _paramName = "";
+		public string paramName
+		{
+			get{return _paramName;}
+			set{_paramName = value;}
+		}
+
+		private string _paramValue = "";
+		public string paramValue
+		{
+			get{return _paramValue;}
+			set{_paramValue = value;}
+		}
+
+		public override void Serialize(MemoryStream ms)
+		{
+			this.stream = ms;
+			if (!string.IsNullOrEmpty(paramName))
+			{
+				writer.Write(1);
+				writer.Write(paramName);
+			}
+			if (!string.IsNullOrEmpty(paramValue))
+			{
+				writer.Write(2);
+				writer.Write(paramValue);
+			}
+		}
+		public override void Deserialize(MemoryStream ms)
+		{
+			this.stream = ms;
+			var tag = 0;
+			while (reader.BaseStream.Position < reader.BaseStream.Length && (tag = reader.ReadInt32()) != 0)
+			{
+				switch (tag)
+				{
+					case 1:
+					{
+						paramName = reader.ReadString();
+						break;
+					}
+					case 2:
+					{
+						paramValue = reader.ReadString();
+						break;
+					}
+				}
+			}
+		}
+	}
+
+	public class PktParamUpdate : PktBase
+	{
+		private List<ParamInfo> _lInfos = new List<ParamInfo>();
+		public List<ParamInfo> lInfos
+		{
+			get{return _lInfos;}
+			set{_lInfos = value;}
+		}
+
+		public override void Serialize(MemoryStream ms)
+		{
+			this.stream = ms;
+			if (lInfos.Count > 0)
+			{
+				writer.Write(1);
+				writer.Write(lInfos.Count);
+				foreach (var __item in lInfos)
+				{
+					var m = new MemoryStream();
+					__item.Serialize(m);
+					var bs = m.ToArray();
+					writer.Write(bs.Length);
+					writer.Write(bs);
+				}
+			}
+		}
+		public override void Deserialize(MemoryStream ms)
+		{
+			this.stream = ms;
+			var tag = 0;
+			while (reader.BaseStream.Position < reader.BaseStream.Length && (tag = reader.ReadInt32()) != 0)
+			{
+				switch (tag)
+				{
+					case 1:
+					{
+						var count = reader.ReadInt32();
+						for (var i = 0; i < count; i++)
+						{
+							var __item = new ParamInfo();
+							var c = reader.ReadInt32();
+							__item.Deserialize(new MemoryStream(reader.ReadBytes(c)));
+							lInfos.Add(__item);
 						}
 						break;
 					}

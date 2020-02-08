@@ -94,26 +94,30 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="games\AOnlineSubsystem.cs" />
     <Compile Include="games\data\Defs.cs" />
     <Compile Include="games\data\URemoteData.cs" />
-    <Compile Include="games\game\USanXiao.cs" />
-    <Compile Include="games\game\U2048.cs" />
     <Compile Include="games\game\Cards\ACards.cs" />
     <Compile Include="games\game\Novel\Novels.cs" />
     <Compile Include="games\game\UBigOrSmall.cs" />
-    <Compile Include="games\game\ULifeInBottle.cs" />
     <Compile Include="games\game\UCardGame.cs" />
+    <Compile Include="games\game\ULifeInBottle.cs" />
     <Compile Include="games\game\UMMO.cs" />
-    <Compile Include="games\uis\UICommonTips.cs" />
-    <Compile Include="games\uis\UIDebugConsole.cs" />
+    <Compile Include="games\game\USanXiao.cs" />
+    <Compile Include="games\miner\UIMinerMain.cs" />
+    <Compile Include="games\miner\UIMinerCreateAvatar.cs" />
+    <Compile Include="games\miner\UIMinerLogin.cs" />
+    <Compile Include="games\net\AOnlineSubsystem.cs" />
+    <Compile Include="games\game\U2048.cs" />
+    <Compile Include="games\net\UEventListener.cs" />
+    <Compile Include="games\net\UEvents.cs" />
+    <Compile Include="games\commonUI\UICommonTips.cs" />
+    <Compile Include="games\commonUI\UIDebugConsole.cs" />
     <Compile Include="games\uis\UIRank.cs" />
     <Compile Include="games\uis\UILoading.cs" />
     <Compile Include="games\uis\UDownloader.cs" />
-    <Compile Include="games\uis\ParamNameDefs.cs" />
     <Compile Include="games\uis\UICreateAvatar.cs" />
     <Compile Include="games\uis\UStaticWebRequests.cs" />
-    <Compile Include="games\uis\UICommonWait.cs" />
+    <Compile Include="games\commonUI\UICommonWait.cs" />
     <Compile Include="games\uis\UIMain.cs" />
     <Compile Include="games\uis\UIAlert.cs" />
     <Compile Include="games\uis\UIRegister.cs" />
@@ -126,6 +130,17 @@
     <Compile Include="net\LibClient\AClientApp.cs" />
     <Compile Include="net\LibClient\AClientComm.cs" />
     <Compile Include="net\LibClient\AConnection.cs" />
+    <Compile Include="net\LibClient\GameObj\AAvatarClient.cs" />
+    <Compile Include="net\LibCommon\AConsoleBase.cs" />
+    <Compile Include="net\LibCommon\Components\AComponentBagCommon.cs" />
+    <Compile Include="net\LibCommon\Components\AComponentBase.cs" />
+    <Compile Include="net\LibCommon\Components\AComponentParamCommon.cs" />
+    <Compile Include="net\LibCommon\Defs\AEnumDefs.cs" />
+    <Compile Include="net\LibCommon\Defs\InitValueDefs.cs" />
+    <Compile Include="net\LibCommon\Defs\ParamNameDefs.cs" />
+    <Compile Include="net\LibCommon\GameObj\AAvatarCommon.cs" />
+    <Compile Include="net\LibCommon\GameObj\AGameObj.cs" />
+    <Compile Include="net\LibCommon\GameObj\AParam.cs" />
     <Compile Include="net\LibNet\AUDPSocket.cs" />
     <Compile Include="net\LibNet\ByteStream.cs" />
     <Compile Include="net\LibNet\ClientConnection.cs" />
@@ -172,6 +187,7 @@
     <Compile Include="utils\UWebSender.cs" />
     <Compile Include="websocket\WebSocketConnector.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>

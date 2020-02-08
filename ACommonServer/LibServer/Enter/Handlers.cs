@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using LibPacket;
+using LibCommon;
 
 namespace ACommonServers
 {
@@ -14,24 +15,70 @@ namespace ACommonServers
 		{
 			AFactoryPacket.Instance.RegistPackets(new Caller<PktLoginRequest>(Handler_Login));
 			AFactoryPacket.Instance.RegistPackets(new Caller<PktEnterGameRequest>(Handler_EnterGame));
+			AFactoryPacket.Instance.RegistPackets(new Caller<PktCreateAvatarRequest>(Handler_CreateAvatar));
 		}
 
-		private void Handler_EnterGame(IResponer arg1, PktEnterGameRequest arg2)
+		private void Handler_CreateAvatar(IResponer responer, PktCreateAvatarRequest vo)
 		{
-			
+			var player = AAvatarManager.Instance.OnGetPlayer(responer.playerConnDesc);
+			if (player == null) return;
+			if (player.avatar != null) return;
+
+			var res = new PktCreateAvatarResult();
+			var dbr = ADBManager.Get(InitValueDefs.dbconnect, InitValueDefs.dbname).FindOneData(ParamNameDefs.TableAvatar
+				, ADBAccessor.filter_eq(ParamNameDefs.PartnerID, (int)player.ePartnerID) & ADBAccessor.filter_eq(ParamNameDefs.UID, player.uid));
+			if (dbr != null)
+			{
+				res.eResult = PktCreateAvatarResult.EResult.MaxCount;
+			}
+			else
+			{
+				var dnr = ADBManager.Get(InitValueDefs.dbconnect, InitValueDefs.dbname).FindOneData(ParamNameDefs.TableAvatar
+					, ADBAccessor.filter_eq(ParamNameDefs.AvatarName, vo.avatarName));
+				if (dnr != null)
+				{
+					res.eResult = PktCreateAvatarResult.EResult.SameName;
+				}
+				else
+				{
+					res.eResult = PktCreateAvatarResult.EResult.Success;
+
+					var a = AAvatarManager.Instance.OnCreateAvatar(player.ePartnerID, player.uid, vo.avatarName, vo.sex, player);
+					res.info = a.ToPkt();
+				}
+			}
+			responer.Response(res);
 		}
 
-		private void Handler_Login(IResponer arg1, PktLoginRequest arg2)
+		private void Handler_EnterGame(IResponer responer, PktEnterGameRequest vo)
+		{
+			var player = AAvatarManager.Instance.OnGetPlayer(responer.playerConnDesc);
+			if (player == null) return;
+
+			var res = new PktEnterGameResult();
+		 	var dbr = ADBManager.Get(InitValueDefs.dbconnect, InitValueDefs.dbname).FindOneData(ParamNameDefs.TableAvatar
+				, ADBAccessor.filter_eq(ParamNameDefs.PartnerID, (int)player.ePartnerID) & ADBAccessor.filter_eq(ParamNameDefs.UID, player.uid));
+			if (dbr != null)
+			{
+				var a = AAvatarManager.Instance.OnGetAvatar(player.uid);
+				if (a == null)
+					a = AAvatarManager.Instance.OnCreateAvatar(player.uid, dbr, player);
+				res.info = a.ToPkt();
+			}
+			responer.Response(res);
+		}
+
+		private void Handler_Login(IResponer responer, PktLoginRequest vo)
 		{
 			var res = new PktLoginResult();
-			switch (arg2.ePartnerID)
+			switch ((EPartnerID)vo.ePartnerID)
 			{
-				case PktLoginRequest.EPartnerID.Test:
-					if (arg2.password == MD5String.Hash32(arg2.username))
+				case EPartnerID.Test:
+					if (vo.password == MD5String.Hash32(vo.username))
 					{
 						res.bSuccess = true;
-						res.ePartnerID = arg2.ePartnerID;
-						res.uid = MD5String.Hash32(arg2.password + arg2.username);
+						res.ePartnerID = vo.ePartnerID;
+						res.uid = MD5String.Hash32(vo.password + vo.username);
 					}
 					break;
 				default:
@@ -39,9 +86,9 @@ namespace ACommonServers
 			}
 			if (res.bSuccess)
 			{
-				res.token = LibServer.Managers.ATokenManager.Instance.AddToken(res.ePartnerID, res.uid);
+				AAvatarManager.Instance.OnAddPlayer(res.uid, (EPartnerID)vo.ePartnerID, responer);
 			}
-			arg1.Response(res);
+			responer.Response(res);
 		}
 
 		public void Tick(double fDeltaSec)
