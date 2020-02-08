@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 991441333
+CRC: 3776046348
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -255,4 +255,13 @@ AssetBundleManifest:
         Dependency_0: ui.ab
     Info_81:
       Name: firstui.ab
+      Dependencies: {}
+    Info_82:
+      Name: ui/uiminercreateavatar.ab
+      Dependencies: {}
+    Info_83:
+      Name: ui/uiminerlogin.ab
+      Dependencies: {}
+    Info_84:
+      Name: ui/uiminermain.ab
       Dependencies: {}
