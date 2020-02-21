@@ -43,7 +43,7 @@ namespace ACommonServers
 				{
 					res.eResult = PktCreateAvatarResult.EResult.Success;
 
-					var a = AAvatarManager.Instance.OnCreateAvatar(player.ePartnerID, player.uid, vo.avatarName, vo.sex, player);
+					var a = AAvatarManager.Instance.OnCreateAvatar(vo.avatarName, vo.sex, player);
 					res.info = a.ToPkt();
 				}
 			}

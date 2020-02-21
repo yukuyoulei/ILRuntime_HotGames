@@ -1,0 +1,26 @@
+ManifestFileVersion: 0
+CRC: 962091593
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: d35cb0160b85480ffb7890cb6dcd60bd
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 70e7db779fc083977b06f56e8be8f1dc
+HashAppended: 0
+ClassTypes:
+- Class: 74
+  Script: {instanceID: 0}
+- Class: 91
+  Script: {instanceID: 0}
+Assets:
+- Assets/Arts/Animator/role01.controller
+Dependencies:
+- G:/ProjectsGit/ILRuntime_HotGames/ab1/IOS/animator/right01.ab
+- G:/ProjectsGit/ILRuntime_HotGames/ab1/IOS/animator/front01.ab
+- G:/ProjectsGit/ILRuntime_HotGames/ab1/IOS/animator/idleb01.ab
+- G:/ProjectsGit/ILRuntime_HotGames/ab1/IOS/animator/idlef01.ab
+- G:/ProjectsGit/ILRuntime_HotGames/ab1/IOS/animator/idlel01.ab
+- G:/ProjectsGit/ILRuntime_HotGames/ab1/IOS/animator/idler01.ab
+- G:/ProjectsGit/ILRuntime_HotGames/ab1/IOS/animator/back01.ab
+- G:/ProjectsGit/ILRuntime_HotGames/ab1/IOS/animator/left01.ab

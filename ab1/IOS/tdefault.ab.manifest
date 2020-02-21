@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 3023985810
+CRC: 3625118616
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 9b151b1c71b43780cdafb88801b9f3ae
+    Hash: 0dd23063c0fd61876100f157e424bc03
   TypeTreeHash:
     serializedVersion: 2
     Hash: ea5a42e0fd8ea905efa7aa926a3b8944
@@ -15,5 +15,9 @@ ClassTypes:
   Script: {instanceID: 0}
 Assets:
 - Assets/Arts/Images/btn3.png
+- Assets/Arts/Images/Character/184-Light01.png
+- Assets/Arts/Images/Map/017-MineTown01.png
+- Assets/Arts/Images/Character/001-Fighter01.png
 - Assets/Arts/Images/loading.png
+- Assets/Arts/Images/Character/183-Rock02.png
 Dependencies: []

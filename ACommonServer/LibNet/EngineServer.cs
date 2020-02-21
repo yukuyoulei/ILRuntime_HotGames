@@ -51,9 +51,6 @@ namespace LibNet
 
 		public void EngineInit()
 		{
-			RegistSubSystem(DataAccess.CLongRunningTaskMgr.Instance);
-			DataAccess.CLongRunningTaskMgr.Instance.Initialize();
-
 			EngineControler.Instance.EngineInit();
 			EngineControler.Instance.QueForProcessing(new ServerTickTask(this));
 		}
@@ -201,15 +198,9 @@ namespace LibNet
 		{
 			m_vSubSystems.Add(subSystem);
 		}
-		public bool bAllSubSystemRegisted = false;
 		private static DateTime m_OldTime = DateTime.Now;
 		public void ServerTick()
 		{
-			if (!bAllSubSystemRegisted)
-			{
-				Thread.Sleep(1);
-				return;
-			}
 			DateTime nowTime = DateTime.Now;
 			TimeSpan span = nowTime - m_OldTime;
 			foreach (ITickableSystem subSystem in m_vSubSystems)

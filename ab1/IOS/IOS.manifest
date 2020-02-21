@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 3776046348
+CRC: 338933814
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -192,76 +192,123 @@ AssetBundleManifest:
       Name: images/pai/18.ab
       Dependencies: {}
     Info_63:
-      Name: ui/uiresources/avatarmale.ab
-      Dependencies:
-        Dependency_0: common.ab
-    Info_64:
-      Name: ui/uiresources/avatarfemale.ab
-      Dependencies:
-        Dependency_0: common.ab
-    Info_65:
       Name: game/ubigorsmall.ab
       Dependencies: {}
-    Info_66:
+    Info_64:
       Name: game/ulifeinbottle.ab
       Dependencies:
         Dependency_0: tdefault.ab
-    Info_67:
+    Info_65:
       Name: ui/uirank.ab
       Dependencies: {}
-    Info_68:
+    Info_66:
       Name: ui/uialert.ab
       Dependencies: {}
-    Info_69:
+    Info_67:
       Name: ui/uidebugconsole.ab
       Dependencies: {}
-    Info_70:
+    Info_68:
       Name: ui/uimain.ab
       Dependencies: {}
-    Info_71:
+    Info_69:
       Name: ui/uicreateavatar.ab
       Dependencies: {}
-    Info_72:
+    Info_70:
       Name: game/ucardgame.ab
       Dependencies:
         Dependency_0: ui.ab
-    Info_73:
+    Info_71:
       Name: game/ummo.ab
       Dependencies:
         Dependency_0: ui.ab
         Dependency_1: tdefault.ab
-    Info_74:
+    Info_72:
       Name: ui/uicommonwait.ab
       Dependencies:
         Dependency_0: tdefault.ab
-    Info_75:
+    Info_73:
       Name: ui/uilogin.ab
       Dependencies: {}
-    Info_76:
+    Info_74:
       Name: game/u2048.ab
       Dependencies: {}
-    Info_77:
+    Info_75:
       Name: ui/uiregister.ab
       Dependencies: {}
-    Info_78:
+    Info_76:
       Name: game/usanxiao.ab
       Dependencies: {}
-    Info_79:
+    Info_77:
       Name: ui/uicommontips.ab
       Dependencies: {}
-    Info_80:
+    Info_78:
       Name: ui/uiloading.ab
       Dependencies:
         Dependency_0: ui.ab
-    Info_81:
+    Info_79:
       Name: firstui.ab
       Dependencies: {}
-    Info_82:
+    Info_80:
       Name: ui/uiminercreateavatar.ab
       Dependencies: {}
-    Info_83:
+    Info_81:
       Name: ui/uiminerlogin.ab
       Dependencies: {}
-    Info_84:
+    Info_82:
       Name: ui/uiminermain.ab
-      Dependencies: {}
+      Dependencies:
+        Dependency_0: tdefault.ab
+        Dependency_1: animator/role01.ab
+    Info_83:
+      Name: characters/role01.ab
+      Dependencies:
+        Dependency_0: tdefault.ab
+        Dependency_1: animator/role01.ab
+    Info_84:
+      Name: animator/right01.ab
+      Dependencies:
+        Dependency_0: tdefault.ab
+    Info_85:
+      Name: animator/front01.ab
+      Dependencies:
+        Dependency_0: tdefault.ab
+    Info_86:
+      Name: animator/role01.ab
+      Dependencies:
+        Dependency_0: animator/right01.ab
+        Dependency_1: animator/front01.ab
+        Dependency_2: animator/idleb01.ab
+        Dependency_3: animator/idlef01.ab
+        Dependency_4: animator/idlel01.ab
+        Dependency_5: animator/idler01.ab
+        Dependency_6: animator/back01.ab
+        Dependency_7: animator/left01.ab
+    Info_87:
+      Name: animator/idleb01.ab
+      Dependencies:
+        Dependency_0: tdefault.ab
+    Info_88:
+      Name: animator/idlef01.ab
+      Dependencies:
+        Dependency_0: tdefault.ab
+    Info_89:
+      Name: animator/idlel01.ab
+      Dependencies:
+        Dependency_0: tdefault.ab
+    Info_90:
+      Name: animator/idler01.ab
+      Dependencies:
+        Dependency_0: tdefault.ab
+    Info_91:
+      Name: animator/back01.ab
+      Dependencies:
+        Dependency_0: tdefault.ab
+    Info_92:
+      Name: animator/left01.ab
+      Dependencies:
+        Dependency_0: tdefault.ab
+    Info_93:
+      Name: ui/minermap/map01.ab
+      Dependencies:
+        Dependency_0: tdefault.ab
+        Dependency_1: animator/role01.ab

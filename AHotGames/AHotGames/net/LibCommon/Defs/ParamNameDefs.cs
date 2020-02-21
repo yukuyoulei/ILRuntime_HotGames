@@ -7,6 +7,7 @@
 		public const string TableAvatar = "tAvatar";
 		public const string PartnerID = "pid";
 		public const string UID = "uid";
+		public const string CreateTime = "ct";
 
 		public const string AvatarName = "aname";
 		public const string AvatarGold = "gold";

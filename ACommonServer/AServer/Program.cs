@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using LibNet;
 using LibCommon;
+using System.Threading;
 
 namespace ACommonServers
 {
@@ -34,7 +35,7 @@ namespace ACommonServers
 
 		private static void StartConsoleServer()
 		{
-			while (true) ;
+			(new Thread(new ThreadStart((new AConsoleServer()).run))).Start();
 		}
 
 	}

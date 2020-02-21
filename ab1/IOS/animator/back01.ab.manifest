@@ -1,0 +1,21 @@
+ManifestFileVersion: 0
+CRC: 3042617870
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 464c25810d38f171ff4c5462f0ff0f9d
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: d7865432dca78e1ecd7132916d904900
+HashAppended: 0
+ClassTypes:
+- Class: 74
+  Script: {instanceID: 0}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+Assets:
+- Assets/Arts/Animator/back01.anim
+Dependencies:
+- G:/ProjectsGit/ILRuntime_HotGames/ab1/IOS/tdefault.ab

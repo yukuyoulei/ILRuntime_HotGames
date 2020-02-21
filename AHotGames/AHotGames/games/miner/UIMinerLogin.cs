@@ -66,6 +66,11 @@ public class UIMinerLogin : AHotBase
 
 				if (!LibClient.AClientApp.bConnected)
 				{
+					UEventListener.Instance.AddProducingAction(() =>
+					{
+						btnLogin.enabled = true;
+
+					});
 					AOutput.Log($"连接失败！");
 					return;
 				}

@@ -1,14 +1,19 @@
 客户端收到的网络回调已经可以安全的发送到主线程进行处理。
+
 分发事件
-        UEventListener.Instance.OnDispatchEvent
-        例子：
+
+UEventListener.Instance.OnDispatchEvent
+
+例子：
 ```C#
         UEventListener.Instance.OnDispatchEvent(UEvents.CreateAvatar, new EventCreateAvatar() { eResult = eResult, info = info });
 ```
 
 注册事件
-        UEventListener.Instance.OnRegisterEvent
-        例子：
+
+UEventListener.Instance.OnRegisterEvent
+
+例子：
 ```C#
         UEventListener.Instance.OnRegisterEvent(UEvents.CreateAvatar, OnCreateAvatarCb);
 ```

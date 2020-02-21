@@ -1,0 +1,21 @@
+ManifestFileVersion: 0
+CRC: 4063396957
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: ae22299896452bab1105d9d60fb8a36e
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: d7865432dca78e1ecd7132916d904900
+HashAppended: 0
+ClassTypes:
+- Class: 74
+  Script: {instanceID: 0}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+Assets:
+- Assets/Arts/Animator/right01.anim
+Dependencies:
+- G:/ProjectsGit/ILRuntime_HotGames/ab1/IOS/tdefault.ab

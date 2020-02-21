@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 3128324993
+CRC: 3856974249
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: ef4f0cb0d575400ea1154a36e768b6e9
+    Hash: 056658796c319692872916cc1c2d3ac6
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 218b96b1d94e7c76c3ed46142cff241d
+    Hash: 807bd01eee5f8f9afc3328032066908a
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -17,6 +17,10 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 48
   Script: {instanceID: 0}
+- Class: 91
+  Script: {instanceID: 0}
+- Class: 95
+  Script: {instanceID: 0}
 - Class: 114
   Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 - Class: 114
@@ -26,17 +30,11 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 1301386320, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 - Class: 114
-  Script: {fileID: -2095666955, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-- Class: 114
   Script: {fileID: -405508275, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 - Class: 114
   Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 - Class: 114
-  Script: {fileID: -1200242548, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-- Class: 114
   Script: {fileID: -98529514, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-- Class: 114
-  Script: {fileID: 1367256648, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 - Class: 114
   Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 - Class: 115
@@ -53,4 +51,6 @@ ClassTypes:
   Script: {instanceID: 0}
 Assets:
 - Assets/RemoteResources/UI/UIMinerMain.prefab
-Dependencies: []
+Dependencies:
+- G:/ProjectsGit/ILRuntime_HotGames/ab1/IOS/tdefault.ab
+- G:/ProjectsGit/ILRuntime_HotGames/ab1/IOS/animator/role01.ab

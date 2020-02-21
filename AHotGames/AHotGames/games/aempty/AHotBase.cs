@@ -141,17 +141,24 @@ public abstract class AHotBase
 	}
 	protected void DelayDoSth(Action sth, float delay)
 	{
-		var delta = 0f;
-		addUpdateAction(() =>
+		if (delay > 0)
 		{
-			delta += Time.deltaTime;
-			if (delta > delay)
+			var delta = 0f;
+			addUpdateAction(() =>
 			{
-				sth();
-				return true;
-			}
-			return false;
-		});
+				delta += Time.deltaTime;
+				if (delta > delay)
+				{
+					sth();
+					return true;
+				}
+				return false;
+			});
+		}
+		else
+		{
+			sth();
+		}
 	}
 
 	protected void OnDelaySendMessage(string message, float delay)
@@ -389,6 +396,24 @@ public abstract class AHotBase
 	{
 	}
 
+	protected void MoveTo(RectTransform tc, Vector3 to, float moveSeconds = 1, Action endAction = null)
+	{
+		var startTime = ApiDateTime.Now;
+		var rawp = tc.anchoredPosition;
+		addUpdateAction(() =>
+		{
+			tc.anchoredPosition = Vector3.Lerp(rawp, to, (float)(ApiDateTime.Now - startTime).TotalSeconds / moveSeconds);
+
+			var bend = (ApiDateTime.Now - startTime).TotalSeconds > moveSeconds;
+			if (bend)
+			{
+				tc.anchoredPosition = to;
+
+				endAction?.Invoke();
+			}
+			return bend;
+		});
+	}
 	protected void MoveTo(Transform tc, Vector3 to, float moveSeconds = 1, Space space = Space.World, Action endAction = null)
 	{
 		var startTime = ApiDateTime.Now;

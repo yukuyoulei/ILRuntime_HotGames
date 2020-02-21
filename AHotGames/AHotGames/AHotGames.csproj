@@ -103,6 +103,7 @@
     <Compile Include="games\game\ULifeInBottle.cs" />
     <Compile Include="games\game\UMMO.cs" />
     <Compile Include="games\game\USanXiao.cs" />
+    <Compile Include="games\miner\Map\UMinerMap.cs" />
     <Compile Include="games\miner\UIMinerMain.cs" />
     <Compile Include="games\miner\UIMinerCreateAvatar.cs" />
     <Compile Include="games\miner\UIMinerLogin.cs" />
@@ -141,6 +142,7 @@
     <Compile Include="net\LibCommon\GameObj\AAvatarCommon.cs" />
     <Compile Include="net\LibCommon\GameObj\AGameObj.cs" />
     <Compile Include="net\LibCommon\GameObj\AParam.cs" />
+    <Compile Include="net\LibCommon\GameObj\Cake.cs" />
     <Compile Include="net\LibNet\AUDPSocket.cs" />
     <Compile Include="net\LibNet\ByteStream.cs" />
     <Compile Include="net\LibNet\ClientConnection.cs" />

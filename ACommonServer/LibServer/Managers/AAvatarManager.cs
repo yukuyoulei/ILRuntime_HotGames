@@ -5,11 +5,22 @@ using System.Web;
 using MongoDB.Bson;
 using LibPacket;
 using LibCommon;
+using LibServer.GameObj;
 
 public class AAvatarManager : Singleton<AAvatarManager>
 {
 	private Dictionary<string, AAvatarServer> dUIDIndexedAvatars = new Dictionary<string, AAvatarServer>();
 	private Dictionary<string, Player> dConnectionIndexedPlayers = new Dictionary<string, Player>();
+
+	public void ListAll()
+	{
+		foreach (var a in dUIDIndexedAvatars)
+		{
+			AOutput.Log($"[{a.Key}]{a.Value.AvatarName} Lv:{a.Value.AvatarLevel}");
+		}
+		AOutput.Log($"Total:{dUIDIndexedAvatars.Count}");
+	}
+
 	private void OnAddAvatar(AAvatarServer avatar, Player player)
 	{
 		string uid = avatar.uid;
@@ -43,13 +54,13 @@ public class AAvatarManager : Singleton<AAvatarManager>
 		}
 	}
 
-	public AAvatarServer OnCreateAvatar(EPartnerID ePartnerID, string uid, string avatarName, int sex, Player player)
+	public AAvatarServer OnCreateAvatar(string avatarName, int sex, Player player)
 	{
 		var oid = ObjectId.GenerateNewId();
 		var inst = ADBManager.Get(InitValueDefs.dbconnect, InitValueDefs.dbname).UpdateOneData(ParamNameDefs.TableAvatar
-			, ADBAccessor.filter_eq(ParamNameDefs.UID, uid) & ADBAccessor.filter_eq(ParamNameDefs.PartnerID, (int)ePartnerID) & ADBAccessor.filter_eq(ParamNameDefs.AvatarName, avatarName)
+			, ADBAccessor.filter_eq(ParamNameDefs.UID, player.uid) & ADBAccessor.filter_eq(ParamNameDefs.PartnerID, (int)player.ePartnerID) & ADBAccessor.filter_eq(ParamNameDefs.AvatarName, avatarName)
 			, ADBAccessor.updates_build(ADBAccessor.update(ParamNameDefs.AvatarSex, sex), ADBAccessor.update(ParamNameDefs.CollectionID, oid)), true);
-		var a = new AAvatarServer(uid, null, oid, player);
+		var a = new AAvatarServer(player.uid, null, oid, player);
 		OnAddAvatar(a, player);
 		return a;
 	}
@@ -87,6 +98,7 @@ public class Player
 		this.uid = uid;
 		this.ePartnerID = ePartnerID;
 	}
+	public CakeServer avatarCake;
 	public EPartnerID ePartnerID;
 	public string uid;
 	public IResponer client { get; }

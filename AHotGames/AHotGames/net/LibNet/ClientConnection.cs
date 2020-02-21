@@ -292,7 +292,7 @@ namespace LibNet
 			}
 			catch (System.Exception ex)
 			{
-				AOutput.Log($"ReadComplete {ex.Message}");
+				//AOutput.Log($"ReadComplete {ex.Message}");
 				AddDisconectPacket();
 			}
 		}
