@@ -11,7 +11,6 @@ using LibClient.GameObj;
 public class UIMinerMain : AHotBase
 {
 	Text textGold;
-	Text textDiamond;
 	Button btnDailyCheck;
 	protected override void InitComponents()
 	{
@@ -25,8 +24,6 @@ public class UIMinerMain : AHotBase
 		textUsername.text = CakeClient.GetCake("pinfo", CakeAvatar.myID).GetStringValue(ParamNameDefs.AvatarName);
 		textGold = FindWidget<Text>("textGold");
 		textGold.text = "0";
-		textDiamond = FindWidget<Text>("textDiamond");
-		textDiamond.text = "0";
 		OnParamUpdateCb(null);
 
 		var btnLogout = FindWidget<Button>("btnLogout");
@@ -57,7 +54,6 @@ public class UIMinerMain : AHotBase
 	private void OnParamUpdateCb(UEventBase eb)
 	{
 		textGold.text = CakeClient.GetCake("items", CakeAvatar.myID, LibCommon.InitValueDefs.gold.ToString()).GetIntValue(ParamNameDefs.Count).ToString();
-		textDiamond.text = CakeClient.GetCake("items", CakeAvatar.myID, LibCommon.InitValueDefs.money.ToString()).GetIntValue(ParamNameDefs.Count).ToString();
 		btnDailyCheck.gameObject.SetActive(!ApiDateTime.IsSameDay(CakeClient.GetCake("pinfo", CakeAvatar.myID).GetIntValue(ParamNameDefs.LastDailyCheckTime)));
 	}
 }
