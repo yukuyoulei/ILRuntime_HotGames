@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 183257443
+CRC: 1691457422
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -67,6 +67,7 @@ AssetBundleManifest:
       Dependencies:
         Dependency_0: ui.ab
         Dependency_1: tdefault.ab
+        Dependency_2: anims/cave1.ab
     Info_19:
       Name: images/pai/bg1.ab
       Dependencies: {}
@@ -255,4 +256,93 @@ AssetBundleManifest:
       Dependencies: {}
     Info_81:
       Name: game/usanxiao.ab
+      Dependencies: {}
+    Info_82:
+      Name: animator/idler01.ab
+      Dependencies:
+        Dependency_0: tdefault.ab
+    Info_83:
+      Name: animator/idlel01.ab
+      Dependencies:
+        Dependency_0: tdefault.ab
+    Info_84:
+      Name: animator/idlef01.ab
+      Dependencies:
+        Dependency_0: tdefault.ab
+    Info_85:
+      Name: animator/front01.ab
+      Dependencies:
+        Dependency_0: tdefault.ab
+    Info_86:
+      Name: animator/right01.ab
+      Dependencies:
+        Dependency_0: tdefault.ab
+    Info_87:
+      Name: animator/left01.ab
+      Dependencies:
+        Dependency_0: tdefault.ab
+    Info_88:
+      Name: animator/idleb01.ab
+      Dependencies:
+        Dependency_0: tdefault.ab
+    Info_89:
+      Name: ui/uiminerlogin.ab
+      Dependencies: {}
+    Info_90:
+      Name: ui/uiminermain.ab
+      Dependencies:
+        Dependency_0: tdefault.ab
+        Dependency_1: animator/role01.ab
+    Info_91:
+      Name: ui/uiminercreateavatar.ab
+      Dependencies: {}
+    Info_92:
+      Name: animator/back01.ab
+      Dependencies:
+        Dependency_0: tdefault.ab
+    Info_93:
+      Name: characters/role01.ab
+      Dependencies:
+        Dependency_0: tdefault.ab
+        Dependency_1: animator/role01.ab
+    Info_94:
+      Name: ui/minermap/map01.ab
+      Dependencies:
+        Dependency_0: tdefault.ab
+        Dependency_1: animator/role01.ab
+    Info_95:
+      Name: animator/role01.ab
+      Dependencies:
+        Dependency_0: animator/idler01.ab
+        Dependency_1: animator/idlel01.ab
+        Dependency_2: animator/idlef01.ab
+        Dependency_3: animator/front01.ab
+        Dependency_4: animator/right01.ab
+        Dependency_5: animator/left01.ab
+        Dependency_6: animator/idleb01.ab
+        Dependency_7: animator/back01.ab
+    Info_96:
+      Name: anims/cave1.ab
+      Dependencies:
+        Dependency_0: anims/c1idle.ab
+        Dependency_1: anims/c1move.ab
+    Info_97:
+      Name: anims/c1idle.ab
+      Dependencies:
+        Dependency_0: tdefault.ab
+    Info_98:
+      Name: anims/c1move.ab
+      Dependencies:
+        Dependency_0: tdefault.ab
+    Info_99:
+      Name: txt/dailycheck.ab
+      Dependencies: {}
+    Info_100:
+      Name: txt/items.ab
+      Dependencies: {}
+    Info_101:
+      Name: txt/map.ab
+      Dependencies: {}
+    Info_102:
+      Name: ui/minermap/mapcity.ab
       Dependencies: {}

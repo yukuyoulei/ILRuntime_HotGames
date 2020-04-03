@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 742617341
+CRC: 1430908261
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 300bc3319bec97206cf2e0c9c1f671fe
+    Hash: 42c897fa4d898ce5530465f19df72750
   TypeTreeHash:
     serializedVersion: 2
     Hash: 5ad585dd02dfb5016c0dad519eab8f49
@@ -12,5 +12,5 @@ ClassTypes:
 - Class: 49
   Script: {instanceID: 0}
 Assets:
-- Assets/RemoteResources/Dll/AHotGames.bytes
+- Assets/RemoteResources/txt/Items.txt
 Dependencies: []

@@ -1,0 +1,21 @@
+ManifestFileVersion: 0
+CRC: 3915524940
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: e3b88b0101311fbe19226b59ad8db219
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: d7865432dca78e1ecd7132916d904900
+HashAppended: 0
+ClassTypes:
+- Class: 74
+  Script: {instanceID: 0}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+Assets:
+- Assets/Arts/Anims/c1move.anim
+Dependencies:
+- E:/personal/ILRuntime_HotGames/ILRuntime_HotGames/ab1/IOS/tdefault.ab
