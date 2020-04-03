@@ -43,7 +43,6 @@ public class UConfigManager : MonoBehaviour
 	void Awake()
 	{
 		mInstance = this;
-
 		RegistAllLoadFuncs();
 	}
 

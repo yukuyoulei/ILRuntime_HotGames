@@ -1,4 +1,4 @@
-﻿using ILRuntime.Runtime.Intepreter;
+﻿ using ILRuntime.Runtime.Intepreter;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -22,17 +22,24 @@ public class ILRuntimeHandler
 			return sinstance;
 		}
 	}
+#if ILRUNTIME
 	ILRuntime.Runtime.Enviorment.AppDomain appdomain;
+#endif
 	void Init()
 	{
+#if ILRUNTIME
 		appdomain = new ILRuntime.Runtime.Enviorment.AppDomain();
 #if UNITY_EDITOR
 		appdomain.DebugService.StartDebugService(56000);
 #endif
 		InitializeILRuntime();
+#endif
 	}
 
 	List<string> loadedDlls = new List<string>();
+#if !ILRUNTIME
+	System.Reflection.Assembly assembly;
+#endif
 	public void DoLoadDll(string dll, byte[] dllBytes, byte[] pdbBytes = null)
 	{
 		if (loadedDlls.Contains(dll))
@@ -50,9 +57,14 @@ public class ILRuntimeHandler
 #endif
 		System.IO.MemoryStream fs = new MemoryStream(dllBytes);
 		{
+#if ILRUNTIME
 			appdomain.LoadAssembly(fs, pdb, new ILRuntime.Mono.Cecil.Pdb.PdbReaderProvider());
+#else
+			assembly = AppDomain.CurrentDomain.Load(dllBytes);
+#endif
 		}
 	}
+#if ILRUNTIME
 	unsafe void InitializeILRuntime()
 	{
 		InitDelegates();
@@ -66,12 +78,11 @@ public class ILRuntimeHandler
 
 		ILRuntime.Runtime.Generated.CLRBindings.Initialize(appdomain);
 	}
-
 	private void InitDelegates()
 	{
 		ILRegType.RegisterFunctionDelegate(appdomain);
 
-		#region WebSocket相关
+#region WebSocket相关
 		appdomain.DelegateManager.RegisterMethodDelegate<System.Object, System.EventArgs>();
 		appdomain.DelegateManager.RegisterDelegateConvertor<System.EventHandler>((act) =>
 		{
@@ -105,7 +116,15 @@ public class ILRuntimeHandler
 			});
 		});
 
-		#endregion        appdomain.DelegateManager.RegisterFunctionDelegate<System.Reflection.MethodInfo, System.Boolean>();
+
+
+
+
+#endregion
+		appdomain.DelegateManager.RegisterMethodDelegate<global::IDisposableAdapter.Adaptor>();
+		appdomain.DelegateManager.RegisterFunctionDelegate<System.Threading.Tasks.Task>();		appdomain.DelegateManager.RegisterMethodDelegate<ILRuntime.Runtime.Intepreter.ILTypeInstance>();
+
+		appdomain.DelegateManager.RegisterFunctionDelegate<System.Reflection.MethodInfo, System.Boolean>();
 		appdomain.DelegateManager.RegisterDelegateConvertor<System.Predicate<System.Reflection.MethodInfo>>((act) =>
 		{
 			return new System.Predicate<System.Reflection.MethodInfo>((obj) =>
@@ -301,15 +320,21 @@ public class ILRuntimeHandler
 	{
 		appdomain.Invoke("AHotBase", "EmitGameObject", null, gameObjectName, prefabName, obj);
 	}
+#endif
 	private Dictionary<string, GameObject> dObjs = new Dictionary<string, GameObject>();
 	public void OnLoadClass(string entranceClass, GameObject rootObj, bool CanBeUnloaded = true, string arg = "")
 	{
+#if ILRUNTIME
 		if (CanBeUnloaded)
 		{
 			OnUnloadClass(entranceClass);
 			dObjs.Add(entranceClass, rootObj);
 		}
 		appdomain.Invoke(entranceClass, "SetGameObj", appdomain.Instantiate(entranceClass), rootObj, arg);
+#else
+		var obj = assembly.CreateInstance(entranceClass);
+		obj.GetType().GetMethod("SetGameObj").Invoke(obj, new object[] { rootObj, arg });
+#endif
 	}
 	public void OnUnloadClass(string entranceClass)
 	{
@@ -330,6 +355,15 @@ public class ILRuntimeHandler
 
 	public void SetUnityMessageReceiver(GameObject receiver)
 	{
+#if ILRUNTIME
 		appdomain.Invoke("AHotBase", "SetUnityMessageReceiver", null, receiver);
+#endif
 	}
 }
+
+
+
+
+
+
+

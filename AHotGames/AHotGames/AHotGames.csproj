@@ -18,7 +18,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>..\..\UHotGames\Assets\RemoteResources\Dll\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;ILRuntime,UNITY_5</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
@@ -88,31 +88,38 @@
       <HintPath>..\..\UHotGames\Temp\bin\Debug\UnityEngine.UnityWebRequestWWWModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="UnityEngine.UI">
+    <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\UHotGames\Temp\bin\Debug\Newtonsoft.Json.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="games\actions\ActionBase.cs" />
+    <Compile Include="games\actions\ActionHandler.cs" />
+    <Compile Include="games\actions\ActionRun.cs" />
+    <Compile Include="games\actions\IActionBase.cs" />
     <Compile Include="games\data\Defs.cs" />
     <Compile Include="games\data\URemoteData.cs" />
-    <Compile Include="games\game\USanXiao.cs" />
-    <Compile Include="games\game\U2048.cs" />
     <Compile Include="games\game\Cards\ACards.cs" />
     <Compile Include="games\game\Novel\Novels.cs" />
     <Compile Include="games\game\UBigOrSmall.cs" />
-    <Compile Include="games\game\ULifeInBottle.cs" />
     <Compile Include="games\game\UCardGame.cs" />
     <Compile Include="games\game\UMMO.cs" />
-    <Compile Include="games\uis\UICommonTips.cs" />
-    <Compile Include="games\uis\UIDebugConsole.cs" />
+    <Compile Include="games\miner\Map\UMinerMap.cs" />
+    <Compile Include="games\miner\UIMinerMain.cs" />
+    <Compile Include="games\miner\UIMinerCreateAvatar.cs" />
+    <Compile Include="games\miner\UIMinerLogin.cs" />
+    <Compile Include="games\cnet\AOnlineSubsystem.cs" />
+    <Compile Include="games\cnet\UEventListener.cs" />
+    <Compile Include="games\cnet\UEvents.cs" />
+    <Compile Include="games\commonUI\UICommonTips.cs" />
+    <Compile Include="games\commonUI\UIDebugConsole.cs" />
     <Compile Include="games\uis\UIRank.cs" />
     <Compile Include="games\uis\UILoading.cs" />
     <Compile Include="games\uis\UDownloader.cs" />
-    <Compile Include="games\uis\ParamNameDefs.cs" />
     <Compile Include="games\uis\UICreateAvatar.cs" />
     <Compile Include="games\uis\UStaticWebRequests.cs" />
-    <Compile Include="games\uis\UICommonWait.cs" />
+    <Compile Include="games\commonUI\UICommonWait.cs" />
     <Compile Include="games\uis\UIMain.cs" />
     <Compile Include="games\uis\UIAlert.cs" />
     <Compile Include="games\uis\UIRegister.cs" />
@@ -121,6 +128,50 @@
     <Compile Include="games\AEntrance.cs" />
     <Compile Include="games\aempty\AEmptyUI.cs" />
     <Compile Include="games\uis\widgets\WExpSlider.cs" />
+    <Compile Include="net\LibClient\AClientApis.cs" />
+    <Compile Include="net\LibClient\AClientApp.cs" />
+    <Compile Include="net\LibClient\AClientComm.cs" />
+    <Compile Include="net\LibClient\AConnection.cs" />
+    <Compile Include="net\LibClient\GameObj\CakeAvatar.cs" />
+    <Compile Include="net\LibClient\GameObj\CakeClient.cs" />
+    <Compile Include="net\LibCommon\AConsoleBase.cs" />
+    <Compile Include="net\LibCommon\Components\AComponentBagCommon.cs" />
+    <Compile Include="net\LibCommon\Components\AComponentBase.cs" />
+    <Compile Include="net\LibCommon\Components\AComponentParamCommon.cs" />
+    <Compile Include="net\LibCommon\Defs\AEnumDefs.cs" />
+    <Compile Include="net\LibCommon\Defs\InitValueDefs.cs" />
+    <Compile Include="net\LibCommon\Defs\ParamNameDefs.cs" />
+    <Compile Include="net\LibCommon\GameObj\AAvatarCommon.cs" />
+    <Compile Include="net\LibCommon\GameObj\AGameObj.cs" />
+    <Compile Include="net\LibCommon\GameObj\AParam.cs" />
+    <Compile Include="net\LibCommon\GameObj\Cake.cs" />
+    <Compile Include="net\LibConfig\Loaders\ConfigManager.cs" />
+    <Compile Include="net\LibConfig\Loaders\cs\DailyCheckLoader.cs" />
+    <Compile Include="net\LibConfig\Loaders\cs\ItemsLoader.cs" />
+    <Compile Include="net\LibConfig\Loaders\cs\MapLoader.cs" />
+    <Compile Include="net\LibNet\AUDPSocket.cs" />
+    <Compile Include="net\LibNet\ByteStream.cs" />
+    <Compile Include="net\LibNet\ClientConnection.cs" />
+    <Compile Include="net\LibNet\ClientConnectionUtil.cs" />
+    <Compile Include="net\LibNet\DataAccess\DataAccessBase.cs" />
+    <Compile Include="net\LibNet\DataAccess\DataAccessTask.cs" />
+    <Compile Include="net\LibNet\DataAccess\UtilTask.cs" />
+    <Compile Include="net\LibNet\Engine.cs" />
+    <Compile Include="net\LibNet\EngineClient.cs" />
+    <Compile Include="net\LibNet\EngineControler.cs" />
+    <Compile Include="net\LibNet\EngineServer.cs" />
+    <Compile Include="net\LibNet\ITickableSystem.cs" />
+    <Compile Include="net\LibNet\Packet.cs" />
+    <Compile Include="net\LibNet\PacketFactory.cs" />
+    <Compile Include="net\LibNet\rpc\CRpcTag.cs" />
+    <Compile Include="net\LibNet\rpc\RPCClient.cs" />
+    <Compile Include="net\LibNet\rpc\RPCServer.cs" />
+    <Compile Include="net\LibNet\Uitlity\AFactoryPacket.cs" />
+    <Compile Include="net\LibNet\Uitlity\ExcelReader.cs" />
+    <Compile Include="net\LibNet\Uitlity\IResponer.cs" />
+    <Compile Include="net\LibNet\Uitlity\ServerUtils.cs" />
+    <Compile Include="net\LibPkt\PktBase.cs" />
+    <Compile Include="net\LibPkt\SerializedPkt.cs" />
     <Compile Include="utils\AHotDrag.cs" />
     <Compile Include="utils\AOutput.cs" />
     <Compile Include="utils\ApiDateTime.cs" />
@@ -128,7 +179,9 @@
     <Compile Include="games\aempty\AHotBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="utils\CRC.cs" />
+    <Compile Include="utils\CSCSV.cs" />
     <Compile Include="utils\Environment.cs" />
+    <Compile Include="utils\MD5String.cs" />
     <Compile Include="utils\Singleton.cs" />
     <Compile Include="utils\typeParser.cs" />
     <Compile Include="utils\UEmitMessager.cs" />

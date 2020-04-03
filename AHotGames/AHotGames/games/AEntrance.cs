@@ -5,12 +5,19 @@ using System.Text;
 using UnityEngine.UI;
 using UnityEngine;
 using System.Threading.Tasks;
+using LibClient.GameObj;
 
 public class AEntrance : AHotBase
 {
-    protected override void InitComponents()
+	protected override void InitComponents()
 	{
 		AOutput.Register(UDebugHotLog.Log);
+
+		var i = UEventListener.Instance;
+
+		LibClient.AClientApp.Init(new AOnlineSubsystem());
+
+		new CakeClient("pinfo", "1", "1");
 		PreDownloadResources();
 	}
 
@@ -39,12 +46,16 @@ public class AEntrance : AHotBase
 				{
 					LoadUI<UILoading>();
 
-					UHotAssetBundleLoader.Instance.OnDownloadResources(new List<string>(preloadResources), () =>
+					ConfigManager.Instance.DownloadConfig(() =>
 					{
-						UILoading.Instance?.OnUnloadThis();
+						UHotAssetBundleLoader.Instance.OnDownloadResources(new List<string>(preloadResources), () =>
+						{
+							UILoading.Instance?.OnUnloadThis();
 
-						LoadUI<UILogin>();
-					}, null);
+							//LoadUI<UILogin>();
+							LoadUI<UIMinerLogin>();
+						}, null);
+					});
 				}, null);
 			}, null);
 		}, null);

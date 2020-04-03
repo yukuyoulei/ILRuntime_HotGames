@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -13,5 +14,9 @@ public static class AOutput
 	public static void Log(string slog)
 	{
 		del?.Invoke(slog);
+	}
+	public static void LogError(string slog)
+	{
+		del?.Invoke($"[ERROR]{slog}");
 	}
 }

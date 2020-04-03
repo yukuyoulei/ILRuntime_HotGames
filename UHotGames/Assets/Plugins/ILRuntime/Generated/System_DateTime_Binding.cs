@@ -51,6 +51,7 @@ namespace ILRuntime.Runtime.Generated
             app.RegisterCLRMethodRedirection(method, ToString_8);
 
             app.RegisterCLRCreateDefaultInstance(type, () => new System.DateTime());
+            app.RegisterCLRCreateArrayInstance(type, s => new System.DateTime[s]);
 
             args = new Type[]{typeof(System.Int32), typeof(System.Int32), typeof(System.Int32), typeof(System.Int32), typeof(System.Int32), typeof(System.Int32)};
             method = type.GetConstructor(flag, null, args, null);

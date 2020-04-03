@@ -28,6 +28,9 @@ namespace ILRuntime.Runtime.Generated
             args = new Type[]{};
             method = type.GetMethod("get_TotalMilliseconds", flag, null, args, null);
             app.RegisterCLRMethodRedirection(method, get_TotalMilliseconds_1);
+            args = new Type[]{typeof(System.Double)};
+            method = type.GetMethod("FromMilliseconds", flag, null, args, null);
+            app.RegisterCLRMethodRedirection(method, FromMilliseconds_2);
 
             app.RegisterCLRCreateDefaultInstance(type, () => new System.TimeSpan());
 
@@ -120,6 +123,21 @@ namespace ILRuntime.Runtime.Generated
             __ret->ObjectType = ObjectTypes.Double;
             *(double*)&__ret->Value = result_of_this_method;
             return __ret + 1;
+        }
+
+        static StackObject* FromMilliseconds_2(ILIntepreter __intp, StackObject* __esp, IList<object> __mStack, CLRMethod __method, bool isNewObj)
+        {
+            ILRuntime.Runtime.Enviorment.AppDomain __domain = __intp.AppDomain;
+            StackObject* ptr_of_this_method;
+            StackObject* __ret = ILIntepreter.Minus(__esp, 1);
+
+            ptr_of_this_method = ILIntepreter.Minus(__esp, 1);
+            System.Double @value = *(double*)&ptr_of_this_method->Value;
+
+
+            var result_of_this_method = System.TimeSpan.FromMilliseconds(@value);
+
+            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
         }
 
 

@@ -38,6 +38,7 @@ public class ConfigDownloader : MonoBehaviour
 	IEnumerator DownloadConfig(string configUrl)
 	{
 		var url = configUrl + "?" + ApiDateTime.SecondsFromBegin();
+		AOutput.Log($"DownloadConfig {url}");
 		var www = new WWW(url);
 		StartCoroutine(OnTimeout(www));
 		yield return www;

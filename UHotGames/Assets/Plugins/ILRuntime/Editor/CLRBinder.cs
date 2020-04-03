@@ -51,5 +51,6 @@ public class CLRBinder
         //这里需要注册所有热更DLL中用到的跨域继承Adapter，否则无法正确抓取引用
         domain.RegisterCrossBindingAdaptor(new MonoBehaviourAdapter());
         domain.RegisterCrossBindingAdaptor(new CoroutineAdapter());
+        domain.RegisterCrossBindingAdaptor(new IAsyncStateMachineClassInheritanceAdaptor());
     }
 }

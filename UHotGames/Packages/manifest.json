@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.unity.2d.animation": "1.0.16-preview.2",
     "com.unity.ads": "2.0.8",
     "com.unity.analytics": "2.0.16",
     "com.unity.package-manager-ui": "1.9.11",

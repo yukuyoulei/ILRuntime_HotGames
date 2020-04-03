@@ -34,7 +34,9 @@ public class UEmitMessage : MonoBehaviour
 			{
 				obj = Instantiate(obj);
 			}
+#if ILRUNTIME
 			ILRuntimeHandler.Instance.EmitGameObject(amsg[1], obj, amsg.Length > 2 ? amsg[2] : "");
+#endif
 		}
 		else if (amsg[0] == "unloadall")
 		{

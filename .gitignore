@@ -28,3 +28,7 @@ UHotGames/Assets/Script/Utils/LibUtils/Properties.meta
 UHotGames/Assets/StreamingAssets.meta
 UHotGames/ProjectSettings/ProjectVersion.txt
 *.user
+UHotGames/Assembly-CSharp.csproj
+UHotGames/Assembly-CSharp-firstpass.csproj
+UHotGames/Assembly-CSharp-Editor.csproj
+UHotGames/Assembly-CSharp-Editor-firstpass.csproj

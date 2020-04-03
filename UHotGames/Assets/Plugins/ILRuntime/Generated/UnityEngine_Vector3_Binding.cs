@@ -33,17 +33,15 @@ namespace ILRuntime.Runtime.Generated
             method = type.GetMethod("Lerp", flag, null, args, null);
             app.RegisterCLRMethodRedirection(method, Lerp_2);
 
-            field = type.GetField("x", flag);
-            app.RegisterCLRFieldGetter(field, get_x_0);
-            app.RegisterCLRFieldSetter(field, set_x_0);
             field = type.GetField("y", flag);
-            app.RegisterCLRFieldGetter(field, get_y_1);
-            app.RegisterCLRFieldSetter(field, set_y_1);
+            app.RegisterCLRFieldGetter(field, get_y_0);
+            app.RegisterCLRFieldSetter(field, set_y_0);
             field = type.GetField("z", flag);
-            app.RegisterCLRFieldGetter(field, get_z_2);
-            app.RegisterCLRFieldSetter(field, set_z_2);
-
-            app.RegisterCLRMemberwiseClone(type, PerformMemberwiseClone);
+            app.RegisterCLRFieldGetter(field, get_z_1);
+            app.RegisterCLRFieldSetter(field, set_z_1);
+            field = type.GetField("x", flag);
+            app.RegisterCLRFieldGetter(field, get_x_2);
+            app.RegisterCLRFieldSetter(field, set_x_2);
 
             app.RegisterCLRCreateDefaultInstance(type, () => new UnityEngine.Vector3());
 
@@ -159,45 +157,38 @@ namespace ILRuntime.Runtime.Generated
         }
 
 
-        static object get_x_0(ref object o)
-        {
-            return ((UnityEngine.Vector3)o).x;
-        }
-        static void set_x_0(ref object o, object v)
-        {
-            var h = GCHandle.Alloc(o, GCHandleType.Pinned);
-            UnityEngine.Vector3* p = (UnityEngine.Vector3 *)(void *)h.AddrOfPinnedObject();
-            p->x = (System.Single)v;
-            h.Free();
-        }
-        static object get_y_1(ref object o)
+        static object get_y_0(ref object o)
         {
             return ((UnityEngine.Vector3)o).y;
         }
-        static void set_y_1(ref object o, object v)
+        static void set_y_0(ref object o, object v)
         {
             var h = GCHandle.Alloc(o, GCHandleType.Pinned);
             UnityEngine.Vector3* p = (UnityEngine.Vector3 *)(void *)h.AddrOfPinnedObject();
             p->y = (System.Single)v;
             h.Free();
         }
-        static object get_z_2(ref object o)
+        static object get_z_1(ref object o)
         {
             return ((UnityEngine.Vector3)o).z;
         }
-        static void set_z_2(ref object o, object v)
+        static void set_z_1(ref object o, object v)
         {
             var h = GCHandle.Alloc(o, GCHandleType.Pinned);
             UnityEngine.Vector3* p = (UnityEngine.Vector3 *)(void *)h.AddrOfPinnedObject();
             p->z = (System.Single)v;
             h.Free();
         }
-
-        static object PerformMemberwiseClone(ref object o)
+        static object get_x_2(ref object o)
         {
-            var ins = new UnityEngine.Vector3();
-            ins = (UnityEngine.Vector3)o;
-            return ins;
+            return ((UnityEngine.Vector3)o).x;
+        }
+        static void set_x_2(ref object o, object v)
+        {
+            var h = GCHandle.Alloc(o, GCHandleType.Pinned);
+            UnityEngine.Vector3* p = (UnityEngine.Vector3 *)(void *)h.AddrOfPinnedObject();
+            p->x = (System.Single)v;
+            h.Free();
         }
 
         static StackObject* Ctor_0(ILIntepreter __intp, StackObject* __esp, IList<object> __mStack, CLRMethod __method, bool isNewObj)

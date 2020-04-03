@@ -544,7 +544,8 @@ PlayerSettings:
   webGLUseEmbeddedResources: 0
   webGLCompressionFormat: 1
   webGLLinkerTarget: 1
-  scriptingDefineSymbols: {}
+  scriptingDefineSymbols:
+    4: ILRUNTIME
   platformArchitecture:
     iOS: 2
   scriptingBackend:

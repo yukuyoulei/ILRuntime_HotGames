@@ -25,6 +25,9 @@ namespace ILRuntime.Runtime.Generated
             args = new Type[]{typeof(System.Array), typeof(System.Int32)};
             method = type.GetMethod("CopyTo", flag, null, args, null);
             app.RegisterCLRMethodRedirection(method, CopyTo_0);
+            args = new Type[]{typeof(System.Array), typeof(System.Int32), typeof(System.Array), typeof(System.Int32), typeof(System.Int32)};
+            method = type.GetMethod("ConstrainedCopy", flag, null, args, null);
+            app.RegisterCLRMethodRedirection(method, ConstrainedCopy_1);
 
 
         }
@@ -48,6 +51,35 @@ namespace ILRuntime.Runtime.Generated
             __intp.Free(ptr_of_this_method);
 
             instance_of_this_method.CopyTo(@array, @index);
+
+            return __ret;
+        }
+
+        static StackObject* ConstrainedCopy_1(ILIntepreter __intp, StackObject* __esp, IList<object> __mStack, CLRMethod __method, bool isNewObj)
+        {
+            ILRuntime.Runtime.Enviorment.AppDomain __domain = __intp.AppDomain;
+            StackObject* ptr_of_this_method;
+            StackObject* __ret = ILIntepreter.Minus(__esp, 5);
+
+            ptr_of_this_method = ILIntepreter.Minus(__esp, 1);
+            System.Int32 @length = ptr_of_this_method->Value;
+
+            ptr_of_this_method = ILIntepreter.Minus(__esp, 2);
+            System.Int32 @destinationIndex = ptr_of_this_method->Value;
+
+            ptr_of_this_method = ILIntepreter.Minus(__esp, 3);
+            System.Array @destinationArray = (System.Array)typeof(System.Array).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack));
+            __intp.Free(ptr_of_this_method);
+
+            ptr_of_this_method = ILIntepreter.Minus(__esp, 4);
+            System.Int32 @sourceIndex = ptr_of_this_method->Value;
+
+            ptr_of_this_method = ILIntepreter.Minus(__esp, 5);
+            System.Array @sourceArray = (System.Array)typeof(System.Array).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack));
+            __intp.Free(ptr_of_this_method);
+
+
+            System.Array.ConstrainedCopy(@sourceArray, @sourceIndex, @destinationArray, @destinationIndex, @length);
 
             return __ret;
         }

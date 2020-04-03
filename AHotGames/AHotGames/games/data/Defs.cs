@@ -43,13 +43,6 @@ public static class InitValueDefs
 	public static int[] CaiDaXiaoMultis = new int[] { 1, 3, 5, 10 };
 
 }
-public enum EParamType
-{
-	String,
-	Int,
-	Long,
-	Double,
-}
 
 public enum ERankType
 {

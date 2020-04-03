@@ -15,6 +15,7 @@ public class AntiScriptSplit : MonoBehaviour
 
 		new Thread(new ThreadStart(() => { })).Start();
 		new System.Threading.Tasks.Task(() => { }).Start();
+		System.Threading.Tasks.Task.Run(() => { });
 	}
 
 	private IEnumerator OnRequestCamera()

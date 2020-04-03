@@ -12,8 +12,22 @@ public class UMMO : AHotBase
 	Button btnReturn;
 	InputField inputAnswer;
 	WExpSlider expSlider;
+
+	Transform Cave0;
 	protected override void InitComponents()
 	{
+		Cave0 = FindWidget<Transform>("Cave0");
+		var actionHandler = new ActionHandler(Cave0.gameObject);
+		actionHandler.AddAction(new ActionRun(actionHandler.handler));
+		addUpdateAction(() =>
+		{
+			if (Input.GetMouseButtonDown(0))
+				actionHandler.Do<ActionRun>().Play();
+			if (Input.GetMouseButtonUp(0))
+				actionHandler.Do<ActionRun>().Stop();
+			return false;
+		});
+
 		var tr = FindWidget<Transform>("expBg");
 		expSlider = new WExpSlider();
 		expSlider.SetGameObj(tr.gameObject);

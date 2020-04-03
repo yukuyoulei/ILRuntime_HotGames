@@ -42,7 +42,9 @@ public class SDK_QRCode : UIBase
         var res = reader.Decode(requestedWebCam.GetPixels32(), requestedWebCam.width, requestedWebCam.height);
         if (res != null && !string.IsNullOrEmpty(res.Text))
         {
+#if ILRUNTIME
             ILRuntimeHandler.Instance.EmitMessage($"qrcode:{res.Text}");
+#endif
         }
     }
 

@@ -5,7 +5,9 @@ using System.Linq;
 
 public class Enter : MonoBehaviour
 {
-	public static string ConfigURL { get { return PlayerPrefs.GetInt("USE_LOCAL_CDN") == 1 ? "http://127.0.0.1/hotgame/Config.txt" : "https://yukuyoulei.github.io/ILRuntime_HotGames/ab1/Config.txt"; } }
+	public static string ConfigURL { get { return PlayerPrefs.GetInt("USE_LOCAL_CDN") == 1 
+				? "http://127.0.0.1/hotgame/Config.txt" 
+				: "https://yukuyoulei.github.io/ILRuntime_HotGames/ab1/Config.txt"; } }
 	public bool UseAB;
 	private Transform trUIAlert;
 	private void Start()
@@ -141,6 +143,7 @@ public class Enter : MonoBehaviour
 		ILRuntimeHandler.Instance.SetUnityMessageReceiver(MonoInstancePool.getInstance<UEmitMessage>(true).gameObject);
 
 		ILRuntimeHandler.Instance.OnLoadClass("AEntrance", new GameObject("AEntrance"), false, UConfigManager.bUsingAb.ToString());
+#if ILRUNTIME
 		ILRuntimeHandler.Instance.EmitMessage(bIsLocal ? "local" : "remote");
 		ILRuntimeHandler.Instance.EmitMessage($"resPath:{ConfigDownloader.Instance.OnGetValue("resPath")}");
 		fprocessing = 0.8f;
@@ -149,6 +152,7 @@ public class Enter : MonoBehaviour
 		ILRuntimeHandler.Instance.EmitMessage("targetRuntime:IOS", "AEntrance");
 #elif UNITY_ANDROID
 		ILRuntimeHandler.Instance.EmitMessage("targetRuntime:Android", "AEntrance");
+#endif
 #endif
 #endif
 		fprocessing = 1f;

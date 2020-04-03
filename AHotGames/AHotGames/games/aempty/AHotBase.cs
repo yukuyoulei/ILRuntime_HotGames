@@ -44,6 +44,7 @@ public abstract class AHotBase
 		{
 			onReceiveMsg?.Invoke(msg);
 
+			AOutput.Log($"AHotBase receive msg {msg}");
 			var amsg = msg.Split(new char[] { ':' }, 2);
 			switch (amsg[0])
 			{
@@ -141,17 +142,24 @@ public abstract class AHotBase
 	}
 	protected void DelayDoSth(Action sth, float delay)
 	{
-		var delta = 0f;
-		addUpdateAction(() =>
+		if (delay > 0)
 		{
-			delta += Time.deltaTime;
-			if (delta > delay)
+			var delta = 0f;
+			addUpdateAction(() =>
 			{
-				sth();
-				return true;
-			}
-			return false;
-		});
+				delta += Time.deltaTime;
+				if (delta > delay)
+				{
+					sth();
+					return true;
+				}
+				return false;
+			});
+		}
+		else
+		{
+			sth();
+		}
 	}
 
 	protected void OnDelaySendMessage(string message, float delay)
@@ -296,7 +304,8 @@ public abstract class AHotBase
 		Debug.Log("send message to unity:" + smsg);
 		SendMessageToUnityReceiver(smsg);
 	}
-	public static T LoadClass<T>(string prefabPath, Action<T> action = null) where T : AHotBase, new()
+	private static List<AHotBase> loadedClasses = new List<AHotBase>();
+	public static T LoadClass<T>(string prefabPath, Action<T> action = null, bool bCanNotAntoDestroy = false) where T : AHotBase, new()
 	{
 		GameObject obj = UHotAssetBundleLoader.Instance.OnLoadAsset<GameObject>(prefabPath);
 		if (obj == null)
@@ -307,21 +316,23 @@ public abstract class AHotBase
 		var t = new T();
 		t.SetGameObj(GameObject.Instantiate(obj), "");
 		action?.Invoke(t);
+		if (!bCanNotAntoDestroy)
+			loadedClasses.Add(t);
 		return t;
 	}
-	public static void LoadUI<T>(Action<T> action = null) where T : AHotBase, new()
+	public static void LoadUI<T>(Action<T> action = null, bool bCanNotAntoDestroy = false) where T : AHotBase, new()
 	{
 		UICommonWait.Show();
 		var path = "UI/" + typeof(T).Name;
 		UHotAssetBundleLoader.Instance.OnDownloadResources(() =>
 		{
 			UICommonWait.Hide();
-			LoadClass<T>(path, action);
+			LoadClass<T>(path, action, bCanNotAntoDestroy);
 		}, path);
 	}
-	public static void LoadAnotherUI<T>(Action<T> actionLoadComplete = null) where T : AHotBase, new()
+	public static void LoadAnotherUI<T>(Action<T> actionLoadComplete = null, bool bCanNotAntoDestroy = false) where T : AHotBase, new()
 	{
-		LoadUI<T>(actionLoadComplete);
+		LoadUI<T>(actionLoadComplete, bCanNotAntoDestroy);
 	}
 	public static void LoadAnotherUI(string uiname)
 	{
@@ -340,7 +351,11 @@ public abstract class AHotBase
 	}
 	public static void UnloadAllClasses()
 	{
-		SendMessageToUnityReceiver("unloadall");
+		foreach (var c in loadedClasses)
+		{
+			GameObject.Destroy(c.gameObj);
+		}
+		loadedClasses.Clear();
 	}
 
 	protected void OnInvokeFunc(string funcName)
@@ -377,11 +392,39 @@ public abstract class AHotBase
 		public Action action;
 		public float delay;
 	}
-
+	Dictionary<string, Action<UEventBase>> dRegisterredEvents;
+	protected void RegisterEvent(string eventName, Action<UEventBase> action)
+	{
+		if (dRegisterredEvents == null)
+			dRegisterredEvents = new Dictionary<string, Action<UEventBase>>();
+		dRegisterredEvents.Add(eventName, action);
+		UEventListener.Instance.OnRegisterEvent(eventName, action);
+	}
 	protected virtual void OnDestroy()
 	{
+		if (dRegisterredEvents != null)
+			foreach (var kv in dRegisterredEvents)
+				UEventListener.Instance.OnUnregisterEvent(kv.Key, kv.Value);
 	}
 
+	protected void MoveTo(RectTransform tc, Vector3 to, float moveSeconds = 1, Action endAction = null)
+	{
+		var startTime = ApiDateTime.Now;
+		var rawp = tc.anchoredPosition;
+		addUpdateAction(() =>
+		{
+			tc.anchoredPosition = Vector3.Lerp(rawp, to, (float)(ApiDateTime.Now - startTime).TotalSeconds / moveSeconds);
+
+			var bend = (ApiDateTime.Now - startTime).TotalSeconds > moveSeconds;
+			if (bend)
+			{
+				tc.anchoredPosition = to;
+
+				endAction?.Invoke();
+			}
+			return bend;
+		});
+	}
 	protected void MoveTo(Transform tc, Vector3 to, float moveSeconds = 1, Space space = Space.World, Action endAction = null)
 	{
 		var startTime = ApiDateTime.Now;

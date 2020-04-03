@@ -166,12 +166,12 @@ public class UHotAssetBundleLoader : AHotBase
 	}
 	public void OnDownloadResources(List<string> lResources, Action downloaded, Action<float> progress = null)
 	{
-		UDebugHotLog.Log($"OnDownloadResources {string.Join(",", lResources)}");
 		if (!Environment.UseAB)
 		{
 			downloaded?.Invoke();
 			return;
 		}
+		UDebugHotLog.Log($"OnDownloadResources {Utils.GetPlatformFolder(Application.platform)} {string.Join(",", lResources)}");
 		if (dRemoteVersions.Count == 0)
 		{
 			OnDownloadText(Utils.GetPlatformFolder(Application.platform) + "/versions", (content) =>
@@ -321,6 +321,7 @@ public class UHotAssetBundleLoader : AHotBase
 		}
 		var url = Utils.BaseURL_Res + Utils.GetPlatformFolder(Application.platform) + resource;
 		var www = new WWW(url);
+		AOutput.Log($"Downloading {url}");
 		addUpdateAction(() =>
 		{
 			if (www.isDone)

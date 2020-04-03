@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "AServer": {
+      "commandName": "Project",
+      "nativeDebugging": true
+    }
+  }
+}

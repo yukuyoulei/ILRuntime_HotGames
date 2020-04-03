@@ -532,7 +532,13 @@ public class UBuildTools : EditorWindow
 
 		foreach (var d in dDependences)
 		{
-			PackItem(d.Key, AssetImporter.GetAtPath(d.Key));
+			var imp = AssetImporter.GetAtPath(d.Key);
+			if (imp == null)
+			{
+				Debug.Log($"Invalid importer {d.Key}");
+				continue;
+			}
+			PackItem(d.Key, imp);
 		}
 	}
 	public List<string> indepentPrefabs;
@@ -767,9 +773,9 @@ public class UBuildTools : EditorWindow
 		plistDocument.root.SetString("CFBundleDevelopmentRegion", "China");
 
 		PlistElementDict dict = plistDocument.root.AsDict();
-		dict.SetString("NSPhotoLibraryUsageDescription", "需要访问相册，来上传老师布置的书写作业。");
-		dict.SetString("NSCameraUsageDescription", "需要启用摄像头拍摄上传老师布置的书写作业。");
-		dict.SetString("NSMicrophoneUsageDescription", "需要启用麦克风录制老师布置的朗读作业。");
+		dict.SetString("NSPhotoLibraryUsageDescription", "需要访问相册。");
+		dict.SetString("NSCameraUsageDescription", "需要启用摄像头。");
+		dict.SetString("NSMicrophoneUsageDescription", "需要启用麦克风。");
 
 		{
 			PlistElementArray parray = plistDocument.root.CreateArray("CFBundleURLTypes");
