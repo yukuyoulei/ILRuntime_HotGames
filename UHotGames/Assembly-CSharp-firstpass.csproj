@@ -22,7 +22,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>Temp\bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2018_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_2018_2_21;UNITY_2018_2;UNITY_2018;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_SPRITES;ENABLE_GRID;ENABLE_TILEMAP;ENABLE_TERRAIN;ENABLE_TEXTURE_STREAMING;ENABLE_DIRECTOR;ENABLE_UNET;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_COLLAB_SOFTLOCKS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_TIMELINE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;ENABLE_MANAGED_JOBS;ENABLE_MANAGED_TRANSFORM_JOBS;ENABLE_MANAGED_ANIMATION_JOBS;INCLUDE_DYNAMIC_GI;INCLUDE_GI;ENABLE_MONO_BDWGC;PLATFORM_SUPPORTS_MONO;INCLUDE_PUBNUB;ENABLE_VIDEO;ENABLE_PACKMAN;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_LOCALIZATION;ENABLE_RUNTIME_GI;ENABLE_SUBSTANCE;ENABLE_GAMECENTER;ENABLE_NETWORK;ENABLE_UNITYWEBREQUEST;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_IOS_NATIVE_CRASH_REPORTING;PLAYERCONNECTION_LISTENS_FIXED_PORT;DEBUGGER_LISTENS_FIXED_PORT;PLATFORM_SUPPORTS_ADS_ID;SUPPORT_ENVIRONMENT_VARIABLES;PLATFORM_SUPPORTS_PROFILER;PLATFORM_HAS_NO_SUPPORT_FOR_BUCKET_ALLOCATOR;STRICTCPP_NEW_DELETE_SIGNATURES;HAS_NEON_SKINNING;UNITY_GFX_USE_PLATFORM_VSYNC;UNITY_INPUT_SIMULATE_EVENTS;PLATFORM_ALWAYS_USES_STDOUT_FOR_LOG;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITYADS_RUNTIME;UNITY_UNITYADS_API;PLATFORM_IOS;UNITY_IOS;PLATFORM_IPHONE;UNITY_IPHONE;UNITY_IPHONE_API;SUPPORT_MULTIPLE_DISPLAYS;ENABLE_VR;ENABLE_AR;ENABLE_SPATIALTRACKING;ENABLE_IL2CPP;NET_4_6;ENABLE_PROFILER;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_UNITY_COLLECTIONS_CHECKS;ENABLE_BURST_AOT;UNITY_TEAM_LICENSE;ENABLE_IOS_ON_DEMAND_RESOURCES;ENABLE_IOS_APP_SLICING;UNITY_HAS_GOOGLEVR;ENABLE_MONO</DefineConstants>
+    <DefineConstants>DEBUG;TRACE;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2018_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_2018_2_21;UNITY_2018_2;UNITY_2018;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_SPRITES;ENABLE_GRID;ENABLE_TILEMAP;ENABLE_TERRAIN;ENABLE_TEXTURE_STREAMING;ENABLE_DIRECTOR;ENABLE_UNET;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_COLLAB_SOFTLOCKS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_TIMELINE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;ENABLE_MANAGED_JOBS;ENABLE_MANAGED_TRANSFORM_JOBS;ENABLE_MANAGED_ANIMATION_JOBS;INCLUDE_DYNAMIC_GI;INCLUDE_GI;ENABLE_MONO_BDWGC;PLATFORM_SUPPORTS_MONO;INCLUDE_PUBNUB;ENABLE_VIDEO;ENABLE_PACKMAN;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_LOCALIZATION;ENABLE_RUNTIME_GI;ENABLE_SUBSTANCE;ENABLE_GAMECENTER;ENABLE_NETWORK;ENABLE_UNITYWEBREQUEST;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_IOS_NATIVE_CRASH_REPORTING;PLAYERCONNECTION_LISTENS_FIXED_PORT;DEBUGGER_LISTENS_FIXED_PORT;PLATFORM_SUPPORTS_ADS_ID;SUPPORT_ENVIRONMENT_VARIABLES;PLATFORM_SUPPORTS_PROFILER;PLATFORM_HAS_NO_SUPPORT_FOR_BUCKET_ALLOCATOR;STRICTCPP_NEW_DELETE_SIGNATURES;HAS_NEON_SKINNING;UNITY_GFX_USE_PLATFORM_VSYNC;UNITY_INPUT_SIMULATE_EVENTS;PLATFORM_ALWAYS_USES_STDOUT_FOR_LOG;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITYADS_RUNTIME;UNITY_UNITYADS_API;PLATFORM_IOS;UNITY_IOS;PLATFORM_IPHONE;UNITY_IPHONE;UNITY_IPHONE_API;SUPPORT_MULTIPLE_DISPLAYS;ENABLE_VR;ENABLE_AR;ENABLE_SPATIALTRACKING;ENABLE_IL2CPP;NET_4_6;ENABLE_PROFILER;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_UNITY_COLLECTIONS_CHECKS;ENABLE_BURST_AOT;UNITY_TEAM_LICENSE;ILRUNTIME;ENABLE_IOS_ON_DEMAND_RESOURCES;ENABLE_IOS_APP_SLICING;UNITY_HAS_GOOGLEVR;ENABLE_MONO</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <NoWarn>0169</NoWarn>
@@ -65,104 +65,175 @@
      <Compile Include="Assets\Plugins\ILRuntime\Generated\Newtonsoft_Json_Linq_JObject_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\Newtonsoft_Json_Linq_JToken_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Action_1_Byte_Array_Binding.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Action_1_CoroutineAdapter_Binding_Adaptor_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Action_1_ErrorEventArgs_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Action_1_EventArgs_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Action_1_GameObject_Binding.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Action_1_ILTypeInstance_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Action_1_JObject_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Action_1_MessageEventArgs_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Action_1_Single_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Action_1_String_Binding.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Action_2_IPEndPoint_Byte_Array_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Action_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Activator_Binding.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_ArgumentException_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Array_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_BitConverter_Binding.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Buffer_Binding.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Byte_Array_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Byte_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Char_Binding.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Concurrent_ConcurrentDictionary_2_String_Int32_t.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Concurrent_ConcurrentQueue_1_ILTypeInstance_Bi_t.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Generic_Dictionary_2_Int32_Dictionary_2_Int32__t.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Generic_Dictionary_2_Int32_ILTypeInstance_Bind_t.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Generic_Dictionary_2_Int32_ILTypeInstance_Bind_t_t.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Generic_Dictionary_2_Int32_ILTypeInstance_Bind_t_t_t.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Generic_Dictionary_2_Int32_ILTypeInstance_Bind_t_t_t_t.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Generic_Dictionary_2_Int32_Int32_Binding.cs" />
-     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Generic_Dictionary_2_Int32_RawImage_Binding.cs" />
-     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Generic_Dictionary_2_Int32_RawImage_Binding_En_t.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Generic_Dictionary_2_Int32_String_Binding.cs" />
-     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Generic_Dictionary_2_Int32_Transform_Binding.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Generic_Dictionary_2_String_Action_1_ILTypeIns_t.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Generic_Dictionary_2_String_Action_1_ILTypeIns_t_t.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Generic_Dictionary_2_String_Action_1_String_Bi_t.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Generic_Dictionary_2_String_Action_1_String_Bi_t_t.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Generic_Dictionary_2_String_Action_1_String_Bi_t_t_t.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Generic_Dictionary_2_String_Action_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Generic_Dictionary_2_String_Action_Binding_Enu_t.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Generic_Dictionary_2_String_AssetBundle_Bindin_t.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Generic_Dictionary_2_String_Button_Binding.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Generic_Dictionary_2_String_Dictionary_2_Strin_t.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Generic_Dictionary_2_String_Dictionary_2_Strin_t_t.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Generic_Dictionary_2_String_Dictionary_2_Strin_t_t_t.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Generic_Dictionary_2_String_GameObject_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Generic_Dictionary_2_String_ILTypeInstance_Bin_t.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Generic_Dictionary_2_String_ILTypeInstance_Bin_t_t.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Generic_Dictionary_2_String_ILTypeInstance_Bin_t_t_t.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Generic_Dictionary_2_String_ILTypeInstance_Bin_t_t_t_t.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Generic_Dictionary_2_String_List_1_Action_1_Ga_t.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Generic_Dictionary_2_String_List_1_Action_1_IL_t.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Generic_Dictionary_2_String_List_1_Action_Bind_t.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Generic_Dictionary_2_String_String_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Generic_Dictionary_2_String_String_Binding_Enu_t.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Generic_Dictionary_2_String_String_Binding_Key_t.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Generic_Dictionary_2_String_String_Binding_Key_t_t.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Generic_IEnumerable_1_String_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Generic_IEnumerator_1_JToken_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Generic_IEnumerator_1_KeyValuePair_2_String_JT_t.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Generic_IEnumerator_1_String_Binding.cs" />
-     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Generic_KeyValuePair_2_Int32_RawImage_Binding.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Generic_KeyValuePair_2_Int32_ILTypeInstance_Bi_t.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Generic_KeyValuePair_2_String_Action_1_ILTypeI_t.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Generic_KeyValuePair_2_String_Action_Binding.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Generic_KeyValuePair_2_String_ILTypeInstance_B_t.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Generic_KeyValuePair_2_String_JToken_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Generic_KeyValuePair_2_String_String_Binding.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Generic_List_1_Action_1_CoroutineAdapter_Bindi_t.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Generic_List_1_Action_1_CoroutineAdapter_Bindi_t_t.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Generic_List_1_Action_1_GameObject_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Generic_List_1_Action_1_GameObject_Binding_Enu_t.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Generic_List_1_Action_1_ILTypeInstance_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Generic_List_1_Action_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Generic_List_1_Action_Binding_Enumerator_Bindi_t.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Generic_List_1_CoroutineAdapter_Binding_Adapto_t.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Generic_List_1_CoroutineAdapter_Binding_Adapto_t_t.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Generic_List_1_Func_1_Boolean_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Generic_List_1_Func_1_Boolean_Binding_Enumerat_t.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Generic_List_1_GameObject_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Generic_List_1_GameObject_Binding_Enumerator_B_t.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Generic_List_1_ILTypeInstance_Binding.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Generic_List_1_ILTypeInstance_Binding_Enumerat_t.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Generic_List_1_Int32_Binding.cs" />
-     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Generic_List_1_KeyValuePair_2_Int32_RawImage_B_t.cs" />
-     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Generic_List_1_KeyValuePair_2_Int32_RawImage_B_t_t.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Generic_List_1_Int32_Binding_Enumerator_Bindin_t.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Generic_List_1_RaycastResult_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Generic_List_1_RaycastResult_Binding_Enumerato_t.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Generic_List_1_Single_Binding.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Generic_List_1_String_Array_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Generic_List_1_String_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Generic_List_1_String_Binding_Enumerator_Bindi_t.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Generic_List_1_Thread_Binding.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Generic_List_1_Thread_Binding_Enumerator_Bindi_t.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Generic_List_1_Transform_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Generic_List_1_Transform_Binding_Enumerator_Bi_t.cs" />
-     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Generic_Queue_1_Transform_Binding.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Generic_SortedList_2_Int32_ILTypeInstance_Bind_t.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Generic_SortedList_2_String_ILTypeInstance_Bin_t.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_IEnumerator_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Collections_Specialized_NameValueCollection_Binding.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Console_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Convert_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_DateTime_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Double_Binding.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Environment_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Exception_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Func_1_Boolean_Binding.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Guid_Binding.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_IAsyncResult_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_IDisposable_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Int16_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Int32_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Int64_Binding.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_InvalidOperationException_Binding.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_IO_BinaryReader_Binding.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_IO_BinaryWriter_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_IO_Directory_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_IO_DirectoryInfo_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_IO_File_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_IO_FileInfo_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_IO_FileStream_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_IO_FileSystemInfo_Binding.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_IO_MemoryStream_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_IO_Stream_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_IO_StreamReader_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_IO_TextReader_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Linq_Enumerable_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Math_Binding.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Net_Dns_Binding.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Net_EndPoint_Binding.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Net_IPAddress_Binding.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Net_IPEndPoint_Binding.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Net_IPHostEntry_Binding.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Net_Sockets_Socket_Binding.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Net_Sockets_TcpClient_Binding.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Net_Sockets_TcpListener_Binding.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Net_Sockets_UdpClient_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Net_WebRequest_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Net_WebResponse_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_NotSupportedException_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Object_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Random_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Reflection_MemberInfo_Binding.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Runtime_CompilerServices_AsyncTaskMethodBuilder_1_Boolean__t.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Runtime_CompilerServices_AsyncTaskMethodBuilder_Binding.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Runtime_CompilerServices_TaskAwaiter_1_Boolean_Binding.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Runtime_CompilerServices_TaskAwaiter_1_Int32_Binding.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Runtime_CompilerServices_TaskAwaiter_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Security_Cryptography_HashAlgorithm_Binding.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Security_Cryptography_MD5_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Security_Cryptography_MD5CryptoServiceProvider_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Single_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_String_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Text_Encoding_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Text_StringBuilder_Binding.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Text_UTF8Encoding_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Threading_Monitor_Binding.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Threading_Tasks_Task_1_Boolean_Binding.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Threading_Tasks_Task_1_Int32_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Threading_Tasks_Task_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Threading_Thread_Binding.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Threading_ThreadPool_Binding.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Threading_WaitHandle_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_TimeSpan_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Type_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\System_UInt16_Binding.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_UInt32_Binding.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Xml_XmlAttributeCollection_Binding.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Xml_XmlDocument_Binding.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Xml_XmlNamedNodeMap_Binding.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Xml_XmlNamespaceManager_Binding.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Xml_XmlNode_Binding.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Xml_XmlNodeList_Binding.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Xml_XmlReader_Binding.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\System_Xml_XmlTextReader_Binding.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\UnityEngine_Animator_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\UnityEngine_Application_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\UnityEngine_AssetBundle_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\UnityEngine_AssetBundleManifest_Binding.cs" />
@@ -189,6 +260,7 @@
      <Compile Include="Assets\Plugins\ILRuntime\Generated\UnityEngine_Object_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\UnityEngine_PlayerPrefs_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\UnityEngine_RectTransform_Binding.cs" />
+     <Compile Include="Assets\Plugins\ILRuntime\Generated\UnityEngine_TextAsset_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\UnityEngine_Time_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\UnityEngine_Transform_Binding.cs" />
      <Compile Include="Assets\Plugins\ILRuntime\Generated\UnityEngine_UI_Button_Binding.cs" />
@@ -280,6 +352,9 @@
      <Compile Include="Assets\Plugins\iOS\iap\SDK_AppleInApp.cs" />
      <None Include="Assets\Plugins\WeChat\iOS\README.txt" />
      <None Include="Assets\Plugins\WeChat\Android\AndroidManifest.xml" />
+ <Reference Include="Unity.2D.Animation.Runtime">
+ <HintPath>E:/personal/ILRuntime_HotGames/ILRuntime_HotGames/UHotGames/Library/ScriptAssemblies/Unity.2D.Animation.Runtime.dll</HintPath>
+ </Reference>
  <Reference Include="UnityEditor.StandardEvents">
  <HintPath>E:/personal/ILRuntime_HotGames/ILRuntime_HotGames/UHotGames/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
  </Reference>
@@ -289,8 +364,26 @@
  <Reference Include="Unity.PackageManagerUI.Editor">
  <HintPath>E:/personal/ILRuntime_HotGames/ILRuntime_HotGames/UHotGames/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
  </Reference>
+ <Reference Include="Unity.InternalAPIEngineBridge.001">
+ <HintPath>E:/personal/ILRuntime_HotGames/ILRuntime_HotGames/UHotGames/Library/ScriptAssemblies/Unity.InternalAPIEngineBridge.001.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.2D.Common.Runtime">
+ <HintPath>E:/personal/ILRuntime_HotGames/ILRuntime_HotGames/UHotGames/Library/ScriptAssemblies/Unity.2D.Common.Runtime.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.2D.Animation.Editor">
+ <HintPath>E:/personal/ILRuntime_HotGames/ILRuntime_HotGames/UHotGames/Library/ScriptAssemblies/Unity.2D.Animation.Editor.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.2D.Triangle.Runtime">
+ <HintPath>E:/personal/ILRuntime_HotGames/ILRuntime_HotGames/UHotGames/Library/ScriptAssemblies/Unity.2D.Triangle.Runtime.dll</HintPath>
+ </Reference>
  <Reference Include="Unity.TextMeshPro">
  <HintPath>E:/personal/ILRuntime_HotGames/ILRuntime_HotGames/UHotGames/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.2D.Common.Editor">
+ <HintPath>E:/personal/ILRuntime_HotGames/ILRuntime_HotGames/UHotGames/Library/ScriptAssemblies/Unity.2D.Common.Editor.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.InternalAPIEditorBridge.001">
+ <HintPath>E:/personal/ILRuntime_HotGames/ILRuntime_HotGames/UHotGames/Library/ScriptAssemblies/Unity.InternalAPIEditorBridge.001.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.AIModule">
  <HintPath>D:/Program Files/Unity2018.2.21/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>

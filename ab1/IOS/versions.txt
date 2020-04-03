@@ -2,13 +2,13 @@
 /common.ab.manifest|fcb712dca070abb39716d34bf2f74273|473
 /firstui.ab|83aef6bf8b9e636249e8e569330dff15|4592
 /firstui.ab.manifest|75c067ccdb966e9acde742ba8bf1a372|931
-/IOS|ed836ced4e3ccf453ac3b2fecd02ab95|4951
-/IOS.manifest|4f04b8ae1d7d65aca26f16aa0674b5a7|7986
+/IOS|0a2160e7be808b3388ad198936c7ed9e|4951
+/IOS.manifest|6d3e6afb9461ea67e0e518cfa64f45d4|7986
 /tdefault.ab|d4d5137d3765b05cc3702d8024753579|230903
 /tdefault.ab.manifest|dedd2cb89840e4e8adf5a373c081acab|653
 /ui.ab|2b9dd99794bfe3573ec54c35d2844a6a|5799
 /ui.ab.manifest|b4b8e79f17b2145cc9f75f2e92872f0f|413
-/versions.txt|c512432628b483255a564347097ce268|12807
+/versions.txt|5c46161d7cf6d9b87808893ac0160013|12807
 /animator/back01.ab|50382047402e43fc35a0640ad53c22d4|6492
 /animator/back01.ab.manifest|174b3d05f8c6e5f40d744ecd43a1bd3e|510
 /animator/front01.ab|122739e8d9e9155999280d60cd27b555|6508
@@ -35,8 +35,8 @@
 /anims/cave1.ab.manifest|f6ed40b2661a55416d02edd5433b38b4|531
 /characters/role01.ab|153a638b7b3f91e4285901ec08a7499d|3879
 /characters/role01.ab.manifest|1ce77aa82f30025800cb99355d90c2cd|861
-/dll/ahotgames.ab|9f324ff5be195d37204349afa1cdbb24|103093
-/dll/ahotgames.ab.manifest|a4fb2cfb63d163c2f9a69690e76e2170|367
+/dll/ahotgames.ab|67139c706731f2c46fd77364c5ee3c43|103043
+/dll/ahotgames.ab.manifest|d729b7426184533616eeafbc574e7761|352
 /game/u2048.ab|53ee9ef08f868e8289c7a3a5d8ee610d|13411
 /game/u2048.ab.manifest|11edab0adcf5b36ed84244e58aa147b7|1394
 /game/ubigorsmall.ab|9aac9ab93de9ad977ae5d9fabea83adc|16851
