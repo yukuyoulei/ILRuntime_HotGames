@@ -12,16 +12,17 @@ namespace LibServer.GameObj
 {
 	public class CakeServer : Cake
 	{
-		public CakeServer(string cakeType, string id, string iid)
-			: base(cakeType, id, iid)
+		public CakeServer(string cakeType, string id)
+			: base(cakeType, id)
 		{
 			var cached = Init();
 			bNew = !cached;
 		}
-		public CakeServer(string cakeType, string id)
-			: base(cakeType, id)
+		private CakeServer(string cakeType, string id, string iid)
+			: base(cakeType, id, iid)
 		{
-			Init();
+			var cached = Init();
+			bNew = !cached;
 		}
 		protected override bool Init()
 		{
@@ -51,7 +52,7 @@ namespace LibServer.GameObj
 				}
 				return bCached;
 			}
-			else
+			else if (string.IsNullOrEmpty(iid))
 			{
 				if (!bCached)
 				{
@@ -61,7 +62,8 @@ namespace LibServer.GameObj
 					foreach (var r in res)
 					{
 						var cid = r[ParamNameDefs.ContentID].ToString();
-						var cake = new CakeServer(cakeType, id, cid);
+						var cakes = new CakeServer(cakeType, id);
+						var cake = cakes.GetSingleItem(cid);
 						foreach (var item in r.Names)
 						{
 							if (item == ParamNameDefs.CollectionID) continue;
@@ -148,19 +150,18 @@ namespace LibServer.GameObj
 		private CakeServer GetSubCake(string iid)
 		{
 			if (!subCakes.ContainsKey(iid))
-				subCakes.Add(iid, new CakeServer(cakeType, id, iid));
+				subCakes.Add(iid, new CakeServer(cakeType, id).GetSingleItem(iid));
 			return subCakes[iid] as CakeServer;
 		}
 
 		public CakeServer GetSingleItem(string iid)
 		{
 			if (!IsMulti) throw new Exception($"{cakeType} is not multi!");
-			var cake = new CakeServer(cakeType, id, iid);
-			if (cake.bNew)
-			{
-				subCakes.Add(iid, cake);
-				cake.bNew = false;
-			}
+			if (subCakes.ContainsKey(iid)) return subCakes[iid] as CakeServer;
+			var cake = new CakeServer(cakeType, id);
+			cake.iid = iid;
+			cake.Init();
+			cake.SetValue(ParamNameDefs.ContentID, iid);
 			return cake;
 		}
 		public static void Tick()

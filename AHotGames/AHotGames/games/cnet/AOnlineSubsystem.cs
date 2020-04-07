@@ -38,4 +38,9 @@ public class AOnlineSubsystem : LibClient.AClientComm
 	{
 		UEventListener.Instance.OnDispatchEvent(UEvents.EventContaData, new EventContaData() { id = id });
 	}
+
+	public override void rcvCreateOrderCb(PktCreateOrderResult.EResult eResult, string orderID, string extraInfo)
+	{
+		UEventListener.Instance.OnDispatchEvent(UEvents.EventCreateOrder, new EventCreateOrder() { eResult = eResult, orderID = orderID, extraInfo  = extraInfo});
+	}
 }

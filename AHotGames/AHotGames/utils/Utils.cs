@@ -55,7 +55,8 @@ public static class Utils
 	public static string TargetRuntimeInEditor = "";
 	public static string GetPlatformFolder(RuntimePlatform target)
 	{
-		if (Environment.IsEditor && !string.IsNullOrEmpty(TargetRuntimeInEditor)) return TargetRuntimeInEditor;
+		AOutput.Log($"GetPlatformFolder {TargetRuntimeInEditor}");
+		if (!string.IsNullOrEmpty(TargetRuntimeInEditor)) return TargetRuntimeInEditor;
 
 		switch (target)
 		{

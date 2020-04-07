@@ -142,18 +142,19 @@ public class Enter : MonoBehaviour
 
 		ILRuntimeHandler.Instance.SetUnityMessageReceiver(MonoInstancePool.getInstance<UEmitMessage>(true).gameObject);
 
-		ILRuntimeHandler.Instance.OnLoadClass("AEntrance", new GameObject("AEntrance"), false, UConfigManager.bUsingAb.ToString());
+		var platform = "";
+#if UNITY_ANDROID
+		platform = "Android";
+#elif UNITY_IOS
+		platform = "IOS";
+#else
+		platform = "Windows";
+#endif
+		ILRuntimeHandler.Instance.OnLoadClass("AEntrance", new GameObject("AEntrance"), false, platform);
 #if ILRUNTIME
 		ILRuntimeHandler.Instance.EmitMessage(bIsLocal ? "local" : "remote");
 		ILRuntimeHandler.Instance.EmitMessage($"resPath:{ConfigDownloader.Instance.OnGetValue("resPath")}");
 		fprocessing = 0.8f;
-#if UNITY_EDITOR
-#if UNITY_IOS
-		ILRuntimeHandler.Instance.EmitMessage("targetRuntime:IOS", "AEntrance");
-#elif UNITY_ANDROID
-		ILRuntimeHandler.Instance.EmitMessage("targetRuntime:Android", "AEntrance");
-#endif
-#endif
 #endif
 		fprocessing = 1f;
 	}

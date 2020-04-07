@@ -22,6 +22,7 @@ public class ConfigManager : Singleton<ConfigManager>
 	{
 		RegistLoadFunc("Map", MapLoader.Instance.OnLoadContent);
 		RegistLoadFunc("Items", ItemsLoader.Instance.OnLoadContent);
+		RegistLoadFunc("Payment", PaymentLoader.Instance.OnLoadContent);
 		RegistLoadFunc("DailyCheck", DailyCheckLoader.Instance.OnLoadContent);
 	}
 	public ConfigManager()
@@ -35,7 +36,9 @@ public class ConfigManager : Singleton<ConfigManager>
 		{
 			foreach (var k in dExcelLoaders.Keys)
 			{
-				dExcelLoaders[k].Invoke(UHotAssetBundleLoader.Instance.OnLoadAsset<TextAsset>("txt/" + k).text);
+				var tb = "txt/" + k;
+				AOutput.Log($"Load config {tb}");
+				dExcelLoaders[k].Invoke(UHotAssetBundleLoader.Instance.OnLoadAsset<TextAsset>(tb).text);
 			}
 			downloadConfigComplete();
 		}, dExcelLoaders.Keys.ToArray());
@@ -53,6 +56,7 @@ public class ConfigManager : Singleton<ConfigManager>
 	{
 		MapLoader.Instance.OnLoadContent(GetContent("Map"));
 		ItemsLoader.Instance.OnLoadContent(GetContent("Items"));
+		PaymentLoader.Instance.OnLoadContent(GetContent("Payment"));
 		DailyCheckLoader.Instance.OnLoadContent(GetContent("DailyCheck"));
 	}
 	private string GetContent(string file)

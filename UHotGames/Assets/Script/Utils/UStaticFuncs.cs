@@ -439,7 +439,9 @@ public static class UStaticFuncs
 			{
 				return "";
 			}
-			return url + UStaticFuncs.GetPlatformFolder(Application.platform) + "/";
+			url = url + UStaticFuncs.GetPlatformFolder(Application.platform) + "/";
+			AOutput.Log($"DownLoadConfigURL {url}");
+			return url;
 		}
 	}
 

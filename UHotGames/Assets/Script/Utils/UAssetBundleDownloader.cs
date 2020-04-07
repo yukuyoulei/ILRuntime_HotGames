@@ -85,7 +85,7 @@ public class UAssetBundleDownloader : MonoBehaviour
 			var downloadedResources = new List<string>();
 			if (dFileRemoteVersions.Count == 0)
 			{
-				var url = UStaticFuncs.DownLoadConfigURL + "versions.txt?" + ApiDateTime.Now.Ticks;
+				var url = UStaticFuncs.DownLoadConfigURL + "versions.txt?-" + ApiDateTime.Now.Ticks;
 				if (UStaticFuncs.GetPlatformFolder(Application.platform) == UStaticFuncs.GetPlatformFolder(RuntimePlatform.WindowsPlayer))
 				{
 					if (!url.Contains("://"))

@@ -171,7 +171,7 @@ public class UHotAssetBundleLoader : AHotBase
 			downloaded?.Invoke();
 			return;
 		}
-		UDebugHotLog.Log($"OnDownloadResources {Utils.GetPlatformFolder(Application.platform)} {string.Join(",", lResources)}");
+		AOutput.Log($"OnDownloadResources {Utils.GetPlatformFolder(Application.platform)} {string.Join(",", lResources)}");
 		if (dRemoteVersions.Count == 0)
 		{
 			OnDownloadText(Utils.GetPlatformFolder(Application.platform) + "/versions", (content) =>
@@ -379,7 +379,7 @@ public class UHotAssetBundleLoader : AHotBase
 				}
 				else
 				{
-					UDebugHotLog.Log($"{www.url} error {www.error}");
+					UDebugHotLog.Log($"OnDownloadText {www.url} error {www.error}");
 					errorAction?.Invoke(www.error);
 				}
 				return true;

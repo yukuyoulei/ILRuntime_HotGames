@@ -91,4 +91,15 @@ public static class AClientApis
 		AClientApp.clientComm.rcvExchangeCb(result.bSuccess);
 	}
 
+	public static void OnCreateOrder(int productID)
+	{
+		var pkt = new PktCreateOrderRequest();
+		pkt.productID = productID;
+		AClientApp.RemoteCall<PktCreateOrderResult>(pkt, CreateOrderCb);
+	}
+
+	private static void CreateOrderCb(PktCreateOrderResult obj)
+	{
+		AClientApp.clientComm.rcvCreateOrderCb(obj.eResult, obj.orderID, obj.extraInfo);
+	}
 }

@@ -1225,4 +1225,115 @@ namespace LibPacket
 		}
 	}
 
+	public class PktCreateOrderRequest : PktBase//18986
+	{
+		private int _productID = default(int);
+		public int productID
+		{
+			get { return _productID; }
+			set { _productID = value; }
+		}
+
+		public override void Serialize(MemoryStream ms)
+		{
+			this.stream = ms;
+			if (productID != 0)
+			{
+				writer.Write(1);
+				writer.Write(productID);
+			}
+		}
+		public override void Deserialize(MemoryStream ms)
+		{
+			this.stream = ms;
+			var tag = 0;
+			while (reader.BaseStream.Position < reader.BaseStream.Length && (tag = reader.ReadInt32()) != 0)
+			{
+				switch (tag)
+				{
+					case 1:
+						{
+							productID = reader.ReadInt32();
+							break;
+						}
+				}
+			}
+		}
+	}
+
+	public class PktCreateOrderResult : PktBase//16368
+	{
+		public enum EResult
+		{
+			Success,
+			Failed,
+		}
+		private EResult _eResult = default(EResult);
+		public EResult eResult
+		{
+			get { return _eResult; }
+			set { _eResult = value; }
+		}
+
+		private string _orderID = "";
+		public string orderID
+		{
+			get { return _orderID; }
+			set { _orderID = value; }
+		}
+
+		private string _extraInfo = "";
+		public string extraInfo
+		{
+			get { return _extraInfo; }
+			set { _extraInfo = value; }
+		}
+
+		public override void Serialize(MemoryStream ms)
+		{
+			this.stream = ms;
+			if (eResult != 0)
+			{
+				writer.Write(1);
+				writer.Write((int)eResult);
+			}
+			if (!string.IsNullOrEmpty(orderID))
+			{
+				writer.Write(2);
+				writer.Write(orderID);
+			}
+			if (!string.IsNullOrEmpty(extraInfo))
+			{
+				writer.Write(3);
+				writer.Write(extraInfo);
+			}
+		}
+		public override void Deserialize(MemoryStream ms)
+		{
+			this.stream = ms;
+			var tag = 0;
+			while (reader.BaseStream.Position < reader.BaseStream.Length && (tag = reader.ReadInt32()) != 0)
+			{
+				switch (tag)
+				{
+					case 1:
+						{
+							eResult = (EResult)reader.ReadInt32();
+							break;
+						}
+					case 2:
+						{
+							orderID = reader.ReadString();
+							break;
+						}
+					case 3:
+						{
+							extraInfo = reader.ReadString();
+							break;
+						}
+				}
+			}
+		}
+	}
+
 }

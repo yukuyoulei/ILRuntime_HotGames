@@ -11,6 +11,7 @@ using LibClient.GameObj;
 public class UIMinerMain : AHotBase
 {
 	Text textGold;
+	Text textDiamond;
 	Button btnDailyCheck;
 	protected override void InitComponents()
 	{
@@ -24,7 +25,8 @@ public class UIMinerMain : AHotBase
 		textUsername.text = CakeClient.GetCake("pinfo", CakeAvatar.myID).GetStringValue(ParamNameDefs.AvatarName);
 		textGold = FindWidget<Text>("textGold");
 		textGold.text = "0";
-		OnParamUpdateCb(null);
+		textDiamond = FindWidget<Text>("textDiamond");
+		textDiamond.text = "0";
 
 		var btnLogout = FindWidget<Button>("btnLogout");
 		btnLogout.onClick.AddListener(() =>
@@ -37,7 +39,8 @@ public class UIMinerMain : AHotBase
 		var btnPay = FindWidget<Button>("btnPay");
 		btnPay.onClick.AddListener(() =>
 		{
-			AClientApis.OnPay(1);
+			//AClientApis.OnPay(1);
+			AClientApis.OnCreateOrder(1);
 		});
 		var btnExchange = FindWidget<Button>("btnExchange");
 		btnExchange.onClick.AddListener(() =>
@@ -45,15 +48,25 @@ public class UIMinerMain : AHotBase
 			AClientApis.OnExchange(1);
 		});
 
+		OnParamUpdateCb(null);
 		RegisterEvent(UEvents.ParamUpdate, OnParamUpdateCb);
+		RegisterEvent(UEvents.EventCreateOrder, OnCreateOrderCb);
 
 		//var map01 = LoadClass<UMinerMap>("UI/MinerMap/Map01");
 		AClientApis.OnGetSdata("");
 	}
 
+	private void OnCreateOrderCb(UEventBase obj)
+	{
+		var eb = obj as EventCreateOrder;
+		AOutput.Log($"obj {eb.eResult} {eb.orderID} {eb.extraInfo}");
+		AClientApis.OnPay(1);
+	}
+
 	private void OnParamUpdateCb(UEventBase eb)
 	{
 		textGold.text = CakeClient.GetCake("items", CakeAvatar.myID, LibCommon.InitValueDefs.gold.ToString()).GetIntValue(ParamNameDefs.Count).ToString();
+		textDiamond.text = CakeClient.GetCake("items", CakeAvatar.myID, LibCommon.InitValueDefs.money.ToString()).GetIntValue(ParamNameDefs.Count).ToString();
 		btnDailyCheck.gameObject.SetActive(!ApiDateTime.IsSameDay(CakeClient.GetCake("pinfo", CakeAvatar.myID).GetIntValue(ParamNameDefs.LastDailyCheckTime)));
 	}
 }

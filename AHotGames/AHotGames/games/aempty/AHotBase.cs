@@ -26,6 +26,13 @@ public abstract class AHotBase
 		{
 			Environment.UseAB = false;
 		}
+		else
+		{
+			if (arg == "Android" || arg == "IOS" || arg == "Windows")
+			{
+				Utils.TargetRuntimeInEditor = arg;
+			}
+		}
 
 		if (dGameObjects.ContainsKey(gameObj.name))
 		{
@@ -43,19 +50,6 @@ public abstract class AHotBase
 		r.OnRegistAction((msg) =>
 		{
 			onReceiveMsg?.Invoke(msg);
-
-			AOutput.Log($"AHotBase receive msg {msg}");
-			var amsg = msg.Split(new char[] { ':' }, 2);
-			switch (amsg[0])
-			{
-				case "op":
-					receiveOpMsg(amsg[1] == "1");
-					break;
-				case "targetRuntime":
-					Utils.TargetRuntimeInEditor = amsg[1];
-					UDebugHotLog.Log($"Utils.TargetRuntimeInEditor {Utils.TargetRuntimeInEditor}");
-					break;
-			}
 		});
 
 		gameObj.AddComponent<UOnDestroy>().actionOnDestroy = () =>
@@ -65,11 +59,6 @@ public abstract class AHotBase
 
 		InitComponents();
 	}
-	protected virtual void receiveOpMsg(bool bOp)
-	{
-		enableAllGraphicRaycasters(bOp);
-	}
-
 	protected void muteAllAudioSource(bool bMute)
 	{
 		var audios = gameObj.GetComponentsInChildren<AudioSource>(true);
@@ -402,47 +391,48 @@ public abstract class AHotBase
 	}
 	protected virtual void OnDestroy()
 	{
+		if (!UEventListener.hasInstance) return;
 		if (dRegisterredEvents != null)
 			foreach (var kv in dRegisterredEvents)
 				UEventListener.Instance.OnUnregisterEvent(kv.Key, kv.Value);
 	}
 
-	protected void MoveTo(RectTransform tc, Vector3 to, float moveSeconds = 1, Action endAction = null)
+	protected void MoveTo(RectTransform transform, Vector3 to, float moveSeconds = 1, Action endAction = null)
 	{
 		var startTime = ApiDateTime.Now;
-		var rawp = tc.anchoredPosition;
+		var rawp = transform.anchoredPosition;
 		addUpdateAction(() =>
 		{
-			tc.anchoredPosition = Vector3.Lerp(rawp, to, (float)(ApiDateTime.Now - startTime).TotalSeconds / moveSeconds);
+			transform.anchoredPosition = Vector3.Lerp(rawp, to, (float)(ApiDateTime.Now - startTime).TotalSeconds / moveSeconds);
 
 			var bend = (ApiDateTime.Now - startTime).TotalSeconds > moveSeconds;
 			if (bend)
 			{
-				tc.anchoredPosition = to;
+				transform.anchoredPosition = to;
 
 				endAction?.Invoke();
 			}
 			return bend;
 		});
 	}
-	protected void MoveTo(Transform tc, Vector3 to, float moveSeconds = 1, Space space = Space.World, Action endAction = null)
+	protected void MoveTo(Transform transform, Vector3 to, float moveSeconds = 1, Space space = Space.World, Action endAction = null)
 	{
 		var startTime = ApiDateTime.Now;
-		var rawp = space == Space.World ? tc.position : tc.localPosition;
+		var rawp = space == Space.World ? transform.position : transform.localPosition;
 		addUpdateAction(() =>
 		{
 			if (space == Space.World)
-				tc.position = Vector3.Lerp(rawp, to, (float)(ApiDateTime.Now - startTime).TotalSeconds / moveSeconds);
+				transform.position = Vector3.Lerp(rawp, to, (float)(ApiDateTime.Now - startTime).TotalSeconds / moveSeconds);
 			else
-				tc.localPosition = Vector3.Lerp(rawp, to, (float)(ApiDateTime.Now - startTime).TotalSeconds / moveSeconds);
+				transform.localPosition = Vector3.Lerp(rawp, to, (float)(ApiDateTime.Now - startTime).TotalSeconds / moveSeconds);
 
 			var bend = (ApiDateTime.Now - startTime).TotalSeconds > moveSeconds;
 			if (bend)
 			{
 				if (space == Space.World)
-					tc.position = to;
+					transform.position = to;
 				else
-					tc.localPosition = to;
+					transform.localPosition = to;
 
 				endAction?.Invoke();
 			}

@@ -11,5 +11,9 @@ namespace LibUtils
 		{
 			return System.Text.Encoding.GetEncoding("GB2312").GetByteCount(str);
 		}
+		public static string GetGUIDString()
+		{
+			return Guid.NewGuid().ToString().Replace("-", "");
+		}
 	}
 }

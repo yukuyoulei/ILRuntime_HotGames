@@ -149,6 +149,7 @@
     <Compile Include="net\LibConfig\Loaders\cs\DailyCheckLoader.cs" />
     <Compile Include="net\LibConfig\Loaders\cs\ItemsLoader.cs" />
     <Compile Include="net\LibConfig\Loaders\cs\MapLoader.cs" />
+    <Compile Include="net\LibConfig\Loaders\cs\PaymentLoader.cs" />
     <Compile Include="net\LibNet\AUDPSocket.cs" />
     <Compile Include="net\LibNet\ByteStream.cs" />
     <Compile Include="net\LibNet\ClientConnection.cs" />

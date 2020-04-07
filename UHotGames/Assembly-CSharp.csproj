@@ -181,6 +181,7 @@
      <None Include="Assets\RemoteResources\txt\Map.txt" />
      <None Include="Assets\RemoteResources\txt\DailyCheck.txt" />
      <None Include="Assets\RemoteResources\txt\Items.txt" />
+     <None Include="Assets\RemoteResources\txt\Payment.txt" />
      <None Include="Assets\link.xml" />
  <Reference Include="Unity.2D.Animation.Runtime">
  <HintPath>E:/personal/ILRuntime_HotGames/ILRuntime_HotGames/UHotGames/Library/ScriptAssemblies/Unity.2D.Animation.Runtime.dll</HintPath>

@@ -32,6 +32,7 @@ public class AEntrance : AHotBase
 		, "ui/uicommontips.ab"
 		, "ui/uicommonwait.ab"
 		, "ui/uicreateavatar.ab"
+
 	};
 	private void PreDownloadResources()
 	{

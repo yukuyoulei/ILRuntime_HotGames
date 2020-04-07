@@ -9,6 +9,7 @@ public static class UEvents
 	public const string CreateAvatar = "CreateAvatar";
 	public const string ParamUpdate = "ParamUpdate";
 	public const string EventContaData = "EventContaData";
+	public const string EventCreateOrder = "EventCreateOrder";
 }
 public abstract class UEventBase { }
 
@@ -32,4 +33,10 @@ public class EventCreateAvatar : UEventBase
 public class EventContaData : UEventBase
 {
 	public int id;
+}
+public class EventCreateOrder : UEventBase
+{
+	public PktCreateOrderResult.EResult eResult;
+	public string orderID;
+	public string extraInfo;
 }

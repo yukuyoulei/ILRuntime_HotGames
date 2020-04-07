@@ -26,6 +26,9 @@
 		public const string OwnerID = "oid";
 		public const string ContentID = "cid";
 		public const string Count = "count";
+		
+		public const string ProductID = "pid";
+		public const string Price = "prc";
 
 	}
 }

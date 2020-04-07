@@ -5,6 +5,13 @@ using UnityEngine;
 public class UEventListener : MonoBehaviour
 {
 	private static UEventListener sinstance;
+	public static bool hasInstance
+	{
+		get
+		{
+			return sinstance != null;
+		}
+	}
 	public static UEventListener Instance
 	{
 		get

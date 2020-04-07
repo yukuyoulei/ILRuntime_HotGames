@@ -40,8 +40,16 @@ namespace LibCommon.GameObj
 						cake.RegisterParam(EParamType.String, ParamNameDefs.OwnerID);
 						cake.RegisterParam(EParamType.String, ParamNameDefs.ContentID);
 						cake.RegisterParam(EParamType.Int, ParamNameDefs.Count);
+						cake.RegisterParam(EParamType.Int, ParamNameDefs.CreateTime);
 					});
-
+					_registers.Add("order", cake =>
+					{
+						cake.RegisterParam(EParamType.String, ParamNameDefs.OwnerID);
+						cake.RegisterParam(EParamType.String, ParamNameDefs.ContentID);
+						cake.RegisterParam(EParamType.Int, ParamNameDefs.ProductID);
+						cake.RegisterParam(EParamType.Int, ParamNameDefs.Price);
+						cake.RegisterParam(EParamType.Int, ParamNameDefs.CreateTime);
+					});
 				}
 				return _registers;
 			}
@@ -53,7 +61,7 @@ namespace LibCommon.GameObj
 			bRemove = true;
 		}
 
-		private static string[] multiList = new string[] { "items" };
+		private static string[] multiList = new string[] { "items", "order" };
 		protected virtual bool IsMulti { get { return multiList.Contains(cakeType); } }
 		protected Dictionary<string, Cake> subCakes = new Dictionary<string, Cake>();
 		public Cake(string cakeType, string id)
@@ -77,7 +85,7 @@ namespace LibCommon.GameObj
 		protected bool bInited;
 		public string cakeType { get; private set; }
 		public string id { get; private set; }
-		public string iid { get; private set; }
+		public string iid { get; protected set; }
 		protected bool bNew;
 		public Dictionary<string, AParam> dParams = new Dictionary<string, AParam>();
 		protected virtual bool Init()
@@ -92,8 +100,9 @@ namespace LibCommon.GameObj
 					dCached[id].Add(cakeType, new Dictionary<string, AParam>());
 				else
 				{
-					foreach (var kv in dCached[id][cakeType])
-						dParams[kv.Key] = kv.Value;
+					var ks = dCached[id][cakeType].Keys;
+					foreach (var kv in ks)
+						dParams[kv] = dCached[id][cakeType][kv];
 
 					bcached = true;
 				}

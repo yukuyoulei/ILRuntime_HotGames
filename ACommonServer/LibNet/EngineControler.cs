@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,26 +10,25 @@ namespace LibNet
 {
 	public class EngineControler : Singleton<EngineControler>
 	{
-		private static List<IProducerConsumerTask> ltasks;
+		private static ConcurrentQueue<IProducerConsumerTask> ltasks;
 		public void EngineInit()
 		{
-			ltasks = new List<IProducerConsumerTask>();
-			Task.Run(TickMainThread);
+			ltasks = new ConcurrentQueue<IProducerConsumerTask>();
+			Task.Run(() => { TickMainThread(); });
 		}
 
 		private void TickMainThread()
 		{
 			while (true)
 			{
-				var lt = ltasks.ToArray();
-				foreach (var t in lt)
+				IProducerConsumerTask t;
+				while(ltasks.TryDequeue(out t))
 				{
 					if (t is ExitThreadTask)
 					{
 						AOutput.LogError("ExitThreadTask!");
 						return;         // This signals our exit
 					}
-					ltasks.Remove(t);
 					t.DoWork();
 				}
 				Thread.Sleep(1);
@@ -41,11 +41,11 @@ namespace LibNet
 		}
 		internal void QueForProcessing(ClientConnection client)
 		{
-			ltasks.Add(new ClientPacketProcessingTask(client));
+			ltasks.Enqueue(new ClientPacketProcessingTask(client));
 		}
 		internal void QueForProcessing(IProducerConsumerTask task)
 		{
-			ltasks.Add(task);
+			ltasks.Enqueue(task);
 		}
 		internal void QueForSend(ClientConnection client)
 		{
