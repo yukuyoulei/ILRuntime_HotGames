@@ -104,7 +104,7 @@
                  break;
              case SKPaymentTransactionStateFailed:
                  [self failedTransaction:transaction];
-				 UnitySendMessage("SDK_AppleInApp", "UpdateTransactions", "");
+				 UnitySendMessage("SDK_AppleInApp", "FailedTransactions", "");
                  break;
              case SKPaymentTransactionStateRestored:
                  [self restoreTransaction:transaction];

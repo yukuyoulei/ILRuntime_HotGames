@@ -47,4 +47,8 @@ public class SDK_AppleInApp : MonoBehaviour
 	{
 		ILRuntimeHandler.Instance.EmitMessage($"UpdateTransactions");
 	}
+	private void FailedTransactions()
+	{
+		ILRuntimeHandler.Instance.EmitMessage($"FailedTransactions");
+	}
 }

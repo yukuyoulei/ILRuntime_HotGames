@@ -113,7 +113,7 @@ public class MonoBehaviourAdapter : CrossBindingAdaptor
 				mUpdateMethodGot = true;
 			}
 
-			if (mStartMethod != null)
+			if (mUpdateMethod != null)
 			{
 				appdomain.Invoke(mUpdateMethod, instance, null);
 			}
@@ -129,12 +129,27 @@ public class MonoBehaviourAdapter : CrossBindingAdaptor
 				mOnDestroyMethodGot = true;
 			}
 
-			if (mStartMethod != null)
+			if (mOnDestroyMethod != null)
 			{
 				appdomain.Invoke(mOnDestroyMethod, instance, null);
 			}
 		}
 
+		IMethod mOnInvokeMethodMethod;
+		bool mOnInvokeMethodMethodGot;
+		public void OnInvokeMethod(string param)
+		{
+			if (!mOnInvokeMethodMethodGot)
+			{
+				mOnInvokeMethodMethod = instance.Type.GetMethod("OnInvokeMethod", 1);
+				mOnInvokeMethodMethodGot = true;
+			}
+
+			if (mOnInvokeMethodMethod != null)
+			{
+				appdomain.Invoke(mOnInvokeMethodMethod, instance, param);
+			}
+		}
 		public override string ToString()
 		{
 			IMethod m = appdomain.ObjectType.GetMethod("ToString", 0);

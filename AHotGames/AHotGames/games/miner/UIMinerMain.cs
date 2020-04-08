@@ -64,6 +64,12 @@ public class UIMinerMain : AHotBase
 				case "ProvideContent":
 					UIAlert.Show("ProvideContent " + str);
 					break;
+				case "FailedTransactions":
+					UIAlert.Show("FailedTransactions " + str);
+					break;
+				case "UpdateTransactions":
+					UIAlert.Show("UpdateTransactionss " + str);
+					break;
 			}
 		});
 	}
