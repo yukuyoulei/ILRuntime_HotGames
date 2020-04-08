@@ -36,28 +36,21 @@ public class SDK_AppleInApp : MonoBehaviour
 		InitIAPManager();
 #endif
 	}
-	private string rawOrderID;
-	public static Action actionStartToBuy;
-	public void OnBuyProduct(int productIndex, string orderID)
+	public void OnBuyProduct(string productIndex)
 	{
 #if UNITY_EDITOR
 		return;
 #endif
 #if UNITY_IOS
-		actionStartToBuy?.Invoke();
-		rawOrderID = orderID;
-		BuyProduct(productInfo[productIndex]);
+		BuyProduct(productInfo[int.Parse(productIndex)]);
 #endif
 	}
-	public static Action<string, string> actionReceivedReceiptData;
-	private void ProvideContent(string data)
+	private void ProvideContent(string data)//ReceivedReceiptData
 	{
-		Debug.Log("ProvideContent " + data);
-		actionReceivedReceiptData?.Invoke(rawOrderID, data);
+		ILRuntimeHandler.Instance.EmitMessage($"ProvideContent {data}");
 	}
-	public static Action actionEndBuying;
 	private void UpdateTransactions()
 	{
-		actionEndBuying?.Invoke();
+		ILRuntimeHandler.Instance.EmitMessage($"UpdateTransactions");
 	}
 }

@@ -54,15 +54,29 @@ public class UIMinerMain : AHotBase
 
 		//var map01 = LoadClass<UMinerMap>("UI/MinerMap/Map01");
 		AClientApis.OnGetSdata("");
+
+		OnRegistAction(str =>
+		{
+			var astrs = str.Split(' ');
+			switch (astrs[0])
+			{
+				case "ProvideContent":
+					UIAlert.Show("ProvideContent " + str);
+					break;
+				case "UpdateTransactions":
+					UIAlert.Show("UpdateTransactions " + str);
+					break;
+			}
+		});
 	}
 
 	private void OnCreateOrderCb(UEventBase obj)
 	{
 		var eb = obj as EventCreateOrder;
 		AOutput.Log($"obj {eb.eResult} {eb.orderID} {eb.extraInfo}");
-		AClientApis.OnPay(1);
+		//AClientApis.OnPay(1);
 
-		OnSendSDKMessage("SDK_WeChat", "OpenWechatPay", "test");
+		OnSendSDKMessage("SDK_AppleInApp", "OnBuyProduct", "0");
 	}
 
 	private void OnParamUpdateCb(UEventBase eb)

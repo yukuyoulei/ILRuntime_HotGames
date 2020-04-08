@@ -38,6 +38,7 @@ namespace LibServer.Enter
             order.SetValue(ParamNameDefs.ProductID, vo.productID);
             order.SetValue(ParamNameDefs.Price, data.Price);
             result.orderID = order.iid;
+            //result.extraInfo = APIWechatPay.Pay(data.Price, order.iid, $"描述：{data.Desc}");
             responer.Response(result);
         }
 

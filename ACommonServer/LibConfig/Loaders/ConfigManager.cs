@@ -32,16 +32,25 @@ public class ConfigManager : Singleton<ConfigManager>
 
 	public void DownloadConfig(Action downloadConfigComplete)
 	{
+		var ks = dExcelLoaders.Keys.ToArray();
+		var l = new List<string>();
+		foreach (var k in ks)
+		{
+			l.Add($"txt/{k}");
+		}
 		UHotAssetBundleLoader.Instance.OnDownloadResources(() =>
 		{
 			foreach (var k in dExcelLoaders.Keys)
 			{
 				var tb = "txt/" + k;
-				AOutput.Log($"Load config {tb}");
-				dExcelLoaders[k].Invoke(UHotAssetBundleLoader.Instance.OnLoadAsset<TextAsset>(tb).text);
+				var ta = UHotAssetBundleLoader.Instance.OnLoadAsset<TextAsset>(tb);
+				if (ta != null)
+					dExcelLoaders[k].Invoke(ta.text);
+				else
+					AOutput.Log($"Load config invalid {tb}");
 			}
 			downloadConfigComplete();
-		}, dExcelLoaders.Keys.ToArray());
+		}, l.ToArray());
 	}
 }
 #else
