@@ -247,7 +247,6 @@ public class UHotAssetBundleLoader : AHotBase
 			}
 		}
 		totalCount = lNeedDownload.Count;
-		UDebugHotLog.Log($"totalCount {totalCount}");
 		DoDownloadResources(lNeedDownload, downloaded, progress);
 	}
 	int totalCount;

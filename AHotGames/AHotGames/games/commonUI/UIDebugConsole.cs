@@ -38,7 +38,7 @@ public class UIDebugConsole : AHotBase
 	private void Application_logMessageReceived(string condition, string stackTrace, LogType type)
 	{
 		outputLog.text = $"[{type}]{condition}{((type == LogType.Error || type == LogType.Exception) ? $"\r\n{stackTrace}" : "")}\r\n{outputLog.text}";
-		if (outputLog.text.Length > 3000) outputLog.text = outputLog.text.Substring(0, 3000);
+		if (outputLog.text.Length > 1000) outputLog.text = outputLog.text.Substring(0,1000);
 	}
 }
 
