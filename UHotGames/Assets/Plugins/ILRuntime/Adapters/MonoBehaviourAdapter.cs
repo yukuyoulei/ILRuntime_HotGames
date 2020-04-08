@@ -135,21 +135,6 @@ public class MonoBehaviourAdapter : CrossBindingAdaptor
 			}
 		}
 
-		IMethod mOnInvokeMethodMethod;
-		bool mOnInvokeMethodMethodGot;
-		public void OnInvokeMethod(string param)
-		{
-			if (!mOnInvokeMethodMethodGot)
-			{
-				mOnInvokeMethodMethod = instance.Type.GetMethod("OnInvokeMethod", 1);
-				mOnInvokeMethodMethodGot = true;
-			}
-
-			if (mOnInvokeMethodMethod != null)
-			{
-				appdomain.Invoke(mOnInvokeMethodMethod, instance, param);
-			}
-		}
 		public override string ToString()
 		{
 			IMethod m = appdomain.ObjectType.GetMethod("ToString", 0);
