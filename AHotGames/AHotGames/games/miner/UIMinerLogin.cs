@@ -30,7 +30,7 @@ public class UIMinerLogin : AHotBase
 		Task.Run(async () =>
 		{
 			if (!LibClient.AClientApp.bConnected)
-				await LibClient.AClientApp.StartClient("127.0.0.1");
+				await LibClient.AClientApp.StartClient("69.51.23.197");
 			UEventListener.Instance.AddProducingAction(() =>
 			{
 				UICommonWait.Hide();
