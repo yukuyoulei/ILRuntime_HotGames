@@ -32,6 +32,12 @@ public class ConfigManager : Singleton<ConfigManager>
 
 	public void DownloadConfig(Action downloadConfigComplete)
 	{
+		var ks = dExcelLoaders.Keys.ToArray();
+		var l = new List<string>();
+		foreach (var k in ks)
+		{
+			l.Add($"txt/{k}");
+		}
 		UHotAssetBundleLoader.Instance.OnDownloadResources(() =>
 		{
 			foreach (var k in dExcelLoaders.Keys)
@@ -41,7 +47,7 @@ public class ConfigManager : Singleton<ConfigManager>
 				dExcelLoaders[k].Invoke(UHotAssetBundleLoader.Instance.OnLoadAsset<TextAsset>(tb).text);
 			}
 			downloadConfigComplete();
-		}, dExcelLoaders.Keys.ToArray());
+		}, l.ToArray());
 	}
 }
 #else
