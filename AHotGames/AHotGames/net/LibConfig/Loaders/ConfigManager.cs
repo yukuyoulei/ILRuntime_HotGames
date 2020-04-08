@@ -43,8 +43,11 @@ public class ConfigManager : Singleton<ConfigManager>
 			foreach (var k in dExcelLoaders.Keys)
 			{
 				var tb = "txt/" + k;
-				AOutput.Log($"Load config {tb}");
-				dExcelLoaders[k].Invoke(UHotAssetBundleLoader.Instance.OnLoadAsset<TextAsset>(tb).text);
+				var ta = UHotAssetBundleLoader.Instance.OnLoadAsset<TextAsset>(tb);
+				if (ta != null)
+					dExcelLoaders[k].Invoke(ta.text);
+				else
+					AOutput.Log($"Load config invalid {tb}");
 			}
 			downloadConfigComplete();
 		}, l.ToArray());
