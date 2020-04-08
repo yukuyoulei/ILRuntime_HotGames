@@ -440,6 +440,15 @@ public abstract class AHotBase
 		});
 	}
 
+	protected void OnSendSDKMessage(string v1, string v2, object arg = null)
+	{
+		var obj = GameObject.Find(v1);
+		if (arg != null)
+			obj.SendMessage(v2, arg, SendMessageOptions.RequireReceiver);
+		else
+			obj.SendMessage(v2, SendMessageOptions.RequireReceiver);
+	}
+
 	protected void RegisterReturnButton()
 	{
 		var btnReturn = FindWidget<Button>("btnReturn");

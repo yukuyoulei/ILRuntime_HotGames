@@ -61,6 +61,8 @@ public class UIMinerMain : AHotBase
 		var eb = obj as EventCreateOrder;
 		AOutput.Log($"obj {eb.eResult} {eb.orderID} {eb.extraInfo}");
 		AClientApis.OnPay(1);
+
+		OnSendSDKMessage("SDK_WeChat", "OpenWechatPay", "test");
 	}
 
 	private void OnParamUpdateCb(UEventBase eb)
