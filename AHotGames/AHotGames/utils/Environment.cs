@@ -14,6 +14,7 @@ public static class Environment
     {
         get
         {
+            if (!IsEditor) return true;
             return _UseAB;
         }
         set
