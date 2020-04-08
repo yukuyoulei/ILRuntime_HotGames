@@ -57,6 +57,7 @@ public class UIMinerMain : AHotBase
 
 		OnRegistAction(str =>
 		{
+			UICommonWait.Hide();
 			var astrs = str.Split(' ');
 			switch (astrs[0])
 			{
@@ -76,6 +77,7 @@ public class UIMinerMain : AHotBase
 		AOutput.Log($"obj {eb.eResult} {eb.orderID} {eb.extraInfo}");
 		//AClientApis.OnPay(1);
 
+		UICommonWait.Show();
 		OnSendSDKMessage("SDK_AppleInApp", "OnBuyProduct", "0");
 	}
 
