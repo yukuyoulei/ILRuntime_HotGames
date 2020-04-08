@@ -6,12 +6,6 @@ using UnityEngine;
 using System.Runtime.InteropServices;
 public class SDK_AppleInApp : MonoBehaviour
 {
-	public List<string> productInfo = new List<string>(
-		new string[]
-		{
-			"com.tigermath.ios.price.class1",
-		}
-		);
 #if UNITY_IOS
 
 	[DllImport("__Internal")]
@@ -36,13 +30,13 @@ public class SDK_AppleInApp : MonoBehaviour
 		InitIAPManager();
 #endif
 	}
-	public void OnBuyProduct(string productIndex)
+	public void OnBuyProduct(string productInfo)
 	{
 #if UNITY_EDITOR
 		return;
 #endif
 #if UNITY_IOS
-		BuyProduct(productInfo[int.Parse(productIndex)]);
+		BuyProduct(productInfo);
 #endif
 	}
 	private void ProvideContent(string data)//ReceivedReceiptData

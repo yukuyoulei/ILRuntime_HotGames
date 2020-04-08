@@ -19,6 +19,10 @@ public class AEntrance : AHotBase
 
 		new CakeClient("pinfo", "1", "1");
 		PreDownloadResources();
+
+		var SDK_AppleInApp = GameObject.Find("SDK_AppleInApp");
+		if (SDK_AppleInApp != null)
+			SDK_AppleInApp.AddComponent<SDKInvoker>();
 	}
 
 	private string[] preloadResources = new string[] {

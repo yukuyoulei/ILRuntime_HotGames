@@ -98,6 +98,7 @@
     <Compile Include="games\actions\ActionHandler.cs" />
     <Compile Include="games\actions\ActionRun.cs" />
     <Compile Include="games\actions\IActionBase.cs" />
+    <Compile Include="games\sdk\SDKInvoker.cs" />
     <Compile Include="games\data\Defs.cs" />
     <Compile Include="games\data\URemoteData.cs" />
     <Compile Include="games\game\Cards\ACards.cs" />

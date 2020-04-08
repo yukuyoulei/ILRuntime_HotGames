@@ -64,9 +64,6 @@ public class UIMinerMain : AHotBase
 				case "ProvideContent":
 					UIAlert.Show("ProvideContent " + str);
 					break;
-				case "UpdateTransactions":
-					UIAlert.Show("UpdateTransactions " + str);
-					break;
 			}
 		});
 	}
