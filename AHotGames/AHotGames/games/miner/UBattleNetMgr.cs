@@ -70,6 +70,7 @@ public class UBattleNetMgr : Singleton<UBattleNetMgr>
 		UICommonWait.Show();
 		UHotAssetBundleLoader.Instance.OnDownloadResources(() =>
 		{
+			AOutput.Log($"OnDownloadResources {map.MapClass} {map.Prefab}");
 			UICommonWait.Hide();
 			AHotBase.LoadAnotherClass(map.MapClass, map.Prefab);
 		}, map.Prefab);
