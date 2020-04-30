@@ -22,5 +22,15 @@ public static class Environment
 			PlayerPrefs.SetInt("UseAB", value ? 1 : 0);
 		}
 	}
+	public static bool bUsingLocalCDN
+	{
+		get
+		{
+			if (!PlayerPrefs.HasKey("USE_LOCAL_CDN"))
+				return false;
+			return PlayerPrefs.GetInt("USE_LOCAL_CDN") == 1;
+		}
+	}
+
 	public static string BundleVersion = "";
 }

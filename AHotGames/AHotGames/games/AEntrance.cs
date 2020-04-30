@@ -15,6 +15,9 @@ public class AEntrance : AHotBase
 
 		var i = UEventListener.Instance;
 
+		if (Environment.bUsingLocalCDN)
+			LibClient.AClientApp.SetEndpoint("69.51.23.197", 999);
+
 		LibClient.AClientApp.Init(new AOnlineSubsystem());
 
 		new CakeClient("pinfo", "1", "1");

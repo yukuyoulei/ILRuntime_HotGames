@@ -10,7 +10,7 @@ public class Enter : MonoBehaviour
 		get
 		{
 			if (!PlayerPrefs.HasKey("USE_LOCAL_CDN"))
-				return true;
+				return false;
 			return PlayerPrefs.GetInt("USE_LOCAL_CDN") == 1;
 		}
 	}
