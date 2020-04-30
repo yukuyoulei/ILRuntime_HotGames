@@ -57,7 +57,7 @@ public class AEntrance : AHotBase
 						{
 							lall.Add(d.Prefab);
 						}
-						UHotAssetBundleLoader.Instance.OnDownloadResources(new List<string>(preloadResources), () =>
+						UHotAssetBundleLoader.Instance.OnDownloadResources(lall, () =>
 						{
 							UILoading.Instance?.OnUnloadThis();
 
