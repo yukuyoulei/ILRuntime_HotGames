@@ -13,16 +13,16 @@ public class PlayerSystem : SystemBase
 	{
 	}
 
-	public Entity Create(string id)
+	public Entity Create(string psid)
 	{
-		var entity = new Entity(this.conta);
-		entity.id = id;
+		var entity = new Entity(conta);
+		entity.psid = psid;
 
 		entity.dAttrs.Add("hp", 1);
 		entity.dAttrs.Add("hpn", 1);
-
+		
 		var pkt = new LibPacket.PktCreatePlayer();
-		pkt.id = id;
+		pkt.psid = psid;
 		pkt.contentID = 1;
 		entity.toclient = psid =>
 		{
@@ -34,10 +34,11 @@ public class PlayerSystem : SystemBase
 				pkt.lParams.Add(new LibPacket.ParamInfo() { paramName = kv.Key, paramValue = kv.Value.ToString() });
 			}
 			if (string.IsNullOrEmpty(psid))
-				this.conta.Broadcast(pkt);
+				conta.Broadcast(pkt);
 			else
-				this.conta.NetSystem.SendTo(psid, pkt);
+				conta.NetSystem.SendTo(psid, pkt);
 		};
-		return entity;
+        conta.AddPlayer(entity);
+        return entity;
 	}
 }

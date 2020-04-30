@@ -1,10 +1,10 @@
-public class DailyCheck:DataBase
+public class DailyCheckData : DataBase
 {
 	public string Desc;//描述
 	public int itemID;//道具ID
 	public int itemCount;//道具数量
 }
-public class DailyCheckLoader : SingletonDataLoader<DailyCheckLoader, DailyCheck>
+public class DailyCheckLoader : SingletonDataLoader<DailyCheckLoader, DailyCheckData>
 {
 	public override void OnLoadContent(string content)
 	{
@@ -19,7 +19,7 @@ public class DailyCheckLoader : SingletonDataLoader<DailyCheckLoader, DailyCheck
 			continue;
 			}
 
-			var data = new DailyCheck();
+			var data = new DailyCheckData();
 			data.id = id;
 			data.Desc = GetStringValue(i,istart++);
 			data.itemID = GetIntValue(i,istart++);

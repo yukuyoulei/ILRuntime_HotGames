@@ -53,13 +53,19 @@ public class AEntrance : AHotBase
 						{
 							UILoading.Instance?.OnUnloadThis();
 
-							//LoadUI<UILogin>();
-							LoadUI<UIMinerLogin>();
+							DoInit();
 						}, null);
 					});
 				}, null);
 			}, null);
 		}, null);
+	}
+
+	private void DoInit()
+	{
+		//LoadUI<UILogin>();
+		UBattleNetMgr.Instance.Init();
+		LoadUI<UIMinerLogin>();
 	}
 }
 

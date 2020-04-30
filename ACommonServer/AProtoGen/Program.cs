@@ -273,6 +273,7 @@ namespace ProtoGen
 					string sparam = "\n\t\t" + "private " + ppc.paramType + " _" + ppc.paramName;
 					sdeserialize += $"\n\t\t\t\t\tcase {ppc.paramIndex}:"
 						+ "\n\t\t\t\t\t\t{";
+					var isPktCell = false;
 					if (sparam.IndexOf("List") != -1)
 					{
 						sparam += " = new " + ppc.paramType + "();";
@@ -312,12 +313,13 @@ namespace ProtoGen
 					}
 					else if (lProtoNames.Contains(ppc.paramType))
 					{
+						isPktCell = true;
 						sparam += " = null;";
-						sserialize += $"\n\t\t\tif ({ppc.paramName} != null)" +
+						sserialize += $"\n\t\t\tif (_{ppc.paramName} != null)" +
 							"\n\t\t\t{" +
 							$"\n\t\t\t\twriter.Write({ppc.paramIndex});" +
 							"\n\t\t\t\tvar m = new MemoryStream();" +
-							$"\n\t\t\t\t{ppc.paramName}.Serialize(m);" +
+							$"\n\t\t\t\t_{ppc.paramName}.Serialize(m);" +
 							"\n\t\t\t\tvar bs = m.ToArray();" +
 							"\n\t\t\t\twriter.Write(bs.Length);" +
 							"\n\t\t\t\twriter.Write(bs);" +
@@ -378,7 +380,7 @@ namespace ProtoGen
 						+ "\n\t\t\t\t\t\t}";
 					sparam += "\n\t\t" + "public " + ppc.paramType + " " + ppc.paramName
 						+ "\n\t\t" + "{"
-						+ "\n\t\t\t" + "get { " + "return _" + ppc.paramName + "; }"
+						+ "\n\t\t\t" + "get { " + (isPktCell ? $"if (_{ppc.paramName} == null) _{ppc.paramName} = new {ppc.paramType}(); " : "") + "return _" + ppc.paramName + "; }"
 						+ "\n\t\t\t" + "set { " + "_" + ppc.paramName + " = value; }"
 						+ "\n\t\t" + "}";
 					sproto += sparam;

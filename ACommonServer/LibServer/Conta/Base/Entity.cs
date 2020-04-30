@@ -12,8 +12,9 @@ public class Entity
 	}
 	public Action<string> toclient;
 	public Context conta { get; private set; }
-	public string id { get; set; }
+	public string psid { get; set; }
 	private string _uid;
+	public bool enabled { get; set; }
 	public string uid { get { if (string.IsNullOrEmpty(_uid)) _uid = Guid.NewGuid().ToString(); return _uid; } }
 
 	public Dictionary<string, int> dAttrs = new Dictionary<string, int>();

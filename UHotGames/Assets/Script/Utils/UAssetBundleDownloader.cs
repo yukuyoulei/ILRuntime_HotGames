@@ -204,7 +204,7 @@ public class UAssetBundleDownloader : MonoBehaviour
 
 	internal void OnUnloadAssetBundles()
 	{
-		if (!UConfigManager.bUsingAb)
+		if (!Enter.bUsingAb)
 		{
 			return;
 		}
@@ -408,8 +408,9 @@ public class UAssetBundleDownloader : MonoBehaviour
 	Dictionary<string, UnityEngine.Object> dAssets = new Dictionary<string, UnityEngine.Object>();
 	public T OnLoadAsset<T>(string assetBundlePath) where T : UnityEngine.Object
 	{
+		Debug.Log($"OnLoadAsset Enter.bUsingAb:{Enter.bUsingAb}");
 #if UNITY_EDITOR
-		if (!UConfigManager.bUsingAb)
+		if (!Enter.bUsingAb)
 		{
 			var prefab = UnityEditor.AssetDatabase.LoadAssetAtPath("Assets/RemoteResources/" + assetBundlePath, typeof(T)) as T;
 			if (prefab != null)
@@ -426,7 +427,7 @@ public class UAssetBundleDownloader : MonoBehaviour
 			}
 		}
 #endif
-		if (!UConfigManager.bUsingAb)
+		if (!Enter.bUsingAb)
 		{
 			var path = assetBundlePath;
 			if (path.Contains("."))

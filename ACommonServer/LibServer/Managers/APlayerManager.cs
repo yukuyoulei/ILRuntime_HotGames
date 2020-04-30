@@ -25,10 +25,11 @@ public class APlayerManager : Singleton<APlayerManager>
 	private Dictionary<string, Player> dUIDIndexedPlayers = new Dictionary<string, Player>();
 	public void OnAddPlayer(string uid, EPartnerID ePartnerID, IResponer client)
 	{
-		if (dUIDIndexedPlayers.ContainsKey(uid))
+		var player = OnGetPlayerByUID(uid);
+		if (player != null)
 		{
-			dUIDIndexedPlayers[uid].client.Response(new PktServerMessage() { message = "duplicatelogin" });
-			dUIDIndexedPlayers[uid].OnDisconnect();
+			player.client.Response(new PktServerMessage() { message = "duplicatelogin" });
+			player.OnDisconnect();
 			dUIDIndexedPlayers.Remove(uid);
 		}
 		if (dConnectionIndexedPlayers.ContainsKey(client.playerConnDesc))
@@ -40,10 +41,10 @@ public class APlayerManager : Singleton<APlayerManager>
 		dConnectionIndexedPlayers.Add(client.playerConnDesc, p);
 		dUIDIndexedPlayers.Add(uid, p);
 	}
-	public Player OnGetPlayerByID(string psid)
+	public Player OnGetPlayerByUID(string uid)
 	{
-		if (dUIDIndexedPlayers.ContainsKey(psid))
-			return dUIDIndexedPlayers[psid];
+		if (dUIDIndexedPlayers.ContainsKey(uid))
+			return dUIDIndexedPlayers[uid];
 		return null;
 	}
 	public Player OnGetPlayerByConn(string playerConnDesc)

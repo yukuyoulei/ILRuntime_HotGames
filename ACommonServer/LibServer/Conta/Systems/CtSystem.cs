@@ -16,6 +16,19 @@ public class CtSystem : SystemBase
 	List<DelayFunction> lremove = new List<DelayFunction>();
 	public override void Tick(double fDeltaSec)
 	{
+		if (conta.IsTimeout)
+		{
+			if (conta.enabled)
+			{
+				conta.gameover = true;
+				conta.failed_reason = "timeout";
+			}
+			else
+			{
+				conta.destroy();
+			}
+			return;
+		}
 		foreach (var d in lDelayFunctions)
 		{
 			if (!d.IsTimeOut) continue;

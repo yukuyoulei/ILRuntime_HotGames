@@ -1,4 +1,4 @@
-﻿ using ILRuntime.Runtime.Intepreter;
+﻿using ILRuntime.Runtime.Intepreter;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -57,13 +57,15 @@ public class ILRuntimeHandler
 #endif
 		System.IO.MemoryStream fs = new MemoryStream(dllBytes);
 		{
+			Debug.Log($"load dll {dllBytes != null}, load pdb {pdbBytes != null}");
 #if ILRUNTIME
 			appdomain.LoadAssembly(fs, pdb, new ILRuntime.Mono.Cecil.Pdb.PdbReaderProvider());
 #else
-			assembly = AppDomain.CurrentDomain.Load(dllBytes);
+			assembly = AppDomain.CurrentDomain.Load(dllBytes, pdbBytes);
 #endif
 		}
 	}
+
 #if ILRUNTIME
 	unsafe void InitializeILRuntime()
 	{
@@ -82,7 +84,7 @@ public class ILRuntimeHandler
 	{
 		ILRegType.RegisterFunctionDelegate(appdomain);
 
-#region WebSocket相关
+	#region WebSocket相关
 		appdomain.DelegateManager.RegisterMethodDelegate<System.Object, System.EventArgs>();
 		appdomain.DelegateManager.RegisterDelegateConvertor<System.EventHandler>((act) =>
 		{
@@ -120,7 +122,7 @@ public class ILRuntimeHandler
 
 
 
-#endregion
+	#endregion
 		appdomain.DelegateManager.RegisterMethodDelegate<global::IDisposableAdapter.Adaptor>();
 		appdomain.DelegateManager.RegisterFunctionDelegate<System.Threading.Tasks.Task>();		appdomain.DelegateManager.RegisterMethodDelegate<ILRuntime.Runtime.Intepreter.ILTypeInstance>();
 
@@ -312,15 +314,17 @@ public class ILRuntimeHandler
 		return __esp;
 	}
 
-	public void EmitMessage(string message, string gameObjectName = "")
-	{
-		appdomain.Invoke("AHotBase", "EmitMessage", null, gameObjectName, message);
-	}
 	public void EmitGameObject(string prefabName, GameObject obj, string gameObjectName = "")
 	{
 		appdomain.Invoke("AHotBase", "EmitGameObject", null, gameObjectName, prefabName, obj);
 	}
 #endif
+	public void EmitMessage(string message, string gameObjectName = "")
+	{
+#if ILRUNTIME
+		appdomain.Invoke("AHotBase", "EmitMessage", null, gameObjectName, message);
+#endif
+	}
 	private Dictionary<string, GameObject> dObjs = new Dictionary<string, GameObject>();
 	public void OnLoadClass(string entranceClass, GameObject rootObj, bool CanBeUnloaded = true, string arg = "")
 	{
@@ -357,6 +361,9 @@ public class ILRuntimeHandler
 	{
 #if ILRUNTIME
 		appdomain.Invoke("AHotBase", "SetUnityMessageReceiver", null, receiver);
+#else
+		var obj = assembly.GetType("AHotBase");
+		obj.InvokeMember("SetUnityMessageReceiver", System.Reflection.BindingFlags.InvokeMethod, null, null, new object[] { receiver });
 #endif
 	}
 }

@@ -30,7 +30,7 @@ public class UIMinerLogin : AHotBase
 		Task.Run(async () =>
 		{
 			if (!LibClient.AClientApp.bConnected)
-				await LibClient.AClientApp.StartClient("69.51.23.197");
+				await LibClient.AClientApp.StartClient();
 			UEventListener.Instance.AddProducingAction(() =>
 			{
 				UICommonWait.Hide();
@@ -76,28 +76,6 @@ public class UIMinerLogin : AHotBase
 		});
 
 		RegisterEvent(UEvents.Login, OnLoginCb);
-		RegisterEvent(UEvents.EnterGame, OnEnterGameCb);
-		RegisterEvent(UEvents.ServerDisconnected, OnServerDisconnectedCb);
-	}
-
-	private static void OnServerDisconnectedCb(UEventBase obj)
-	{
-		UnloadAllClasses();
-		LoadAnotherUI<UIMinerLogin>();
-	}
-
-	private void OnEnterGameCb(UEventBase obj)
-	{
-		var eb = obj as EventEnterGame;
-		if (eb.info == null)
-		{
-			LoadAnotherUI<UIMinerCreateAvatar>();
-		}
-		else
-		{
-			LoadAnotherUI<UIMinerMain>();
-		}
-		OnUnloadThis();
 	}
 
 	private void OnLoginCb(UEventBase obj)

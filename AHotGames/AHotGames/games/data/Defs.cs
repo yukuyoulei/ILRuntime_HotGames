@@ -36,7 +36,7 @@ public enum ErrorDefs
 	NotEnoughGold, //金币不足
 }
 
-public static class InitValueDefs
+public static class ClientValueDefs
 {
 	public const int MaxFriends = 20;
 	public const int CaiDaXiaoCost = 100;

@@ -37,7 +37,7 @@ public class UBigOrSmall : AHotBase
 
 		var multis = FindWidget<Transform>("multis");
 		var curMulti = 0;
-		foreach (var w in InitValueDefs.CaiDaXiaoMultis)
+		foreach (var w in ClientValueDefs.CaiDaXiaoMultis)
 		{
 			var t = FindWidget<Toggle>(multis, $"m{w}");
 			var tw = w;

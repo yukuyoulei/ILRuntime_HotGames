@@ -18,6 +18,17 @@
 		public const string DailyCheckCount = "dcc";
 		public const string LastDailyCheckTime = "dcct";
 
+		public const string Jin = "jin";
+		public const string Shui = "shui";
+		public const string Mu = "mu";
+		public const string Huo = "huo";
+		public const string Tu = "tu";
+		public const string JinConta = "jinConta";
+		public const string ShuiConta = "shuiConta";
+		public const string MuConta = "muConta";
+		public const string HuoConta = "huoConta";
+		public const string TuConta = "tuConta";
+
 		public const string CurExp = "curExp";
 		public const string MaxExp = "maxExp";
 

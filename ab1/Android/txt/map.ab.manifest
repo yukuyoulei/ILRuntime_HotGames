@@ -1,0 +1,16 @@
+ManifestFileVersion: 0
+CRC: 1294928281
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 3959ed96d32e5980d83ddfb0dce487fa
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 5ad585dd02dfb5016c0dad519eab8f49
+HashAppended: 0
+ClassTypes:
+- Class: 49
+  Script: {instanceID: 0}
+Assets:
+- Assets/RemoteResources/txt/Map.txt
+Dependencies: []

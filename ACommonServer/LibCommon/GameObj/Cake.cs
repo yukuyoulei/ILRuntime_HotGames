@@ -34,6 +34,16 @@ namespace LibCommon.GameObj
 						cake.RegisterParam(EParamType.Int, ParamNameDefs.CreateTime);
 						cake.RegisterParam(EParamType.Int, ParamNameDefs.LastDailyCheckTime);
 						cake.RegisterParam(EParamType.Int, ParamNameDefs.DailyCheckCount);
+						cake.RegisterParam(EParamType.Int, ParamNameDefs.Jin);
+						cake.RegisterParam(EParamType.Int, ParamNameDefs.Shui);
+						cake.RegisterParam(EParamType.Int, ParamNameDefs.Mu);
+						cake.RegisterParam(EParamType.Int, ParamNameDefs.Huo);
+						cake.RegisterParam(EParamType.Int, ParamNameDefs.Tu);
+						cake.RegisterParam(EParamType.Int, ParamNameDefs.JinConta);
+						cake.RegisterParam(EParamType.Int, ParamNameDefs.ShuiConta);
+						cake.RegisterParam(EParamType.Int, ParamNameDefs.MuConta);
+						cake.RegisterParam(EParamType.Int, ParamNameDefs.HuoConta);
+						cake.RegisterParam(EParamType.Int, ParamNameDefs.TuConta);
 					});
 					_registers.Add("items", cake =>
 					{
@@ -62,7 +72,7 @@ namespace LibCommon.GameObj
 		}
 
 		private static string[] multiList = new string[] { "items", "order" };
-		protected virtual bool IsMulti { get { return multiList.Contains(cakeType); } }
+		protected bool IsMulti { get { return multiList.Contains(cakeType); } }
 		protected Dictionary<string, Cake> subCakes = new Dictionary<string, Cake>();
 		public Cake(string cakeType, string id)
 		{

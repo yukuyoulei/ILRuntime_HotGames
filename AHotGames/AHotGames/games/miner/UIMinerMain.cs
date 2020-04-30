@@ -50,10 +50,7 @@ public class UIMinerMain : AHotBase
 
 		OnParamUpdateCb(null);
 		RegisterEvent(UEvents.ParamUpdate, OnParamUpdateCb);
-		RegisterEvent(UEvents.EventCreateOrder, OnCreateOrderCb);
-
-		//var map01 = LoadClass<UMinerMap>("UI/MinerMap/Map01");
-		AClientApis.OnGetSdata("");
+		RegisterEvent(UEvents.CreateOrder, OnCreateOrderCb);
 
 		OnRegistAction(str =>
 		{

@@ -1,4 +1,4 @@
 resources=https://yukuyoulei.github.io/ILRuntime_HotGames/ab1/
-useab=1
 preloads=firstui,dll/,ui/
-dll=https://yukuyoulei.github.io/ILRuntime_HotGames/ab1/AHotGames.bytes
+#dll=https://yukuyoulei.github.io/ILRuntime_HotGames/ab1/AHotGames.bytes
+dll=https://127.0.0.1/hotgame/AHotGames.bytes

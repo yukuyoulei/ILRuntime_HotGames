@@ -1,0 +1,26 @@
+ManifestFileVersion: 0
+CRC: 2696472458
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 436082e2fc7365bce919c03cb9186dc1
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: ea5a42e0fd8ea905efa7aa926a3b8944
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+Assets:
+- 'Assets/Arts/UI/Sprite/1 #331715.png'
+- Assets/Arts/Images/btn3.png
+- Assets/Arts/Images/Character/184-Light01.png
+- Assets/Arts/UI/Sprite/1 (7).png
+- Assets/Arts/Images/Map/017-MineTown01.png
+- Assets/Arts/Playable/caverman.png
+- Assets/Arts/Images/Character/001-Fighter01.png
+- Assets/Arts/Images/loading.png
+- Assets/Arts/Images/Character/183-Rock02.png
+Dependencies: []

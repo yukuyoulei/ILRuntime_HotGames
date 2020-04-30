@@ -1,0 +1,20 @@
+ManifestFileVersion: 0
+CRC: 1787796338
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: b67a0a71d899f00cd19b7e1d63d8a81d
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 70e7db779fc083977b06f56e8be8f1dc
+HashAppended: 0
+ClassTypes:
+- Class: 74
+  Script: {instanceID: 0}
+- Class: 91
+  Script: {instanceID: 0}
+Assets:
+- Assets/Arts/Anims/Cave1.controller
+Dependencies:
+- E:/personal/ILRuntime_HotGames/ILRuntime_HotGames/ab1/Android/anims/c1idle.ab
+- E:/personal/ILRuntime_HotGames/ILRuntime_HotGames/ab1/Android/anims/c1move.ab

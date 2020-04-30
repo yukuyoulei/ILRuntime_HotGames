@@ -76,7 +76,7 @@ public class UIMinerCreateAvatar : AHotBase
 		if (res.eResult == PktCreateAvatarResult.EResult.Success)
 		{
 			OnUnloadThis();
-			LoadAnotherUI<UIMinerMain>();
+			AClientApis.OnGetSdata();
 		}
 	}
 }

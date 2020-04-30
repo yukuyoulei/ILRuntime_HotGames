@@ -8,8 +8,21 @@ public class Enter : MonoBehaviour
 	public static string ConfigURL { get { return PlayerPrefs.GetInt("USE_LOCAL_CDN") == 1 
 				? "http://127.0.0.1/hotgame/Config.txt" 
 				: "https://yukuyoulei.github.io/ILRuntime_HotGames/ab1/Config.txt"; } }
-	public bool UseAB;
 	private Transform trUIAlert;
+	public static bool bUsingAb
+	{
+		get
+		{
+			if (!PlayerPrefs.HasKey("UseAB"))
+				return true;
+			return PlayerPrefs.GetInt("UseAB") != 0;
+		}
+		set
+		{
+			PlayerPrefs.SetInt("UseAB", value ? 1 : 0);
+		}
+	}
+
 	private void Start()
 	{
 #if UNITY_ANDROID
@@ -47,20 +60,15 @@ public class Enter : MonoBehaviour
 	}
 
 
-	bool bIsLocal;
 	private void InitRemoteConfig()
 	{
 		ConfigDownloader.Instance.StartToDownload(ConfigURL, () =>
 		{
-			bIsLocal = false;
-
 			ParseConfig();
 
 			fprocessing = 0.2f;
 		}, () =>
 		{
-			bIsLocal = true;
-			UConfigManager.bUsingAb = false;
 			Invoke("InitRemoteConfig", 3);
 		});
 
@@ -74,13 +82,7 @@ public class Enter : MonoBehaviour
 			return;
 		}
 
-		UConfigManager.bUsingAb = ConfigDownloader.Instance.OnGetIntValue("useab") == 1;
-
-#if UNITY_EDITOR
-		UConfigManager.bUsingAb = UseAB;
-#endif
-
-		if (UConfigManager.bUsingAb)
+		if (bUsingAb)
 		{
 			StartCoroutine(OnDownloadDll(ConfigDownloader.Instance.OnGetValue("dll")));
 		}
@@ -152,7 +154,6 @@ public class Enter : MonoBehaviour
 #endif
 		ILRuntimeHandler.Instance.OnLoadClass("AEntrance", new GameObject("AEntrance"), false, platform);
 #if ILRUNTIME
-		ILRuntimeHandler.Instance.EmitMessage(bIsLocal ? "local" : "remote");
 		ILRuntimeHandler.Instance.EmitMessage($"resPath:{ConfigDownloader.Instance.OnGetValue("resPath")}");
 		fprocessing = 0.8f;
 #endif

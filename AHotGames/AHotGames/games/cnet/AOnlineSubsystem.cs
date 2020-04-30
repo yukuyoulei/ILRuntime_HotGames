@@ -34,13 +34,23 @@ public class AOnlineSubsystem : LibClient.AClientComm
 	{
 		UEventListener.Instance.OnDispatchEvent(UEvents.ParamUpdate, null);
 	}
-	public override void rcvContaData(int id)
+	public override void rcvContaData(int id, List<PData> lDatas)
 	{
-		UEventListener.Instance.OnDispatchEvent(UEvents.EventContaData, new EventContaData() { id = id });
+		UEventListener.Instance.OnDispatchEvent(UEvents.ContaData, new EventContaData() { id = id, lDatas = lDatas });
 	}
 
 	public override void rcvCreateOrderCb(PktCreateOrderResult.EResult eResult, string orderID, string extraInfo)
 	{
-		UEventListener.Instance.OnDispatchEvent(UEvents.EventCreateOrder, new EventCreateOrder() { eResult = eResult, orderID = orderID, extraInfo  = extraInfo});
+		UEventListener.Instance.OnDispatchEvent(UEvents.CreateOrder, new EventCreateOrder() { eResult = eResult, orderID = orderID, extraInfo = extraInfo });
+	}
+
+	public override void rcvSettlement(bool ret, PData pData)
+	{
+		UEventListener.Instance.OnDispatchEvent(UEvents.Settlement, new EventSettlement() { bRet = ret, pdata = pData });
+	}
+
+	public override void rcvCreatePlayer(PktCreatePlayer info)
+	{
+		UEventListener.Instance.OnDispatchEvent(UEvents.CreatePlayer, new EventCreatePlayer() { pkt =info });
 	}
 }

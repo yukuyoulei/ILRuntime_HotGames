@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 2534631385
+CRC: 1054430114
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -346,3 +346,100 @@ AssetBundleManifest:
     Info_102:
       Name: ui/minermap/mapcity.ab
       Dependencies: {}
+    Info_103:
+      Name: txt/payment.ab
+      Dependencies: {}
+    Info_104:
+      Name: txt/huo.ab
+      Dependencies: {}
+    Info_105:
+      Name: txt/jin.ab
+      Dependencies: {}
+    Info_106:
+      Name: txt/mu.ab
+      Dependencies: {}
+    Info_107:
+      Name: txt/shui.ab
+      Dependencies: {}
+    Info_108:
+      Name: txt/tu.ab
+      Dependencies: {}
+    Info_109:
+      Name: ui/minermap/maphuo1.ab
+      Dependencies:
+        Dependency_0: tdefault.ab
+        Dependency_1: animator/role01.ab
+    Info_110:
+      Name: ui/minermap/maphuo2.ab
+      Dependencies:
+        Dependency_0: tdefault.ab
+        Dependency_1: animator/role01.ab
+    Info_111:
+      Name: ui/minermap/maphuo3.ab
+      Dependencies:
+        Dependency_0: tdefault.ab
+        Dependency_1: animator/role01.ab
+    Info_112:
+      Name: ui/minermap/mapjin1.ab
+      Dependencies:
+        Dependency_0: tdefault.ab
+        Dependency_1: animator/role01.ab
+    Info_113:
+      Name: ui/minermap/mapjin2.ab
+      Dependencies:
+        Dependency_0: tdefault.ab
+        Dependency_1: animator/role01.ab
+    Info_114:
+      Name: ui/minermap/mapjin3.ab
+      Dependencies:
+        Dependency_0: tdefault.ab
+        Dependency_1: animator/role01.ab
+    Info_115:
+      Name: ui/minermap/mapmu1.ab
+      Dependencies:
+        Dependency_0: tdefault.ab
+        Dependency_1: animator/role01.ab
+    Info_116:
+      Name: ui/minermap/mapmu2.ab
+      Dependencies:
+        Dependency_0: tdefault.ab
+        Dependency_1: animator/role01.ab
+    Info_117:
+      Name: ui/minermap/mapmu3.ab
+      Dependencies:
+        Dependency_0: tdefault.ab
+        Dependency_1: animator/role01.ab
+    Info_118:
+      Name: ui/minermap/mapshui1.ab
+      Dependencies:
+        Dependency_0: tdefault.ab
+        Dependency_1: animator/role01.ab
+    Info_119:
+      Name: ui/minermap/mapshui2.ab
+      Dependencies:
+        Dependency_0: tdefault.ab
+        Dependency_1: animator/role01.ab
+    Info_120:
+      Name: ui/minermap/mapshui3.ab
+      Dependencies:
+        Dependency_0: tdefault.ab
+        Dependency_1: animator/role01.ab
+    Info_121:
+      Name: ui/minermap/maptu1.ab
+      Dependencies:
+        Dependency_0: tdefault.ab
+        Dependency_1: animator/role01.ab
+    Info_122:
+      Name: ui/minermap/maptu2.ab
+      Dependencies:
+        Dependency_0: tdefault.ab
+        Dependency_1: animator/role01.ab
+    Info_123:
+      Name: ui/minermap/maptu3.ab
+      Dependencies:
+        Dependency_0: tdefault.ab
+        Dependency_1: animator/role01.ab
+    Info_124:
+      Name: ui/uisinglesettlement.ab
+      Dependencies:
+        Dependency_0: tdefault.ab

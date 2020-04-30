@@ -17,14 +17,20 @@ public class NetSystem : SystemBase
 	{
 		foreach (var e in this.conta.entities.Values)
 		{
-			e.toclient?.Invoke(entity.id);
+			if (e.psid == entity.psid) continue;
+			e.toclient?.Invoke(entity.psid);
 		}
 	}
 
 	internal void SendTo(string id, PktBase pkt)
 	{
-		var p = APlayerManager.Instance.OnGetPlayerByID(id);
+		var p = APlayerManager.Instance.OnGetPlayerByPSID(id);
 		if (p == null) return;
 		p.client.Response(pkt);
+	}
+
+	internal void me2all(Entity entity)
+	{
+		entity.toclient?.Invoke(null);
 	}
 }

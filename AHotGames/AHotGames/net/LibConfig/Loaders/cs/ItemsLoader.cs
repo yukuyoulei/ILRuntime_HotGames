@@ -1,11 +1,11 @@
-public class Items:DataBase
+public class ItemsData : DataBase
 {
 	public string Name;//道具名
 	public string Desc;//描述
 	public string param;//属性
 	public int dropID;//掉落ID
 }
-public class ItemsLoader : SingletonDataLoader<ItemsLoader, Items>
+public class ItemsLoader : SingletonDataLoader<ItemsLoader, ItemsData>
 {
 	public override void OnLoadContent(string content)
 	{
@@ -20,7 +20,7 @@ public class ItemsLoader : SingletonDataLoader<ItemsLoader, Items>
 			continue;
 			}
 
-			var data = new Items();
+			var data = new ItemsData();
 			data.id = id;
 			data.Name = GetStringValue(i,istart++);
 			data.Desc = GetStringValue(i,istart++);

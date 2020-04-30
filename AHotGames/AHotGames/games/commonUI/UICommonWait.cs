@@ -7,6 +7,7 @@ using UnityEngine;
 
 public class UICommonWait : AHotBase
 {
+	protected override bool bCanBeAutoClosed => false;
 	private static UICommonWait sinstance;
 	protected override void InitComponents()
 	{
@@ -27,15 +28,15 @@ public class UICommonWait : AHotBase
 		if (sinstance == null)
 			UHotAssetBundleLoader.Instance.OnDownloadResources(() =>
 			{
-				sinstance = LoadClass<UICommonWait>("UI/UICommonWait", null, true);
+				sinstance = LoadClass<UICommonWait>("UI/UICommonWait", null);
 			}, "UI/UICommonWait");
 		else
-			sinstance.gameObj.SetActive(true);
+			sinstance.gameObj?.SetActive(true);
 	}
 	public static void Hide()
 	{
 		if (sinstance != null)
-			sinstance.gameObj.SetActive(false);
+			sinstance.gameObj?.SetActive(false);
 	}
 }
 

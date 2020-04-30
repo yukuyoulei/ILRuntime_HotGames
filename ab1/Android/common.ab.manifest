@@ -1,0 +1,21 @@
+ManifestFileVersion: 0
+CRC: 495039006
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: a562537760b5c611ffa75e1ce7bd70c1
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: ea5a42e0fd8ea905efa7aa926a3b8944
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+Assets:
+- Assets/Arts/Images/112001.png
+- Assets/Arts/Images/113003.png
+- Assets/Arts/Images/xianyu.png
+- Assets/Arts/Images/jinbi.png
+Dependencies: []

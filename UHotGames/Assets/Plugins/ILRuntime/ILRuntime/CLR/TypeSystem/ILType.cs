@@ -128,6 +128,10 @@ namespace ILRuntime.CLR.TypeSystem
                     InitializeFields();
                 if (methods == null)
                     InitializeMethods();
+                if (staticInstance == null && staticFieldTypes != null)
+                {
+                    staticInstance = new ILTypeStaticInstance(this);
+                }
                 if (staticInstance != null && !staticConstructorCalled)
                 {
                     staticConstructorCalled = true;
@@ -447,7 +451,7 @@ namespace ILRuntime.CLR.TypeSystem
             }
         }
 
-        string fullName;
+        string fullName, fullNameForNested;
         public string FullName
         {
             get
@@ -473,6 +477,12 @@ namespace ILRuntime.CLR.TypeSystem
                     }
                     else
                         fullName = typeRef.FullName;
+                    if (typeRef.IsNested)
+                    {
+                        fullNameForNested = fullName.Replace("/", ".");
+                    }
+                    else
+                        fullNameForNested = fullName;
                 }
                 return fullName;
             }
@@ -706,7 +716,13 @@ namespace ILRuntime.CLR.TypeSystem
             var m = GetMethod(method.Name, method.Parameters, genericArguments, method.ReturnType, true);
             if (m == null && method.DeclearingType.IsInterface)
             {
-                m = GetMethod(string.Format("{0}.{1}", method.DeclearingType.FullName, method.Name), method.Parameters, genericArguments, method.ReturnType, true);
+                var iltype = method.DeclearingType as ILType;
+                if (iltype != null)
+                {
+                    m = GetMethod(string.Format("{0}.{1}", iltype.fullNameForNested, method.Name), method.Parameters, genericArguments, method.ReturnType, true);
+                }
+                else
+                    m = GetMethod(string.Format("{0}.{1}", method.DeclearingType.FullName, method.Name), method.Parameters, genericArguments, method.ReturnType, true);
             }
 
             if (m == null)
@@ -1020,7 +1036,7 @@ namespace ILRuntime.CLR.TypeSystem
             {
                 Array.Resize(ref staticFieldTypes, idxStatic);
                 Array.Resize(ref staticFieldDefinitions, idxStatic);
-                staticInstance = new ILTypeStaticInstance(this);
+                //staticInstance = new ILTypeStaticInstance(this);
             }
         }
 

@@ -1,11 +1,11 @@
-public class Payment:DataBase
+public class PaymentData : DataBase
 {
 	public string Name;//名字
 	public string Desc;//描述
 	public int Price;//价格
 	public string AppStoreID;//AppStoreID
 }
-public class PaymentLoader : SingletonDataLoader<PaymentLoader, Payment>
+public class PaymentLoader : SingletonDataLoader<PaymentLoader, PaymentData>
 {
 	public override void OnLoadContent(string content)
 	{
@@ -20,7 +20,7 @@ public class PaymentLoader : SingletonDataLoader<PaymentLoader, Payment>
 			continue;
 			}
 
-			var data = new Payment();
+			var data = new PaymentData();
 			data.id = id;
 			data.Name = GetStringValue(i,istart++);
 			data.Desc = GetStringValue(i,istart++);

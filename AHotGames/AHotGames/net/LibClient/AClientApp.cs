@@ -26,17 +26,23 @@ namespace LibClient
 		{
 			RegistPacketResponers<PktParamUpdate>(rcvParamUpdate);
 			RegistPacketResponers<PktContaData>(rcvContaData);
-			RegistPacketResponers<PktEasy>(rcvEasy);
+			RegistPacketResponers<PktSettlement>(rcvSettlement);
+			RegistPacketResponers<PktCreatePlayer>(rcvCreatePlayer);
 		}
 
-		private static void rcvEasy(PktEasy obj)
+		private static void rcvCreatePlayer(PktCreatePlayer obj)
 		{
-			clientComm.rcvEasy(obj.name, obj.ints, obj.strs);
+			clientComm.rcvCreatePlayer(obj);
+		}
+
+		private static void rcvSettlement(PktSettlement obj)
+		{
+			clientComm.rcvSettlement(obj.ret, obj.pData);
 		}
 
 		private static void rcvContaData(PktContaData obj)
 		{
-			clientComm.rcvContaData(obj.id);
+			clientComm.rcvContaData(obj.id, obj.lDatas);
 		}
 
 		private static void rcvParamUpdate(PktParamUpdate obj)
@@ -59,15 +65,20 @@ namespace LibClient
 			connection = null;
 		}
 
-		private static string s_ip = "69.51.23.197";
-		public static async System.Threading.Tasks.Task StartClient(string ip = "", int port = 999)
+		private static string ip = "127.0.0.1";//"69.51.23.197";
+		private static int port = 999;
+		public static async System.Threading.Tasks.Task StartClient()
 		{
-			if (!string.IsNullOrEmpty(ip))
-				s_ip = ip;
-			connection = new AConnection(s_ip, port);
+			AOutput.Log($"Connecting {ip}:{port}");
+			connection = new AConnection(ip, port);
 			await connection.Connect();
 			if (connection.IsConnected)
-				AOutput.Log($"Connected {s_ip}:{port}");
+				AOutput.Log($"Connected {ip}:{port}");
+		}
+		public static void SetEndpoint(string sip, int iport)
+		{
+			ip = sip;
+			port = iport;
 		}
 		public static bool bConnected
 		{

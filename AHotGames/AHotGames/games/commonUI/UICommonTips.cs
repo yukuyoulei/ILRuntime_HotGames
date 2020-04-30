@@ -7,6 +7,7 @@ using UnityEngine;
 
 public class UICommonTips : AHotBase
 {
+	protected override bool bCanBeAutoClosed => false;
 	static UICommonTips sinstance;
 	Text tipcell;
 	protected override void InitComponents()
@@ -19,7 +20,7 @@ public class UICommonTips : AHotBase
 
 	public static void AddTip(string content)
 	{
-		if (sinstance == null) LoadAnotherUI<UICommonTips>(instance => { sinstance = instance; sinstance.DoAddTip(content); }, true);
+		if (sinstance == null) LoadAnotherUI<UICommonTips>(instance => { sinstance = instance; sinstance.DoAddTip(content); });
 		else sinstance.DoAddTip(content);
 	}
 

@@ -8,6 +8,7 @@ using LibCommon;
 using System.Threading;
 using LibServer.Enter;
 using System.IO;
+using LibServer.Managers;
 
 namespace ACommonServers
 {
@@ -27,6 +28,7 @@ namespace ACommonServers
 			EngineServer.Instance.ServerStartUp(typeParser.intParse(sport), EngineServer.EServerType.GatewayServer);
 
 			GameHandlers_Enter.Instance.Init();
+			EngineServer.Instance.RegistSubSystem(AContaManager.Instance);
 			EngineServer.Instance.RegistSubSystem(GameHandlers_Enter.Instance);
 			StartConsoleServer();
 

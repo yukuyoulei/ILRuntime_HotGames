@@ -4,6 +4,7 @@ using UnityEditor;
 using System.IO;
 using System.Collections.Generic;
 using System;
+using System.Linq;
 /*
 using UnityEngine.VR;
 */
@@ -183,6 +184,42 @@ public class UBuildTools : EditorWindow
 			}
 		}
 	}
+	bool UseAB
+	{
+		get
+		{
+			return Enter.bUsingAb;
+		}
+		set
+		{
+			Enter.bUsingAb = value;
+		}
+	}
+
+	const string sILRUNTIME = "ILRUNTIME";
+	bool ILRUNTIME
+	{
+		get
+		{
+			return PlayerSettings.GetScriptingDefineSymbolsForGroup(target).Split(';').Contains(sILRUNTIME);
+		}
+		set
+		{
+			var asymbols = PlayerSettings.GetScriptingDefineSymbolsForGroup(target).Split(';').ToList();
+			if (value)
+			{
+				if (asymbols.Contains(sILRUNTIME)) return;
+				asymbols.Add(sILRUNTIME);
+				PlayerSettings.SetScriptingDefineSymbolsForGroup(target, string.Join(";", asymbols));
+			}
+			else
+			{
+				if (!asymbols.Contains(sILRUNTIME)) return;
+				asymbols.Remove(sILRUNTIME);
+				PlayerSettings.SetScriptingDefineSymbolsForGroup(target, string.Join(",", asymbols));
+			}
+		}
+	}
 
 	string sBuildLog = "";
 	Vector2 scrollPos;
@@ -285,6 +322,9 @@ public class UBuildTools : EditorWindow
 		*/
 
 		EditorGUILayout.Space();
+		UseAB = EditorGUILayout.ToggleLeft("编辑器下是否使用AB", UseAB);
+		ILRUNTIME = EditorGUILayout.ToggleLeft("是否使用ILRUNTIME", ILRUNTIME);
+		bUsingLocalCDN = EditorGUILayout.ToggleLeft("是否使用本地CDN", bUsingLocalCDN);
 
 #if UNITY_ANDROID
 		EditorGUILayout.Space();
@@ -304,8 +344,6 @@ public class UBuildTools : EditorWindow
 		EditorGUILayout.LabelField("包地址", GUILayout.Width(50));
 		targetBuildDir = EditorGUILayout.TextField(targetBuildDir);
 		GUILayout.EndHorizontal();
-
-		bUsingLocalCDN = EditorGUILayout.ToggleLeft("是否使用本地CDN", bUsingLocalCDN);
 
 		bUsingIL2CPP = EditorGUILayout.ToggleLeft("是否使用IL2CPP", bUsingIL2CPP);
 		if (GUILayout.Button("Build"))

@@ -1,0 +1,21 @@
+ManifestFileVersion: 0
+CRC: 3377575891
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 9a5a0dfc96a17bd8b722e657e8e0a900
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: d7865432dca78e1ecd7132916d904900
+HashAppended: 0
+ClassTypes:
+- Class: 74
+  Script: {instanceID: 0}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+Assets:
+- Assets/Arts/Animator/left01.anim
+Dependencies:
+- E:/personal/ILRuntime_HotGames/ILRuntime_HotGames/ab1/Android/tdefault.ab

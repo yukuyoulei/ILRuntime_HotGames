@@ -1,0 +1,21 @@
+ManifestFileVersion: 0
+CRC: 1575548384
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: ccedb620e2c1b3b809085744bfd42360
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: d7865432dca78e1ecd7132916d904900
+HashAppended: 0
+ClassTypes:
+- Class: 74
+  Script: {instanceID: 0}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+Assets:
+- Assets/Arts/Animator/idlef01.anim
+Dependencies:
+- E:/personal/ILRuntime_HotGames/ILRuntime_HotGames/ab1/Android/tdefault.ab

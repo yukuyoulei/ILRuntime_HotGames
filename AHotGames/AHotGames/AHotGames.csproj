@@ -105,7 +105,11 @@
     <Compile Include="games\game\UBigOrSmall.cs" />
     <Compile Include="games\game\UCardGame.cs" />
     <Compile Include="games\game\UMMO.cs" />
+    <Compile Include="games\miner\Map\MapSingle.cs" />
+    <Compile Include="games\miner\UISingleSettlement.cs" />
+    <Compile Include="games\miner\Map\MapCity.cs" />
     <Compile Include="games\miner\Map\UMinerMap.cs" />
+    <Compile Include="games\miner\UBattleNetMgr.cs" />
     <Compile Include="games\miner\UIMinerMain.cs" />
     <Compile Include="games\miner\UIMinerCreateAvatar.cs" />
     <Compile Include="games\miner\UIMinerLogin.cs" />
@@ -147,9 +151,14 @@
     <Compile Include="net\LibCommon\GameObj\Cake.cs" />
     <Compile Include="net\LibConfig\Loaders\ConfigManager.cs" />
     <Compile Include="net\LibConfig\Loaders\cs\DailyCheckLoader.cs" />
+    <Compile Include="net\LibConfig\Loaders\cs\HuoLoader.cs" />
     <Compile Include="net\LibConfig\Loaders\cs\ItemsLoader.cs" />
+    <Compile Include="net\LibConfig\Loaders\cs\JinLoader.cs" />
     <Compile Include="net\LibConfig\Loaders\cs\MapLoader.cs" />
+    <Compile Include="net\LibConfig\Loaders\cs\MuLoader.cs" />
     <Compile Include="net\LibConfig\Loaders\cs\PaymentLoader.cs" />
+    <Compile Include="net\LibConfig\Loaders\cs\ShuiLoader.cs" />
+    <Compile Include="net\LibConfig\Loaders\cs\TuLoader.cs" />
     <Compile Include="net\LibNet\AUDPSocket.cs" />
     <Compile Include="net\LibNet\ByteStream.cs" />
     <Compile Include="net\LibNet\ClientConnection.cs" />

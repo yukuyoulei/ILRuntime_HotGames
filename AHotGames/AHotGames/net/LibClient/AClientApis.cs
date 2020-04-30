@@ -29,6 +29,37 @@ public static class AClientApis
 		var req = new PktEnterGameRequest();
 		AClientApp.RemoteCall<PktEnterGameResult>(req, OnEnterGameCb);
 	}
+
+	internal static void OnEnterScene()
+	{
+		var pkt = new PktCommonRequest();
+		pkt.method = (int)ECommonMethod.EnterScene;
+		AClientApp.RemoteCall(pkt);
+	}
+
+	internal static void OnEnterCity()
+	{
+		var pkt = new PktCommonRequest();
+		pkt.pData.intArg = 1;
+		pkt.method = (int)ECommonMethod.EnterConta;
+		AClientApp.RemoteCall(pkt);
+	}
+
+	internal static void OnBeginFight()
+	{
+		var pkt = new PktCommonRequest();
+		pkt.method = (int)ECommonMethod.BeginFight;
+		AClientApp.RemoteCall(pkt);
+	}
+
+	internal static void OnEnterConta(string swx)
+	{
+		var pkt = new PktCommonRequest();
+		pkt.pData.strArg = swx;
+		pkt.method = (int)ECommonMethod.EnterConta;
+		AClientApp.RemoteCall(pkt);
+	}
+
 	private static void OnEnterGameCb(PktEnterGameResult res)
 	{
 		if (res.info != null)
@@ -57,7 +88,7 @@ public static class AClientApis
 		AClientApp.clientComm.rcvCreateAvatarCb(res.eResult, res.info);
 	}
 
-	public static void OnGetSdata(string name)
+	public static void OnGetSdata(string name = "")
 	{
 		var pkt = new PktGetSdata();
 		pkt.name = name;
@@ -102,4 +133,5 @@ public static class AClientApis
 	{
 		AClientApp.clientComm.rcvCreateOrderCb(obj.eResult, obj.orderID, obj.extraInfo);
 	}
+
 }

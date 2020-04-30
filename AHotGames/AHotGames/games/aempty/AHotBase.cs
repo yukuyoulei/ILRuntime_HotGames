@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -13,25 +14,14 @@ public abstract class AHotBase
 	public static AHotBase curGame;
 	public static string strArg;
 	protected bool bDestroying;
-	private static AHotBase sinstance;
+	protected virtual bool bCanBeAutoClosed { get; } = true;
 	public void SetGameObj(GameObject gameObj, string arg = "")
 	{
-		sinstance = this;
+		this.gameObj = gameObj;
 
-		if (arg.Equals("true", StringComparison.CurrentCultureIgnoreCase))
+		if (arg == "Android" || arg == "IOS" || arg == "Windows")
 		{
-			Environment.UseAB = true;
-		}
-		else if (arg.Equals("false", StringComparison.CurrentCultureIgnoreCase))
-		{
-			Environment.UseAB = false;
-		}
-		else
-		{
-			if (arg == "Android" || arg == "IOS" || arg == "Windows")
-			{
-				Utils.TargetRuntimeInEditor = arg;
-			}
+			Utils.TargetRuntimeInEditor = arg;
 		}
 
 		if (dGameObjects.ContainsKey(gameObj.name))
@@ -42,7 +32,6 @@ public abstract class AHotBase
 		{
 			dGameObjects.Add(gameObj.name, gameObj);
 		}
-		this.gameObj = gameObj;
 		strArg = arg;
 		var r = this.gameObj.AddComponent<UEmitMessager>();
 		curGame = this;
@@ -58,6 +47,10 @@ public abstract class AHotBase
 		};
 
 		InitComponents();
+
+		if (bCanBeAutoClosed
+			&& !loadedClasses.Contains(this))
+			loadedClasses.Add(this);
 	}
 	protected void muteAllAudioSource(bool bMute)
 	{
@@ -179,9 +172,10 @@ public abstract class AHotBase
 	}
 
 	private static GameObject msgReceiver;
-	static void SetUnityMessageReceiver(GameObject receiver)
+	public static void SetUnityMessageReceiver(GameObject receiver)
 	{
 		msgReceiver = receiver;
+		AOutput.Log($"MessageReceiver received:{receiver.name}");
 	}
 	public static void SendInvokeToUnityReceiver(string gameObjName, string message, string argument = "")
 	{
@@ -294,7 +288,7 @@ public abstract class AHotBase
 		SendMessageToUnityReceiver(smsg);
 	}
 	private static List<AHotBase> loadedClasses = new List<AHotBase>();
-	public static T LoadClass<T>(string prefabPath, Action<T> action = null, bool bCanNotAntoDestroy = false) where T : AHotBase, new()
+	public static T LoadClass<T>(string prefabPath, Action<T> action = null) where T : AHotBase, new()
 	{
 		GameObject obj = UHotAssetBundleLoader.Instance.OnLoadAsset<GameObject>(prefabPath);
 		if (obj == null)
@@ -305,23 +299,24 @@ public abstract class AHotBase
 		var t = new T();
 		t.SetGameObj(GameObject.Instantiate(obj), "");
 		action?.Invoke(t);
-		if (!bCanNotAntoDestroy)
-			loadedClasses.Add(t);
+		if (t.bCanBeAutoClosed)
+			if (!loadedClasses.Contains(t))
+				loadedClasses.Add(t);
 		return t;
 	}
-	public static void LoadUI<T>(Action<T> action = null, bool bCanNotAntoDestroy = false) where T : AHotBase, new()
+	public static void LoadUI<T>(Action<T> action = null) where T : AHotBase, new()
 	{
 		UICommonWait.Show();
 		var path = "UI/" + typeof(T).Name;
 		UHotAssetBundleLoader.Instance.OnDownloadResources(() =>
 		{
 			UICommonWait.Hide();
-			LoadClass<T>(path, action, bCanNotAntoDestroy);
+			LoadClass<T>(path, action);
 		}, path);
 	}
-	public static void LoadAnotherUI<T>(Action<T> actionLoadComplete = null, bool bCanNotAntoDestroy = false) where T : AHotBase, new()
+	public static void LoadAnotherUI<T>(Action<T> actionLoadComplete = null) where T : AHotBase, new()
 	{
-		LoadUI<T>(actionLoadComplete, bCanNotAntoDestroy);
+		LoadUI<T>(actionLoadComplete);
 	}
 	public static void LoadAnotherUI(string uiname)
 	{
@@ -342,7 +337,8 @@ public abstract class AHotBase
 	{
 		foreach (var c in loadedClasses)
 		{
-			GameObject.Destroy(c.gameObj);
+			if (c.gameObj)
+				GameObject.Destroy(c.gameObj);
 		}
 		loadedClasses.Clear();
 	}
