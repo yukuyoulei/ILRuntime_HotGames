@@ -29,7 +29,7 @@ public class UBattleNetMgr : Singleton<UBattleNetMgr>
 			return;
 		}
 		var eb = obj as EventSettlement;
-		AHotBase.LoadUI<UISingleSettlement>(ui => { ui.SetData(eb); });
+		AHotBase.LoadUI<UISingleSettlement>(ui=> { ui.SetData(eb); });
 	}
 
 	private void OnCreatePlayer(UEventBase obj)
@@ -67,12 +67,6 @@ public class UBattleNetMgr : Singleton<UBattleNetMgr>
 		var data = obj as EventContaData;
 		var id = data.id;
 		var map = MapLoader.Instance.OnGetData(id);
-		UICommonWait.Show();
-		UHotAssetBundleLoader.Instance.OnDownloadResources(() =>
-		{
-			AOutput.Log($"OnDownloadResources {map.MapClass} {map.Prefab}");
-			UICommonWait.Hide();
-			AHotBase.LoadAnotherClass(map.MapClass, map.Prefab);
-		}, map.Prefab);
+		AHotBase.LoadAnotherClass(map.MapClass, map.Prefab);
 	}
 }

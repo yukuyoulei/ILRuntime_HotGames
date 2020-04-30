@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using UnityEngine;
 using System.Threading.Tasks;
 using LibClient.GameObj;
+using System.Resources;
 
 public class AEntrance : AHotBase
 {
@@ -51,6 +52,11 @@ public class AEntrance : AHotBase
 
 					ConfigManager.Instance.DownloadConfig(() =>
 					{
+						var lall = preloadResources.ToList();
+						foreach (var d in MapLoader.Instance.AllData)
+						{
+							lall.Add(d.Prefab);
+						}
 						UHotAssetBundleLoader.Instance.OnDownloadResources(new List<string>(preloadResources), () =>
 						{
 							UILoading.Instance?.OnUnloadThis();
