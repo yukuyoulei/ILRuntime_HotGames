@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
@@ -255,17 +256,15 @@ public class UHotAssetBundleLoader : AHotBase
 		if (lWaitingForDownload.Count > 0)
 		{
 			var resource = "";
-			do
+			if (lWaitingForDownload.Count == 0)
 			{
-				if (lWaitingForDownload.Count == 0)
-				{
-					resource = "";
-					break;
-				}
+				resource = "";
+			}
+			else
+			{
 				resource = lWaitingForDownload[0];
 				lWaitingForDownload.RemoveAt(0);
 			}
-			while (dAssetBundles.ContainsKey(resource));
 
 			if (!string.IsNullOrEmpty(resource))
 			{
@@ -278,7 +277,7 @@ public class UHotAssetBundleLoader : AHotBase
 					}
 					, (err) =>
 					{
-						//lResources.Add(resource);
+						AOutput.Log($"Download {resource} failed:{err}");
 						DoDownloadResources(lWaitingForDownload, downloaded, progress);
 					}
 					, (p) =>

@@ -9,6 +9,7 @@ public class MapSingle : AHotBase
 {
 	protected override void InitComponents()
 	{
+		LoadUI<UIMinerBattle>();
 
 		AClientApis.OnEnterScene();
 	}
