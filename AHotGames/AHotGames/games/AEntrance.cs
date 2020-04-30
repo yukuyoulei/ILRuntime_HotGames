@@ -20,7 +20,6 @@ public class AEntrance : AHotBase
 
 		LibClient.AClientApp.Init(new AOnlineSubsystem());
 
-		new CakeClient("pinfo", "1", "1");
 		PreDownloadResources();
 	}
 
