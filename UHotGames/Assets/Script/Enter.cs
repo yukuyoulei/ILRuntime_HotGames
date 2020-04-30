@@ -5,9 +5,24 @@ using System.Linq;
 
 public class Enter : MonoBehaviour
 {
-	public static string ConfigURL { get { return PlayerPrefs.GetInt("USE_LOCAL_CDN") == 1 
-				? "http://127.0.0.1/hotgame/Config.txt" 
-				: "https://yukuyoulei.github.io/ILRuntime_HotGames/ab1/Config.txt"; } }
+	public static bool bUsingLocalCDN
+	{
+		get
+		{
+			if (!PlayerPrefs.HasKey("USE_LOCAL_CDN"))
+				return true;
+			return PlayerPrefs.GetInt("USE_LOCAL_CDN") == 1;
+		}
+	}
+	public static string ConfigURL
+	{
+		get
+		{
+			return bUsingLocalCDN
+? "http://127.0.0.1/hotgame/Config.txt"
+: "https://yukuyoulei.github.io/ILRuntime_HotGames/ab1/Config.txt";
+		}
+	}
 	private Transform trUIAlert;
 	public static bool bUsingAb
 	{
@@ -26,7 +41,7 @@ public class Enter : MonoBehaviour
 	private void Start()
 	{
 #if UNITY_ANDROID
-        MonoInstancePool.getInstance<SDK_Orientation>(true).ShowBar();
+		MonoInstancePool.getInstance<SDK_Orientation>(true).ShowBar();
 #endif
 		Screen.fullScreen = true;
 		MonoInstancePool.getInstance<AntiScriptSplit>(true);
@@ -84,7 +99,9 @@ public class Enter : MonoBehaviour
 
 		if (bUsingAb)
 		{
-			StartCoroutine(OnDownloadDll(ConfigDownloader.Instance.OnGetValue("dll")));
+			var dllpath = ConfigDownloader.Instance.OnGetValue("dll");
+			if (bUsingLocalCDN) dllpath = ConfigDownloader.Instance.OnGetValue("localdll");
+			StartCoroutine(OnDownloadDll(dllpath));
 		}
 		else
 		{
@@ -171,10 +188,10 @@ public class Enter : MonoBehaviour
 		newversionmustdownkey = "nviosm";
 		newversionurlkey = "nviosurl";
 #elif UNITY_ANDROID
-        newversionkey = "nvand";
-        newversionmustdownkey = "nvandm";
-        newversionurlkey = "nvandurl";
-        nvandignorekey = "nvandignore";
+		newversionkey = "nvand";
+		newversionmustdownkey = "nvandm";
+		newversionurlkey = "nvandurl";
+		nvandignorekey = "nvandignore";
 #elif UNITY_STANDALONE
 		newversionkey = "nvwin";
 		newversionmustdownkey = "nvwinm";
