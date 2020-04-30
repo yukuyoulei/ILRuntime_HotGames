@@ -20,12 +20,12 @@ public class UBigOrSmall : AHotBase
 		ShowGold();
 
 		btnReturn = FindWidget<Button>("btnReturn");
-		btnReturn.onClick.AddListener(() =>
+		btnReturn.onClick.AddListener((UnityEngine.Events.UnityAction)(() =>
 		{
-			OnUnloadThis();
+			base.OnUnloadThis();
 
-			LoadAnotherUI<UIMain>();
-		});
+			AHotBase.LoadUI<UIMain>();
+		}));
 
 		var bbig = false;
 		var bsmall = false;

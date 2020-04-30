@@ -38,12 +38,12 @@ public class UMMO : AHotBase
 		inputAnswer = FindWidget<InputField>("inputAnswer");
 
 		btnReturn = FindWidget<Button>("btnReturn");
-		btnReturn.onClick.AddListener(() =>
+		btnReturn.onClick.AddListener((UnityEngine.Events.UnityAction)(() =>
 		{
-			OnUnloadThis();
+			base.OnUnloadThis();
 
-			LoadAnotherUI<UIMain>();
-		});
+			AHotBase.LoadUI<UIMain>();
+		}));
 
 		btnGetQuestion = FindWidget<Button>("btnGetQuestion");
 		btnGetQuestion.onClick.AddListener(() =>

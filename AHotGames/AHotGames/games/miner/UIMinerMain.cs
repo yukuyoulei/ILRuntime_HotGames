@@ -29,12 +29,12 @@ public class UIMinerMain : AHotBase
 		textDiamond.text = "0";
 
 		var btnLogout = FindWidget<Button>("btnLogout");
-		btnLogout.onClick.AddListener(() =>
+		btnLogout.onClick.AddListener((UnityEngine.Events.UnityAction)(() =>
 		{
 			AClientApp.OnDisconnect();
-			OnUnloadThis();
-			LoadAnotherUI<UIMinerLogin>();
-		});
+			base.OnUnloadThis();
+			AHotBase.LoadUI<UIMinerLogin>();
+		}));
 
 		var btnPay = FindWidget<Button>("btnPay");
 		btnPay.onClick.AddListener(() =>

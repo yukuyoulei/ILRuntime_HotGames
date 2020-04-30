@@ -78,12 +78,12 @@ public class UILogin : AHotBase
 				});
 		});
 		var btnRegister = FindWidget<Button>("btnRegister");
-		btnRegister.onClick.AddListener(() =>
+		btnRegister.onClick.AddListener((UnityEngine.Events.UnityAction)(() =>
 		{
-			OnUnloadThis();
+			base.OnUnloadThis();
 
-			LoadAnotherUI<UIRegister>();
-		});
+			AHotBase.LoadUI<UIRegister>();
+		}));
 
 		if (!string.IsNullOrEmpty(token))
 		{
@@ -105,25 +105,25 @@ public class UILogin : AHotBase
 	private void OnSelectAvatar()
 	{
 		UStaticWebRequests.DoSelectAvatar(UILogin.CachedUsername, UILogin.token
-			, (jsel) =>
+			, (Action<JObject>)((jsel) =>
 			{
-				OnUnloadThis();
+				base.OnUnloadThis();
 
 				URemoteData.OnReceiveAvatarData(jsel["avatar"].ToString());
-				LoadAnotherUI<UIMain>();
-			}, (err) =>
+				AHotBase.LoadUI<UIMain>();
+			}), (Action<string>)((err) =>
 			{
 				if (err == "3")
 				{
-					OnUnloadThis();
+					base.OnUnloadThis();
 
-					LoadAnotherUI<UICreateAvatar>();
+					AHotBase.LoadUI<UICreateAvatar>();
 				}
 				else
 				{
 					UIAlert.Show("选择角色失败，" + err);
 				}
-			}, (err) =>
+			}), (err) =>
 			{
 				UIAlert.Show("选择角色失败，" + err);
 			});

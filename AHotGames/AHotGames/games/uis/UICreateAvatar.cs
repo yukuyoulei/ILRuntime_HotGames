@@ -29,13 +29,13 @@ public class UICreateAvatar : AHotBase
 	protected override void InitComponents()
 	{
 		btnReturn = FindWidget<Button>("btnReturn");
-		btnReturn.onClick.AddListener(() =>
+		btnReturn.onClick.AddListener((UnityEngine.Events.UnityAction)(() =>
 		{
-			OnUnloadThis();
+			base.OnUnloadThis();
 
 			URemoteData.OnLogout();
-			LoadAnotherUI<UILogin>();
-		});
+			AHotBase.LoadUI<UILogin>();
+		}));
 
 		inputNickname = FindWidget<InputField>("inputNickname");
 		inputNickname.text = "";
@@ -55,21 +55,21 @@ public class UICreateAvatar : AHotBase
 		bMale = true;
 
 		btnCreate = FindWidget<Button>("btnCreate");
-		btnCreate.onClick.AddListener(() =>
+		btnCreate.onClick.AddListener((UnityEngine.Events.UnityAction)(() =>
 		{
 			var nickname = inputNickname.text;
 			if (string.IsNullOrEmpty(nickname))
 			{
 				return;
 			}
-			UStaticWebRequests.DoCreateAvatar(UILogin.CachedUsername, UILogin.token, nickname, bMale ? "1" : "0", jsuccess =>
+			UStaticWebRequests.DoCreateAvatar(UILogin.CachedUsername, UILogin.token, nickname, bMale ? "1" : "0", (Action<Newtonsoft.Json.Linq.JObject>)(jsuccess =>
 			{
 				URemoteData.OnReceiveAvatarData(jsuccess["avatar"].ToString());
-				OnUnloadThis();
+				base.OnUnloadThis();
 
-				LoadAnotherUI<UIMain>();
-			});
-		});
+				AHotBase.LoadUI<UIMain>();
+			}));
+		}));
 	}
 }
 

@@ -10,19 +10,19 @@ public class UIRegister : AHotBase
     protected override void InitComponents()
     {
         var btnReturn = FindWidget<Button>("btnReturn");
-        btnReturn.onClick.AddListener(() =>
+        btnReturn.onClick.AddListener((UnityEngine.Events.UnityAction)(() =>
         {
-			OnUnloadThis();
+			base.OnUnloadThis();
 
-            LoadAnotherUI<UILogin>();
-        });
+			AHotBase.LoadUI<UILogin>();
+        }));
 
         var inputUsername = FindWidget<InputField>("inputUsername");
         var inputEmail = FindWidget<InputField>("inputEmail");
         var inputPassword = FindWidget<InputField>("inputPassword");
         var inputPasswordConfirm = FindWidget<InputField>("inputPasswordConfirm");
         var btnRegister = FindWidget<Button>("btnRegister");
-        btnRegister.onClick.AddListener(() =>
+        btnRegister.onClick.AddListener((UnityEngine.Events.UnityAction)(() =>
         {
             if (string.IsNullOrEmpty(inputUsername.text)
                 || string.IsNullOrEmpty(inputPassword.text)
@@ -34,45 +34,45 @@ public class UIRegister : AHotBase
                 || !inputEmail.text.Contains(".")
                 || inputEmail.text.IndexOf("@") > inputEmail.text.IndexOf("."))
             {
-                UIAlert.Show("请输入合法的邮箱，这将是找回密码的唯一途径。", null, null, true);
+				UIAlert.Show("请输入合法的邮箱，这将是找回密码的唯一途径。", null, null, true);
                 return;
             }
             if (inputUsername.text.Length < 4 || inputUsername.text.Length > 16)
             {
-                UIAlert.Show("用户名长度应为4-16个字节。", null, null, true);
+				UIAlert.Show("用户名长度应为4-16个字节。", null, null, true);
                 return;
             }
             if (inputPasswordConfirm.text != inputPassword.text)
             {
-                UIAlert.Show("两次输入的密码不一致，请重新输入。", null, null, true);
+				UIAlert.Show("两次输入的密码不一致，请重新输入。", null, null, true);
                 return;
             }
             if (inputPassword.text.Length < 6 || inputPassword.text.Length > 16)
             {
-                UIAlert.Show("密码长度应为6-16个字节。", null, null, true);
+				UIAlert.Show("密码长度应为6-16个字节。", null, null, true);
                 return;
             }
-            UStaticWebRequests.DoRegist(inputUsername.text, Utils.MD5Hash(inputPassword.text), inputEmail.text
-                    , (jres) =>
+			UStaticWebRequests.DoRegist(inputUsername.text, Utils.MD5Hash(inputPassword.text), inputEmail.text
+                    , (Action<Newtonsoft.Json.Linq.JObject>)((jres) =>
                     {
-                        UIAlert.Show("注册成功，请返回登录界面登录。", () =>
+						UIAlert.Show("注册成功，请返回登录界面登录。", (Action)(() =>
                         {
-                            UILogin.CachedUsername = jres["username"].ToString();
+							UILogin.CachedUsername = jres["username"].ToString();
 
-							OnUnloadThis();
+							base.OnUnloadThis();
 
-                            LoadAnotherUI<UILogin>();
-                        }, null, true);
-                    }
+							AHotBase.LoadUI<UILogin>();
+                        }), null, true);
+                    })
                     , (err) =>
                     {
-                        UIAlert.Show("注册失败，" + Utils.ErrorFormat(err));
+						UIAlert.Show("注册失败，" + Utils.ErrorFormat(err));
                     }
                     , (failedRes) =>
                     {
-                        UIAlert.Show("网络错误：" + failedRes + " 请稍后再试。");
+						UIAlert.Show("网络错误：" + failedRes + " 请稍后再试。");
                     });
-        });
+        }));
 
     }
 }

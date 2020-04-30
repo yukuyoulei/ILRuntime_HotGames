@@ -68,12 +68,12 @@ public class UIMinerLogin : AHotBase
 			btnLogin.enabled = false;
 		});
 		var btnRegister = FindWidget<Button>("btnRegister");
-		btnRegister.onClick.AddListener(() =>
+		btnRegister.onClick.AddListener((UnityEngine.Events.UnityAction)(() =>
 		{
-			OnUnloadThis();
+			base.OnUnloadThis();
 
-			LoadAnotherUI<UIRegister>();
-		});
+			AHotBase.LoadUI<UIRegister>();
+		}));
 
 		RegisterEvent(UEvents.Login, OnLoginCb);
 	}

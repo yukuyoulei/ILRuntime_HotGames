@@ -314,14 +314,6 @@ public abstract class AHotBase
 			LoadClass<T>(path, action);
 		}, path);
 	}
-	public static void LoadAnotherUI<T>(Action<T> actionLoadComplete = null) where T : AHotBase, new()
-	{
-		LoadUI<T>(actionLoadComplete);
-	}
-	public static void LoadAnotherUI(string uiname)
-	{
-		LoadAnotherClass(uiname, "UI/" + uiname + "");
-	}
 	public virtual void OnUnloadThis()
 	{
 		bDestroying = true;
@@ -458,6 +450,6 @@ public abstract class AHotBase
 	{
 		OnUnloadThis();
 
-		LoadAnotherUI<UIMain>();
+		LoadUI<UIMain>();
 	}
 }

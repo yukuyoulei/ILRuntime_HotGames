@@ -20,7 +20,7 @@ public class UICommonTips : AHotBase
 
 	public static void AddTip(string content)
 	{
-		if (sinstance == null) LoadAnotherUI<UICommonTips>(instance => { sinstance = instance; sinstance.DoAddTip(content); });
+		if (sinstance == null) LoadUI<UICommonTips>(instance => { sinstance = instance; sinstance.DoAddTip(content); });
 		else sinstance.DoAddTip(content);
 	}
 

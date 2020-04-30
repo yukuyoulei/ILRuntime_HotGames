@@ -62,7 +62,7 @@ public class UIAlert : AHotBase
 		if (sintance == null
 			|| sintance.bDestroying)
 		{
-			LoadAnotherUI<UIAlert>();
+			LoadUI<UIAlert>();
 		}
 	}
 	public static void Hide()

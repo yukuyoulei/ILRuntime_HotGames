@@ -12,7 +12,7 @@ public class MapCity : AHotBase
 {
 	protected override void InitComponents()
 	{
-		LoadAnotherUI<UIMinerMain>();
+		LoadUI<UIMinerMain>();
 
 		foreach (var wx in InitValueDefs.wuxing.Keys)
 		{

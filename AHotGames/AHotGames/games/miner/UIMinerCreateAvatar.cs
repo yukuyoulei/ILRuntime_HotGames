@@ -30,12 +30,12 @@ public class UIMinerCreateAvatar : AHotBase
 	protected override void InitComponents()
 	{
 		btnReturn = FindWidget<Button>("btnReturn");
-		btnReturn.onClick.AddListener(() =>
+		btnReturn.onClick.AddListener((UnityEngine.Events.UnityAction)(() =>
 		{
-			OnUnloadThis();
+			base.OnUnloadThis();
 
-			LoadAnotherUI<UIMinerLogin>();
-		});
+			AHotBase.LoadUI<UIMinerLogin>();
+		}));
 
 		inputNickname = FindWidget<InputField>("inputNickname");
 		inputNickname.text = "";

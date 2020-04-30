@@ -43,7 +43,7 @@ public class UBattleNetMgr : Singleton<UBattleNetMgr>
 	private static void OnServerDisconnectedCb(UEventBase obj)
 	{
 		AHotBase.UnloadAllClasses();
-		AHotBase.LoadAnotherUI<UIMinerLogin>();
+		AHotBase.LoadUI<UIMinerLogin>();
 	}
 
 	private void OnEnterGameCb(UEventBase obj)
@@ -52,7 +52,7 @@ public class UBattleNetMgr : Singleton<UBattleNetMgr>
 		var eb = obj as EventEnterGame;
 		if (eb.info == null)
 		{
-			AHotBase.LoadAnotherUI<UIMinerCreateAvatar>();
+			AHotBase.LoadUI<UIMinerCreateAvatar>();
 		}
 		else
 		{

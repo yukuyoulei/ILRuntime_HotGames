@@ -52,10 +52,10 @@ public class UIMain : AHotBase
 		menuCell.gameObject.SetActive(false);
 
 		var btnRank = FindWidget<Button>("btnRank");
-		btnRank.onClick.AddListener(() =>
+		btnRank.onClick.AddListener((UnityEngine.Events.UnityAction)(() =>
 		{
-			LoadAnotherUI<UIRank>();
-		});
+			AHotBase.LoadUI<UIRank>();
+		}));
 
 		var btnCheck = FindWidget<Button>("btnCheck");
 		btnCheck.onClick.AddListener(() =>
@@ -67,14 +67,14 @@ public class UIMain : AHotBase
 		});
 
 		var btnLogout = FindWidget<Button>("btnLogout");
-		btnLogout.onClick.AddListener(() =>
+		btnLogout.onClick.AddListener((UnityEngine.Events.UnityAction)(() =>
 		{
 			UStaticWebRequests.DoLogout(UILogin.CachedUsername, UILogin.token
-				, (jres) =>
+				, (Action<Newtonsoft.Json.Linq.JObject>)((jres) =>
 				{
-					OnUnloadThis();
-					LoadAnotherUI<UILogin>();
-				}, (err) =>
+					base.OnUnloadThis();
+					AHotBase.LoadUI<UILogin>();
+				}), (err) =>
 				{
 					UIAlert.Show("注销失败：" + Utils.ErrorFormat(err));
 				}, (err) =>
@@ -82,7 +82,7 @@ public class UIMain : AHotBase
 					UIAlert.Show("web error:" + err);
 				});
 
-		});
+		}));
 
 		foreach (var g in dGames)
 		{

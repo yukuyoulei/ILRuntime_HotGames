@@ -105,6 +105,7 @@
     <Compile Include="games\game\UBigOrSmall.cs" />
     <Compile Include="games\game\UCardGame.cs" />
     <Compile Include="games\game\UMMO.cs" />
+    <Compile Include="games\miner\UIMinerBattle.cs" />
     <Compile Include="games\miner\Map\MapSingle.cs" />
     <Compile Include="games\miner\UISingleSettlement.cs" />
     <Compile Include="games\miner\Map\MapCity.cs" />
