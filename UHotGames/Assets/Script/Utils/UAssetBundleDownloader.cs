@@ -358,7 +358,7 @@ public class UAssetBundleDownloader : MonoBehaviour
 		}
 		if (manifestBundle == null)
 		{
-			manifestBundle = dAssetBundles[UStaticFuncs.GetPlatformFolder(Application.platform)];
+			manifestBundle = dAssetBundles[platform];
 		}
 		if (manifest == null)
 		{
@@ -503,14 +503,18 @@ public class UAssetBundleDownloader : MonoBehaviour
 		{
 			return dAssetBundles[assetBundlePath];
 		}
-		var path = UStaticFuncs.ConfigSaveDir + assetBundlePath;
+		var path = UStaticFuncs.ConfigSaveDir + "/" + assetBundlePath;
+		if (!File.Exists(path))
+		{
+			return null;
+		}
 		var ab = AssetBundle.LoadFromFile(path);
 		if (ab == null)
 		{
 			return null;
 		}
 		dAssetBundles.Add(assetBundlePath, ab);
-		var depends = OnGetAssetBundleDependeces(UStaticFuncs.GetAssetBundleName(assetBundlePath));
+		var depends = OnGetAssetBundleDependeces(assetBundlePath);
 		foreach (var d in depends)
 		{
 			OnGetAssetBundle(assetBundlePath);

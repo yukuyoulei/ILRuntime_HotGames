@@ -45,7 +45,7 @@ public static class Utils
 	{
 		get
 		{
-			if (Environment.IsEditor)
+			if (Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.OSXEditor)
 				return new System.IO.DirectoryInfo(Application.dataPath).FullName + "/../AB/RemoteResources/";
 			else if (Application.platform == RuntimePlatform.WindowsPlayer)
 				return new System.IO.DirectoryInfo(Application.dataPath).FullName + "/../../AB/" + GetPlatformFolder(Application.platform) + "/";

@@ -449,20 +449,12 @@ public static class UStaticFuncs
 	{
 		get
 		{
-			return DataDir();
+			if (Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.OSXEditor)
+				return new System.IO.DirectoryInfo(Application.dataPath).FullName + "/../AB/RemoteResources/";
+			else if (Application.platform == RuntimePlatform.WindowsPlayer)
+				return new System.IO.DirectoryInfo(Application.dataPath).FullName + "/../../AB/" + GetPlatformFolder(Application.platform) + "/";
+			return Application.persistentDataPath + "/" + GetPlatformFolder(Application.platform) + "/";
 		}
-	}
-	public static string DataDir(string sub = "")
-	{
-		sub = GetPlatformFolder(Application.platform);
-#if UNITY_EDITOR
-		string sdir = new DirectoryInfo(Application.dataPath).FullName + "/../RemoteResources/";
-#elif UNITY_STANDALONE
-		string sdir = new DirectoryInfo(Application.dataPath).FullName + "/../../AB/" + sub + "/";
-#else
-		string sdir = Application.persistentDataPath + "/" + sub + "/";
-#endif
-		return sdir;
 	}
 
 	public static string GetPlatformFolder(RuntimePlatform target)
