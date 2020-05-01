@@ -221,7 +221,7 @@ public abstract class AHotBase
 	{
 		UHotAssetBundleLoader.Instance.OnDownloadResources(() =>
 		{
-			action?.Invoke(UHotAssetBundleLoader.Instance.OnLoadAsset<GameObject>(prefabPath));
+			action?.Invoke(GameObject.Instantiate(UHotAssetBundleLoader.Instance.OnLoadAsset<GameObject>(prefabPath)));
 		}, prefabPath);
 	}
 
@@ -257,8 +257,7 @@ public abstract class AHotBase
 	{
 		UHotAssetBundleLoader.Instance.OnDownloadResources(() =>
 		{
-			var go = UHotAssetBundleLoader.Instance.OnLoadAsset<GameObject>(prefab);
-			SendMessageToUnityReceiver(go, classname);
+			SendMessageToUnityReceiver(GameObject.Instantiate(UHotAssetBundleLoader.Instance.OnLoadAsset<GameObject>(prefab)), classname);
 		}, prefab);
 	}
 	private static List<AHotBase> loadedClasses = new List<AHotBase>();
