@@ -65,8 +65,8 @@ namespace LibClient
 			connection = null;
 		}
 
-		private static string ip = "127.0.0.1";//"69.51.23.197";
-		private static int port = 999;
+		public static string ip = "127.0.0.1";//"69.51.23.197";
+		public static int port = 999;
 		public static async System.Threading.Tasks.Task StartClient()
 		{
 			AOutput.Log($"Connecting {ip}:{port}");

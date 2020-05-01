@@ -18,6 +18,7 @@ public class AEntrance : AHotBase
 
 		if (!Environment.bUsingLocalCDN)
 			LibClient.AClientApp.SetEndpoint("69.51.23.197", 999);
+		AOutput.Log($"LibClient.AClientApp Connect {LibClient.AClientApp.ip}:{LibClient.AClientApp.port}");
 
 		LibClient.AClientApp.Init(new AOnlineSubsystem());
 

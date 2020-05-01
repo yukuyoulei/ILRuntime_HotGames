@@ -216,17 +216,6 @@ public abstract class AHotBase
 		}
 		dGameObjects[gameobjName].GetComponent<UEmitMessager>().ReceiveMessage(message);
 	}
-	public static void EmitGameObject(string gameobjName, string prefabName, GameObject obj)
-	{
-		if (dPendingActions.ContainsKey(prefabName))
-		{
-			foreach (var a in dPendingActions[prefabName])
-			{
-				a?.Invoke(obj);
-			}
-			dPendingActions.Remove(prefabName);
-		}
-	}
 	static Dictionary<string, List<Action<GameObject>>> dPendingActions = new Dictionary<string, List<Action<GameObject>>>();
 	protected static void LoadPrefab(string prefabPath, Action<GameObject> action)
 	{
@@ -240,18 +229,6 @@ public abstract class AHotBase
 	public void OnRegistAction(Action<string> a)
 	{
 		onReceiveMsg += a;
-	}
-	protected Dictionary<string, Button> dButtons = new Dictionary<string, Button>();
-	protected void OnRegistButtonActions()
-	{
-		OnRegistAction((msg) =>
-		{
-			if (!dButtons.ContainsKey(msg))
-			{
-				return;
-			}
-			UStaticFuncs.EmitButtonClick(dButtons[msg]);
-		});
 	}
 	protected AHotDrag RegistDragFunc(Graphic dragObj, Graphic dragDropObj, Action beginDrag, Action endDrag, Action dropDrag, Action draging = null)
 	{
