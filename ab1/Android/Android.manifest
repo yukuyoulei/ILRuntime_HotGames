@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 920249462
+CRC: 105664188
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -443,3 +443,8 @@ AssetBundleManifest:
       Name: ui/uisinglesettlement.ab
       Dependencies:
         Dependency_0: tdefault.ab
+    Info_125:
+      Name: ui/uiminerbattle.ab
+      Dependencies:
+        Dependency_0: tdefault.ab
+        Dependency_1: animator/role01.ab
