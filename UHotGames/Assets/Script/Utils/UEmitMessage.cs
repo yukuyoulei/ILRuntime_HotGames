@@ -97,4 +97,9 @@ public class UEmitMessage : MonoBehaviour
 			}
 		}
 	}
+	public void EmitMessageToObj(object[] args)
+	{
+		AOutput.Log($"EmitMessageToObj {args[1]}");
+		ILRuntimeHandler.Instance.OnLoadClass(args[1].ToString(), args[0] as GameObject);
+	}
 }

@@ -144,10 +144,6 @@ public abstract class AHotBase
 		}
 	}
 
-	protected void OnDelaySendMessage(string message, float delay)
-	{
-		gameObj.GetComponent<UEmitMessager>().OnSendMessage(message, delay);
-	}
 	protected abstract void InitComponents();
 	public T FindWidget<T>(string widgetName) where T : Component
 	{
@@ -177,9 +173,13 @@ public abstract class AHotBase
 		msgReceiver = receiver;
 		AOutput.Log($"MessageReceiver received:{receiver.name}");
 	}
-	public static void SendInvokeToUnityReceiver(string gameObjName, string message, string argument = "")
+	public static void SendMessageToUnityReceiver(GameObject go, string message)
 	{
-		SendMessageToUnityReceiver($"invoke|{gameObjName}:{message}{(string.IsNullOrEmpty(argument) ? "" : $":{argument}")}");
+		if (msgReceiver == null)
+		{
+			return;
+		}
+		msgReceiver.SendMessage("EmitMessageToObj", new object[] { go, message });
 	}
 	public static void SendMessageToUnityReceiver(string message)
 	{
@@ -228,17 +228,12 @@ public abstract class AHotBase
 		}
 	}
 	static Dictionary<string, List<Action<GameObject>>> dPendingActions = new Dictionary<string, List<Action<GameObject>>>();
-	protected static void LoadPrefab(string prefabName, Action<GameObject> action)
+	protected static void LoadPrefab(string prefabPath, Action<GameObject> action)
 	{
-		if (!dPendingActions.ContainsKey(prefabName))
+		UHotAssetBundleLoader.Instance.OnDownloadResources(() =>
 		{
-			dPendingActions.Add(prefabName, new List<Action<GameObject>>());
-		}
-		dPendingActions[prefabName].Add(action);
-
-		var smsg = "loadprefab|" + prefabName;
-		Debug.Log("send message to unity:" + smsg);
-		SendMessageToUnityReceiver(smsg);
+			action?.Invoke(UHotAssetBundleLoader.Instance.OnLoadAsset<GameObject>(prefabPath));
+		}, prefabPath);
 	}
 
 	private Action<string> onReceiveMsg;
@@ -283,9 +278,11 @@ public abstract class AHotBase
 
 	public static void LoadAnotherClass(string classname, string prefab = "", string arg = "")
 	{
-		var smsg = "load|" + classname + "|" + prefab + "|" + arg;
-		Debug.Log("send message to unity:" + smsg);
-		SendMessageToUnityReceiver(smsg);
+		UHotAssetBundleLoader.Instance.OnDownloadResources(() =>
+		{
+			var go = UHotAssetBundleLoader.Instance.OnLoadAsset<GameObject>(prefab);
+			SendMessageToUnityReceiver(go, classname);
+		}, prefab);
 	}
 	private static List<AHotBase> loadedClasses = new List<AHotBase>();
 	public static T LoadClass<T>(string prefabPath, Action<T> action = null) where T : AHotBase, new()
@@ -335,10 +332,6 @@ public abstract class AHotBase
 		loadedClasses.Clear();
 	}
 
-	protected void OnInvokeFunc(string funcName)
-	{
-		SendMessageToUnityReceiver("sop:func:" + funcName);
-	}
 	List<OperationCell> operationList = new List<OperationCell>();
 	protected void EnqueueOperation(float delay, Action action)
 	{

@@ -78,7 +78,10 @@ public class UIMinerMain : AHotBase
 		//AClientApis.OnPay(1);
 
 		UICommonWait.Show();
-		OnSendSDKMessage("SDK_AppleInApp", "OnBuyProduct", "0");
+		if (Application.platform == RuntimePlatform.IPhonePlayer)
+			OnSendSDKMessage("SDK_AppleInApp", "OnBuyProduct", "0");
+		else
+			OnSendSDKMessage("SDK_WeChat", "OpenWechatPay", eb.extraInfo);
 	}
 
 	private void OnParamUpdateCb(UEventBase eb)
