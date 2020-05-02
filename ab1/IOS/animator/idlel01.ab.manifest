@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 625171227
+CRC: 1804447116
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 51d77dc0a678f9828dd1067d0e8a3d0a
+    Hash: 8703db76d8bb8008e860765b372fd5c3
   TypeTreeHash:
     serializedVersion: 2
     Hash: d7865432dca78e1ecd7132916d904900
@@ -18,4 +18,4 @@ ClassTypes:
 Assets:
 - Assets/Arts/Animator/idlel01.anim
 Dependencies:
-- E:/personal/ILRuntime_HotGames/ILRuntime_HotGames/ab1/IOS/tdefault.ab
+- G:/ProjectsGit/ILRuntime_HotGames/ab1/IOS/tdefault.ab

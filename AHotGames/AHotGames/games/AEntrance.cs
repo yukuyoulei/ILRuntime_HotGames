@@ -37,11 +37,11 @@ public class AEntrance : AHotBase
 		, "ui/uicommonwait.ab"
 		, "ui/uicreateavatar.ab"
 		, "ui/uiminermain.ab"
-	};
+    };
 	private void PreDownloadResources()
 	{
-		UHotAssetBundleLoader.Instance.OnDownloadResources(new List<string> { Utils.GetPlatformFolder(Application.platform)
-			, Utils.GetPlatformFolder(Application.platform)+ ".manifest" }, () =>
+		UHotAssetBundleLoader.Instance.OnDownloadResources(new List<string> { Utils.GetPlatformFolder()
+			, Utils.GetPlatformFolder()+ ".manifest" }, () =>
 		{
 			UHotAssetBundleLoader.Instance.OnDownloadResources(new List<string> { "ui/uidebugconsole.ab" }, () =>
 			{

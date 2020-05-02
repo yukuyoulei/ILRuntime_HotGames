@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 287417583
+CRC: 1681978802
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: de4485af43714bb9b1c94fcb0b21d76b
+    Hash: 36adccf8b0dd81e659f6141bf9b821f2
   TypeTreeHash:
     serializedVersion: 2
     Hash: 4aaed3b76448a5316bb8066d5454c61b
@@ -45,4 +45,5 @@ ClassTypes:
   Script: {instanceID: 0}
 Assets:
 - Assets/RemoteResources/UI/UIMinerLogin.prefab
-Dependencies: []
+Dependencies:
+- G:/ProjectsGit/ILRuntime_HotGames/ab1/IOS/tdefault.ab

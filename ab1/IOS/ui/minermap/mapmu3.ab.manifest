@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2294996774
+CRC: 2368896679
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 1bbdb0d2ac70c983180a0ed0c9bc7050
+    Hash: 90edd3515fa18ea9e65ec67761a19d5b
   TypeTreeHash:
     serializedVersion: 2
     Hash: fcd31332c608291ee535a8ac67de3627
@@ -40,5 +40,5 @@ ClassTypes:
 Assets:
 - Assets/RemoteResources/UI/MinerMap/MapMu3.prefab
 Dependencies:
-- E:/personal/ILRuntime_HotGames/ILRuntime_HotGames/ab1/IOS/tdefault.ab
-- E:/personal/ILRuntime_HotGames/ILRuntime_HotGames/ab1/IOS/animator/role01.ab
+- G:/ProjectsGit/ILRuntime_HotGames/ab1/IOS/tdefault.ab
+- G:/ProjectsGit/ILRuntime_HotGames/ab1/IOS/animator/role01.ab

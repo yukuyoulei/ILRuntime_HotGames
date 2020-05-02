@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1642263724
+CRC: 1317915235
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 23d11724386b4fdb5095b8415e6b3f71
+    Hash: 35e1f157ff1abfea07db38c810c247fb
   TypeTreeHash:
     serializedVersion: 2
     Hash: 598cd6b3c95cf0094029708cf5f16ba1
@@ -46,4 +46,4 @@ ClassTypes:
 Assets:
 - Assets/RemoteResources/Game/ULifeInBottle.prefab
 Dependencies:
-- E:/personal/ILRuntime_HotGames/ILRuntime_HotGames/ab1/IOS/tdefault.ab
+- G:/ProjectsGit/ILRuntime_HotGames/ab1/IOS/tdefault.ab

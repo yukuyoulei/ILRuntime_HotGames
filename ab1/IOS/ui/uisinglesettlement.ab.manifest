@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2874202047
+CRC: 2673386594
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 7624aa7b1d6f32d90ee44279761080eb
+    Hash: f2104d356176bf3d8b5d287ed19b39f4
   TypeTreeHash:
     serializedVersion: 2
     Hash: 83ac0e1e075d7f415cc72867027d2a6a
@@ -44,4 +44,4 @@ ClassTypes:
 Assets:
 - Assets/RemoteResources/UI/UISingleSettlement.prefab
 Dependencies:
-- E:/personal/ILRuntime_HotGames/ILRuntime_HotGames/ab1/IOS/tdefault.ab
+- G:/ProjectsGit/ILRuntime_HotGames/ab1/IOS/tdefault.ab

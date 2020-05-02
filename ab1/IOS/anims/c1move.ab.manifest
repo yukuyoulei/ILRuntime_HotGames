@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 3915524940
+CRC: 3877958260
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: e3b88b0101311fbe19226b59ad8db219
+    Hash: c5966586d075a87fd41390b86f22ae7d
   TypeTreeHash:
     serializedVersion: 2
     Hash: d7865432dca78e1ecd7132916d904900
@@ -18,4 +18,4 @@ ClassTypes:
 Assets:
 - Assets/Arts/Anims/c1move.anim
 Dependencies:
-- E:/personal/ILRuntime_HotGames/ILRuntime_HotGames/ab1/IOS/tdefault.ab
+- G:/ProjectsGit/ILRuntime_HotGames/ab1/IOS/tdefault.ab
