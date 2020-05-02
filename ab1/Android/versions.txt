@@ -1,5 +1,5 @@
-/Android|2b4053a0006adf48b9dec767ba9e8743|5710
-/Android.manifest|ed4fac9bcc43e7867cd35d14aa03c83d|10751
+/Android|ef0f1eaa17cf1afe3e04753112bf6e53|5711
+/Android.manifest|3501a2ab86f55b3b782781bc89346ea1|10783
 /common.ab|14614371268b78b7bd579e5a1f00be9b|78728
 /common.ab.manifest|298b9b055470952d5668ac71918051f8|472
 /firstui.ab|fab05767299100fe24e08500fce7066c|4593
@@ -8,7 +8,7 @@
 /tdefault.ab.manifest|346ee9b014b7e9d6c12341bd20af7598|705
 /ui.ab|c5121ef9cf124e68ea56ea1b2153ed0a|5799
 /ui.ab.manifest|f710ff4cb6df19bc9c0a42ec854183f3|413
-/versions.txt|c2963508d9fa16f6c0053c517f239e27|15588
+/versions.txt|faaa93865a5a621f9803d65d585bd67b|15772
 /animator/back01.ab|d4e41a741a9d30d4c5066ee9428b17ff|6493
 /animator/back01.ab.manifest|467937df203a2b3e575fb96821a909eb|492
 /animator/front01.ab|28053df4127b0c509cef6f10bdc58df2|6508
@@ -35,8 +35,8 @@
 /anims/cave1.ab.manifest|bea21dbec0b11cc156db255e44892fb1|539
 /characters/role01.ab|eb77f88cdb2396bd866db3fad10e35ab|3879
 /characters/role01.ab.manifest|6db8e10dd0a1dfb2c6a0c71201b03d50|837
-/dll/ahotgames.ab|494e1b845b6c8c9d1ec1287d3ef704cf|108461
-/dll/ahotgames.ab.manifest|bcde23fac55e149447678ea6a410b124|350
+/dll/ahotgames.ab|d39bb1cfaf94f83571cbcb9b3ddac50a|108457
+/dll/ahotgames.ab.manifest|65a6dd8371a8070b5550653fdd46979f|351
 /game/u2048.ab|06fc88971d7738ca4615974c61ac34da|13411
 /game/u2048.ab.manifest|9bb1a1f4fe0737d9ed17161316da3897|1346
 /game/ubigorsmall.ab|206819c9c8e7a9d593d3340f7be12105|16851
@@ -205,8 +205,8 @@
 /ui/uiminerbattle.ab.manifest|aa6aa523b7429b1b0e71d0b02a2515f8|1676
 /ui/uiminercreateavatar.ab|5e854ec7059b4d46ae01a57407c61546|16683
 /ui/uiminercreateavatar.ab.manifest|09d15c195c0d7016a20599ef8d5ab03f|1357
-/ui/uiminerlogin.ab|09fda7fc0309fd401830d4ae4a635044|13387
-/ui/uiminerlogin.ab.manifest|f1b70f41dd4096e69b33889a606637bf|1350
+/ui/uiminerlogin.ab|ef44abdc0c47ca9697d3dc9af90b2c97|15948
+/ui/uiminerlogin.ab.manifest|b938d844e6ddaec92e951298a0a4132a|1423
 /ui/uiminermain.ab|30b233b7328b3a1be40f6850645b09ca|13334
 /ui/uiminermain.ab.manifest|c955ded2f9410a2daca300fde5bcb481|1674
 /ui/uirank.ab|e4fac963c44973a67e035a04f049dacb|14027

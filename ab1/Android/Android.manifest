@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 105664188
+CRC: 1146402129
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -287,7 +287,8 @@ AssetBundleManifest:
         Dependency_0: tdefault.ab
     Info_89:
       Name: ui/uiminerlogin.ab
-      Dependencies: {}
+      Dependencies:
+        Dependency_0: tdefault.ab
     Info_90:
       Name: ui/uiminermain.ab
       Dependencies:
