@@ -165,7 +165,8 @@ public class UHotAssetBundleLoader : AHotBase
 	{
 		OnDownloadResources(resources.ToList(), downloaded);
 	}
-	public void OnDownloadResources(List<string> lResources, Action downloaded, Action<float> progress = null)
+	public void OnDownloadResources(List<string> lResources, Action downloaded, Action<float> progress = null
+		, bool checksuffix = true)
 	{
 		AOutput.Log($"OnDownloadResources Environment.UseAB {Environment.UseAB} {Utils.GetPlatformFolder()} {string.Join(",", lResources)}");
 		if (!Environment.UseAB)
@@ -190,28 +191,25 @@ public class UHotAssetBundleLoader : AHotBase
 						  dRemoteVersions.Add(ac[0], ac[1]);
 					  }
 				  }
-				  DoCheckVersions(lResources, downloaded, progress);
+				  DoCheckVersions(lResources, downloaded, progress, checksuffix);
 			  });
 		}
 		else
 		{
-			DoCheckVersions(lResources, downloaded, progress);
+			DoCheckVersions(lResources, downloaded, progress, checksuffix);
 		}
 	}
-	private void DoCheckVersions(List<string> lResources, Action downloaded, Action<float> progress)
+	private void DoCheckVersions(List<string> lResources, Action downloaded, Action<float> progress, bool checksuffix = true)
 	{
 		var lNeedDownload = new List<string>();
 		foreach (var r in lResources)
 		{
-			var rlower = r.ToLower();
-			var res = rlower;
+			var res = r.ToLower();
 			if (!res.StartsWith("/"))
 			{
 				res = $"/{res}";
 			}
-			if (res != $"/{Utils.GetPlatformFolder()}"
-				&& res != $"/{Utils.GetPlatformFolder()}.manifest"
-				&& !res.EndsWith(UHotAssetBundleLoader.AssetBundleSuffix))
+			if (checksuffix && !res.EndsWith(UHotAssetBundleLoader.AssetBundleSuffix))
 			{
 				res = $"{res}{UHotAssetBundleLoader.AssetBundleSuffix}";
 			}

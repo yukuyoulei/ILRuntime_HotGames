@@ -67,7 +67,7 @@ public class AEntrance : AHotBase
 					});
 				}, null);
 			}, null);
-		}, null);
+		}, null, false);
 	}
 
 	private void DoInit()
