@@ -209,8 +209,8 @@ public class UHotAssetBundleLoader : AHotBase
 			{
 				res = $"/{res}";
 			}
-			if (rlower != Utils.GetPlatformFolder()
-				&& rlower != $"{Utils.GetPlatformFolder()}.manifest"
+			if (res != $"/{Utils.GetPlatformFolder()}"
+				&& res != $"/{Utils.GetPlatformFolder()}.manifest"
 				&& !res.EndsWith(UHotAssetBundleLoader.AssetBundleSuffix))
 			{
 				res = $"{res}{UHotAssetBundleLoader.AssetBundleSuffix}";
