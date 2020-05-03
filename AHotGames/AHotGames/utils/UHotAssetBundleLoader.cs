@@ -66,7 +66,7 @@ public class UHotAssetBundleLoader : AHotBase
 		var depends = OnGetAssetBundleDependeces(assetBundlePath);
 		foreach (var d in depends)
 		{
-			OnGetAssetBundle(assetBundlePath);
+			OnGetAssetBundle(d);
 		}
 		return ab;
 	}
@@ -186,9 +186,9 @@ public class UHotAssetBundleLoader : AHotBase
 					  {
 						  continue;
 					  }
-					  if (!dRemoteVersions.ContainsKey(ac[0]))
+					  if (!dRemoteVersions.ContainsKey(ac[0].ToLower()))
 					  {
-						  dRemoteVersions.Add(ac[0], ac[1]);
+						  dRemoteVersions.Add(ac[0].ToLower(), ac[1]);
 					  }
 				  }
 				  DoCheckVersions(lResources, downloaded, progress, checksuffix);
@@ -216,6 +216,7 @@ public class UHotAssetBundleLoader : AHotBase
 			UDebugHotLog.Log($"check version res {res}");
 			if (!dRemoteVersions.ContainsKey(res))
 			{
+				UDebugHotLog.Log($"!dRemoteVersions.ContainsKey(res)");
 				continue;
 			}
 			var file = ULocalFileManager.Instance.OnGetFile(res);
