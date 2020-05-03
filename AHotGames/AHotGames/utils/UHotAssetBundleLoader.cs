@@ -165,7 +165,8 @@ public class UHotAssetBundleLoader : AHotBase
 	{
 		OnDownloadResources(resources.ToList(), downloaded);
 	}
-	public void OnDownloadResources(List<string> lResources, Action downloaded, Action<float> progress = null)
+	public void OnDownloadResources(List<string> lResources, Action downloaded, Action<float> progress = null
+		, bool checksuffix = true)
 	{
 		if (!Environment.UseAB)
 		{
@@ -189,15 +190,15 @@ public class UHotAssetBundleLoader : AHotBase
 						  dRemoteVersions.Add(ac[0].ToLower(), ac[1]);
 					  }
 				  }
-				  DoCheckVersions(lResources, downloaded, progress);
+				  DoCheckVersions(lResources, downloaded, progress, checksuffix);
 			  });
 		}
 		else
 		{
-			DoCheckVersions(lResources, downloaded, progress);
+			DoCheckVersions(lResources, downloaded, progress, checksuffix);
 		}
 	}
-	private void DoCheckVersions(List<string> lResources, Action downloaded, Action<float> progress)
+	private void DoCheckVersions(List<string> lResources, Action downloaded, Action<float> progress, bool checksuffix = true)
 	{
 		var lNeedDownload = new List<string>();
 		foreach (var r in lResources)
@@ -207,14 +208,13 @@ public class UHotAssetBundleLoader : AHotBase
 			{
 				res = $"/{res}";
 			}
-			if (res != $"/{Utils.GetPlatformFolder()}"
-				&& res != $"{Utils.GetPlatformFolder()}.manifest"
-				&& !res.EndsWith(AssetBundleSuffix))
+			if (checksuffix && !res.EndsWith(UHotAssetBundleLoader.AssetBundleSuffix))
 			{
 				res = $"{res}{AssetBundleSuffix}";
 			}
 			if (!dRemoteVersions.ContainsKey(res))
 			{
+				UDebugHotLog.Log($"!dRemoteVersions.ContainsKey(res)");
 				continue;
 			}
 			var file = ULocalFileManager.Instance.OnGetFile(res);
