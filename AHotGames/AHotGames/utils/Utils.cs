@@ -48,16 +48,16 @@ public static class Utils
 			if (Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.OSXEditor)
 				return new System.IO.DirectoryInfo(Application.dataPath).FullName + "/../AB/RemoteResources/";
 			else if (Application.platform == RuntimePlatform.WindowsPlayer)
-				return new System.IO.DirectoryInfo(Application.dataPath).FullName + "/../../AB/" + GetPlatformFolder(Application.platform) + "/";
-			return Application.persistentDataPath + "/" + GetPlatformFolder(Application.platform) + "/";
+				return new System.IO.DirectoryInfo(Application.dataPath).FullName + "/../../AB/" + GetPlatformFolder() + "/";
+			return Application.persistentDataPath + "/" + GetPlatformFolder() + "/";
 		}
 	}
 	public static string TargetRuntimeInEditor = "";
-	public static string GetPlatformFolder(RuntimePlatform target)
+	public static string GetPlatformFolder()
 	{
 		if (!string.IsNullOrEmpty(TargetRuntimeInEditor)) return TargetRuntimeInEditor;
 
-		switch (target)
+		switch (Application.platform)
 		{
 			case RuntimePlatform.Android:
 				return "Android";

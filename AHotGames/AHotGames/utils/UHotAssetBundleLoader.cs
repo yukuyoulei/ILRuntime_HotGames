@@ -73,7 +73,7 @@ public class UHotAssetBundleLoader : AHotBase
 	public static string AssetBundleSuffix = ".ab";
 	public AssetBundle OnGetAssetBundle(string assetBundlePath, bool NoDependences = false)
 	{
-		var platform = Utils.GetPlatformFolder(Application.platform);
+		var platform = Utils.GetPlatformFolder();
 		if (!assetBundlePath.EndsWith(AssetBundleSuffix))
 		{
 			assetBundlePath += AssetBundleSuffix;
@@ -101,7 +101,7 @@ public class UHotAssetBundleLoader : AHotBase
 	public string[] OnGetAssetBundleDependeces(string name, List<string> dependens = null)
 	{
 		name = name.StartsWith("/") ? name.Substring(1) : name;
-		var platform = Utils.GetPlatformFolder(Application.platform);
+		var platform = Utils.GetPlatformFolder();
 		if (!dAssetBundles.ContainsKey(platform))
 		{
 			var ab = DoGetAssetBundle(platform);
@@ -167,7 +167,7 @@ public class UHotAssetBundleLoader : AHotBase
 	}
 	public void OnDownloadResources(List<string> lResources, Action downloaded, Action<float> progress = null)
 	{
-		AOutput.Log($"OnDownloadResources Environment.UseAB {Environment.UseAB} {Utils.GetPlatformFolder(Application.platform)} {string.Join(",", lResources)}");
+		AOutput.Log($"OnDownloadResources Environment.UseAB {Environment.UseAB} {Utils.GetPlatformFolder()} {string.Join(",", lResources)}");
 		if (!Environment.UseAB)
 		{
 			downloaded?.Invoke();
@@ -175,7 +175,7 @@ public class UHotAssetBundleLoader : AHotBase
 		}
 		if (dRemoteVersions.Count == 0)
 		{
-			OnDownloadText(Utils.GetPlatformFolder(Application.platform) + "/versions", (content) =>
+			OnDownloadText(Utils.GetPlatformFolder() + "/versions", (content) =>
 			  {
 				  var acontent = content.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
 				  foreach (var c in acontent)
@@ -203,12 +203,15 @@ public class UHotAssetBundleLoader : AHotBase
 		var lNeedDownload = new List<string>();
 		foreach (var r in lResources)
 		{
-			var res = r.ToLower();
+			var rlower = r.ToLower();
+			var res = rlower;
 			if (!res.StartsWith("/"))
 			{
 				res = $"/{res}";
 			}
-			if (!res.EndsWith(UHotAssetBundleLoader.AssetBundleSuffix))
+			if (rlower != Utils.GetPlatformFolder()
+				&& rlower != $"{Utils.GetPlatformFolder()}.manifest"
+				&& !res.EndsWith(UHotAssetBundleLoader.AssetBundleSuffix))
 			{
 				res = $"{res}{UHotAssetBundleLoader.AssetBundleSuffix}";
 			}
@@ -317,7 +320,7 @@ public class UHotAssetBundleLoader : AHotBase
 		{
 			return null;
 		}
-		var url = Utils.BaseURL_Res + Utils.GetPlatformFolder(Application.platform) + resource;
+		var url = Utils.BaseURL_Res + Utils.GetPlatformFolder() + resource;
 		var www = new WWW(url);
 		AOutput.Log($"Downloading {url}");
 		addUpdateAction(() =>
