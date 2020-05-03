@@ -1,5 +1,5 @@
-/Android|ef0f1eaa17cf1afe3e04753112bf6e53|5711
-/Android.manifest|3501a2ab86f55b3b782781bc89346ea1|10783
+/Android|708cc12ea9f1ea11d8483864b3bd8075|5711
+/Android.manifest|58fc69ed02052e48db024451812edb87|10783
 /common.ab|14614371268b78b7bd579e5a1f00be9b|78728
 /common.ab.manifest|298b9b055470952d5668ac71918051f8|472
 /firstui.ab|fab05767299100fe24e08500fce7066c|4593
@@ -8,7 +8,7 @@
 /tdefault.ab.manifest|346ee9b014b7e9d6c12341bd20af7598|705
 /ui.ab|c5121ef9cf124e68ea56ea1b2153ed0a|5799
 /ui.ab.manifest|f710ff4cb6df19bc9c0a42ec854183f3|413
-/versions.txt|faaa93865a5a621f9803d65d585bd67b|15772
+/versions.txt|e93376bffdd6ea0ee54db784e274a766|15772
 /animator/back01.ab|d4e41a741a9d30d4c5066ee9428b17ff|6493
 /animator/back01.ab.manifest|467937df203a2b3e575fb96821a909eb|492
 /animator/front01.ab|28053df4127b0c509cef6f10bdc58df2|6508
@@ -35,8 +35,8 @@
 /anims/cave1.ab.manifest|bea21dbec0b11cc156db255e44892fb1|539
 /characters/role01.ab|eb77f88cdb2396bd866db3fad10e35ab|3879
 /characters/role01.ab.manifest|6db8e10dd0a1dfb2c6a0c71201b03d50|837
-/dll/ahotgames.ab|d39bb1cfaf94f83571cbcb9b3ddac50a|108457
-/dll/ahotgames.ab.manifest|65a6dd8371a8070b5550653fdd46979f|351
+/dll/ahotgames.ab|0ff5b7fb354651f92ce34166e74e1bb6|108457
+/dll/ahotgames.ab.manifest|85b2166a00d8c7e236fa9f5e24148cb8|352
 /game/u2048.ab|06fc88971d7738ca4615974c61ac34da|13411
 /game/u2048.ab.manifest|9bb1a1f4fe0737d9ed17161316da3897|1346
 /game/ubigorsmall.ab|206819c9c8e7a9d593d3340f7be12105|16851
@@ -216,9 +216,9 @@
 /ui/uisinglesettlement.ab|3ad1c7777a9f3ef8507d0ca39048e16c|9314
 /ui/uisinglesettlement.ab.manifest|e036897ba11f746aa6bea738ad65dc29|1337
 /ui/minermap/map01.ab|665b7c11449980db75e1279d06152657|7234
-/ui/minermap/map01.ab.manifest|d1cbe1cbaacc2abd2f61e5d24fbc9c38|1341
+/ui/minermap/map01.ab.manifest|bff121e795762ea2fb8dcd6e5f808369|1341
 /ui/minermap/mapcity.ab|b1bbc028d2ebc95be5e02475fabdfa70|13707
-/ui/minermap/mapcity.ab.manifest|cf6641118aaf258748570500a4877aa3|1635
+/ui/minermap/mapcity.ab.manifest|f7104a70f4536166b8da890c26db58c6|1635
 /ui/minermap/maphuo1.ab|072c9631e0d0aa35f309b2b56c718119|7246
 /ui/minermap/maphuo1.ab.manifest|b065cb2c5c7fae68afc79c06bd629c98|1344
 /ui/minermap/maphuo2.ab|12476cfd96717dc898e5646c6117b360|7263
