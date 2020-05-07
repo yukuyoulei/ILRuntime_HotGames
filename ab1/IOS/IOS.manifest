@@ -1,343 +1,343 @@
 ManifestFileVersion: 0
-CRC: 1334992692
+CRC: 3173641805
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
       Name: dll/ahotgames.ab
       Dependencies: {}
     Info_1:
-      Name: images/pai/29.ab
-      Dependencies: {}
-    Info_2:
-      Name: images/pai/2.ab
-      Dependencies: {}
-    Info_3:
-      Name: images/pai/50.ab
-      Dependencies: {}
-    Info_4:
-      Name: images/pai/28.ab
-      Dependencies: {}
-    Info_5:
-      Name: images/pai/46.ab
-      Dependencies: {}
-    Info_6:
-      Name: images/pai/11.ab
-      Dependencies: {}
-    Info_7:
-      Name: images/pai/19.ab
-      Dependencies: {}
-    Info_8:
-      Name: images/pai/35.ab
-      Dependencies: {}
-    Info_9:
-      Name: images/pai/8.ab
-      Dependencies: {}
-    Info_10:
-      Name: images/pai/52.ab
-      Dependencies: {}
-    Info_11:
-      Name: images/pai/bg2.ab
-      Dependencies: {}
-    Info_12:
       Name: common.ab
       Dependencies: {}
-    Info_13:
-      Name: images/pai/12.ab
-      Dependencies: {}
-    Info_14:
-      Name: images/pai/20.ab
-      Dependencies: {}
-    Info_15:
+    Info_2:
       Name: ui.ab
       Dependencies: {}
-    Info_16:
-      Name: images/pai/13.ab
-      Dependencies: {}
-    Info_17:
-      Name: images/pai/36.ab
-      Dependencies: {}
-    Info_18:
-      Name: images/pai/44.ab
-      Dependencies: {}
-    Info_19:
-      Name: images/pai/3.ab
-      Dependencies: {}
-    Info_20:
-      Name: images/pai/14.ab
-      Dependencies: {}
-    Info_21:
-      Name: images/pai/54.ab
-      Dependencies: {}
-    Info_22:
-      Name: images/pai/15.ab
-      Dependencies: {}
-    Info_23:
-      Name: images/pai/24.ab
-      Dependencies: {}
-    Info_24:
-      Name: images/pai/32.ab
-      Dependencies: {}
-    Info_25:
-      Name: images/pai/42.ab
-      Dependencies: {}
-    Info_26:
-      Name: tdefault.ab
-      Dependencies: {}
-    Info_27:
-      Name: images/pai/41.ab
-      Dependencies: {}
-    Info_28:
-      Name: images/pai/33.ab
-      Dependencies: {}
-    Info_29:
-      Name: images/pai/4.ab
-      Dependencies: {}
-    Info_30:
-      Name: images/pai/40.ab
-      Dependencies: {}
-    Info_31:
-      Name: images/pai/51.ab
-      Dependencies: {}
-    Info_32:
-      Name: images/pai/22.ab
-      Dependencies: {}
-    Info_33:
-      Name: images/pai/1.ab
-      Dependencies: {}
-    Info_34:
-      Name: images/pai/39.ab
-      Dependencies: {}
-    Info_35:
-      Name: images/pai/37.ab
-      Dependencies: {}
-    Info_36:
-      Name: images/pai/34.ab
-      Dependencies: {}
-    Info_37:
+    Info_3:
       Name: images/light.ab
       Dependencies: {}
-    Info_38:
+    Info_4:
       Name: images/mapbg.ab
       Dependencies: {}
-    Info_39:
-      Name: images/pai/30.ab
-      Dependencies: {}
-    Info_40:
-      Name: images/pai/bg1.ab
-      Dependencies: {}
-    Info_41:
-      Name: images/pai/48.ab
-      Dependencies: {}
-    Info_42:
-      Name: images/pai/9.ab
-      Dependencies: {}
-    Info_43:
-      Name: images/pai/43.ab
-      Dependencies: {}
-    Info_44:
-      Name: images/pai/26.ab
-      Dependencies: {}
-    Info_45:
-      Name: images/pai/21.ab
-      Dependencies: {}
-    Info_46:
-      Name: images/pai/6.ab
-      Dependencies: {}
-    Info_47:
-      Name: images/pai/47.ab
-      Dependencies: {}
-    Info_48:
-      Name: images/pai/16.ab
-      Dependencies: {}
-    Info_49:
+    Info_5:
       Name: images/btn5.ab
       Dependencies: {}
-    Info_50:
-      Name: images/pai/10.ab
-      Dependencies: {}
-    Info_51:
-      Name: images/pai/38.ab
-      Dependencies: {}
-    Info_52:
-      Name: images/pai/17.ab
-      Dependencies: {}
-    Info_53:
-      Name: images/pai/45.ab
-      Dependencies: {}
-    Info_54:
-      Name: images/pai/27.ab
-      Dependencies: {}
-    Info_55:
-      Name: images/pai/7.ab
-      Dependencies: {}
-    Info_56:
-      Name: images/pai/49.ab
-      Dependencies: {}
-    Info_57:
-      Name: images/pai/53.ab
-      Dependencies: {}
-    Info_58:
-      Name: images/pai/31.ab
-      Dependencies: {}
-    Info_59:
-      Name: images/pai/23.ab
-      Dependencies: {}
-    Info_60:
-      Name: images/pai/25.ab
-      Dependencies: {}
-    Info_61:
-      Name: images/pai/5.ab
-      Dependencies: {}
-    Info_62:
-      Name: images/pai/18.ab
-      Dependencies: {}
-    Info_63:
+    Info_6:
       Name: ui/uiresources/avatarmale.ab
       Dependencies:
         Dependency_0: common.ab
-    Info_64:
+    Info_7:
       Name: ui/uiresources/avatarfemale.ab
       Dependencies:
         Dependency_0: common.ab
-    Info_65:
-      Name: game/ubigorsmall.ab
-      Dependencies: {}
-    Info_66:
-      Name: game/ulifeinbottle.ab
-      Dependencies:
-        Dependency_0: tdefault.ab
-    Info_67:
-      Name: ui/uirank.ab
-      Dependencies: {}
-    Info_68:
+    Info_8:
       Name: ui/uialert.ab
       Dependencies: {}
-    Info_69:
-      Name: ui/uidebugconsole.ab
-      Dependencies: {}
-    Info_70:
+    Info_9:
       Name: ui/uimain.ab
       Dependencies: {}
-    Info_71:
-      Name: ui/uicreateavatar.ab
+    Info_10:
+      Name: ui/uicommonwait.ab
+      Dependencies:
+        Dependency_0: tdefault.ab
+    Info_11:
+      Name: ui/uilogin.ab
       Dependencies: {}
-    Info_72:
+    Info_12:
+      Name: ui/uiregister.ab
+      Dependencies: {}
+    Info_13:
+      Name: ui/uiloading.ab
+      Dependencies:
+        Dependency_0: ui.ab
+    Info_14:
+      Name: firstui.ab
+      Dependencies: {}
+    Info_15:
+      Name: tdefault.ab
+      Dependencies: {}
+    Info_16:
       Name: game/ucardgame.ab
       Dependencies:
         Dependency_0: ui.ab
-    Info_73:
+    Info_17:
+      Name: game/ulifeinbottle.ab
+      Dependencies:
+        Dependency_0: tdefault.ab
+    Info_18:
       Name: game/ummo.ab
       Dependencies:
         Dependency_0: ui.ab
         Dependency_1: tdefault.ab
         Dependency_2: anims/cave1.ab
+    Info_19:
+      Name: images/pai/bg1.ab
+      Dependencies: {}
+    Info_20:
+      Name: images/pai/bg2.ab
+      Dependencies: {}
+    Info_21:
+      Name: ui/uicreateavatar.ab
+      Dependencies: {}
+    Info_22:
+      Name: ui/uirank.ab
+      Dependencies: {}
+    Info_23:
+      Name: game/ubigorsmall.ab
+      Dependencies: {}
+    Info_24:
+      Name: ui/uidebugconsole.ab
+      Dependencies: {}
+    Info_25:
+      Name: images/pai/1.ab
+      Dependencies: {}
+    Info_26:
+      Name: images/pai/10.ab
+      Dependencies: {}
+    Info_27:
+      Name: images/pai/11.ab
+      Dependencies: {}
+    Info_28:
+      Name: images/pai/12.ab
+      Dependencies: {}
+    Info_29:
+      Name: images/pai/13.ab
+      Dependencies: {}
+    Info_30:
+      Name: images/pai/14.ab
+      Dependencies: {}
+    Info_31:
+      Name: images/pai/15.ab
+      Dependencies: {}
+    Info_32:
+      Name: images/pai/16.ab
+      Dependencies: {}
+    Info_33:
+      Name: images/pai/17.ab
+      Dependencies: {}
+    Info_34:
+      Name: images/pai/18.ab
+      Dependencies: {}
+    Info_35:
+      Name: images/pai/19.ab
+      Dependencies: {}
+    Info_36:
+      Name: images/pai/2.ab
+      Dependencies: {}
+    Info_37:
+      Name: images/pai/20.ab
+      Dependencies: {}
+    Info_38:
+      Name: images/pai/21.ab
+      Dependencies: {}
+    Info_39:
+      Name: images/pai/22.ab
+      Dependencies: {}
+    Info_40:
+      Name: images/pai/23.ab
+      Dependencies: {}
+    Info_41:
+      Name: images/pai/24.ab
+      Dependencies: {}
+    Info_42:
+      Name: images/pai/25.ab
+      Dependencies: {}
+    Info_43:
+      Name: images/pai/26.ab
+      Dependencies: {}
+    Info_44:
+      Name: images/pai/27.ab
+      Dependencies: {}
+    Info_45:
+      Name: images/pai/28.ab
+      Dependencies: {}
+    Info_46:
+      Name: images/pai/29.ab
+      Dependencies: {}
+    Info_47:
+      Name: images/pai/3.ab
+      Dependencies: {}
+    Info_48:
+      Name: images/pai/30.ab
+      Dependencies: {}
+    Info_49:
+      Name: images/pai/31.ab
+      Dependencies: {}
+    Info_50:
+      Name: images/pai/32.ab
+      Dependencies: {}
+    Info_51:
+      Name: images/pai/33.ab
+      Dependencies: {}
+    Info_52:
+      Name: images/pai/34.ab
+      Dependencies: {}
+    Info_53:
+      Name: images/pai/35.ab
+      Dependencies: {}
+    Info_54:
+      Name: images/pai/36.ab
+      Dependencies: {}
+    Info_55:
+      Name: images/pai/37.ab
+      Dependencies: {}
+    Info_56:
+      Name: images/pai/38.ab
+      Dependencies: {}
+    Info_57:
+      Name: images/pai/39.ab
+      Dependencies: {}
+    Info_58:
+      Name: images/pai/4.ab
+      Dependencies: {}
+    Info_59:
+      Name: images/pai/40.ab
+      Dependencies: {}
+    Info_60:
+      Name: images/pai/41.ab
+      Dependencies: {}
+    Info_61:
+      Name: images/pai/42.ab
+      Dependencies: {}
+    Info_62:
+      Name: images/pai/43.ab
+      Dependencies: {}
+    Info_63:
+      Name: images/pai/44.ab
+      Dependencies: {}
+    Info_64:
+      Name: images/pai/45.ab
+      Dependencies: {}
+    Info_65:
+      Name: images/pai/46.ab
+      Dependencies: {}
+    Info_66:
+      Name: images/pai/47.ab
+      Dependencies: {}
+    Info_67:
+      Name: images/pai/48.ab
+      Dependencies: {}
+    Info_68:
+      Name: images/pai/49.ab
+      Dependencies: {}
+    Info_69:
+      Name: images/pai/5.ab
+      Dependencies: {}
+    Info_70:
+      Name: images/pai/50.ab
+      Dependencies: {}
+    Info_71:
+      Name: images/pai/51.ab
+      Dependencies: {}
+    Info_72:
+      Name: images/pai/52.ab
+      Dependencies: {}
+    Info_73:
+      Name: images/pai/53.ab
+      Dependencies: {}
     Info_74:
-      Name: ui/uicommonwait.ab
-      Dependencies:
-        Dependency_0: tdefault.ab
+      Name: images/pai/54.ab
+      Dependencies: {}
     Info_75:
-      Name: ui/uilogin.ab
+      Name: images/pai/6.ab
       Dependencies: {}
     Info_76:
-      Name: game/u2048.ab
+      Name: images/pai/7.ab
       Dependencies: {}
     Info_77:
-      Name: ui/uiregister.ab
+      Name: images/pai/8.ab
       Dependencies: {}
     Info_78:
-      Name: game/usanxiao.ab
+      Name: images/pai/9.ab
       Dependencies: {}
     Info_79:
       Name: ui/uicommontips.ab
       Dependencies: {}
     Info_80:
-      Name: ui/uiloading.ab
-      Dependencies:
-        Dependency_0: ui.ab
+      Name: game/u2048.ab
+      Dependencies: {}
     Info_81:
-      Name: firstui.ab
+      Name: game/usanxiao.ab
       Dependencies: {}
     Info_82:
-      Name: ui/uiminercreateavatar.ab
-      Dependencies: {}
+      Name: animator/idler01.ab
+      Dependencies:
+        Dependency_0: tdefault.ab
     Info_83:
-      Name: ui/uiminerlogin.ab
+      Name: animator/idlel01.ab
       Dependencies:
         Dependency_0: tdefault.ab
     Info_84:
-      Name: ui/uiminermain.ab
+      Name: animator/idlef01.ab
       Dependencies:
         Dependency_0: tdefault.ab
-        Dependency_1: animator/role01.ab
     Info_85:
-      Name: characters/role01.ab
+      Name: animator/front01.ab
       Dependencies:
         Dependency_0: tdefault.ab
-        Dependency_1: animator/role01.ab
     Info_86:
       Name: animator/right01.ab
       Dependencies:
         Dependency_0: tdefault.ab
     Info_87:
-      Name: animator/front01.ab
-      Dependencies:
-        Dependency_0: tdefault.ab
-    Info_88:
-      Name: animator/role01.ab
-      Dependencies:
-        Dependency_0: animator/right01.ab
-        Dependency_1: animator/front01.ab
-        Dependency_2: animator/idleb01.ab
-        Dependency_3: animator/idlef01.ab
-        Dependency_4: animator/idlel01.ab
-        Dependency_5: animator/idler01.ab
-        Dependency_6: animator/back01.ab
-        Dependency_7: animator/left01.ab
-    Info_89:
-      Name: animator/idleb01.ab
-      Dependencies:
-        Dependency_0: tdefault.ab
-    Info_90:
-      Name: animator/idlef01.ab
-      Dependencies:
-        Dependency_0: tdefault.ab
-    Info_91:
-      Name: animator/idlel01.ab
-      Dependencies:
-        Dependency_0: tdefault.ab
-    Info_92:
-      Name: animator/idler01.ab
-      Dependencies:
-        Dependency_0: tdefault.ab
-    Info_93:
-      Name: animator/back01.ab
-      Dependencies:
-        Dependency_0: tdefault.ab
-    Info_94:
       Name: animator/left01.ab
       Dependencies:
         Dependency_0: tdefault.ab
-    Info_95:
+    Info_88:
+      Name: animator/idleb01.ab
+      Dependencies:
+        Dependency_0: tdefault.ab
+    Info_89:
+      Name: ui/uiminerlogin.ab
+      Dependencies:
+        Dependency_0: tdefault.ab
+    Info_90:
+      Name: ui/uiminermain.ab
+      Dependencies:
+        Dependency_0: tdefault.ab
+        Dependency_1: animator/role01.ab
+    Info_91:
+      Name: ui/uiminercreateavatar.ab
+      Dependencies: {}
+    Info_92:
+      Name: animator/back01.ab
+      Dependencies:
+        Dependency_0: tdefault.ab
+    Info_93:
+      Name: characters/role01.ab
+      Dependencies:
+        Dependency_0: tdefault.ab
+        Dependency_1: animator/role01.ab
+    Info_94:
       Name: ui/minermap/map01.ab
       Dependencies:
         Dependency_0: tdefault.ab
         Dependency_1: animator/role01.ab
+    Info_95:
+      Name: animator/role01.ab
+      Dependencies:
+        Dependency_0: animator/idler01.ab
+        Dependency_1: animator/idlel01.ab
+        Dependency_2: animator/idlef01.ab
+        Dependency_3: animator/front01.ab
+        Dependency_4: animator/right01.ab
+        Dependency_5: animator/left01.ab
+        Dependency_6: animator/idleb01.ab
+        Dependency_7: animator/back01.ab
     Info_96:
-      Name: anims/c1idle.ab
-      Dependencies:
-        Dependency_0: tdefault.ab
-    Info_97:
-      Name: anims/c1move.ab
-      Dependencies:
-        Dependency_0: tdefault.ab
-    Info_98:
-      Name: ui/minermap/mapcity.ab
-      Dependencies: {}
-    Info_99:
       Name: anims/cave1.ab
       Dependencies:
         Dependency_0: anims/c1idle.ab
         Dependency_1: anims/c1move.ab
+    Info_97:
+      Name: anims/c1idle.ab
+      Dependencies:
+        Dependency_0: tdefault.ab
+    Info_98:
+      Name: anims/c1move.ab
+      Dependencies:
+        Dependency_0: tdefault.ab
+    Info_99:
+      Name: txt/dailycheck.ab
+      Dependencies: {}
     Info_100:
       Name: txt/items.ab
       Dependencies: {}
@@ -345,107 +345,107 @@ AssetBundleManifest:
       Name: txt/map.ab
       Dependencies: {}
     Info_102:
-      Name: txt/dailycheck.ab
+      Name: ui/minermap/mapcity.ab
       Dependencies: {}
     Info_103:
       Name: txt/payment.ab
       Dependencies: {}
     Info_104:
-      Name: ui/uiminerbattle.ab
-      Dependencies:
-        Dependency_0: tdefault.ab
-        Dependency_1: animator/role01.ab
+      Name: txt/huo.ab
+      Dependencies: {}
     Info_105:
-      Name: ui/minermap/mapmu1.ab
-      Dependencies:
-        Dependency_0: tdefault.ab
-        Dependency_1: animator/role01.ab
+      Name: txt/jin.ab
+      Dependencies: {}
     Info_106:
-      Name: ui/minermap/mapshui1.ab
-      Dependencies:
-        Dependency_0: tdefault.ab
-        Dependency_1: animator/role01.ab
+      Name: txt/mu.ab
+      Dependencies: {}
     Info_107:
-      Name: ui/minermap/mapjin3.ab
-      Dependencies:
-        Dependency_0: tdefault.ab
-        Dependency_1: animator/role01.ab
+      Name: txt/shui.ab
+      Dependencies: {}
     Info_108:
-      Name: ui/minermap/maptu3.ab
-      Dependencies:
-        Dependency_0: tdefault.ab
-        Dependency_1: animator/role01.ab
+      Name: txt/tu.ab
+      Dependencies: {}
     Info_109:
-      Name: ui/minermap/maphuo2.ab
-      Dependencies:
-        Dependency_0: tdefault.ab
-        Dependency_1: animator/role01.ab
-    Info_110:
-      Name: ui/uisinglesettlement.ab
-      Dependencies:
-        Dependency_0: tdefault.ab
-    Info_111:
-      Name: ui/minermap/mapjin2.ab
-      Dependencies:
-        Dependency_0: tdefault.ab
-        Dependency_1: animator/role01.ab
-    Info_112:
-      Name: ui/minermap/mapmu2.ab
-      Dependencies:
-        Dependency_0: tdefault.ab
-        Dependency_1: animator/role01.ab
-    Info_113:
       Name: ui/minermap/maphuo1.ab
       Dependencies:
         Dependency_0: tdefault.ab
         Dependency_1: animator/role01.ab
-    Info_114:
-      Name: ui/minermap/maptu1.ab
+    Info_110:
+      Name: ui/minermap/maphuo2.ab
       Dependencies:
         Dependency_0: tdefault.ab
         Dependency_1: animator/role01.ab
-    Info_115:
-      Name: ui/minermap/maptu2.ab
-      Dependencies:
-        Dependency_0: tdefault.ab
-        Dependency_1: animator/role01.ab
-    Info_116:
-      Name: ui/minermap/mapshui3.ab
-      Dependencies:
-        Dependency_0: tdefault.ab
-        Dependency_1: animator/role01.ab
-    Info_117:
-      Name: ui/minermap/mapshui2.ab
-      Dependencies:
-        Dependency_0: tdefault.ab
-        Dependency_1: animator/role01.ab
-    Info_118:
+    Info_111:
       Name: ui/minermap/maphuo3.ab
       Dependencies:
         Dependency_0: tdefault.ab
         Dependency_1: animator/role01.ab
-    Info_119:
-      Name: ui/minermap/mapmu3.ab
-      Dependencies:
-        Dependency_0: tdefault.ab
-        Dependency_1: animator/role01.ab
-    Info_120:
+    Info_112:
       Name: ui/minermap/mapjin1.ab
       Dependencies:
         Dependency_0: tdefault.ab
         Dependency_1: animator/role01.ab
+    Info_113:
+      Name: ui/minermap/mapjin2.ab
+      Dependencies:
+        Dependency_0: tdefault.ab
+        Dependency_1: animator/role01.ab
+    Info_114:
+      Name: ui/minermap/mapjin3.ab
+      Dependencies:
+        Dependency_0: tdefault.ab
+        Dependency_1: animator/role01.ab
+    Info_115:
+      Name: ui/minermap/mapmu1.ab
+      Dependencies:
+        Dependency_0: tdefault.ab
+        Dependency_1: animator/role01.ab
+    Info_116:
+      Name: ui/minermap/mapmu2.ab
+      Dependencies:
+        Dependency_0: tdefault.ab
+        Dependency_1: animator/role01.ab
+    Info_117:
+      Name: ui/minermap/mapmu3.ab
+      Dependencies:
+        Dependency_0: tdefault.ab
+        Dependency_1: animator/role01.ab
+    Info_118:
+      Name: ui/minermap/mapshui1.ab
+      Dependencies:
+        Dependency_0: tdefault.ab
+        Dependency_1: animator/role01.ab
+    Info_119:
+      Name: ui/minermap/mapshui2.ab
+      Dependencies:
+        Dependency_0: tdefault.ab
+        Dependency_1: animator/role01.ab
+    Info_120:
+      Name: ui/minermap/mapshui3.ab
+      Dependencies:
+        Dependency_0: tdefault.ab
+        Dependency_1: animator/role01.ab
     Info_121:
-      Name: txt/shui.ab
-      Dependencies: {}
+      Name: ui/minermap/maptu1.ab
+      Dependencies:
+        Dependency_0: tdefault.ab
+        Dependency_1: animator/role01.ab
     Info_122:
-      Name: txt/tu.ab
-      Dependencies: {}
+      Name: ui/minermap/maptu2.ab
+      Dependencies:
+        Dependency_0: tdefault.ab
+        Dependency_1: animator/role01.ab
     Info_123:
-      Name: txt/mu.ab
-      Dependencies: {}
+      Name: ui/minermap/maptu3.ab
+      Dependencies:
+        Dependency_0: tdefault.ab
+        Dependency_1: animator/role01.ab
     Info_124:
-      Name: txt/jin.ab
-      Dependencies: {}
+      Name: ui/uisinglesettlement.ab
+      Dependencies:
+        Dependency_0: tdefault.ab
     Info_125:
-      Name: txt/huo.ab
-      Dependencies: {}
+      Name: ui/uiminerbattle.ab
+      Dependencies:
+        Dependency_0: tdefault.ab
+        Dependency_1: animator/role01.ab

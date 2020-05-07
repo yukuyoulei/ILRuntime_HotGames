@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1942579608
+CRC: 2241164013
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: b4adb99b40026e5d5aeecf5573501188
+    Hash: cb466ffd30db2aebbd03e93d6a841c51
   TypeTreeHash:
     serializedVersion: 2
     Hash: d7865432dca78e1ecd7132916d904900
@@ -18,4 +18,4 @@ ClassTypes:
 Assets:
 - Assets/Arts/Anims/c1idle.anim
 Dependencies:
-- G:/ProjectsGit/ILRuntime_HotGames/ab1/IOS/tdefault.ab
+- E:/personal/ILRuntime_HotGames/ILRuntime_HotGames/ab1/IOS/tdefault.ab

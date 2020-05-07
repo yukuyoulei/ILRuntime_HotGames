@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2847498525
+CRC: 1147236607
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: a9c6bfc31234d6ff2b8e05b039136a02
+    Hash: 527a34a677885ec2fa19c83eb471d9af
   TypeTreeHash:
     serializedVersion: 2
     Hash: 25af0cc901b458286dbbdd16713c792c
@@ -28,5 +28,5 @@ ClassTypes:
 Assets:
 - Assets/RemoteResources/Characters/role01.prefab
 Dependencies:
-- G:/ProjectsGit/ILRuntime_HotGames/ab1/IOS/tdefault.ab
-- G:/ProjectsGit/ILRuntime_HotGames/ab1/IOS/animator/role01.ab
+- E:/personal/ILRuntime_HotGames/ILRuntime_HotGames/ab1/IOS/tdefault.ab
+- E:/personal/ILRuntime_HotGames/ILRuntime_HotGames/ab1/IOS/animator/role01.ab

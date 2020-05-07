@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1660451499
+CRC: 2506799051
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 873f6854e29c34952261496ed8f5cb4e
+    Hash: ca1f39b7f019606f9c49f892ba0049fb
   TypeTreeHash:
     serializedVersion: 2
     Hash: 889fbb5b6e36544f758ccb5d48a4550b
@@ -56,6 +56,6 @@ ClassTypes:
 Assets:
 - Assets/RemoteResources/Game/UMMO.prefab
 Dependencies:
-- G:/ProjectsGit/ILRuntime_HotGames/ab1/IOS/ui.ab
-- G:/ProjectsGit/ILRuntime_HotGames/ab1/IOS/tdefault.ab
-- G:/ProjectsGit/ILRuntime_HotGames/ab1/IOS/anims/cave1.ab
+- E:/personal/ILRuntime_HotGames/ILRuntime_HotGames/ab1/IOS/ui.ab
+- E:/personal/ILRuntime_HotGames/ILRuntime_HotGames/ab1/IOS/tdefault.ab
+- E:/personal/ILRuntime_HotGames/ILRuntime_HotGames/ab1/IOS/anims/cave1.ab

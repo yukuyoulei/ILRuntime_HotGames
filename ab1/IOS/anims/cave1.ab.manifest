@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 402525742
+CRC: 3215086594
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 6c1a2c1aeeca11f60f9143268e037a6b
+    Hash: cdf2a245bcd82462a8bfc0306d609669
   TypeTreeHash:
     serializedVersion: 2
     Hash: 70e7db779fc083977b06f56e8be8f1dc
@@ -16,5 +16,5 @@ ClassTypes:
 Assets:
 - Assets/Arts/Anims/Cave1.controller
 Dependencies:
-- G:/ProjectsGit/ILRuntime_HotGames/ab1/IOS/anims/c1idle.ab
-- G:/ProjectsGit/ILRuntime_HotGames/ab1/IOS/anims/c1move.ab
+- E:/personal/ILRuntime_HotGames/ILRuntime_HotGames/ab1/IOS/anims/c1idle.ab
+- E:/personal/ILRuntime_HotGames/ILRuntime_HotGames/ab1/IOS/anims/c1move.ab

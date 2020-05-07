@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2217117790
+CRC: 3774312364
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 39981ee65b51fd464339c8e82cd3b581
+    Hash: 03059c08c19d0d83f9ae00151715ba54
   TypeTreeHash:
     serializedVersion: 2
     Hash: d7865432dca78e1ecd7132916d904900
@@ -18,4 +18,4 @@ ClassTypes:
 Assets:
 - Assets/Arts/Animator/front01.anim
 Dependencies:
-- G:/ProjectsGit/ILRuntime_HotGames/ab1/IOS/tdefault.ab
+- E:/personal/ILRuntime_HotGames/ILRuntime_HotGames/ab1/IOS/tdefault.ab

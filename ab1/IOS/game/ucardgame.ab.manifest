@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2533984550
+CRC: 1137955624
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: a1f902503c08472c6c459a6a45b53dc2
+    Hash: aabcc5b92cece9958a385c495cb7f4f2
   TypeTreeHash:
     serializedVersion: 2
     Hash: 392c110234ea66d1a3990022d02e19bb
@@ -50,4 +50,4 @@ ClassTypes:
 Assets:
 - Assets/RemoteResources/Game/UCardGame.prefab
 Dependencies:
-- G:/ProjectsGit/ILRuntime_HotGames/ab1/IOS/ui.ab
+- E:/personal/ILRuntime_HotGames/ILRuntime_HotGames/ab1/IOS/ui.ab
