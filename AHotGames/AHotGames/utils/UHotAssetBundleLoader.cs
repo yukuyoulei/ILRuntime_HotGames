@@ -207,14 +207,15 @@ public class UHotAssetBundleLoader : AHotBase
 	{
 		var lNeedDownload = new List<string>();
 		foreach (var r in lResources)
-		{
-			var res = r.ToLower();
-			if (!res.StartsWith("/"))
-			{
-				res = $"/{res}";
-			}
+{
+			var res = r;
 			if (checksuffix && !res.EndsWith(UHotAssetBundleLoader.AssetBundleSuffix))
 			{
+				res = res.ToLower();
+				if (!res.StartsWith("/"))
+				{
+					res = $"/{res}";
+				}
 				res = $"{res}{AssetBundleSuffix}";
 			}
 			if (!dRemoteVersions.ContainsKey(res))

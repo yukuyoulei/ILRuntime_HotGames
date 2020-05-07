@@ -34,8 +34,8 @@ public class AEntrance : AHotBase
     };
 	private void PreDownloadResources()
 	{
-		UHotAssetBundleLoader.Instance.OnDownloadResources(new List<string> { Utils.GetPlatformFolder()
-			, Utils.GetPlatformFolder()+ ".manifest" }, () =>
+		UHotAssetBundleLoader.Instance.OnDownloadResources(new List<string> { "/" + Utils.GetPlatformFolder()
+			, "/" + Utils.GetPlatformFolder()+ ".manifest" }, () =>
 		{
 			UHotAssetBundleLoader.Instance.OnDownloadResources(new List<string> { "ui/uidebugconsole.ab" }, () =>
 			{
