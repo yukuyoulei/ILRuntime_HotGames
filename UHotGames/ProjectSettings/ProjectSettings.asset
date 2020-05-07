@@ -159,7 +159,7 @@ PlayerSettings:
   buildNumber:
     Standalone: 1.0.2
     iOS: 1
-  AndroidBundleVersionCode: 5
+  AndroidBundleVersionCode: 7
   AndroidMinSdkVersion: 21
   AndroidTargetSdkVersion: 0
   AndroidPreferredInstallLocation: 1
