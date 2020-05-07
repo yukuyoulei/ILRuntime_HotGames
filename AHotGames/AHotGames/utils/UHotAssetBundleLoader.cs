@@ -11,6 +11,7 @@ using UnityEngine.UI;
 
 public class UHotAssetBundleLoader : AHotBase
 {
+	protected override bool bCanBeAutoClosed => false;
 	private static UHotAssetBundleLoader sinstance;
 	public static UHotAssetBundleLoader Instance
 	{
@@ -133,6 +134,10 @@ public class UHotAssetBundleLoader : AHotBase
 		{
 			total = new List<string>();
 		}
+		if (!total.Contains(name))
+		{
+			total.Add(name);
+		}
 		var result = manifest.GetAllDependencies(name);
 		foreach (var d in result)
 		{
@@ -214,7 +219,6 @@ public class UHotAssetBundleLoader : AHotBase
 			}
 			if (!dRemoteVersions.ContainsKey(res))
 			{
-				UDebugHotLog.Log($"!dRemoteVersions.ContainsKey(res)");
 				continue;
 			}
 			var file = ULocalFileManager.Instance.OnGetFile(res);

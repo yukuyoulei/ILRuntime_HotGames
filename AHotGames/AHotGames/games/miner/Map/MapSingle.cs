@@ -15,4 +15,3 @@ public class MapSingle : AHotBase
 		AClientApis.OnEnterScene();
 	}
 }
-

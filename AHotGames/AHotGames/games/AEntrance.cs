@@ -26,17 +26,11 @@ public class AEntrance : AHotBase
 	}
 
 	private string[] preloadResources = new string[] {
-		  "ui/uilogin.ab"
-
-		, "ui/uirank.ab"
-		, "ui/uimain.ab"
-		, "ui/uiwait.ab"
+		"ui/uiwait.ab"
 		, "ui/uialert.ab"
 		, "ui/uiregister.ab"
 		, "ui/uicommontips.ab"
 		, "ui/uicommonwait.ab"
-		, "ui/uicreateavatar.ab"
-		, "ui/uiminermain.ab"
     };
 	private void PreDownloadResources()
 	{
