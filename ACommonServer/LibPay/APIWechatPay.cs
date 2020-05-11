@@ -19,13 +19,13 @@ public static class APIWechatPay
 	/// <summary>
 	/// 微信支付商户号（从微信发给你的邮件中获得的）
 	/// </summary>
-	private static string MchId = "150487113861";
+	private static string MchId = "1588040881";
 
 	/// <summary>
 	/// 应用的APPID（微信发给你的邮件中也有这项内容，一般以wx开头，微信开放平台-管理中心-应用详情也可以看到这项内容）
 	/// </summary>
-	private static string AppId = "wxb244f08e73ca02c21";//appid
-	private static string ApiSecret = "62a0584a3ffc03f39a08e782bc75d5918";//appsecret
+	private static string AppId = "wx88524d9adfdb7297";//appid
+	private static string ApiSecret = "6JDxMn6cNQNBjt90OghNpGADSpNROmzN";//appsecret
 	/// <summary>
 	/// 这里是API密钥，不是Appsecret，这里最容易出错了！请务必注意！
 	/// 设置方法：微信商户平台(pay.weixin.qq.com)-->账户设置-->API安全-->密钥设置

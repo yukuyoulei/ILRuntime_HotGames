@@ -49,10 +49,6 @@ public class UILoading : AHotBase
 			return true;
 		});
 	}
-	public void OnSetJindu(string str)
-	{
-		UDebugHotLog.Log($"OnSetJindu [{str}]");
-	}
 	public void OnSetProgress(float p)
 	{
 		if (imageProgress != null)

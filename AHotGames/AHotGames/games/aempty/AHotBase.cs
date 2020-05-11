@@ -171,7 +171,6 @@ public abstract class AHotBase
 	public static void SetUnityMessageReceiver(GameObject receiver)
 	{
 		msgReceiver = receiver;
-		AOutput.Log($"MessageReceiver received:{receiver.name}");
 	}
 	public static void SendMessageToUnityReceiver(GameObject go, string message)
 	{
@@ -265,11 +264,9 @@ public abstract class AHotBase
 	private static List<AHotBase> loadedClasses = new List<AHotBase>();
 	public static T LoadClass<T>(string prefabPath, Action<T> action = null) where T : AHotBase, new()
 	{
-		AOutput.Log($"LoadClass(prefabPath {prefabPath});");
 		GameObject obj = UHotAssetBundleLoader.Instance.OnLoadAsset<GameObject>(prefabPath);
 		if (obj == null)
 		{
-			UDebugHotLog.Log($"cannot find prefab {prefabPath}");
 			return null;
 		}
 		var t = new T();
@@ -284,7 +281,6 @@ public abstract class AHotBase
 	{
 		UICommonWait.Show();
 		var path = "UI/" + typeof(T).Name;
-		AOutput.Log($"LoadUI(path {path});");
 		UHotAssetBundleLoader.Instance.OnDownloadResources(() =>
 		{
 			UICommonWait.Hide();
