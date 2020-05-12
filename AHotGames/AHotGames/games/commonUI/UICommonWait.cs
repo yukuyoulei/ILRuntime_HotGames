@@ -26,10 +26,7 @@ public class UICommonWait : AHotBase
 	public static void Show()
 	{
 		if (sinstance == null)
-			UHotAssetBundleLoader.Instance.OnDownloadResources(() =>
-			{
-				sinstance = LoadClass<UICommonWait>("UI/UICommonWait", null);
-			}, "UI/UICommonWait");
+			sinstance = LoadClass<UICommonWait>("UI/UICommonWait", null);
 		else
 			sinstance.gameObj?.SetActive(true);
 	}

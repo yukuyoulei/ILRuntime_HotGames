@@ -58,6 +58,7 @@ public class UIMinerLogin : AHotBase
 					{
 						btnLogin.enabled = true;
 
+						UICommonWait.Hide();
 					});
 					AOutput.Log($"连接失败！");
 					return;

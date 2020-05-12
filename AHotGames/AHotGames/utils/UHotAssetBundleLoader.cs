@@ -110,7 +110,6 @@ public class UHotAssetBundleLoader : AHotBase
 			var ab = DoGetAssetBundle(platform);
 			if (ab == null)
 			{
-				AOutput.Log($"OnGetAssetBundleDependeces {platform} is null");
 				return;
 			}
 		}
@@ -329,7 +328,6 @@ public class UHotAssetBundleLoader : AHotBase
 					progressAction(www.progress);
 				else
 				{
-					UDebugHotLog.Log($"OnDownloadBytes process {www.progress}");
 					UILoading.Instance?.OnSetProgress(www.progress);
 				}
 			}
