@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class SDK_WeChat : MonoBehaviour
@@ -30,6 +30,8 @@ public class SDK_WeChat : MonoBehaviour
 				AndroidJavaObject activity = unityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
 				AndroidJavaClass apiFactory = new AndroidJavaClass("com.tencent.mm.opensdk.openapi.WXAPIFactory");
 
+				if (apiFactory == null)
+					throw new Exception("Cannot find AndroidJavaClass apiFactory");
 				_wxApi = apiFactory.CallStatic<AndroidJavaObject>("createWXAPI", activity, appid, false);
 			}
 			return _wxApi;
@@ -43,9 +45,9 @@ public class SDK_WeChat : MonoBehaviour
     private extern static string WechatPayWeChatInitialize(string appid);*/
 #endif
 
-	public const string appid = "wx88524d9adfdb7297";
-	private const string appsecret = "6JDxMn6cNQNBjt90OghNpGADSpNROmzN";
-	private const string partnerid = "1588040881";
+	public const string appid = "";
+	private const string appsecret = "";
+	private const string partnerid = "";
 	void Start()
 	{
 #if UNITY_ANDROID
@@ -81,6 +83,8 @@ public class SDK_WeChat : MonoBehaviour
 		paras.Add("sign#sign", sign); //应用签名，预下单的签名不能用，要重新签名
 
 		var request = new AndroidJavaObject("com.tencent.mm.opensdk.modelpay.PayReq");
+		if (request == null)
+			throw new Exception("Cannot find AndroidJavaClass com.tencent.mm.opensdk.modelpay.PayReq");
 		foreach (var kv in paras)
 		{
 			request.Set(kv.Key.Split('#')[1], kv.Value);
@@ -92,8 +96,13 @@ public class SDK_WeChat : MonoBehaviour
 #endif
 	}
 
+	public static Action responseAction;
 	void WXPayCallback(string code)
 	{
+		if (code.Contains("0"))
+		{
+			responseAction?.Invoke();
+		}
 		Debug.Log($"WXPayCallback {code}");
 	}
 }

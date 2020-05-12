@@ -257,7 +257,7 @@ public abstract class AHotBase
 		UHotAssetBundleLoader.Instance.OnDownloadResources(() =>
 		{
 			var t = Type.GetType(classname);
-			var ci = Activator.CreateInstance(t) as AHotBase;
+			var ci = (AHotBase)Activator.CreateInstance(t);
 			ci.SetGameObj(GameObject.Instantiate(UHotAssetBundleLoader.Instance.OnLoadAsset<GameObject>(prefab)));
 		}, prefab);
 	}

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
@@ -19,13 +20,13 @@ public static class APIWechatPay
 	/// <summary>
 	/// 微信支付商户号（从微信发给你的邮件中获得的）
 	/// </summary>
-	private static string MchId = "1588040881";
+	private static string MchId = "";
 
 	/// <summary>
 	/// 应用的APPID（微信发给你的邮件中也有这项内容，一般以wx开头，微信开放平台-管理中心-应用详情也可以看到这项内容）
 	/// </summary>
-	private static string AppId = "wx88524d9adfdb7297";//appid
-	private static string ApiSecret = "6JDxMn6cNQNBjt90OghNpGADSpNROmzN";//appsecret
+	private static string AppId = "";//appid
+	private static string ApiSecret = "";//appsecret
 	/// <summary>
 	/// 这里是API密钥，不是Appsecret，这里最容易出错了！请务必注意！
 	/// 设置方法：微信商户平台(pay.weixin.qq.com)-->账户设置-->API安全-->密钥设置
@@ -91,7 +92,7 @@ public static class APIWechatPay
 			timestamp = timeStamp,
 			sign = paySign
 		};
-		return Newtonsoft.Json.JsonConvert.SerializeObject(obj);
+		return JsonConvert.SerializeObject(obj);
 	}
 	public static string GetTimeStamp()
 	{

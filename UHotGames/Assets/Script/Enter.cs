@@ -20,7 +20,7 @@ public class Enter : MonoBehaviour
 		{
 			return bUsingLocalCDN
 ? "http://127.0.0.1/hotgame/Config.txt"
-: "https://yukuyoulei.github.io/ILRuntime_HotGames/ab1/Config.txt";
+: "http://69.51.23.197/hotgame/ab1/Config.txt";
 		}
 	}
 	private Transform trUIAlert;

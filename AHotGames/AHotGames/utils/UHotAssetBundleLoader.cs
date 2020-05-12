@@ -34,7 +34,8 @@ public class UHotAssetBundleLoader : AHotBase
 		}
 		else
 		{
-			var deps = OnGetAssetBundleDependeces(path + AssetBundleSuffix);
+			var deps = new List<string>();
+			OnGetAssetBundleDependeces(path + AssetBundleSuffix, deps);
 			foreach (var dep in deps)
 			{
 				OnGetAssetBundle(dep);
@@ -64,8 +65,9 @@ public class UHotAssetBundleLoader : AHotBase
 			return null;
 		}
 		dAssetBundles.Add(assetBundlePath, ab);
-		var depends = OnGetAssetBundleDependeces(assetBundlePath);
-		foreach (var d in depends)
+		var deps = new List<string>();
+		OnGetAssetBundleDependeces(assetBundlePath, deps);
+		foreach (var d in deps)
 		{
 			OnGetAssetBundle(d);
 		}
@@ -99,7 +101,7 @@ public class UHotAssetBundleLoader : AHotBase
 	}
 	AssetBundle manifestBundle;
 	AssetBundleManifest manifest;
-	public string[] OnGetAssetBundleDependeces(string name, List<string> dependens = null)
+	public void OnGetAssetBundleDependeces(string name, List<string> dependens)
 	{
 		name = name.StartsWith("/") ? name.Substring(1) : name;
 		var platform = Utils.GetPlatformFolder();
@@ -108,7 +110,8 @@ public class UHotAssetBundleLoader : AHotBase
 			var ab = DoGetAssetBundle(platform);
 			if (ab == null)
 			{
-				return new string[] { };
+				AOutput.Log($"OnGetAssetBundleDependeces {platform} is null");
+				return;
 			}
 		}
 		if (manifestBundle == null)
@@ -119,49 +122,19 @@ public class UHotAssetBundleLoader : AHotBase
 		{
 			manifest = (AssetBundleManifest)manifestBundle.LoadAsset("AssetBundleManifest");
 		}
-		var total = dependens;
-		if (dependens != null)
+		if (!dependens.Contains(name))
 		{
-			foreach (var d in dependens)
-			{
-				if (!total.Contains(d))
-				{
-					total.Add(d);
-				}
-			}
-		}
-		else
-		{
-			total = new List<string>();
-		}
-		if (!total.Contains(name))
-		{
-			total.Add(name);
+			dependens.Add(name);
 		}
 		var result = manifest.GetAllDependencies(name);
-		foreach (var d in result)
-		{
-			if (!total.Contains(d))
-			{
-				total.Add(d);
-			}
-		}
 		foreach (var r in result)
 		{
-			if (dependens != null && dependens.Contains(r))
+			if (dependens.Contains(r))
 			{
 				continue;
 			}
-			var deps = OnGetAssetBundleDependeces(r, total);
-			foreach (var d in deps)
-			{
-				if (!total.Contains(d))
-				{
-					total.Add(d);
-				}
-			}
+			OnGetAssetBundleDependeces(r, dependens);
 		}
-		return total.ToArray();
 	}
 	private Dictionary<string, AssetBundle> dAssetBundles = new Dictionary<string, AssetBundle>();
 	private List<string> lDownloaded = new List<string>();
@@ -218,19 +191,20 @@ public class UHotAssetBundleLoader : AHotBase
 				res = res.ToLower();
 				res = $"{res}{AssetBundleSuffix}";
 			}
-			if (!dRemoteVersions.ContainsKey(res))
+			if (!dRemoteVersions.ContainsKey(res.ToLower()))
 			{
 				continue;
 			}
 			var file = ULocalFileManager.Instance.OnGetFile(res);
-			if (file == null || file.version != dRemoteVersions[res])
+			if (file == null || file.version != dRemoteVersions[res.ToLower()])
 			{
 				lNeedDownload.Add(res);
 			}
 
 			if (res.EndsWith(AssetBundleSuffix))
 			{
-				var deps = OnGetAssetBundleDependeces(res);
+				var deps = new List<string>();
+				OnGetAssetBundleDependeces(res, deps);
 				foreach (var dep in deps)
 				{
 					var rdep = dep;
@@ -240,14 +214,14 @@ public class UHotAssetBundleLoader : AHotBase
 					}
 					if (!lNeedDownload.Contains(rdep))
 					{
-						if (!dRemoteVersions.ContainsKey(rdep))
+						if (!dRemoteVersions.ContainsKey(rdep.ToLower()))
 						{
 							continue;
 						}
 						file = ULocalFileManager.Instance.OnGetFile(rdep);
-						if (file == null || file.version != dRemoteVersions[rdep])
+						if (file == null || file.version != dRemoteVersions[rdep.ToLower()])
 						{
-							lNeedDownload.Add(rdep);
+							lNeedDownload.Add(rdep.ToLower());
 						}
 					}
 				}
@@ -275,7 +249,7 @@ public class UHotAssetBundleLoader : AHotBase
 			if (!string.IsNullOrEmpty(resource))
 			{
 				WWW w = OnDownloadBytes(resource
-					, dRemoteVersions[resource]
+					, dRemoteVersions[resource.ToLower()]
 					, (res) =>
 					{
 						lDownloaded.Add(res);

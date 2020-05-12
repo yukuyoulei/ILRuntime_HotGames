@@ -17,7 +17,7 @@ public class AEntrance : AHotBase
 		var i = UEventListener.Instance;
 
 		if (!Environment.bUsingLocalCDN)
-			LibClient.AClientApp.SetEndpoint("127.0.0.1", 999);
+			LibClient.AClientApp.SetEndpoint("69.51.23.197", 999);
 		AOutput.Log($"LibClient.AClientApp Connect {LibClient.AClientApp.ip}:{LibClient.AClientApp.port}");
 
 		LibClient.AClientApp.Init(new AOnlineSubsystem());

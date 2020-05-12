@@ -7,6 +7,7 @@ using UnityEngine;
 using LibClient;
 using LibCommon;
 using LibClient.GameObj;
+using Newtonsoft.Json.Linq;
 
 public class UIMinerMain : AHotBase
 {
@@ -70,7 +71,16 @@ public class UIMinerMain : AHotBase
 			}
 		});
 	}
-
+	class JWechatPay
+	{
+		public string appid;
+		public string partnerid;
+		public string prepayid;
+		public string package;
+		public string noncestr;
+		public string timestamp;
+		public string sign;
+	}
 	private void OnCreateOrderCb(UEventBase obj)
 	{
 		var eb = obj as EventCreateOrder;
@@ -81,7 +91,10 @@ public class UIMinerMain : AHotBase
 		if (Application.platform == RuntimePlatform.IPhonePlayer)
 			OnSendSDKMessage("SDK_AppleInApp", "OnBuyProduct", "0");
 		else
-			OnSendSDKMessage("SDK_WeChat", "OpenWechatPay", eb.extraInfo);
+		{
+			var jo = Newtonsoft.Json.JsonConvert.DeserializeObject(eb.extraInfo) as JObject;
+			OnSendSDKMessage("SDK_WeChat", "OpenWechatPay", $"{jo["prepayid"]},{jo["noncestr"]},{jo["timestamp"]},{jo["sign"]}");
+		}
 	}
 
 	private void OnParamUpdateCb(UEventBase eb)
