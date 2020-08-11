@@ -65,6 +65,12 @@ public class ADBAccessor
 		return Builders<BsonDocument>.Sort.Combine(sorts);
 	}
 
+	public static SortDefinition<BsonDocument> sort_Combine(params SortDefinition<BsonDocument>[] sorts)
+	{
+		return Builders<BsonDocument>.Sort.Combine(sorts);
+
+	}
+
 	public static UpdateDefinition<BsonDocument> updates_build(params UpdateDefinition<BsonDocument>[] updates)
 	{
 		var updateBuilder = Builders<BsonDocument>.Update;
