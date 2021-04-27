@@ -10,6 +10,8 @@ using System.Resources;
 
 public class AEntrance : AHotBase
 {
+	public AEntrance() { }
+
 	protected override void InitComponents()
 	{
 		AOutput.Register(UDebugHotLog.Log);
