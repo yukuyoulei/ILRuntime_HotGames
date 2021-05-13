@@ -1,0 +1,42 @@
+message PktLoginRequest
+{
+	enum EPartnerID
+	{
+		Test,
+		Normal,
+	}
+	string username = 1;
+	string password = 2;
+	EPartnerID ePartnerID = 3;
+}
+message PktLoginResult
+{
+	PktLoginRequest.EPartnerID ePartnerID = 3;
+	string uid = 1;
+	bool bSuccess = 2;
+	string token = 4;
+}
+message AvatarInfo
+{
+	string avatarID = 1;
+	string avatarName = 2;
+}
+message PktEnterGameRequest
+{
+	PktLoginRequest.EPartnerID ePartnerID = 3;
+	string uid = 1;
+	string token = 4;
+}
+message PktEnterGameResult
+{
+	AvatarInfo info = 1;
+}
+message ItemInfo
+{
+	int contentID = 1;
+	int num = 2;
+}
+message PktItemNotify
+{
+	List<ItemInfo> lItems = 2;
+}

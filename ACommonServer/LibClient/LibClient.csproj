@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Configurations>Debug;Release;Ship</Configurations>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LibCommon\LibCommon.csproj" />
+    <ProjectReference Include="..\LibNet\LibNet.csproj" />
+    <ProjectReference Include="..\LibPkt\LibPkt.csproj" />
+    <ProjectReference Include="..\LibUtil\LibUtil.csproj" />
+  </ItemGroup>
+
+</Project>

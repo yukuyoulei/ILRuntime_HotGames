@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+    <Configurations>Debug;Release;Ship</Configurations>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>bin/Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Ship|AnyCPU'">
+    <OutputPath>Ship</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="WebSocketSharp.Standard" Version="1.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LibCommon\LibCommon.csproj" />
+    <ProjectReference Include="..\LibConfig\LibConfig.csproj" />
+    <ProjectReference Include="..\LibDB\LibDB.csproj" />
+    <ProjectReference Include="..\LibNet\LibNet.csproj" />
+    <ProjectReference Include="..\LibPkt\LibPkt.csproj" />
+    <ProjectReference Include="..\LibServer\LibServer.csproj" />
+    <ProjectReference Include="..\LibUtil\LibUtil.csproj" />
+  </ItemGroup>
+
+</Project>

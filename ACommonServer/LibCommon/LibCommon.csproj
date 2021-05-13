@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Configurations>Debug;Release;Ship</Configurations>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Ship|AnyCPU'">
+    <DefineConstants>TRACE;DEBUG;SERVER</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LibNet\LibNet.csproj" />
+    <ProjectReference Include="..\LibPkt\LibPkt.csproj" />
+    <ProjectReference Include="..\LibUtil\LibUtil.csproj" />
+  </ItemGroup>
+
+</Project>

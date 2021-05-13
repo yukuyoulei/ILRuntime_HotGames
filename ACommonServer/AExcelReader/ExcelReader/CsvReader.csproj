@@ -1,0 +1,279 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{FE988A38-987D-4AE9-9D74-4187C2714FF1}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>ExcelReader</RootNamespace>
+    <AssemblyName>ExcelReader</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CsvReader.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CsvReader.Designer.cs">
+      <DependentUpon>CsvReader.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LibUtils\ADictionary.cs" />
+    <Compile Include="LibUtils\AIniLoader.cs" />
+    <Compile Include="LibUtils\AOutput.cs" />
+    <Compile Include="LibUtils\ApiDateTime.cs" />
+    <Compile Include="LibUtils\ApiRandom.cs" />
+    <Compile Include="LibUtils\ASessionGenerator.cs" />
+    <Compile Include="LibUtils\AWebServerUtils.cs" />
+    <Compile Include="LibUtils\BZip2\BZip2.cs" />
+    <Compile Include="LibUtils\BZip2\BZip2Constants.cs" />
+    <Compile Include="LibUtils\BZip2\BZip2Exception.cs" />
+    <Compile Include="LibUtils\BZip2\BZip2InputStream.cs" />
+    <Compile Include="LibUtils\BZip2\BZip2OutputStream.cs" />
+    <Compile Include="LibUtils\Calculator.cs" />
+    <Compile Include="LibUtils\CheckCn.cs" />
+    <Compile Include="LibUtils\Checksums\Adler32.cs" />
+    <Compile Include="LibUtils\Checksums\CRC32.cs" />
+    <Compile Include="LibUtils\Checksums\IChecksum.cs" />
+    <Compile Include="LibUtils\Checksums\StrangeCRC.cs" />
+    <Compile Include="LibUtils\CommonUtil.cs" />
+    <Compile Include="LibUtils\ConsoleCmdBase.cs" />
+    <Compile Include="LibUtils\Core\FileSystemScanner.cs" />
+    <Compile Include="LibUtils\Core\INameTransform.cs" />
+    <Compile Include="LibUtils\Core\IScanFilter.cs" />
+    <Compile Include="LibUtils\Core\NameFilter.cs" />
+    <Compile Include="LibUtils\Core\PathFilter.cs" />
+    <Compile Include="LibUtils\Core\StreamUtils.cs" />
+    <Compile Include="LibUtils\Core\WindowsPathUtils.cs" />
+    <Compile Include="LibUtils\CRC.cs" />
+    <Compile Include="LibUtils\CSBitFieldDynamic.cs" />
+    <Compile Include="LibUtils\CSCSV.cs" />
+    <Compile Include="LibUtils\DBByteStream.cs" />
+    <Compile Include="LibUtils\Encryption\PkzipClassic.cs" />
+    <Compile Include="LibUtils\Encryption\ZipAESStream.cs" />
+    <Compile Include="LibUtils\Encryption\ZipAESTransform.cs" />
+    <Compile Include="LibUtils\FileUtils.cs" />
+    <Compile Include="LibUtils\FormulaStringFx.cs" />
+    <Compile Include="LibUtils\GZip\GZIPConstants.cs" />
+    <Compile Include="LibUtils\GZip\GZipException.cs" />
+    <Compile Include="LibUtils\GZip\GzipInputStream.cs" />
+    <Compile Include="LibUtils\GZip\GzipOutputStream.cs" />
+    <Compile Include="LibUtils\HttpUtility.cs" />
+    <Compile Include="LibUtils\Lzw\LzwConstants.cs" />
+    <Compile Include="LibUtils\Lzw\LzwException.cs" />
+    <Compile Include="LibUtils\Lzw\LzwInputStream.cs" />
+    <Compile Include="LibUtils\MD5String.cs" />
+    <Compile Include="LibUtils\MyEmail.cs" />
+    <Compile Include="LibUtils\MyMD5.cs" />
+    <Compile Include="LibUtils\NetStates.cs" />
+    <Compile Include="LibUtils\Pair.cs" />
+    <Compile Include="LibUtils\RemoteObject.cs" />
+    <Compile Include="LibUtils\SameDay.cs" />
+    <Compile Include="LibUtils\Singleton.cs" />
+    <Compile Include="LibUtils\StringUtils.cs" />
+    <Compile Include="LibUtils\Tar\InvalidHeaderException.cs" />
+    <Compile Include="LibUtils\Tar\TarArchive.cs" />
+    <Compile Include="LibUtils\Tar\TarBuffer.cs" />
+    <Compile Include="LibUtils\Tar\TarEntry.cs" />
+    <Compile Include="LibUtils\Tar\TarException.cs" />
+    <Compile Include="LibUtils\Tar\TarHeader.cs" />
+    <Compile Include="LibUtils\Tar\TarInputStream.cs" />
+    <Compile Include="LibUtils\Tar\TarOutputStream.cs" />
+    <Compile Include="LibUtils\typeParser.cs" />
+    <Compile Include="LibUtils\UnhandledExceptionCatcher.cs" />
+    <Compile Include="LibUtils\Util_Zip.cs" />
+    <Compile Include="LibUtils\Vector.cs" />
+    <Compile Include="LibUtils\WordFilter.cs" />
+    <Compile Include="LibUtils\Zip\Compression\Deflater.cs" />
+    <Compile Include="LibUtils\Zip\Compression\DeflaterConstants.cs" />
+    <Compile Include="LibUtils\Zip\Compression\DeflaterEngine.cs" />
+    <Compile Include="LibUtils\Zip\Compression\DeflaterHuffman.cs" />
+    <Compile Include="LibUtils\Zip\Compression\DeflaterPending.cs" />
+    <Compile Include="LibUtils\Zip\Compression\Inflater.cs" />
+    <Compile Include="LibUtils\Zip\Compression\InflaterDynHeader.cs" />
+    <Compile Include="LibUtils\Zip\Compression\InflaterHuffmanTree.cs" />
+    <Compile Include="LibUtils\Zip\Compression\PendingBuffer.cs" />
+    <Compile Include="LibUtils\Zip\Compression\Streams\DeflaterOutputStream.cs" />
+    <Compile Include="LibUtils\Zip\Compression\Streams\InflaterInputStream.cs" />
+    <Compile Include="LibUtils\Zip\Compression\Streams\OutputWindow.cs" />
+    <Compile Include="LibUtils\Zip\Compression\Streams\StreamManipulator.cs" />
+    <Compile Include="LibUtils\Zip\FastZip.cs" />
+    <Compile Include="LibUtils\Zip\IEntryFactory.cs" />
+    <Compile Include="LibUtils\Zip\SharpZipBaseException.cs" />
+    <Compile Include="LibUtils\Zip\WindowsNameTransform.cs" />
+    <Compile Include="LibUtils\Zip\ZipConstants.cs" />
+    <Compile Include="LibUtils\Zip\ZipEntry.cs" />
+    <Compile Include="LibUtils\Zip\ZipEntryFactory.cs" />
+    <Compile Include="LibUtils\Zip\ZipException.cs" />
+    <Compile Include="LibUtils\Zip\ZipExtraData.cs" />
+    <Compile Include="LibUtils\Zip\ZipFile.cs" />
+    <Compile Include="LibUtils\Zip\ZipHelperStream.cs" />
+    <Compile Include="LibUtils\Zip\ZipInputStream.cs" />
+    <Compile Include="LibUtils\Zip\ZipNameTransform.cs" />
+    <Compile Include="LibUtils\Zip\ZipOutputStream.cs" />
+    <Compile Include="Program.cs" />
+    <EmbeddedResource Include="CsvReader.resx">
+      <DependentUpon>CsvReader.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="LibUtils\ADictionary.cs.meta" />
+    <None Include="LibUtils\AIniLoader.cs.meta" />
+    <None Include="LibUtils\AOutput.cs.meta" />
+    <None Include="LibUtils\ApiDateTime.cs.meta" />
+    <None Include="LibUtils\ApiRandom.cs.meta" />
+    <None Include="LibUtils\ASessionGenerator.cs.meta" />
+    <None Include="LibUtils\BZip2.meta" />
+    <None Include="LibUtils\BZip2\BZip2.cs.meta" />
+    <None Include="LibUtils\BZip2\BZip2Constants.cs.meta" />
+    <None Include="LibUtils\BZip2\BZip2Exception.cs.meta" />
+    <None Include="LibUtils\BZip2\BZip2InputStream.cs.meta" />
+    <None Include="LibUtils\BZip2\BZip2OutputStream.cs.meta" />
+    <None Include="LibUtils\Calculator.cs.meta" />
+    <None Include="LibUtils\CheckCn.cs.meta" />
+    <None Include="LibUtils\Checksums.meta" />
+    <None Include="LibUtils\Checksums\Adler32.cs.meta" />
+    <None Include="LibUtils\Checksums\CRC32.cs.meta" />
+    <None Include="LibUtils\Checksums\IChecksum.cs.meta" />
+    <None Include="LibUtils\Checksums\StrangeCRC.cs.meta" />
+    <None Include="LibUtils\CommonUtil.cs.meta" />
+    <None Include="LibUtils\ConsoleCmdBase.cs.meta" />
+    <None Include="LibUtils\Core.meta" />
+    <None Include="LibUtils\Core\FileSystemScanner.cs.meta" />
+    <None Include="LibUtils\Core\INameTransform.cs.meta" />
+    <None Include="LibUtils\Core\IScanFilter.cs.meta" />
+    <None Include="LibUtils\Core\NameFilter.cs.meta" />
+    <None Include="LibUtils\Core\PathFilter.cs.meta" />
+    <None Include="LibUtils\Core\StreamUtils.cs.meta" />
+    <None Include="LibUtils\Core\WindowsPathUtils.cs.meta" />
+    <None Include="LibUtils\CRC.cs.meta" />
+    <None Include="LibUtils\CSBitFieldDynamic.cs.meta" />
+    <None Include="LibUtils\CSCSV.cs.meta" />
+    <None Include="LibUtils\DBByteStream.cs.meta" />
+    <None Include="LibUtils\Encryption.meta" />
+    <None Include="LibUtils\Encryption\PkzipClassic.cs.meta" />
+    <None Include="LibUtils\Encryption\ZipAESStream.cs.meta" />
+    <None Include="LibUtils\Encryption\ZipAESTransform.cs.meta" />
+    <None Include="LibUtils\FormulaStringFx.cs.meta" />
+    <None Include="LibUtils\GZip.meta" />
+    <None Include="LibUtils\GZip\GZIPConstants.cs.meta" />
+    <None Include="LibUtils\GZip\GZipException.cs.meta" />
+    <None Include="LibUtils\GZip\GzipInputStream.cs.meta" />
+    <None Include="LibUtils\GZip\GzipOutputStream.cs.meta" />
+    <None Include="LibUtils\HttpUtility.cs.meta" />
+    <None Include="LibUtils\LibUtils.csproj.meta" />
+    <None Include="LibUtils\Lzw.meta" />
+    <None Include="LibUtils\Lzw\LzwConstants.cs.meta" />
+    <None Include="LibUtils\Lzw\LzwException.cs.meta" />
+    <None Include="LibUtils\Lzw\LzwInputStream.cs.meta" />
+    <None Include="LibUtils\MD5String.cs.meta" />
+    <None Include="LibUtils\MyMD5.cs.meta" />
+    <None Include="LibUtils\NetStates.cs.meta" />
+    <None Include="LibUtils\Pair.cs.meta" />
+    <None Include="LibUtils\Properties.meta" />
+    <None Include="LibUtils\RemoteObject.cs.meta" />
+    <None Include="LibUtils\SameDay.cs.meta" />
+    <None Include="LibUtils\Singleton.cs.meta" />
+    <None Include="LibUtils\StringUtils.cs.meta" />
+    <None Include="LibUtils\Tar.meta" />
+    <None Include="LibUtils\Tar\InvalidHeaderException.cs.meta" />
+    <None Include="LibUtils\Tar\TarArchive.cs.meta" />
+    <None Include="LibUtils\Tar\TarBuffer.cs.meta" />
+    <None Include="LibUtils\Tar\TarEntry.cs.meta" />
+    <None Include="LibUtils\Tar\TarException.cs.meta" />
+    <None Include="LibUtils\Tar\TarHeader.cs.meta" />
+    <None Include="LibUtils\Tar\TarInputStream.cs.meta" />
+    <None Include="LibUtils\Tar\TarOutputStream.cs.meta" />
+    <None Include="LibUtils\typeParser.cs.meta" />
+    <None Include="LibUtils\UnhandledExceptionCatcher.cs.meta" />
+    <None Include="LibUtils\Util_Zip.cs.meta" />
+    <None Include="LibUtils\Vector.cs.meta" />
+    <None Include="LibUtils\WordFilter.cs.meta" />
+    <None Include="LibUtils\Zip.meta" />
+    <None Include="LibUtils\Zip\Compression.meta" />
+    <None Include="LibUtils\Zip\Compression\Deflater.cs.meta" />
+    <None Include="LibUtils\Zip\Compression\DeflaterConstants.cs.meta" />
+    <None Include="LibUtils\Zip\Compression\DeflaterEngine.cs.meta" />
+    <None Include="LibUtils\Zip\Compression\DeflaterHuffman.cs.meta" />
+    <None Include="LibUtils\Zip\Compression\DeflaterPending.cs.meta" />
+    <None Include="LibUtils\Zip\Compression\Inflater.cs.meta" />
+    <None Include="LibUtils\Zip\Compression\InflaterDynHeader.cs.meta" />
+    <None Include="LibUtils\Zip\Compression\InflaterHuffmanTree.cs.meta" />
+    <None Include="LibUtils\Zip\Compression\PendingBuffer.cs.meta" />
+    <None Include="LibUtils\Zip\Compression\Streams.meta" />
+    <None Include="LibUtils\Zip\Compression\Streams\DeflaterOutputStream.cs.meta" />
+    <None Include="LibUtils\Zip\Compression\Streams\InflaterInputStream.cs.meta" />
+    <None Include="LibUtils\Zip\Compression\Streams\OutputWindow.cs.meta" />
+    <None Include="LibUtils\Zip\Compression\Streams\StreamManipulator.cs.meta" />
+    <None Include="LibUtils\Zip\FastZip.cs.meta" />
+    <None Include="LibUtils\Zip\IEntryFactory.cs.meta" />
+    <None Include="LibUtils\Zip\SharpZipBaseException.cs.meta" />
+    <None Include="LibUtils\Zip\WindowsNameTransform.cs.meta" />
+    <None Include="LibUtils\Zip\ZipConstants.cs.meta" />
+    <None Include="LibUtils\Zip\ZipEntry.cs.meta" />
+    <None Include="LibUtils\Zip\ZipEntryFactory.cs.meta" />
+    <None Include="LibUtils\Zip\ZipException.cs.meta" />
+    <None Include="LibUtils\Zip\ZipExtraData.cs.meta" />
+    <None Include="LibUtils\Zip\ZipFile.cs.meta" />
+    <None Include="LibUtils\Zip\ZipHelperStream.cs.meta" />
+    <None Include="LibUtils\Zip\ZipInputStream.cs.meta" />
+    <None Include="LibUtils\Zip\ZipNameTransform.cs.meta" />
+    <None Include="LibUtils\Zip\ZipOutputStream.cs.meta" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="LibUtils\LibUtils.csproj" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
