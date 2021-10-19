@@ -84,13 +84,14 @@ public class Enter : MonoBehaviour
 		StartCoroutine(OnDownloadConfigs());
 #endif
 #else
-		/*AEntrance.Initialize(
+		AEntrance.Initialize(
 #if UNITY_IOS
 			"ios"
 #else
 			"android"
 #endif
-		);*/
+		);
+		fprocessing = 1;
 #endif
 	}
 	IEnumerator OnDownloadConfigs()
