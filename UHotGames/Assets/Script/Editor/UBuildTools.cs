@@ -770,7 +770,7 @@ public class UBuildTools : EditorWindow
 #endif
 		LogWithTime(string.Format("Build to {0}", spath));
 		string sresult = "";
-#if UNITY_2018
+#if UNITY_2018_1_OR_NEWER
 		var r = BuildPipeline.BuildPlayer(FindEnabledEditorScenes(), spath, bt, BuildOptions.None);
 		sresult = r.summary.result.ToString();
 #else
