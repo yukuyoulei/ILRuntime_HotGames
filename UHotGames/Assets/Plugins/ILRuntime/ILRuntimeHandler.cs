@@ -1,130 +1,148 @@
-﻿using ILRuntime.Runtime.Intepreter;
-using System.Collections.Generic;
-using System.IO;
-using UnityEngine;
-using ILRuntime.Runtime.Stack;
-using ILRuntime.CLR.Method;
+﻿using ILRuntime.CLR.Method;
 using ILRuntime.CLR.TypeSystem;
+using ILRuntime.Runtime.Intepreter;
+using ILRuntime.Runtime.Stack;
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Xml.Serialization;
+using UnityEngine;
 
-public class ILRuntimeHandler
+public static class ILRuntimeHandler
 {
-	private static ILRuntimeHandler sinstance;
-	public static ILRuntimeHandler Instance
+	private static ILRuntime.Runtime.Enviorment.AppDomain appdomain;
+	public static void OnStartILRuntime(byte[] dllbytes, byte[] pdbbytes = null)
 	{
-		get
-		{
-			if (sinstance == null)
-			{
-				sinstance = new ILRuntimeHandler();
-				sinstance.Init();
-			}
-			return sinstance;
-		}
-	}
-#if ILRUNTIME
-	ILRuntime.Runtime.Enviorment.AppDomain appdomain;
-#endif
-	void Init()
-	{
-#if ILRUNTIME
 		appdomain = new ILRuntime.Runtime.Enviorment.AppDomain();
+		appdomain.LoadAssembly(new MemoryStream(dllbytes)
+			, pdbbytes == null ? null : new MemoryStream(pdbbytes)
+			, new ILRuntime.Mono.Cecil.Pdb.PdbReaderProvider());
 #if UNITY_EDITOR
 		appdomain.DebugService.StartDebugService(56000);
 #endif
-		InitializeILRuntime();
-#endif
-	}
-
-	List<string> loadedDlls = new List<string>();
-#if !ILRUNTIME
-	System.Reflection.Assembly assembly;
-#endif
-	public void DoLoadDll(string dll, byte[] dllBytes, byte[] pdbBytes = null)
-	{
-		if (loadedDlls.Contains(dll))
-		{
-			return;
-		}
-		loadedDlls.Add(dll);
-
-		MemoryStream pdb = null;
-#if UNITY_EDITOR
-		if (pdbBytes != null)
-		{
-			pdb = new MemoryStream(pdbBytes);
-		}
-#endif
-		System.IO.MemoryStream fs = new MemoryStream(dllBytes);
-		{
-			Debug.Log($"load dll {dllBytes != null}, load pdb {pdbBytes != null}");
-#if ILRUNTIME
-			appdomain.LoadAssembly(fs, pdb, new ILRuntime.Mono.Cecil.Pdb.PdbReaderProvider());
-#else
-			assembly = AppDomain.CurrentDomain.Load(dllBytes, pdbBytes);
-#endif
-		}
-	}
-
-#if ILRUNTIME
-	unsafe void InitializeILRuntime()
-	{
+		InitAdaptors();
 		InitDelegates();
-
 		SetupCLRRedirection();
-
-		//这里做一些ILRuntime的注册
-		appdomain.RegisterCrossBindingAdaptor(new IDisposableAdapter());
-		appdomain.RegisterCrossBindingAdaptor(new MonoBehaviourAdapter());
-		appdomain.RegisterCrossBindingAdaptor(new IAsyncStateMachineClassInheritanceAdaptor());
-
 		ILRuntime.Runtime.Generated.CLRBindings.Initialize(appdomain);
+		OnILRuntimeInitialized();
 	}
-	private void InitDelegates()
+	private static void InitDelegates()
 	{
-		ILRegType.RegisterFunctionDelegate(appdomain);
+		appdomain.DelegateManager.RegisterMethodDelegate<global::IDisposableAdapter.Adapter>();
+		appdomain.DelegateManager.RegisterFunctionDelegate<UnityEngine.Component, System.Boolean>();
+		appdomain.DelegateManager.RegisterFunctionDelegate<UnityEngine.Component, UnityEngine.Component, System.Int32>();
+		appdomain.DelegateManager.RegisterFunctionDelegate<System.Boolean>();
+		appdomain.DelegateManager.RegisterFunctionDelegate<System.Object>();
+		appdomain.DelegateManager.RegisterFunctionDelegate<System.Object, System.Boolean>();
+		appdomain.DelegateManager.RegisterFunctionDelegate<System.DateTime, System.Boolean>();
+		appdomain.DelegateManager.RegisterFunctionDelegate<System.Object, System.Object, System.Int32>();
+		appdomain.DelegateManager.RegisterFunctionDelegate<System.Int32, System.Boolean>();
+		appdomain.DelegateManager.RegisterFunctionDelegate<System.Int32, System.Int32, System.Int32>();
+		appdomain.DelegateManager.RegisterFunctionDelegate<System.Single, System.Boolean>();
+		appdomain.DelegateManager.RegisterFunctionDelegate<System.Single, System.Single, System.Int32>();
+		appdomain.DelegateManager.RegisterFunctionDelegate<UnityEngine.Vector4, System.Boolean>();
+		appdomain.DelegateManager.RegisterFunctionDelegate<UnityEngine.Vector4, UnityEngine.Vector4, System.Int32>();
+		appdomain.DelegateManager.RegisterFunctionDelegate<UnityEngine.Matrix4x4, System.Boolean>();
+		appdomain.DelegateManager.RegisterFunctionDelegate<UnityEngine.Matrix4x4, UnityEngine.Matrix4x4, System.Int32>();
+		appdomain.DelegateManager.RegisterFunctionDelegate<UnityEngine.GameObject, System.Boolean>();
+		appdomain.DelegateManager.RegisterFunctionDelegate<UnityEngine.GameObject, UnityEngine.GameObject, System.Int32>();
+		appdomain.DelegateManager.RegisterFunctionDelegate<UnityEngine.EventSystems.RaycastResult, System.Boolean>();
+		appdomain.DelegateManager.RegisterFunctionDelegate<UnityEngine.EventSystems.RaycastResult, UnityEngine.EventSystems.RaycastResult, System.Int32>();
+		appdomain.DelegateManager.RegisterFunctionDelegate<UnityEngine.EventSystems.EventTrigger.Entry, System.Boolean>();
+		appdomain.DelegateManager.RegisterFunctionDelegate<UnityEngine.EventSystems.EventTrigger.Entry, UnityEngine.EventSystems.EventTrigger.Entry, System.Int32>();
+		appdomain.DelegateManager.RegisterFunctionDelegate<UnityEngine.Vector3, System.Boolean>();
+		appdomain.DelegateManager.RegisterFunctionDelegate<UnityEngine.Vector3, UnityEngine.Vector3, System.Int32>();
+		appdomain.DelegateManager.RegisterFunctionDelegate<UnityEngine.Color, System.Boolean>();
+		appdomain.DelegateManager.RegisterFunctionDelegate<UnityEngine.Color, UnityEngine.Color, System.Int32>();
+		appdomain.DelegateManager.RegisterFunctionDelegate<UnityEngine.Color32, System.Boolean>();
+		appdomain.DelegateManager.RegisterFunctionDelegate<UnityEngine.Color32, UnityEngine.Color32, System.Int32>();
+		appdomain.DelegateManager.RegisterFunctionDelegate<UnityEngine.Vector2, System.Boolean>();
+		appdomain.DelegateManager.RegisterFunctionDelegate<UnityEngine.Vector2, UnityEngine.Vector2, System.Int32>();
+		appdomain.DelegateManager.RegisterFunctionDelegate<UnityEngine.BoneWeight, System.Boolean>();
+		appdomain.DelegateManager.RegisterFunctionDelegate<UnityEngine.BoneWeight, UnityEngine.BoneWeight, System.Int32>();
+		appdomain.DelegateManager.RegisterFunctionDelegate<UnityEngine.UIVertex, System.Boolean>();
+		appdomain.DelegateManager.RegisterFunctionDelegate<UnityEngine.UIVertex, UnityEngine.UIVertex, System.Int32>();
+		appdomain.DelegateManager.RegisterFunctionDelegate<UnityEngine.Rect, System.Boolean>();
+		appdomain.DelegateManager.RegisterFunctionDelegate<UnityEngine.Rect, UnityEngine.Rect, System.Int32>();
+		appdomain.DelegateManager.RegisterFunctionDelegate<UnityEngine.AnimatorClipInfo, System.Boolean>();
+		appdomain.DelegateManager.RegisterFunctionDelegate<UnityEngine.AnimatorClipInfo, UnityEngine.AnimatorClipInfo, System.Int32>();
+		appdomain.DelegateManager.RegisterFunctionDelegate<UnityEngine.UI.Selectable, System.Boolean>();
+		appdomain.DelegateManager.RegisterFunctionDelegate<UnityEngine.UI.Selectable, UnityEngine.UI.Selectable, System.Int32>();
+		appdomain.DelegateManager.RegisterFunctionDelegate<UnityEngine.UICharInfo, System.Boolean>();
+		appdomain.DelegateManager.RegisterFunctionDelegate<UnityEngine.UICharInfo, UnityEngine.UICharInfo, System.Int32>();
+		appdomain.DelegateManager.RegisterFunctionDelegate<UnityEngine.UILineInfo, System.Boolean>();
+		appdomain.DelegateManager.RegisterFunctionDelegate<UnityEngine.UILineInfo, UnityEngine.UILineInfo, System.Int32>();
+		appdomain.DelegateManager.RegisterFunctionDelegate<UnityEngine.UI.Dropdown.OptionData, System.Boolean>();
+		appdomain.DelegateManager.RegisterFunctionDelegate<UnityEngine.UI.Dropdown.OptionData, UnityEngine.UI.Dropdown.OptionData, System.Int32>();
+		appdomain.DelegateManager.RegisterFunctionDelegate<System.String, System.Boolean>();
+		appdomain.DelegateManager.RegisterFunctionDelegate<System.String, System.String, System.Int32>();
+		appdomain.DelegateManager.RegisterFunctionDelegate<UnityEngine.Sprite, System.Boolean>();
+		appdomain.DelegateManager.RegisterFunctionDelegate<UnityEngine.Sprite, UnityEngine.Sprite, System.Int32>();
+		appdomain.DelegateManager.RegisterFunctionDelegate<System.String, System.Int32, System.Char, System.Char>();
+		appdomain.DelegateManager.RegisterFunctionDelegate<UnityEngine.UI.RectMask2D, System.Boolean>();
+		appdomain.DelegateManager.RegisterFunctionDelegate<UnityEngine.UI.RectMask2D, UnityEngine.UI.RectMask2D, System.Int32>();
+		appdomain.DelegateManager.RegisterFunctionDelegate<UnityEngine.UI.ILayoutElement, System.Single>();
+		appdomain.DelegateManager.RegisterFunctionDelegate<System.Type, System.Boolean>();
+		appdomain.DelegateManager.RegisterFunctionDelegate<System.Type, System.Type, System.Int32>();
+		appdomain.DelegateManager.RegisterFunctionDelegate<UnityEngine.Object, System.Boolean>();
+		appdomain.DelegateManager.RegisterFunctionDelegate<UnityEngine.Object, UnityEngine.Object, System.Int32>();
+		appdomain.DelegateManager.RegisterFunctionDelegate<System.Threading.Tasks.Task>();
+		appdomain.DelegateManager.RegisterMethodDelegate<ILRuntime.Runtime.Intepreter.ILTypeInstance>();
+		appdomain.DelegateManager.RegisterMethodDelegate<UnityEngine.AsyncOperation>();
+		appdomain.DelegateManager.RegisterMethodDelegate<System.Object, System.Threading.Tasks.UnobservedTaskExceptionEventArgs>();
+		appdomain.DelegateManager.RegisterMethodDelegate<System.Single>();
+		appdomain.DelegateManager.RegisterFunctionDelegate<System.String, System.String, System.Int32>();
+		appdomain.DelegateManager.RegisterMethodDelegate<UnityEngine.Vector2>();
 
-	#region WebSocket相关
-		appdomain.DelegateManager.RegisterMethodDelegate<System.Object, System.EventArgs>();
-		appdomain.DelegateManager.RegisterDelegateConvertor<System.EventHandler>((act) =>
+
+		appdomain.DelegateManager.RegisterDelegateConvertor<UnityEngine.Events.UnityAction<UnityEngine.Vector2>>((act) =>
 		{
-			return new System.EventHandler((sender, e) =>
+			return new UnityEngine.Events.UnityAction<UnityEngine.Vector2>((arg0) =>
 			{
-				((Action<System.Object, System.EventArgs>)act)(sender, e);
+				((Action<UnityEngine.Vector2>)act)(arg0);
 			});
 		});
-		appdomain.DelegateManager.RegisterMethodDelegate<System.Object, WebSocketSharp.MessageEventArgs>();
-		appdomain.DelegateManager.RegisterDelegateConvertor<System.EventHandler<WebSocketSharp.MessageEventArgs>>((act) =>
+
+		appdomain.DelegateManager.RegisterDelegateConvertor<System.Comparison<System.String>>((act) =>
 		{
-			return new System.EventHandler<WebSocketSharp.MessageEventArgs>((sender, e) =>
+			return new System.Comparison<System.String>((x, y) =>
 			{
-				((Action<System.Object, WebSocketSharp.MessageEventArgs>)act)(sender, e);
-			});
-		});
-		appdomain.DelegateManager.RegisterMethodDelegate<System.Object, WebSocketSharp.ErrorEventArgs>();
-		appdomain.DelegateManager.RegisterDelegateConvertor<System.EventHandler<WebSocketSharp.ErrorEventArgs>>((act) =>
-		{
-			return new System.EventHandler<WebSocketSharp.ErrorEventArgs>((sender, e) =>
-			{
-				((Action<System.Object, WebSocketSharp.ErrorEventArgs>)act)(sender, e);
-			});
-		});
-		appdomain.DelegateManager.RegisterMethodDelegate<System.Object, WebSocketSharp.CloseEventArgs>();
-		appdomain.DelegateManager.RegisterDelegateConvertor<System.EventHandler<WebSocketSharp.CloseEventArgs>>((act) =>
-		{
-			return new System.EventHandler<WebSocketSharp.CloseEventArgs>((sender, e) =>
-			{
-				((Action<System.Object, WebSocketSharp.CloseEventArgs>)act)(sender, e);
+				return ((Func<System.String, System.String, System.Int32>)act)(x, y);
 			});
 		});
 
+		appdomain.DelegateManager.RegisterDelegateConvertor<UnityEngine.Events.UnityAction<System.Single>>((act) =>
+		{
+			return new UnityEngine.Events.UnityAction<System.Single>((arg0) =>
+			{
+				((Action<System.Single>)act)(arg0);
+			});
+		});
 
+		appdomain.DelegateManager.RegisterDelegateConvertor<System.EventHandler<System.Threading.Tasks.UnobservedTaskExceptionEventArgs>>((act) =>
+		{
+			return new System.EventHandler<System.Threading.Tasks.UnobservedTaskExceptionEventArgs>((sender, e) =>
+			{
+				((Action<System.Object, System.Threading.Tasks.UnobservedTaskExceptionEventArgs>)act)(sender, e);
+			});
+		});
 
-
-
-	#endregion
-		appdomain.DelegateManager.RegisterMethodDelegate<global::IDisposableAdapter.Adaptor>();
-		appdomain.DelegateManager.RegisterFunctionDelegate<System.Threading.Tasks.Task>();		appdomain.DelegateManager.RegisterMethodDelegate<ILRuntime.Runtime.Intepreter.ILTypeInstance>();
+		appdomain.DelegateManager.RegisterDelegateConvertor<System.Threading.ParameterizedThreadStart>((act) =>
+		{
+			return new System.Threading.ParameterizedThreadStart((obj) =>
+			{
+				((Action<System.Object>)act)(obj);
+			});
+		});
+		appdomain.DelegateManager.RegisterDelegateConvertor<System.Threading.SendOrPostCallback>((act) =>
+		{
+			return new System.Threading.SendOrPostCallback((state) =>
+			{
+				((Action<System.Object>)act)(state);
+			});
+		});
 
 		appdomain.DelegateManager.RegisterFunctionDelegate<System.Reflection.MethodInfo, System.Boolean>();
 		appdomain.DelegateManager.RegisterDelegateConvertor<System.Predicate<System.Reflection.MethodInfo>>((act) =>
@@ -135,7 +153,8 @@ public class ILRuntimeHandler
 			});
 		});
 
-		appdomain.DelegateManager.RegisterMethodDelegate<System.IAsyncResult>();
+		appdomain.DelegateManager.RegisterMethodDelegate<System.IAsyncResult>();
+
 		appdomain.DelegateManager.RegisterMethodDelegate<System.Object, System.UnhandledExceptionEventArgs>();
 		appdomain.DelegateManager.RegisterDelegateConvertor<System.UnhandledExceptionEventHandler>((act) =>
 		{
@@ -146,13 +165,15 @@ public class ILRuntimeHandler
 		});
 
 		appdomain.DelegateManager.RegisterMethodDelegate<ILRuntime.Runtime.Intepreter.ILTypeInstance, ILRuntime.Runtime.Intepreter.ILTypeInstance>();
-		appdomain.DelegateManager.RegisterMethodDelegate<System.Object>();		appdomain.DelegateManager.RegisterDelegateConvertor<System.Threading.WaitCallback>((act) =>
+		appdomain.DelegateManager.RegisterMethodDelegate<System.Object>();
+		appdomain.DelegateManager.RegisterDelegateConvertor<System.Threading.WaitCallback>((act) =>
 		{
 			return new System.Threading.WaitCallback((state) =>
 			{
 				((Action<System.Object>)act)(state);
 			});
-		});
+		});
+
 		appdomain.DelegateManager.RegisterMethodDelegate<System.Boolean>();
 		appdomain.DelegateManager.RegisterDelegateConvertor<UnityEngine.Events.UnityAction<System.Boolean>>((act) =>
 		{
@@ -160,7 +181,8 @@ public class ILRuntimeHandler
 			{
 				((Action<System.Boolean>)act)(arg0);
 			});
-		});
+		});
+
 		appdomain.DelegateManager.RegisterMethodDelegate<System.String>();
 		appdomain.DelegateManager.RegisterMethodDelegate<UnityEngine.GameObject>();
 
@@ -204,9 +226,8 @@ public class ILRuntimeHandler
 				((Action)act)();
 			});
 		});
-
 	}
-	unsafe void SetupCLRRedirection()
+	unsafe private static void SetupCLRRedirection()
 	{
 		//这里面的通常应该写在InitializeILRuntime，这里为了演示写这里
 		var arr = typeof(GameObject).GetMethods();
@@ -314,63 +335,35 @@ public class ILRuntimeHandler
 		return __esp;
 	}
 
-	public void EmitGameObject(string prefabName, GameObject obj, string gameObjectName = "")
+	private static void InitAdaptors()
 	{
-		appdomain.Invoke("AHotBase", "EmitGameObject", null, gameObjectName, prefabName, obj);
+		appdomain.RegisterCrossBindingAdaptor(new IDisposableAdapter());
+		appdomain.RegisterCrossBindingAdaptor(new MonoBehaviourAdapter());
+		appdomain.RegisterCrossBindingAdaptor(new IAsyncStateMachineClassInheritanceAdaptor());
+		appdomain.RegisterValueTypeBinder(typeof(Vector2), new Vector2Binder());
+		appdomain.RegisterValueTypeBinder(typeof(Vector3), new Vector3Binder());
+		appdomain.RegisterValueTypeBinder(typeof(Quaternion), new QuaternionBinder());
 	}
-#endif
-	public void EmitMessage(string message, string gameObjectName = "")
+	public static void OnILRUpdate()
 	{
-#if ILRUNTIME
-		appdomain.Invoke("AHotBase", "EmitMessage", null, gameObjectName, message);
-#endif
+		if (appdomain == null)
+			return;
+		appdomain.Invoke("AEntrance", "Update", null);
 	}
-	private Dictionary<string, GameObject> dObjs = new Dictionary<string, GameObject>();
-	public void OnLoadClass(string entranceClass, GameObject rootObj, bool CanBeUnloaded = true, string arg = "")
+	private static void OnILRuntimeInitialized()
 	{
-#if ILRUNTIME
-		if (CanBeUnloaded)
-		{
-			OnUnloadClass(entranceClass);
-			dObjs.Add(entranceClass, rootObj);
-		}
-		appdomain.Invoke(entranceClass, "SetGameObj", appdomain.Instantiate(entranceClass), rootObj, arg);
+		appdomain.Invoke("AEntrance", "Initialize", null,
+#if UNITY_ANDROID
+			"android"
+#elif UNITY_IOS
+			"ios"
 #else
-		var obj = assembly.CreateInstance(entranceClass);
-		obj.GetType().GetMethod("SetGameObj").Invoke(obj, new object[] { rootObj, arg });
+			"pc"
 #endif
+);
 	}
-	public void OnUnloadClass(string entranceClass)
+	public static void OnInvoke(string className, string methodName, params string[] args)
 	{
-		if (dObjs.ContainsKey(entranceClass))
-		{
-			GameObject.Destroy(dObjs[entranceClass]);
-			dObjs.Remove(entranceClass);
-		}
-	}
-	public void OnUnloadAllClasses()
-	{
-		foreach (var d in dObjs)
-		{
-			GameObject.Destroy(d.Value);
-		}
-		dObjs.Clear();
-	}
-
-	public void SetUnityMessageReceiver(GameObject receiver)
-	{
-#if ILRUNTIME
-		appdomain.Invoke("AHotBase", "SetUnityMessageReceiver", null, receiver);
-#else
-		var obj = assembly.GetType("AHotBase");
-		obj.InvokeMember("SetUnityMessageReceiver", System.Reflection.BindingFlags.InvokeMethod, null, null, new object[] { receiver });
-#endif
+		appdomain.Invoke(className, methodName, null, args);
 	}
 }
-
-
-
-
-
-
-

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography;
+using System.Text;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -100,13 +101,12 @@ public static class UStaticFuncs
 		Transform t = FindChild(tr, childName);
 		if (t == null)
 		{
-			AOutput.LogError("FindChildComponent cannot find " + childName);
 			return null;
 		}
 		var cn = t.GetComponent<T>();
 		if (cn == null)
 		{
-			AOutput.LogError("FindChildComponent cannot find " + childName);
+			//AOutput.LogError("FindChildComponent cannot find " + childName);
 		}
 		return cn;
 	}
@@ -430,21 +430,6 @@ public static class UStaticFuncs
 		return dt;
 	}
 
-	public static string DownLoadConfigURL
-	{
-		get
-		{
-			var url = ConfigDownloader.Instance.OnGetValue("resources");
-			if (string.IsNullOrEmpty(url))
-			{
-				return "";
-			}
-			url = url + UStaticFuncs.GetPlatformFolder(Application.platform) + "/";
-			AOutput.Log($"DownLoadConfigURL {url}");
-			return url;
-		}
-	}
-
 	public static string ConfigSaveDir
 	{
 		get
@@ -668,6 +653,27 @@ public static class UStaticFuncs
 		}
 		zipStream.Close();
 		return ms.ToArray();
+	}
+	public static string GetMD5HashFromFile(string fileName)
+	{
+		try
+		{
+			var file = new System.IO.FileStream(fileName, System.IO.FileMode.Open);
+			System.Security.Cryptography.MD5 md5 = new System.Security.Cryptography.MD5CryptoServiceProvider();
+			byte[] retVal = md5.ComputeHash(file);
+			file.Close();
+
+			StringBuilder sb = new StringBuilder();
+			for (int i = 0; i < retVal.Length; i++)
+			{
+				sb.Append(retVal[i].ToString("x2"));
+			}
+			return sb.ToString();
+		}
+		catch (Exception ex)
+		{
+			throw new Exception("GetMD5HashFromFile() fail,error:" + ex.Message);
+		}
 	}
 }
 

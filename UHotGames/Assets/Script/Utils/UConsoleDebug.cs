@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,7 +12,7 @@ public class UConsoleDebug : MonoBehaviour
 
 	private void Application_logMessageReceived(string condition, string stackTrace, LogType type)
 	{
-		slog = $"{slog} \r\n [{ApiDateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")}] {condition}";
+		slog = $"{slog} \r\n [{DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")}] {condition}";
 		if (slog.Length > 3000)
 		{
 			slog = slog.Substring(0, 3000);

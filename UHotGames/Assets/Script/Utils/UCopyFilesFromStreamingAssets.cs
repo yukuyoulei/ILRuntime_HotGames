@@ -50,7 +50,7 @@ public class UCopyFilesFromStreamingAssets : MonoBehaviour
         }
         else
         {
-            AOutput.Log("DoCopyFile failed:" + www.error + " for file " + www.url);
+            //AOutput.Log("DoCopyFile failed:" + www.error + " for file " + www.url);
             actionOnComp?.Invoke();
         }
     }
@@ -84,9 +84,8 @@ public class UCopyFilesFromStreamingAssets : MonoBehaviour
         }
         else
         {
-            AOutput.Log("DoCopyFile failed:" + www.error + " for file " + www.url);
+            //AOutput.Log("DoCopyFile failed:" + www.error + " for file " + www.url);
         }
-        AOutput.Log("正在释放资源，不消耗流量。");
         OnCopyFile();
     }
 }

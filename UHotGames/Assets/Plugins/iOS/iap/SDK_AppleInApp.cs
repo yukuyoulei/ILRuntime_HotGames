@@ -41,14 +41,14 @@ public class SDK_AppleInApp : MonoBehaviour
 	}
 	private void ProvideContent(string data)//ReceivedReceiptData
 	{
-		ILRuntimeHandler.Instance.EmitMessage($"ProvideContent {data}");
+		ILRuntimeHandler.OnInvoke("SDKHandlers", "ProvideContent", data);
 	}
 	private void UpdateTransactions()
 	{
-		ILRuntimeHandler.Instance.EmitMessage($"UpdateTransactions");
+		ILRuntimeHandler.OnInvoke("SDKHandlers", "UpdateTransactions");
 	}
 	private void FailedTransactions()
 	{
-		ILRuntimeHandler.Instance.EmitMessage($"FailedTransactions");
+		ILRuntimeHandler.OnInvoke("SDKHandlers", "FailedTransactions");
 	}
 }

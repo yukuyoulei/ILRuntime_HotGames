@@ -2,6 +2,7 @@
 using System.IO;
 using UnityEngine;
 using System.Linq;
+using System.Collections.Generic;
 
 public class Enter : MonoBehaviour
 {
@@ -47,8 +48,6 @@ public class Enter : MonoBehaviour
 		MonoInstancePool.getInstance<AntiScriptSplit>(true);
 		MonoInstancePool.getInstance<SDK_WeChat>(true);
 
-		trUIAlert = UStaticFuncs.FindChildComponent<Transform>(transform, "UIAlert");
-		fprocessing = 0.1f;
 #if UNITY_IOS
 		MonoInstancePool.getInstance<SDK_AppleInApp>(true);
 #endif
@@ -58,199 +57,89 @@ public class Enter : MonoBehaviour
 		var fa = "fa" + Utils_Plugins.Util_GetBundleVersion();
 		if (!PlayerPrefs.HasKey(fa))
 		{
-			AOutput.Log($"start copy files {fa}");
 			MonoInstancePool.getInstance<UCopyFilesFromStreamingAssets>().OnCopy("versions.txt", UStaticFuncs.ConfigSaveDir, () =>
 			{
-				InitRemoteConfig();
+				DoStart();
 				PlayerPrefs.SetInt("fa" + Utils_Plugins.Util_GetBundleVersion(), 1);
 			});
 		}
 		else
 		{
 #endif
-			InitRemoteConfig();
+			DoStart();
 #if !UNITY_WEBGL
 		}
 #endif
 	}
-
-
-	private void InitRemoteConfig()
+	private void DoStart()
 	{
-		ConfigDownloader.Instance.StartToDownload(ConfigURL, () =>
-		{
-			ParseConfig();
-
-			fprocessing = 0.2f;
-		}, () =>
-		{
-			Invoke("InitRemoteConfig", 3);
-		});
-
+#if ILRUNTIME
+#if UNITY_EDITOR
+		var path = "./ab1/AHotGames";
+		var dllbs = File.ReadAllBytes($"{path}.bytes");
+		var pdbbs = File.ReadAllBytes($"{path}.pdb");
+		ILRuntimeHandler.OnStartILRuntime(dllbs, pdbbs);
+		fprocessing = 1;
+#else
+		StartCoroutine(OnDownloadConfigs());
+#endif
+#else
+		/*AEntrance.Initialize(
+#if UNITY_IOS
+			"ios"
+#else
+			"android"
+#endif
+		);*/
+#endif
 	}
-
-	private void ParseConfig(bool bChecked = false)
+	IEnumerator OnDownloadConfigs()
 	{
-		if (!bChecked)
-		{
-			CheckNewVersion();
-			return;
-		}
-
-		if (bUsingAb)
-		{
-			var dllpath = ConfigDownloader.Instance.OnGetValue("dll");
-			if (bUsingLocalCDN) dllpath = ConfigDownloader.Instance.OnGetValue("localdll");
-			StartCoroutine(OnDownloadDll(dllpath));
-		}
-		else
-		{
-			LoadDll(File.ReadAllBytes("Assets/RemoteResources/Dll/AHotGames.bytes")
-				, File.ReadAllBytes("Assets/RemoteResources/Dll/AHotGames.pdb"));
-		}
-	}
-
-	WWW www;
-	IEnumerator OnDownloadDll(string dllPath, float delay = 0)
-	{
-		fprocessing = 0.4f;
-		if (delay > 0)
-		{
-			yield return new WaitForSeconds(delay);
-		}
-		AOutput.Log($"dllPath {dllPath}");
-		www = new WWW(dllPath);
+		var www = new WWW(ConfigURL);
 		yield return www;
 		if (string.IsNullOrEmpty(www.error))
 		{
-			if (dllPath.EndsWith(".ab"))
+			var all = www.text.Split(new char[] { '\r', '\n' });
+			foreach (var line in all)
 			{
-				LoadDll(www.assetBundle.LoadAsset<TextAsset>("AHotGames").bytes, null);
+				if (line.StartsWith("//")) continue;
+				if (line.StartsWith("#")) continue;
+				if (line.StartsWith("--")) continue;
+				var aline = line.Split(new char[] { '=' }, 2);
+				if (aline.Length < 2) continue;
+				dconfigs.Add(aline[0], aline[1]);
 			}
-			else
-			{
-				var dllBytes = www.bytes;
-#if UNITY_EDITOR
-				www = new WWW(dllPath.Replace(".bytes", ".pdb"));
-				AOutput.Log($"www {www.url}");
-				yield return www;
-				LoadDll(dllBytes, www.bytes);
-#else
-				LoadDll(dllBytes, null);
-#endif
-			}
+
+			www = new WWW(OnGetConfig("dll"));
+			yield return www;
+			ILRuntimeHandler.OnStartILRuntime(www.bytes, null);
+			fprocessing = 1;
 		}
 		else
 		{
-			StartCoroutine(OnDownloadDll(ConfigDownloader.Instance.OnGetValue("dll"), 3));
-			AOutput.Log($"www {www.url} error {www.error}");
+			Debug.Log($"{ConfigURL} error:{www.error}");
+			yield return new WaitForSeconds(5);
+			StartCoroutine(OnDownloadConfigs());
 		}
-		www = null;
 	}
-	private void LoadDll(byte[] bytes, byte[] pdbBytes)
+	Dictionary<string, string> dconfigs = new Dictionary<string, string>();
+	string OnGetConfig(string tag)
 	{
-		StartCoroutine(DelayLoadDll(bytes, pdbBytes));
-	}
-	IEnumerator DelayLoadDll(byte[] bytes, byte[] pdbBytes)
-	{
-		fprocessing = 0.5f;
-		yield return new WaitForEndOfFrame();
-
-		ILRuntimeHandler.Instance.DoLoadDll("AHotGames", bytes, pdbBytes);
-		fprocessing = 0.7f;
-
-		ILRuntimeHandler.Instance.SetUnityMessageReceiver(MonoInstancePool.getInstance<UEmitMessage>(true).gameObject);
-
-		var platform = "";
-#if UNITY_ANDROID
-		platform = "Android";
-#elif UNITY_IOS
-		platform = "IOS";
-#else
-		platform = "Windows";
-#endif
-		ILRuntimeHandler.Instance.OnLoadClass("AEntrance", new GameObject("AEntrance"), false, platform);
-#if ILRUNTIME
-		ILRuntimeHandler.Instance.EmitMessage($"resPath:{ConfigDownloader.Instance.OnGetValue("resPath")}");
-		fprocessing = 0.8f;
-#endif
-		fprocessing = 1f;
-	}
-
-	void CheckNewVersion()
-	{
-		var newversionkey = "";
-		var newversionmustdownkey = "";
-		var newversionurlkey = "";
-		var nvandignorekey = "";
-#if UNITY_IOS
-		newversionkey = "nvios";
-		newversionmustdownkey = "nviosm";
-		newversionurlkey = "nviosurl";
-#elif UNITY_ANDROID
-		newversionkey = "nvand";
-		newversionmustdownkey = "nvandm";
-		newversionurlkey = "nvandurl";
-		nvandignorekey = "nvandignore";
-#elif UNITY_STANDALONE
-		newversionkey = "nvwin";
-		newversionmustdownkey = "nvwinm";
-		newversionurlkey = "nvwinurl";
-#endif
-		var remoteVersion = ConfigDownloader.Instance.OnGetValue(newversionkey);
-		if (!string.IsNullOrEmpty(remoteVersion))
+		var rawtag = tag;
+		if (bUsingLocalCDN)
 		{
-			if (VersionIsSmall(Utils_Plugins.Util_GetBundleVersion(), remoteVersion))
-			{
-				var anvandignore = ConfigDownloader.Instance.OnGetValue(nvandignorekey).Split(',');
-				var newversionmustdown = ConfigDownloader.Instance.OnGetIntValue(newversionmustdownkey);
-				var newversionurl = ConfigDownloader.Instance.OnGetValue(newversionurlkey);
-				if (anvandignore.Contains(Utils_Plugins.Util_GetBundleVersion()))
-				{
-					if (PlayerPrefs.GetString("ignore") == remoteVersion)
-					{
-						ParseConfig(true);
-						return;
-					}
-					UIAlert.Show($"有新版本可更新，本版本({Utils_Plugins.Util_GetBundleVersion()})配置为可忽略更新，点击“确定”按钮更新，点击“取消”按钮跳过版本{remoteVersion}更新。", () =>
-					{
-						Application.OpenURL(newversionurl);
-						Invoke("ShowUIAlert", 0.2f);
-					}, false, false, () =>
-					{
-						PlayerPrefs.SetString("ignore", remoteVersion);
-						ParseConfig(true);
-					}, trUIAlert, true);
-					return;
-				}
-				if (newversionmustdown == 1)
-				{
-					UIAlert.Show(string.Format("发现最新版本{0}，本版本有重要更新，请更新后重试。", remoteVersion), () =>
-					{
-						Application.OpenURL(newversionurl);
-						Invoke("ShowUIAlert", 0.2f);
-					}, false, false, () => { Application.Quit(); }, trUIAlert, true);
-				}
-				else
-				{
-					UIAlert.Show(string.Format("发现最新版本{0}，是否要更新？", remoteVersion), () =>
-					{
-						Application.OpenURL(newversionurl);
-					}, false, false, () =>
-					{
-						ParseConfig(true);
-					}, trUIAlert);
-				}
-			}
-			else
-			{
-				ParseConfig(true);
-			}
+			tag = $"local{tag}";
+			if (dconfigs.ContainsKey(tag))
+				return dconfigs[tag];
 		}
-		else
-		{
-			ParseConfig(true);
-		}
+		tag = rawtag + Application.version;
+		Debug.Log($"get config {tag}");
+		if (dconfigs.ContainsKey(tag))
+			return dconfigs[tag];
+		tag = rawtag;
+		if (!dconfigs.ContainsKey(tag))
+			return "";
+		return dconfigs[tag];
 	}
 	private bool VersionIsSmall(string localVersion, string remoteVersion)
 	{
@@ -266,7 +155,7 @@ public class Enter : MonoBehaviour
 			{
 				continue;
 			}
-			return typeParser.intParse(alocal[i]) < typeParser.intParse(aremote[i]);
+			return int.Parse(alocal[i]) < int.Parse(aremote[i]);
 		}
 		return alocal.Length < aremote.Length;
 	}

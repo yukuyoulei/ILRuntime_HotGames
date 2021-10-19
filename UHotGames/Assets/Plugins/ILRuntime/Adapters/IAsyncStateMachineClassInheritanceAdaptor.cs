@@ -1,90 +1,58 @@
-﻿using ILRuntime.CLR.Method;
+using System;
+using System.Runtime.CompilerServices;
+using ILRuntime.CLR.Method;
 using ILRuntime.Runtime.Enviorment;
 using ILRuntime.Runtime.Intepreter;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using UnityEngine;
 
 public class IAsyncStateMachineClassInheritanceAdaptor : CrossBindingAdaptor
 {
-	public override Type BaseCLRType
-	{
-		get
-		{
-			return typeof(IAsyncStateMachine);
-		}
-	}
-
-	public override Type AdaptorType
-	{
-		get
-		{
-			return typeof(IAsyncStateMachineAdaptor);
-		}
-	}
-
+	public override Type BaseCLRType => typeof(IAsyncStateMachine);
+	public override Type AdaptorType => typeof(IAsyncStateMachineAdaptor);
 	public override object CreateCLRInstance(ILRuntime.Runtime.Enviorment.AppDomain appdomain, ILTypeInstance instance)
 	{
 		return new IAsyncStateMachineAdaptor(appdomain, instance);
 	}
-
 	public class IAsyncStateMachineAdaptor : IAsyncStateMachine, CrossBindingAdaptorType
 	{
-		private ILTypeInstance instance;
-		private ILRuntime.Runtime.Enviorment.AppDomain appDomain;
-
-		private IMethod mMoveNext;
-		private IMethod mSetStateMachine;
-		private readonly object[] param1 = new object[1];
-
-		public IAsyncStateMachineAdaptor()
-		{
-		}
-
+		private readonly ILRuntime.Runtime.Enviorment.AppDomain _appDomain;
+		public ILTypeInstance ILInstance { get; }
+		private readonly IMethod _mMoveNext;
+		private readonly IMethod _mSetStateMachine;
+		public IAsyncStateMachineAdaptor() { }
 		public IAsyncStateMachineAdaptor(ILRuntime.Runtime.Enviorment.AppDomain appDomain, ILTypeInstance instance)
 		{
-			this.appDomain = appDomain;
-			this.instance = instance;
+			_appDomain = appDomain;
+			ILInstance = instance;
+			_mMoveNext = ILInstance.Type.GetMethod("MoveNext", 0);
+			_mSetStateMachine = ILInstance.Type.GetMethod("SetStateMachine", 1);
 		}
-
-		public ILTypeInstance ILInstance
-		{
-			get
-			{
-				return instance;
-			}
-		}
-
 		public void MoveNext()
 		{
-			if (this.mMoveNext == null)
+			using (var ctx = _appDomain.BeginInvoke(_mMoveNext))
 			{
-				mMoveNext = instance.Type.GetMethod("MoveNext", 0);
+				ctx.PushObject(ILInstance);
+				ctx.Invoke();
 			}
-			this.appDomain.Invoke(mMoveNext, instance, null);
 		}
-
 		public void SetStateMachine(IAsyncStateMachine stateMachine)
 		{
-			if (this.mSetStateMachine == null)
+			using (var ctx = _appDomain.BeginInvoke(_mSetStateMachine))
 			{
-				mSetStateMachine = instance.Type.GetMethod("SetStateMachine");
+				ctx.PushObject(ILInstance);
+				ctx.PushObject(stateMachine);
+				ctx.Invoke();
 			}
-			this.appDomain.Invoke(mSetStateMachine, instance, stateMachine);
 		}
-
 		public override string ToString()
 		{
-			IMethod m = this.appDomain.ObjectType.GetMethod("ToString", 0);
-			m = instance.Type.GetVirtualMethod(m);
+			var m = _appDomain.ObjectType.GetMethod("ToString", 0);
+			m = ILInstance.Type.GetVirtualMethod(m);
 			if (m == null || m is ILMethod)
 			{
-				return instance.ToString();
+				return ILInstance.ToString();
 			}
-
-			return instance.Type.FullName;
+			return ILInstance.Type.FullName;
 		}
 	}
 }
+

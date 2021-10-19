@@ -5,6 +5,9 @@ using System.IO;
 using System.Collections.Generic;
 using System;
 using System.Linq;
+using UnityEditor.PackageManager.UI;
+using System.Runtime.InteropServices;
+using System.Diagnostics;
 /*
 using UnityEngine.VR;
 */
@@ -28,7 +31,7 @@ public class UBuildTools : EditorWindow
 		{
 			return BuildTargetGroup.iOS;
 		}
-	}
+	} 
 #elif UNITY_STANDALONE
     BuildTargetGroup target
     {
@@ -144,20 +147,6 @@ public class UBuildTools : EditorWindow
 			PlayerSettings.productName = value;
 		}
 	}
-	static bool vrsupport
-	{
-		get
-		{
-			return PlayerSettings.virtualRealitySupported;
-		}
-		set
-		{
-			if (vrsupport != value)
-			{
-				PlayerSettings.virtualRealitySupported = value;
-			}
-		}
-	}
 	bool bUsingLocalCDN
 	{
 		get
@@ -188,11 +177,13 @@ public class UBuildTools : EditorWindow
 	{
 		get
 		{
-			return Enter.bUsingAb;
+			if (!PlayerPrefs.HasKey("UseAB"))
+				return true;
+			return PlayerPrefs.GetInt("UseAB") != 0;
 		}
 		set
 		{
-			Enter.bUsingAb = value;
+			PlayerPrefs.SetInt("UseAB", value ? 1 : 0);
 		}
 	}
 
@@ -222,9 +213,49 @@ public class UBuildTools : EditorWindow
 	}
 
 	string sBuildLog = "";
+	const string HotScriptsDir = "AHotGames";
+	string sHotScriptDir
+	{
+		get
+		{
+			return $".\\{HotScriptsDir}";
+		}
+	}
+	string sNotHotScriptDir
+	{
+		get
+		{
+			return $".\\Assets\\{HotScriptsDir}";
+		}
+	}
+	void DoHotDir()
+	{
+		if (!ILRUNTIME)
+		{
+			if (Directory.Exists(sNotHotScriptDir))
+				JunctionPoint.Delete(sNotHotScriptDir);
+			JunctionPoint.Create(sNotHotScriptDir, sHotScriptDir, true);
+		}
+		if (ILRUNTIME && Directory.Exists(sNotHotScriptDir))
+		{
+			JunctionPoint.Delete(sNotHotScriptDir);
+			File.Delete(sNotHotScriptDir + ".meta");
+		}
+		AssetDatabase.Refresh();
+	}
+	[DllImport("Kernel32", CharSet = CharSet.Unicode)]
+	public extern static bool CreateHardLink(string linkName, string sourceName, IntPtr attribute);
+
 	Vector2 scrollPos;
+	string loadAssetbundlePath;
 	void OnGUI()
 	{
+		if (EditorApplication.isCompiling)
+		{
+			GUILayout.Label("Compiling");
+			return;
+		}
+
 		scrollPos = EditorGUILayout.BeginScrollView(scrollPos);
 
 		if (GUILayout.Button("Remove PlayerPref", GUILayout.Width(160)))
@@ -308,22 +339,16 @@ public class UBuildTools : EditorWindow
 		EditorGUILayout.EndHorizontal();
 
 		EditorGUILayout.Space();
-		/*
-
-				vrsupport = EditorGUILayout.Toggle("VR Support", vrsupport);
-				if (vrsupport)
-				{
-#if UNITY_2017
-					EditorGUILayout.LabelField("└ Supported Devices:" + string.Join(",", UnityEngine.XR.XRSettings.supportedDevices));
-#else
-					EditorGUILayout.LabelField("└ Supported Devices:" + string.Join(",", UnityEngine.XR.XRSettings.supportedDevices));
-#endif
-				}
-		*/
 
 		EditorGUILayout.Space();
 		UseAB = EditorGUILayout.ToggleLeft("编辑器下是否使用AB", UseAB);
+		GUILayout.Label("热更代码目录：" + sHotScriptDir);
+		GUILayout.Label("非热更代码目录：" + sNotHotScriptDir);
+		var ilr = ILRUNTIME;
 		ILRUNTIME = EditorGUILayout.ToggleLeft("是否使用ILRUNTIME", ILRUNTIME);
+		if (ilr != ILRUNTIME)
+			DoHotDir();
+
 		bUsingLocalCDN = EditorGUILayout.ToggleLeft("是否使用本地CDN", bUsingLocalCDN);
 
 #if UNITY_ANDROID
@@ -497,7 +522,7 @@ public class UBuildTools : EditorWindow
 	}
 	private static string GetAssetBundleTargetPath()
 	{
-		var p = Path.GetFullPath(Path.Combine(Application.dataPath, "../../ab1/"));
+		var p = Path.GetFullPath(Path.Combine(Application.dataPath, "../ab1/"));
 		return Path.Combine(p, Platform.GetPlatformFolder(EditorUserBuildSettings.activeBuildTarget)); ;
 	}
 
@@ -556,6 +581,7 @@ public class UBuildTools : EditorWindow
 		{
 			if (files[i] is DirectoryInfo)
 			{
+				if ((files[i] as DirectoryInfo).Name == ".svn") continue;
 				Pack(files[i].FullName);
 			}
 			else
@@ -573,7 +599,6 @@ public class UBuildTools : EditorWindow
 			var imp = AssetImporter.GetAtPath(d.Key);
 			if (imp == null)
 			{
-				Debug.Log($"Invalid importer {d.Key}");
 				continue;
 			}
 			PackItem(d.Key, imp);
@@ -619,11 +644,11 @@ public class UBuildTools : EditorWindow
 				TextureImporter tai = assetImporter as TextureImporter;
 				if (!string.IsNullOrEmpty(tai.spritePackingTag))
 				{
-					tai.SetAssetBundleNameAndVariant(tai.spritePackingTag + UAssetBundleDownloader.AssetBundleSuffix, null);
+					tai.SetAssetBundleNameAndVariant(tai.spritePackingTag + ".ab", null);
 				}
 				else
 				{
-					tai.SetAssetBundleNameAndVariant("tdefault" + UAssetBundleDownloader.AssetBundleSuffix, null);
+					tai.SetAssetBundleNameAndVariant(dp + ".ab", null);
 				}
 			}
 			else
@@ -644,8 +669,8 @@ public class UBuildTools : EditorWindow
 	private static void PackItem(string dp, AssetImporter assetImporter)
 	{
 		string pathTmp = dp.Substring("Assets".Length + 1);
-		string assetName = pathTmp.Substring(pathTmp.IndexOf("/") + 1).Replace(" ", "_");
-		assetName = assetName.Replace(Path.GetExtension(assetName), UAssetBundleDownloader.AssetBundleSuffix);
+		string assetName = pathTmp.Substring(pathTmp.IndexOf("/") + 1).Replace(" ", "_").Replace("#", "_").Replace("-", "_");
+		assetName = assetName.Replace(Path.GetExtension(assetName), ".ab");
 		assetImporter.SetAssetBundleNameAndVariant(assetName, string.Empty);
 
 		//fileWithDepends(assetImporter.assetPath);
@@ -777,19 +802,23 @@ public class UBuildTools : EditorWindow
 		sresult = BuildPipeline.BuildPlayer(FindEnabledEditorScenes(), spath, bt, BuildOptions.None);
 #endif
 #if UNITY_IOS
-
 		string projPath = PBXProject.GetPBXProjectPath(spath);
 		PBXProject proj = new PBXProject();
 		proj.ReadFromFile(projPath);
 
-		string targetGuid = proj.TargetGuidByName("Unity-iPhone");
+		//string targetGuid = proj.TargetGuidByName("Unity-iPhone");
+		string targetGuid = proj.GetUnityMainTargetGuid();
 		proj.AddFileToBuild(targetGuid, proj.AddFile("usr/lib/libstdc++.tbd", "Frameworks/libstdc++.tbd", PBXSourceTree.Sdk));
 		proj.AddFileToBuild(targetGuid, proj.AddFile("usr/lib/libicucore.tbd", "Frameworks/libicucore.tbd", PBXSourceTree.Sdk));
 		proj.AddFileToBuild(targetGuid, proj.AddFile("usr/lib/libz.tbd", "Frameworks/libz.tbd", PBXSourceTree.Sdk));
 		proj.AddFileToBuild(targetGuid, proj.AddFile("usr/lib/libsqlite3.tbd", "Frameworks/libsqlite3.tbd", PBXSourceTree.Sdk));
 		proj.AddFileToBuild(targetGuid, proj.AddFile("usr/lib/libsqlite3.0.tbd", "Frameworks/libsqlite3.tbd", PBXSourceTree.Sdk));
 		proj.AddFileToBuild(targetGuid, proj.AddFile("usr/lib/libresolv.tbd", "Frameworks/libresolv.tbd", PBXSourceTree.Sdk));
+		
+		string targetGuidUnityFramework = proj.GetUnityFrameworkTargetGuid();
+		proj.AddFileToBuild(targetGuidUnityFramework, proj.AddFile("usr/lib/libz.tbd", "Frameworks/libz.tbd", PBXSourceTree.Sdk));
 
+		proj.AddFrameworkToProject(targetGuid, "Unityframework.framework", false);
 		proj.AddFrameworkToProject(targetGuid, "JavaScriptCore.framework", false);
 		proj.AddFrameworkToProject(targetGuid, "MessageUI.framework", false);
 		proj.AddFrameworkToProject(targetGuid, "AdSupport.framework", false);
@@ -798,10 +827,11 @@ public class UBuildTools : EditorWindow
 		proj.AddFrameworkToProject(targetGuid, "CoreTelephony.framework", false);
 		proj.AddFrameworkToProject(targetGuid, "Accelerate.framework", false);
 		proj.AddFrameworkToProject(targetGuid, "QuartzCore.framework", false);
+		proj.AddFrameworkToProject(targetGuid, "Security.framework", false);
 		proj.AddFrameworkToProject(targetGuid, "SystemConfiguration.framework", false);
 
 		proj.SetBuildProperty(targetGuid, "ENABLE_BITCODE", "false");
-		proj.SetBuildProperty(targetGuid, "OTHER_LDFLAGS", "$(inherited) -weak_framework CoreMotion -weak-lSystem -weak_framework Photos -framework AssetsLibrary -framework MobileCoreServices -framework ImageIO -all_load -ObjC");
+		proj.SetBuildProperty(targetGuid, "OTHER_LDFLAGS", "$(inherited) -lz -weak_framework CoreMotion -weak-lSystem -weak_framework Photos -framework AssetsLibrary -framework MobileCoreServices -framework ImageIO -all_load -ObjC");
 
 		proj.WriteToFile(projPath);
 
@@ -811,11 +841,11 @@ public class UBuildTools : EditorWindow
 		plistDocument.root.SetString("CFBundleDevelopmentRegion", "China");
 
 		PlistElementDict dict = plistDocument.root.AsDict();
-		dict.SetString("NSPhotoLibraryUsageDescription", "需要访问相册。");
+		/*dict.SetString("NSPhotoLibraryUsageDescription", "需要访问相册。");
 		dict.SetString("NSCameraUsageDescription", "需要启用摄像头。");
-		dict.SetString("NSMicrophoneUsageDescription", "需要启用麦克风。");
+		dict.SetString("NSMicrophoneUsageDescription", "需要启用麦克风。");*/
 
-		{
+		/*{
 			PlistElementArray parray = plistDocument.root.CreateArray("CFBundleURLTypes");
 			dict = parray.AddDict();
 			dict.SetString("CFBundleTypeRole", "Editor");
@@ -828,7 +858,7 @@ public class UBuildTools : EditorWindow
 			PlistElementArray parray = plistDocument.root.CreateArray("LSApplicationQueriesSchemes");
 			parray.AddString("wechat");
 			parray.AddString("weixin");
-		}
+		}*/
 
 		plistDocument.WriteToFile(spath + "/Info.plist");
 #endif
@@ -891,7 +921,7 @@ public class UBuildTools : EditorWindow
 			}
 
 			sresult += fi.FullName.Replace("\\", "/").Replace(outputDir.Replace("\\", "/"), "");
-			sresult += "|" + MD5String.GetMD5HashFromFile(s) + "|" + fi.Length;
+			sresult += "|" + UStaticFuncs.GetMD5HashFromFile(s) + "|" + fi.Length;
 			sresult += "\r\n";
 		}
 		foreach (var s in Directory.GetDirectories(sdir))
@@ -947,7 +977,7 @@ public class UBuildTools : EditorWindow
 			Directory.CreateDirectory(sdir);
 		}
 		string s = string.Format("[{0}]{1}", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), slog);
-		Debug.Log(s);
+		UnityEngine.Debug.Log(s);
 
 		string logPath = sdir + "/BuildLog.txt";
 		if (File.Exists(logPath))

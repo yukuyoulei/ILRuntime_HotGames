@@ -1,0 +1,982 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <LangVersion>8.0</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.20506</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <RootNamespace>
+    </RootNamespace>
+    <ProjectGuid>{0A522ED7-16E0-4685-6344-E18FAC971BA1}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <AssemblyName>AHotGames</AssemblyName>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <BaseDirectory>.</BaseDirectory>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Temp\Bin\Debug\</OutputPath>
+    <DefineConstants>UNITY_2021_1_24;UNITY_2021_1;UNITY_2021;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2018_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_2018_3_OR_NEWER;UNITY_2018_4_OR_NEWER;UNITY_2019_1_OR_NEWER;UNITY_2019_2_OR_NEWER;UNITY_2019_3_OR_NEWER;UNITY_2019_4_OR_NEWER;UNITY_2020_1_OR_NEWER;UNITY_2020_2_OR_NEWER;UNITY_2020_3_OR_NEWER;UNITY_2021_1_OR_NEWER;UNITY_INCLUDE_TESTS;USE_SEARCH_ENGINE_API;USE_QUICK_SEARCH_MODULE;SCENE_TEMPLATE_MODULE;ENABLE_AR;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_EVENT_QUEUE;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_TEXTURE_STREAMING;ENABLE_UNET;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_UNITYWEBREQUEST;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_COLLAB_SOFTLOCKS;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_NATIVE_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_MANAGED_JOBS;ENABLE_MANAGED_TRANSFORM_JOBS;ENABLE_MANAGED_ANIMATION_JOBS;ENABLE_MANAGED_AUDIO_JOBS;ENABLE_RUNTIME_PERMISSIONS;ENABLE_ENGINE_CODE_STRIPPING;ENABLE_ONSCREEN_KEYBOARD;INCLUDE_DYNAMIC_GI;ENABLE_MONO_BDWGC;ENABLE_SCRIPTING_GC_WBARRIERS;PLATFORM_SUPPORTS_MONO;ENABLE_VIDEO;PLATFORM_ANDROID;UNITY_ANDROID;UNITY_ANDROID_API;ENABLE_EGL;ENABLE_NETWORK;ENABLE_RUNTIME_GI;ENABLE_CRUNCH_TEXTURE_COMPRESSION;UNITY_CAN_SHOW_SPLASH_SCREEN;UNITY_HAS_GOOGLEVR;UNITY_HAS_TANGO;ENABLE_SPATIALTRACKING;ENABLE_ETC_COMPRESSION;PLATFORM_EXTENDS_VULKAN_DEVICE;PLATFORM_HAS_MULTIPLE_SWAPCHAINS;UNITY_ANDROID_SUPPORTS_SHADOWFILES;PLATFORM_UPDATES_TIME_OUTSIDE_OF_PLAYER_LOOP;ENABLE_UNITYADS_RUNTIME;UNITY_UNITYADS_API;ENABLE_MONO;NET_4_6;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_UNITY_COLLECTIONS_CHECKS;ENABLE_BURST_AOT;UNITY_TEAM_LICENSE;UNITY_PRO_LICENSE;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_DIRECTOR;ENABLE_LOCALIZATION;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_TILEMAP;ENABLE_TIMELINE;ENABLE_LEGACY_INPUT_MANAGER;ILRUNTIME;CSHARP_7_OR_LATER;CSHARP_7_3_OR_NEWER</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>0169</NoWarn>
+    <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Temp\bin\Release\</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>0169</NoWarn>
+    <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup>
+    <NoConfig>true</NoConfig>
+    <NoStdLib>true</NoStdLib>
+    <AddAdditionalExplicitAssemblyReferences>false</AddAdditionalExplicitAssemblyReferences>
+    <ImplicitlyExpandNETStandardFacades>false</ImplicitlyExpandNETStandardFacades>
+    <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
+  </PropertyGroup>
+  <ItemGroup>
+    <Analyzer Include="D:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="UnityEngine">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.AIModule">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\Managed\UnityEngine\UnityEngine.AIModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ARModule">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\Managed\UnityEngine\UnityEngine.ARModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.AccessibilityModule">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\Managed\UnityEngine\UnityEngine.AccessibilityModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.AndroidJNIModule">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\Managed\UnityEngine\UnityEngine.AndroidJNIModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.AnimationModule">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\Managed\UnityEngine\UnityEngine.AnimationModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.AssetBundleModule">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\Managed\UnityEngine\UnityEngine.AssetBundleModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.AudioModule">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\Managed\UnityEngine\UnityEngine.AudioModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ClothModule">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\Managed\UnityEngine\UnityEngine.ClothModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\Managed\UnityEngine\UnityEngine.CoreModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.CrashReportingModule">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\Managed\UnityEngine\UnityEngine.CrashReportingModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.DSPGraphModule">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\Managed\UnityEngine\UnityEngine.DSPGraphModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.DirectorModule">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\Managed\UnityEngine\UnityEngine.DirectorModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.GIModule">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\Managed\UnityEngine\UnityEngine.GIModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.GameCenterModule">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\Managed\UnityEngine\UnityEngine.GameCenterModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.GridModule">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\Managed\UnityEngine\UnityEngine.GridModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.HotReloadModule">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\Managed\UnityEngine\UnityEngine.HotReloadModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.IMGUIModule">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\Managed\UnityEngine\UnityEngine.IMGUIModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ImageConversionModule">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\Managed\UnityEngine\UnityEngine.ImageConversionModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.InputModule">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\Managed\UnityEngine\UnityEngine.InputModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.InputLegacyModule">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\Managed\UnityEngine\UnityEngine.InputLegacyModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.JSONSerializeModule">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\Managed\UnityEngine\UnityEngine.JSONSerializeModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.LocalizationModule">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\Managed\UnityEngine\UnityEngine.LocalizationModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ParticleSystemModule">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\Managed\UnityEngine\UnityEngine.ParticleSystemModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.PerformanceReportingModule">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\Managed\UnityEngine\UnityEngine.PerformanceReportingModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.PhysicsModule">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\Managed\UnityEngine\UnityEngine.PhysicsModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Physics2DModule">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\Managed\UnityEngine\UnityEngine.Physics2DModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ProfilerModule">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\Managed\UnityEngine\UnityEngine.ProfilerModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.RuntimeInitializeOnLoadManagerInitializerModule">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\Managed\UnityEngine\UnityEngine.RuntimeInitializeOnLoadManagerInitializerModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ScreenCaptureModule">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\Managed\UnityEngine\UnityEngine.ScreenCaptureModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.SharedInternalsModule">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\Managed\UnityEngine\UnityEngine.SharedInternalsModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.SpriteMaskModule">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\Managed\UnityEngine\UnityEngine.SpriteMaskModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.SpriteShapeModule">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\Managed\UnityEngine\UnityEngine.SpriteShapeModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.StreamingModule">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\Managed\UnityEngine\UnityEngine.StreamingModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.SubstanceModule">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\Managed\UnityEngine\UnityEngine.SubstanceModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.SubsystemsModule">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\Managed\UnityEngine\UnityEngine.SubsystemsModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.TLSModule">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\Managed\UnityEngine\UnityEngine.TLSModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.TerrainModule">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\Managed\UnityEngine\UnityEngine.TerrainModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.TerrainPhysicsModule">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\Managed\UnityEngine\UnityEngine.TerrainPhysicsModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.TextCoreModule">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\Managed\UnityEngine\UnityEngine.TextCoreModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.TextRenderingModule">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\Managed\UnityEngine\UnityEngine.TextRenderingModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.TilemapModule">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\Managed\UnityEngine\UnityEngine.TilemapModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UIModule">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\Managed\UnityEngine\UnityEngine.UIModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UIElementsModule">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\Managed\UnityEngine\UnityEngine.UIElementsModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UIElementsNativeModule">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\Managed\UnityEngine\UnityEngine.UIElementsNativeModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UNETModule">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\Managed\UnityEngine\UnityEngine.UNETModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UmbraModule">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\Managed\UnityEngine\UnityEngine.UmbraModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityAnalyticsModule">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\Managed\UnityEngine\UnityEngine.UnityAnalyticsModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityConnectModule">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\Managed\UnityEngine\UnityEngine.UnityConnectModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityCurlModule">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\Managed\UnityEngine\UnityEngine.UnityCurlModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityTestProtocolModule">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\Managed\UnityEngine\UnityEngine.UnityTestProtocolModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestModule">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\Managed\UnityEngine\UnityEngine.UnityWebRequestModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestAssetBundleModule">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\Managed\UnityEngine\UnityEngine.UnityWebRequestAssetBundleModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestAudioModule">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\Managed\UnityEngine\UnityEngine.UnityWebRequestAudioModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestTextureModule">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\Managed\UnityEngine\UnityEngine.UnityWebRequestTextureModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestWWWModule">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\Managed\UnityEngine\UnityEngine.UnityWebRequestWWWModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.VFXModule">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\Managed\UnityEngine\UnityEngine.VFXModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.VRModule">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\Managed\UnityEngine\UnityEngine.VRModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.VehiclesModule">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\Managed\UnityEngine\UnityEngine.VehiclesModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.VideoModule">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\Managed\UnityEngine\UnityEngine.VideoModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.WindModule">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\Managed\UnityEngine\UnityEngine.WindModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.XRModule">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\Managed\UnityEngine\UnityEngine.XRModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\Managed\UnityEngine\UnityEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.CoreModule">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\Managed\UnityEngine\UnityEditor.CoreModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.DeviceSimulatorModule">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\Managed\UnityEngine\UnityEditor.DeviceSimulatorModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.GraphViewModule">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\Managed\UnityEngine\UnityEditor.GraphViewModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.PackageManagerUIModule">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\Managed\UnityEngine\UnityEditor.PackageManagerUIModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.QuickSearchModule">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\Managed\UnityEngine\UnityEditor.QuickSearchModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.SceneTemplateModule">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\Managed\UnityEngine\UnityEditor.SceneTemplateModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.UIBuilderModule">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\Managed\UnityEngine\UnityEditor.UIBuilderModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.UIElementsModule">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\Managed\UnityEngine\UnityEditor.UIElementsModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.UIElementsSamplesModule">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\Managed\UnityEngine\UnityEditor.UIElementsSamplesModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.UIServiceModule">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\Managed\UnityEngine\UnityEditor.UIServiceModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.UnityConnectModule">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\Managed\UnityEngine\UnityEditor.UnityConnectModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.Graphs">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\Managed\UnityEditor.Graphs.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.Android.Extensions">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\PlaybackEngines\AndroidPlayer\UnityEditor.Android.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.iOS.Extensions">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\PlaybackEngines\iOSSupport\UnityEditor.iOS.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.WindowsStandalone.Extensions">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\PlaybackEngines\WindowsStandaloneSupport\UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="log4netPlastic">
+      <HintPath>Library\PackageCache\com.unity.collab-proxy@1.11.2\Lib\Editor\PlasticSCM\log4netPlastic.dll</HintPath>
+    </Reference>
+    <Reference Include="zxing.unity">
+      <HintPath>Assets\Plugins\zxing\zxing.unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Plastic.Newtonsoft.Json">
+      <HintPath>Library\PackageCache\com.unity.collab-proxy@1.11.2\Lib\Editor\PlasticSCM\Unity.Plastic.Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Analytics.StandardEvents">
+      <HintPath>Library\PackageCache\com.unity.analytics@3.6.11\AnalyticsStandardEvents\Unity.Analytics.StandardEvents.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Analytics.Editor">
+      <HintPath>Library\PackageCache\com.unity.analytics@3.6.11\Unity.Analytics.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Plastic.Antlr3.Runtime">
+      <HintPath>Library\PackageCache\com.unity.collab-proxy@1.11.2\Lib\Editor\PlasticSCM\Unity.Plastic.Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="ILRuntime.Mono.Cecil">
+      <HintPath>Library\PackageCache\com.ourpalm.ilruntime@1.6.7\Plugins\ILRuntime.Mono.Cecil.dll</HintPath>
+    </Reference>
+    <Reference Include="websocket-sharp">
+      <HintPath>Assets\Plugins\WebSocket\websocket-sharp.dll</HintPath>
+    </Reference>
+    <Reference Include="ILRuntime.Mono.Cecil.Pdb">
+      <HintPath>Library\PackageCache\com.ourpalm.ilruntime@1.6.7\Plugins\ILRuntime.Mono.Cecil.Pdb.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Analytics.Tracker">
+      <HintPath>Library\PackageCache\com.unity.analytics@3.6.11\Unity.Analytics.Tracker.dll</HintPath>
+    </Reference>
+    <Reference Include="ILRuntime.Mono.Cecil.Mdb">
+      <HintPath>Library\PackageCache\com.ourpalm.ilruntime@1.6.7\Plugins\ILRuntime.Mono.Cecil.Mdb.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>Assets\Plugins\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="unityplastic">
+      <HintPath>Library\PackageCache\com.unity.collab-proxy@1.11.2\Lib\Editor\PlasticSCM\unityplastic.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.iOS.Extensions.Xcode">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\PlaybackEngines\iOSSupport\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.iOS.Extensions.Common">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\PlaybackEngines\iOSSupport\UnityEditor.iOS.Extensions.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="mscorlib">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\mscorlib.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\System.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\System.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\System.Runtime.Serialization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\System.Xml.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\System.Xml.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\System.Numerics.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics.Vectors">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\System.Net.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.Compression">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\System.IO.Compression.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Microsoft.CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\System.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Win32.Primitives">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\Microsoft.Win32.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="netstandard">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\netstandard.dll</HintPath>
+    </Reference>
+    <Reference Include="System.AppContext">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.AppContext.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Collections.Concurrent">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Collections.Concurrent.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Collections">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Collections.NonGeneric">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Collections.NonGeneric.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Collections.Specialized">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Collections.Specialized.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Annotations">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.ComponentModel.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.EventBasedAsync">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.ComponentModel.EventBasedAsync.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Primitives">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.ComponentModel.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.TypeConverter">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.ComponentModel.TypeConverter.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Console">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Console.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.Common">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Data.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Diagnostics.Contracts">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Diagnostics.Contracts.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Diagnostics.Debug">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Diagnostics.Debug.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Diagnostics.FileVersionInfo">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Diagnostics.FileVersionInfo.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Diagnostics.Process">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Diagnostics.Process.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Diagnostics.StackTrace">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Diagnostics.StackTrace.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Diagnostics.TextWriterTraceListener">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Diagnostics.TextWriterTraceListener.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Diagnostics.Tools">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Diagnostics.Tools.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Diagnostics.TraceSource">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Diagnostics.TraceSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing.Primitives">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Drawing.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Dynamic.Runtime">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Dynamic.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Globalization.Calendars">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Globalization.Calendars.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Globalization">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Globalization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Globalization.Extensions">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Globalization.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.Compression.ZipFile">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.IO.Compression.ZipFile.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.IO.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.FileSystem">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.IO.FileSystem.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.FileSystem.DriveInfo">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.IO.FileSystem.DriveInfo.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.FileSystem.Primitives">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.IO.FileSystem.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.FileSystem.Watcher">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.IO.FileSystem.Watcher.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.IsolatedStorage">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.IO.IsolatedStorage.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.MemoryMappedFiles">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.IO.MemoryMappedFiles.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.Pipes">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.IO.Pipes.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.UnmanagedMemoryStream">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.IO.UnmanagedMemoryStream.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Linq">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Linq.Expressions">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Linq.Expressions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Linq.Parallel">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Linq.Parallel.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Linq.Queryable">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Linq.Queryable.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Rtc">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Net.Http.Rtc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.NameResolution">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Net.NameResolution.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.NetworkInformation">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Net.NetworkInformation.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Ping">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Net.Ping.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Primitives">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Net.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Requests">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Net.Requests.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Security">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Net.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Sockets">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Net.Sockets.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.WebHeaderCollection">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Net.WebHeaderCollection.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.WebSockets.Client">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Net.WebSockets.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.WebSockets">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Net.WebSockets.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ObjectModel">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.ObjectModel.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reflection">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Reflection.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reflection.Emit">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Reflection.Emit.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reflection.Emit.ILGeneration">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Reflection.Emit.ILGeneration.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reflection.Emit.Lightweight">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Reflection.Emit.Lightweight.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reflection.Extensions">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Reflection.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reflection.Primitives">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Reflection.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Resources.Reader">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Resources.Reader.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Resources.ResourceManager">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Resources.ResourceManager.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Resources.Writer">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Resources.Writer.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.VisualC">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Runtime.CompilerServices.VisualC.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Extensions">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Runtime.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Handles">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Runtime.Handles.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Runtime.InteropServices.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices.WindowsRuntime">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Runtime.InteropServices.WindowsRuntime.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Numerics">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Runtime.Numerics.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization.Formatters">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Runtime.Serialization.Formatters.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization.Json">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Runtime.Serialization.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization.Primitives">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Runtime.Serialization.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization.Xml">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Runtime.Serialization.Xml.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Claims">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Security.Claims.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Algorithms">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Security.Cryptography.Algorithms.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Csp">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Security.Cryptography.Csp.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Encoding">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Security.Cryptography.Encoding.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Primitives">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Security.Cryptography.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.X509Certificates">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Security.Cryptography.X509Certificates.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Principal">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Security.Principal.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.SecureString">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Security.SecureString.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceModel.Duplex">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.ServiceModel.Duplex.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceModel.Http">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.ServiceModel.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceModel.NetTcp">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.ServiceModel.NetTcp.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceModel.Primitives">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.ServiceModel.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceModel.Security">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.ServiceModel.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Encoding">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Text.Encoding.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Encoding.Extensions">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Text.Encoding.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.RegularExpressions">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Text.RegularExpressions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Threading.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Overlapped">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Threading.Overlapped.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Threading.Tasks.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Parallel">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Threading.Tasks.Parallel.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Thread">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Threading.Thread.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.ThreadPool">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Threading.ThreadPool.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Timer">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Threading.Timer.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.ReaderWriter">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Xml.ReaderWriter.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.XDocument">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Xml.XDocument.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.XmlDocument">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Xml.XmlDocument.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.XmlSerializer">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Xml.XmlSerializer.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.XPath">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Xml.XPath.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.XPath.XDocument">
+      <HintPath>G:\Unity\2021.1.24f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.Xml.XPath.XDocument.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.UI">
+      <HintPath>Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="AHotGames\AHotGames.meta" />
+    <None Include="AHotGames\AHotGames.sln.meta" />
+    <None Include="AHotGames\AHotGames\AHotGames.asmdef" />
+    <None Include="AHotGames\AHotGames\AHotGames.asmdef.meta" />
+    <None Include="AHotGames\AHotGames\AHotGames.csproj" />
+    <None Include="AHotGames\AHotGames\AHotGames.csproj.meta" />
+    <None Include="AHotGames\AHotGames\games.meta" />
+    <None Include="AHotGames\AHotGames\games\actions.meta" />
+    <None Include="AHotGames\AHotGames\games\actions\ActionBase.cs.meta" />
+    <None Include="AHotGames\AHotGames\games\actions\ActionHandler.cs.meta" />
+    <None Include="AHotGames\AHotGames\games\actions\ActionRun.cs.meta" />
+    <None Include="AHotGames\AHotGames\games\actions\IActionBase.cs.meta" />
+    <None Include="AHotGames\AHotGames\games\aempty.meta" />
+    <None Include="AHotGames\AHotGames\games\aempty\AEmptyUI.cs.meta" />
+    <None Include="AHotGames\AHotGames\games\aempty\AHotBase.cs.meta" />
+    <None Include="AHotGames\AHotGames\games\AEntrance.cs.meta" />
+    <None Include="AHotGames\AHotGames\games\cnet.meta" />
+    <None Include="AHotGames\AHotGames\games\cnet\AOnlineSubsystem.cs.meta" />
+    <None Include="AHotGames\AHotGames\games\cnet\UEventListener.cs.meta" />
+    <None Include="AHotGames\AHotGames\games\cnet\UEvents.cs.meta" />
+    <None Include="AHotGames\AHotGames\games\commonUI.meta" />
+    <None Include="AHotGames\AHotGames\games\commonUI\UICommonTips.cs.meta" />
+    <None Include="AHotGames\AHotGames\games\commonUI\UICommonWait.cs.meta" />
+    <None Include="AHotGames\AHotGames\games\commonUI\UIDebugConsole.cs.meta" />
+    <None Include="AHotGames\AHotGames\games\data.meta" />
+    <None Include="AHotGames\AHotGames\games\data\Defs.cs.meta" />
+    <None Include="AHotGames\AHotGames\games\data\URemoteData.cs.meta" />
+    <None Include="AHotGames\AHotGames\games\game.meta" />
+    <None Include="AHotGames\AHotGames\games\game\Cards.meta" />
+    <None Include="AHotGames\AHotGames\games\game\Cards\ACards.cs.meta" />
+    <None Include="AHotGames\AHotGames\games\game\Novel.meta" />
+    <None Include="AHotGames\AHotGames\games\game\Novel\Novels.cs.meta" />
+    <None Include="AHotGames\AHotGames\games\game\UBigOrSmall.cs.meta" />
+    <None Include="AHotGames\AHotGames\games\game\UCardGame.cs.meta" />
+    <None Include="AHotGames\AHotGames\games\game\UMMO.cs.meta" />
+    <None Include="AHotGames\AHotGames\games\miner.meta" />
+    <None Include="AHotGames\AHotGames\games\miner\Map.meta" />
+    <None Include="AHotGames\AHotGames\games\miner\Map\MapCity.cs.meta" />
+    <None Include="AHotGames\AHotGames\games\miner\Map\MapSingle.cs.meta" />
+    <None Include="AHotGames\AHotGames\games\miner\Map\UMinerMap.cs.meta" />
+    <None Include="AHotGames\AHotGames\games\miner\UBattleNetMgr.cs.meta" />
+    <None Include="AHotGames\AHotGames\games\miner\UIMinerBattle.cs.meta" />
+    <None Include="AHotGames\AHotGames\games\miner\UIMinerCreateAvatar.cs.meta" />
+    <None Include="AHotGames\AHotGames\games\miner\UIMinerLogin.cs.meta" />
+    <None Include="AHotGames\AHotGames\games\miner\UIMinerMain.cs.meta" />
+    <None Include="AHotGames\AHotGames\games\miner\UISingleSettlement.cs.meta" />
+    <None Include="AHotGames\AHotGames\games\uis.meta" />
+    <None Include="AHotGames\AHotGames\games\uis\UDownloader.cs.meta" />
+    <None Include="AHotGames\AHotGames\games\uis\UIAlert.cs.meta" />
+    <None Include="AHotGames\AHotGames\games\uis\UICreateAvatar.cs.meta" />
+    <None Include="AHotGames\AHotGames\games\uis\UIFirst.cs.meta" />
+    <None Include="AHotGames\AHotGames\games\uis\UILoading.cs.meta" />
+    <None Include="AHotGames\AHotGames\games\uis\UILogin.cs.meta" />
+    <None Include="AHotGames\AHotGames\games\uis\UIMain.cs.meta" />
+    <None Include="AHotGames\AHotGames\games\uis\UIRank.cs.meta" />
+    <None Include="AHotGames\AHotGames\games\uis\UIRegister.cs.meta" />
+    <None Include="AHotGames\AHotGames\games\uis\UStaticWebRequests.cs.meta" />
+    <None Include="AHotGames\AHotGames\games\uis\widgets.meta" />
+    <None Include="AHotGames\AHotGames\games\uis\widgets\WExpSlider.cs.meta" />
+    <None Include="AHotGames\AHotGames\net.meta" />
+    <None Include="AHotGames\AHotGames\net\LibClient.meta" />
+    <None Include="AHotGames\AHotGames\net\LibClient\AClientApis.cs.meta" />
+    <None Include="AHotGames\AHotGames\net\LibClient\AClientApp.cs.meta" />
+    <None Include="AHotGames\AHotGames\net\LibClient\AClientComm.cs.meta" />
+    <None Include="AHotGames\AHotGames\net\LibClient\AConnection.cs.meta" />
+    <None Include="AHotGames\AHotGames\net\LibClient\GameObj.meta" />
+    <None Include="AHotGames\AHotGames\net\LibClient\GameObj\CakeAvatar.cs.meta" />
+    <None Include="AHotGames\AHotGames\net\LibClient\GameObj\CakeClient.cs.meta" />
+    <None Include="AHotGames\AHotGames\net\LibCommon.meta" />
+    <None Include="AHotGames\AHotGames\net\LibCommon\AConsoleBase.cs.meta" />
+    <None Include="AHotGames\AHotGames\net\LibCommon\Components.meta" />
+    <None Include="AHotGames\AHotGames\net\LibCommon\Components\AComponentBagCommon.cs.meta" />
+    <None Include="AHotGames\AHotGames\net\LibCommon\Components\AComponentBase.cs.meta" />
+    <None Include="AHotGames\AHotGames\net\LibCommon\Components\AComponentParamCommon.cs.meta" />
+    <None Include="AHotGames\AHotGames\net\LibCommon\Defs.meta" />
+    <None Include="AHotGames\AHotGames\net\LibCommon\Defs\AEnumDefs.cs.meta" />
+    <None Include="AHotGames\AHotGames\net\LibCommon\Defs\InitValueDefs.cs.meta" />
+    <None Include="AHotGames\AHotGames\net\LibCommon\Defs\ParamNameDefs.cs.meta" />
+    <None Include="AHotGames\AHotGames\net\LibCommon\GameObj.meta" />
+    <None Include="AHotGames\AHotGames\net\LibCommon\GameObj\AAvatarCommon.cs.meta" />
+    <None Include="AHotGames\AHotGames\net\LibCommon\GameObj\AGameObj.cs.meta" />
+    <None Include="AHotGames\AHotGames\net\LibCommon\GameObj\AParam.cs.meta" />
+    <None Include="AHotGames\AHotGames\net\LibCommon\GameObj\Cake.cs.meta" />
+    <None Include="AHotGames\AHotGames\net\LibCommon\LibCommon.csproj.user.meta" />
+    <None Include="AHotGames\AHotGames\net\LibConfig.meta" />
+    <None Include="AHotGames\AHotGames\net\LibConfig\Data.meta" />
+    <None Include="AHotGames\AHotGames\net\LibConfig\Data\Base.meta" />
+    <None Include="AHotGames\AHotGames\net\LibConfig\Loaders.meta" />
+    <None Include="AHotGames\AHotGames\net\LibConfig\Loaders\ConfigManager.cs.meta" />
+    <None Include="AHotGames\AHotGames\net\LibConfig\Loaders\cs.meta" />
+    <None Include="AHotGames\AHotGames\net\LibConfig\Loaders\cs\DailyCheckLoader.cs.meta" />
+    <None Include="AHotGames\AHotGames\net\LibConfig\Loaders\cs\HuoLoader.cs.meta" />
+    <None Include="AHotGames\AHotGames\net\LibConfig\Loaders\cs\ItemsLoader.cs.meta" />
+    <None Include="AHotGames\AHotGames\net\LibConfig\Loaders\cs\JinLoader.cs.meta" />
+    <None Include="AHotGames\AHotGames\net\LibConfig\Loaders\cs\MapLoader.cs.meta" />
+    <None Include="AHotGames\AHotGames\net\LibConfig\Loaders\cs\MuLoader.cs.meta" />
+    <None Include="AHotGames\AHotGames\net\LibConfig\Loaders\cs\PaymentLoader.cs.meta" />
+    <None Include="AHotGames\AHotGames\net\LibConfig\Loaders\cs\ShuiLoader.cs.meta" />
+    <None Include="AHotGames\AHotGames\net\LibConfig\Loaders\cs\TuLoader.cs.meta" />
+    <None Include="AHotGames\AHotGames\net\LibNet.meta" />
+    <None Include="AHotGames\AHotGames\net\LibNet\AUDPSocket.cs.meta" />
+    <None Include="AHotGames\AHotGames\net\LibNet\ByteStream.cs.meta" />
+    <None Include="AHotGames\AHotGames\net\LibNet\ClientConnection.cs.meta" />
+    <None Include="AHotGames\AHotGames\net\LibNet\ClientConnectionUtil.cs.meta" />
+    <None Include="AHotGames\AHotGames\net\LibNet\DataAccess.meta" />
+    <None Include="AHotGames\AHotGames\net\LibNet\DataAccess\DataAccessBase.cs.meta" />
+    <None Include="AHotGames\AHotGames\net\LibNet\DataAccess\DataAccessTask.cs.meta" />
+    <None Include="AHotGames\AHotGames\net\LibNet\DataAccess\UtilTask.cs.meta" />
+    <None Include="AHotGames\AHotGames\net\LibNet\Engine.cs.meta" />
+    <None Include="AHotGames\AHotGames\net\LibNet\EngineClient.cs.meta" />
+    <None Include="AHotGames\AHotGames\net\LibNet\EngineControler.cs.meta" />
+    <None Include="AHotGames\AHotGames\net\LibNet\EngineServer.cs.meta" />
+    <None Include="AHotGames\AHotGames\net\LibNet\ITickableSystem.cs.meta" />
+    <None Include="AHotGames\AHotGames\net\LibNet\Packet.cs.meta" />
+    <None Include="AHotGames\AHotGames\net\LibNet\PacketFactory.cs.meta" />
+    <None Include="AHotGames\AHotGames\net\LibNet\rpc.meta" />
+    <None Include="AHotGames\AHotGames\net\LibNet\rpc\CRpcTag.cs.meta" />
+    <None Include="AHotGames\AHotGames\net\LibNet\rpc\RPCClient.cs.meta" />
+    <None Include="AHotGames\AHotGames\net\LibNet\rpc\RPCServer.cs.meta" />
+    <None Include="AHotGames\AHotGames\net\LibNet\Uitlity.meta" />
+    <None Include="AHotGames\AHotGames\net\LibNet\Uitlity\AFactoryPacket.cs.meta" />
+    <None Include="AHotGames\AHotGames\net\LibNet\Uitlity\ExcelReader.cs.meta" />
+    <None Include="AHotGames\AHotGames\net\LibNet\Uitlity\IResponer.cs.meta" />
+    <None Include="AHotGames\AHotGames\net\LibNet\Uitlity\ServerUtils.cs.meta" />
+    <None Include="AHotGames\AHotGames\net\LibPkt.meta" />
+    <None Include="AHotGames\AHotGames\net\LibPkt\PktBase.cs.meta" />
+    <None Include="AHotGames\AHotGames\net\LibPkt\SerializedPkt.cs.meta" />
+    <None Include="AHotGames\AHotGames\obj.meta" />
+    <None Include="AHotGames\AHotGames\obj\Debug.meta" />
+    <None Include="AHotGames\AHotGames\obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="AHotGames\AHotGames\obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache.meta" />
+    <None Include="AHotGames\AHotGames\Properties.meta" />
+    <None Include="AHotGames\AHotGames\Properties\AssemblyInfo.cs.meta" />
+    <None Include="AHotGames\AHotGames\utils.meta" />
+    <None Include="AHotGames\AHotGames\utils\AHotDrag.cs.meta" />
+    <None Include="AHotGames\AHotGames\utils\AOutput.cs.meta" />
+    <None Include="AHotGames\AHotGames\utils\ApiDateTime.cs.meta" />
+    <None Include="AHotGames\AHotGames\utils\ClickButton.cs.meta" />
+    <None Include="AHotGames\AHotGames\utils\CRC.cs.meta" />
+    <None Include="AHotGames\AHotGames\utils\CSCSV.cs.meta" />
+    <None Include="AHotGames\AHotGames\utils\HotEnvironment.cs.meta" />
+    <None Include="AHotGames\AHotGames\utils\MD5String.cs.meta" />
+    <None Include="AHotGames\AHotGames\utils\Singleton.cs.meta" />
+    <None Include="AHotGames\AHotGames\utils\typeParser.cs.meta" />
+    <None Include="AHotGames\AHotGames\utils\UDebugHotLog.cs.meta" />
+    <None Include="AHotGames\AHotGames\utils\UEmitMessager.cs.meta" />
+    <None Include="AHotGames\AHotGames\utils\UHotAssetBundleLoader.cs.meta" />
+    <None Include="AHotGames\AHotGames\utils\UHotStaticFuncs.cs.meta" />
+    <None Include="AHotGames\AHotGames\utils\ULocalFileManager.cs.meta" />
+    <None Include="AHotGames\AHotGames\utils\UOnDestroy.cs.meta" />
+    <None Include="AHotGames\AHotGames\utils\UOnGUIer.cs.meta" />
+    <None Include="AHotGames\AHotGames\utils\Utils.cs.meta" />
+    <None Include="AHotGames\AHotGames\utils\UUpdater.cs.meta" />
+    <None Include="AHotGames\AHotGames\utils\UWebSender.cs.meta" />
+    <None Include="AHotGames\AHotGames\websocket.meta" />
+    <None Include="AHotGames\AHotGames\websocket\WebSocketConnector.cs.meta" />
+    <None Include="AHotGames\packages.meta" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="AHotGames\AHotGames.sln" />
+    <Content Include="AHotGames\AHotGames\net\LibCommon\LibCommon.csproj.user" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AHotGames\AHotGames\games\actions\ActionBase.cs" />
+    <Compile Include="AHotGames\AHotGames\games\actions\ActionHandler.cs" />
+    <Compile Include="AHotGames\AHotGames\games\actions\ActionRun.cs" />
+    <Compile Include="AHotGames\AHotGames\games\actions\IActionBase.cs" />
+    <Compile Include="AHotGames\AHotGames\games\aempty\AEmptyUI.cs" />
+    <Compile Include="AHotGames\AHotGames\games\aempty\AHotBase.cs" />
+    <Compile Include="AHotGames\AHotGames\games\AEntrance.cs" />
+    <Compile Include="AHotGames\AHotGames\games\cnet\AOnlineSubsystem.cs" />
+    <Compile Include="AHotGames\AHotGames\games\cnet\UEventListener.cs" />
+    <Compile Include="AHotGames\AHotGames\games\cnet\UEvents.cs" />
+    <Compile Include="AHotGames\AHotGames\games\commonUI\UICommonTips.cs" />
+    <Compile Include="AHotGames\AHotGames\games\commonUI\UICommonWait.cs" />
+    <Compile Include="AHotGames\AHotGames\games\commonUI\UIDebugConsole.cs" />
+    <Compile Include="AHotGames\AHotGames\games\data\Defs.cs" />
+    <Compile Include="AHotGames\AHotGames\games\data\URemoteData.cs" />
+    <Compile Include="AHotGames\AHotGames\games\game\Cards\ACards.cs" />
+    <Compile Include="AHotGames\AHotGames\games\game\Novel\Novels.cs" />
+    <Compile Include="AHotGames\AHotGames\games\game\UBigOrSmall.cs" />
+    <Compile Include="AHotGames\AHotGames\games\game\UCardGame.cs" />
+    <Compile Include="AHotGames\AHotGames\games\game\UMMO.cs" />
+    <Compile Include="AHotGames\AHotGames\games\miner\Map\MapCity.cs" />
+    <Compile Include="AHotGames\AHotGames\games\miner\Map\MapSingle.cs" />
+    <Compile Include="AHotGames\AHotGames\games\miner\Map\UMinerMap.cs" />
+    <Compile Include="AHotGames\AHotGames\games\miner\UBattleNetMgr.cs" />
+    <Compile Include="AHotGames\AHotGames\games\miner\UIMinerBattle.cs" />
+    <Compile Include="AHotGames\AHotGames\games\miner\UIMinerCreateAvatar.cs" />
+    <Compile Include="AHotGames\AHotGames\games\miner\UIMinerLogin.cs" />
+    <Compile Include="AHotGames\AHotGames\games\miner\UIMinerMain.cs" />
+    <Compile Include="AHotGames\AHotGames\games\miner\UISingleSettlement.cs" />
+    <Compile Include="AHotGames\AHotGames\games\uis\UDownloader.cs" />
+    <Compile Include="AHotGames\AHotGames\games\uis\UIAlert.cs" />
+    <Compile Include="AHotGames\AHotGames\games\uis\UICreateAvatar.cs" />
+    <Compile Include="AHotGames\AHotGames\games\uis\UIFirst.cs" />
+    <Compile Include="AHotGames\AHotGames\games\uis\UILoading.cs" />
+    <Compile Include="AHotGames\AHotGames\games\uis\UILogin.cs" />
+    <Compile Include="AHotGames\AHotGames\games\uis\UIMain.cs" />
+    <Compile Include="AHotGames\AHotGames\games\uis\UIRank.cs" />
+    <Compile Include="AHotGames\AHotGames\games\uis\UIRegister.cs" />
+    <Compile Include="AHotGames\AHotGames\games\uis\UStaticWebRequests.cs" />
+    <Compile Include="AHotGames\AHotGames\games\uis\widgets\WExpSlider.cs" />
+    <Compile Include="AHotGames\AHotGames\net\LibClient\AClientApis.cs" />
+    <Compile Include="AHotGames\AHotGames\net\LibClient\AClientApp.cs" />
+    <Compile Include="AHotGames\AHotGames\net\LibClient\AClientComm.cs" />
+    <Compile Include="AHotGames\AHotGames\net\LibClient\AConnection.cs" />
+    <Compile Include="AHotGames\AHotGames\net\LibClient\GameObj\CakeAvatar.cs" />
+    <Compile Include="AHotGames\AHotGames\net\LibClient\GameObj\CakeClient.cs" />
+    <Compile Include="AHotGames\AHotGames\net\LibCommon\AConsoleBase.cs" />
+    <Compile Include="AHotGames\AHotGames\net\LibCommon\Components\AComponentBagCommon.cs" />
+    <Compile Include="AHotGames\AHotGames\net\LibCommon\Components\AComponentBase.cs" />
+    <Compile Include="AHotGames\AHotGames\net\LibCommon\Components\AComponentParamCommon.cs" />
+    <Compile Include="AHotGames\AHotGames\net\LibCommon\Defs\AEnumDefs.cs" />
+    <Compile Include="AHotGames\AHotGames\net\LibCommon\Defs\InitValueDefs.cs" />
+    <Compile Include="AHotGames\AHotGames\net\LibCommon\Defs\ParamNameDefs.cs" />
+    <Compile Include="AHotGames\AHotGames\net\LibCommon\GameObj\AAvatarCommon.cs" />
+    <Compile Include="AHotGames\AHotGames\net\LibCommon\GameObj\AGameObj.cs" />
+    <Compile Include="AHotGames\AHotGames\net\LibCommon\GameObj\AParam.cs" />
+    <Compile Include="AHotGames\AHotGames\net\LibCommon\GameObj\Cake.cs" />
+    <Compile Include="AHotGames\AHotGames\net\LibConfig\Loaders\ConfigManager.cs" />
+    <Compile Include="AHotGames\AHotGames\net\LibConfig\Loaders\cs\DailyCheckLoader.cs" />
+    <Compile Include="AHotGames\AHotGames\net\LibConfig\Loaders\cs\HuoLoader.cs" />
+    <Compile Include="AHotGames\AHotGames\net\LibConfig\Loaders\cs\ItemsLoader.cs" />
+    <Compile Include="AHotGames\AHotGames\net\LibConfig\Loaders\cs\JinLoader.cs" />
+    <Compile Include="AHotGames\AHotGames\net\LibConfig\Loaders\cs\MapLoader.cs" />
+    <Compile Include="AHotGames\AHotGames\net\LibConfig\Loaders\cs\MuLoader.cs" />
+    <Compile Include="AHotGames\AHotGames\net\LibConfig\Loaders\cs\PaymentLoader.cs" />
+    <Compile Include="AHotGames\AHotGames\net\LibConfig\Loaders\cs\ShuiLoader.cs" />
+    <Compile Include="AHotGames\AHotGames\net\LibConfig\Loaders\cs\TuLoader.cs" />
+    <Compile Include="AHotGames\AHotGames\net\LibNet\AUDPSocket.cs" />
+    <Compile Include="AHotGames\AHotGames\net\LibNet\ByteStream.cs" />
+    <Compile Include="AHotGames\AHotGames\net\LibNet\ClientConnection.cs" />
+    <Compile Include="AHotGames\AHotGames\net\LibNet\ClientConnectionUtil.cs" />
+    <Compile Include="AHotGames\AHotGames\net\LibNet\DataAccess\DataAccessBase.cs" />
+    <Compile Include="AHotGames\AHotGames\net\LibNet\DataAccess\DataAccessTask.cs" />
+    <Compile Include="AHotGames\AHotGames\net\LibNet\DataAccess\UtilTask.cs" />
+    <Compile Include="AHotGames\AHotGames\net\LibNet\Engine.cs" />
+    <Compile Include="AHotGames\AHotGames\net\LibNet\EngineClient.cs" />
+    <Compile Include="AHotGames\AHotGames\net\LibNet\EngineControler.cs" />
+    <Compile Include="AHotGames\AHotGames\net\LibNet\EngineServer.cs" />
+    <Compile Include="AHotGames\AHotGames\net\LibNet\ITickableSystem.cs" />
+    <Compile Include="AHotGames\AHotGames\net\LibNet\Packet.cs" />
+    <Compile Include="AHotGames\AHotGames\net\LibNet\PacketFactory.cs" />
+    <Compile Include="AHotGames\AHotGames\net\LibNet\rpc\CRpcTag.cs" />
+    <Compile Include="AHotGames\AHotGames\net\LibNet\rpc\RPCClient.cs" />
+    <Compile Include="AHotGames\AHotGames\net\LibNet\rpc\RPCServer.cs" />
+    <Compile Include="AHotGames\AHotGames\net\LibNet\Uitlity\AFactoryPacket.cs" />
+    <Compile Include="AHotGames\AHotGames\net\LibNet\Uitlity\ExcelReader.cs" />
+    <Compile Include="AHotGames\AHotGames\net\LibNet\Uitlity\IResponer.cs" />
+    <Compile Include="AHotGames\AHotGames\net\LibNet\Uitlity\ServerUtils.cs" />
+    <Compile Include="AHotGames\AHotGames\net\LibPkt\PktBase.cs" />
+    <Compile Include="AHotGames\AHotGames\net\LibPkt\SerializedPkt.cs" />
+    <Compile Include="AHotGames\AHotGames\obj\Debug\.NETFramework,Version=v4.5.AssemblyAttributes.cs" />
+    <Compile Include="AHotGames\AHotGames\Properties\AssemblyInfo.cs" />
+    <Compile Include="AHotGames\AHotGames\utils\AHotDrag.cs" />
+    <Compile Include="AHotGames\AHotGames\utils\AOutput.cs" />
+    <Compile Include="AHotGames\AHotGames\utils\ApiDateTime.cs" />
+    <Compile Include="AHotGames\AHotGames\utils\ClickButton.cs" />
+    <Compile Include="AHotGames\AHotGames\utils\CRC.cs" />
+    <Compile Include="AHotGames\AHotGames\utils\CSCSV.cs" />
+    <Compile Include="AHotGames\AHotGames\utils\HotEnvironment.cs" />
+    <Compile Include="AHotGames\AHotGames\utils\MD5String.cs" />
+    <Compile Include="AHotGames\AHotGames\utils\Singleton.cs" />
+    <Compile Include="AHotGames\AHotGames\utils\typeParser.cs" />
+    <Compile Include="AHotGames\AHotGames\utils\UDebugHotLog.cs" />
+    <Compile Include="AHotGames\AHotGames\utils\UEmitMessager.cs" />
+    <Compile Include="AHotGames\AHotGames\utils\UHotAssetBundleLoader.cs" />
+    <Compile Include="AHotGames\AHotGames\utils\UHotStaticFuncs.cs" />
+    <Compile Include="AHotGames\AHotGames\utils\ULocalFileManager.cs" />
+    <Compile Include="AHotGames\AHotGames\utils\UOnDestroy.cs" />
+    <Compile Include="AHotGames\AHotGames\utils\UOnGUIer.cs" />
+    <Compile Include="AHotGames\AHotGames\utils\Utils.cs" />
+    <Compile Include="AHotGames\AHotGames\utils\UUpdater.cs" />
+    <Compile Include="AHotGames\AHotGames\utils\UWebSender.cs" />
+    <Compile Include="AHotGames\AHotGames\websocket\WebSocketConnector.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="AHotGames\AHotGames\net\LibConfig\Data\Base\" />
+    <Folder Include="AHotGames\packages\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="GenerateTargetFrameworkMonikerAttribute" />
+  <PropertyGroup>
+    <PostBuildEvent>echo f | xcopy /r /y $(TargetDir)\$(ProjectName).dll $(TargetDir)..\..\..\ab1\AHotGames.bytes
+echo f | xcopy /r /y $(TargetDir)\$(ProjectName).pdb $(TargetDir)..\..\..\ab1\AHotGames.pdb
+</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

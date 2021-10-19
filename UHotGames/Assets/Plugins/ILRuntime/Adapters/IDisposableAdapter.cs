@@ -1,18 +1,18 @@
-﻿using System;
+﻿using ILRuntime.CLR.Method;
 using ILRuntime.Runtime.Enviorment;
 using ILRuntime.Runtime.Intepreter;
-using ILRuntime.CLR.Method;
-using System.IO;
-using System.Collections.Generic;
-using System.Collections;
+using System;
+using System.Runtime.CompilerServices;
 
 public class IDisposableAdapter : CrossBindingAdaptor
 {
+	//定义访问方法的方法信息
+	static CrossBindingMethodInfo mDispose = new CrossBindingMethodInfo("Dispose");
 	public override Type BaseCLRType
 	{
 		get
 		{
-			return typeof(IDisposable);
+			return typeof(IDisposable);//这里是你想继承的类型
 		}
 	}
 
@@ -20,44 +20,38 @@ public class IDisposableAdapter : CrossBindingAdaptor
 	{
 		get
 		{
-			return typeof(Adaptor);
+			return typeof(Adapter);
 		}
 	}
 
 	public override object CreateCLRInstance(ILRuntime.Runtime.Enviorment.AppDomain appdomain, ILTypeInstance instance)
 	{
-		return new Adaptor(appdomain, instance);
+		return new Adapter(appdomain, instance);
 	}
 
-	internal class Adaptor : IDisposable
+	public class Adapter : IDisposable, CrossBindingAdaptorType
 	{
 		ILTypeInstance instance;
 		ILRuntime.Runtime.Enviorment.AppDomain appdomain;
-		IMethod mDisposeMethod;
-		bool mDisposeMethodGot;
-		public void Dispose()
-		{
-			if (!mDisposeMethodGot)
-			{
-				mDisposeMethod = instance.Type.GetMethod("Dispose", 0);
-				mDisposeMethodGot = true;
-			}
 
-			if (mDisposeMethod != null)
-			{
-				appdomain.Invoke(mDisposeMethod, instance, null);
-			}
+		//必须要提供一个无参数的构造函数
+		public Adapter()
+		{
+
 		}
-		public Adaptor(ILRuntime.Runtime.Enviorment.AppDomain appdomain, ILTypeInstance instance)
+
+		public Adapter(ILRuntime.Runtime.Enviorment.AppDomain appdomain, ILTypeInstance instance)
 		{
 			this.appdomain = appdomain;
 			this.instance = instance;
 		}
 
-		public ILTypeInstance ILInstance { get { return instance; } set { instance = value; } }
+		public ILTypeInstance ILInstance { get { return instance; } }
 
-		public ILRuntime.Runtime.Enviorment.AppDomain AppDomain { get { return appdomain; } set { appdomain = value; } }
-
-
+		public void Dispose()
+		{
+			if (!mDispose.CheckShouldInvokeBase(instance))
+				mDispose.Invoke(this.instance);
+		}
 	}
 }
