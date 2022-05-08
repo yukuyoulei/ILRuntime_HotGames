@@ -3,6 +3,7 @@ using System.IO;
 using UnityEngine;
 using System.Linq;
 using System.Collections.Generic;
+using System;
 
 public class Enter : MonoBehaviour
 {
@@ -84,13 +85,20 @@ public class Enter : MonoBehaviour
 		StartCoroutine(OnDownloadConfigs());
 #endif
 #else
-		AEntrance.Initialize(
+		var t = this.GetType().Assembly.GetType("AEntrance");
+		if (t == null)
+		{
+			Debug.Log($"No AEntrance type found.");
+			return;
+		}
+		var m = t.GetMethod("Initialize");
+		m.Invoke(null, new object[] { 
 #if UNITY_IOS
 			"ios"
 #else
 			"android"
 #endif
-		);
+		});
 		fprocessing = 1;
 #endif
 	}

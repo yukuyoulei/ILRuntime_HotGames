@@ -8,6 +8,7 @@ using System.Linq;
 using UnityEditor.PackageManager.UI;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
+using System.Xml;
 /*
 using UnityEngine.VR;
 */
@@ -228,6 +229,34 @@ public class UBuildTools : EditorWindow
 			return $".\\Assets\\{HotScriptsDir}";
 		}
 	}
+	string sHotScriptAsmdef
+	{
+		get
+		{
+			return $"{sHotScriptDir}\\AHotGames\\{HotScriptsDir}.asmdef";
+		}
+	}
+	string sNotHotScriptAsmdef
+	{
+		get
+		{
+			return $"{sHotScriptDir}\\AHotGames\\{HotScriptsDir}.asmdef~";
+		}
+	}
+	bool ToggleAsmdef
+	{
+		get
+		{
+			if (!PlayerPrefs.HasKey("ToggleAsmdef"))
+				return true;
+			return PlayerPrefs.GetInt("ToggleAsmdef") == 1;
+		}
+		set
+		{
+			PlayerPrefs.SetInt("ToggleAsmdef", value ? 1 : 0);
+		}
+	}
+
 	void DoHotDir()
 	{
 		if (!ILRUNTIME)
@@ -240,6 +269,56 @@ public class UBuildTools : EditorWindow
 		{
 			JunctionPoint.Delete(sNotHotScriptDir);
 			File.Delete(sNotHotScriptDir + ".meta");
+
+			var fhot = sHotScriptDir + ".csproj";
+			var fall = File.ReadAllText(fhot);
+			fall = fall.Replace($"Assets\\{HotScriptsDir}\\", $"{HotScriptsDir}\\");
+
+			var xmldoc = new XmlDocument();
+			xmldoc.LoadXml(fall);
+			var eles = xmldoc.GetElementsByTagName("PropertyGroup");
+			XmlNode ep = null;
+			for (var i = 0; i < eles.Count; i++)
+			{
+				var ele = eles[i];
+				if (ele.ChildNodes[0].Name == "ProjectTypeGuids")
+				{
+					ep = ele.ParentNode;
+					ep.RemoveChild(ele);
+					break;
+				}
+			}
+			var elementNewPropertyGroup = xmldoc.CreateElement("PropertyGroup", ep.NamespaceURI);
+			var elementPostBuildEvent = xmldoc.CreateElement("PostBuildEvent", elementNewPropertyGroup.NamespaceURI);
+			elementNewPropertyGroup.AppendChild(elementPostBuildEvent);
+			elementPostBuildEvent.InnerText = @"echo f| xcopy /r /y $(TargetDir)\$(ProjectName).dll $(TargetDir)..\..\..\ab1\AHotGames.bytes
+echo f| xcopy /r /y $(TargetDir)\$(ProjectName).pdb $(TargetDir)..\..\..\ab1\AHotGames.pdb";
+			ep.AppendChild(elementNewPropertyGroup);
+
+			eles = xmldoc.GetElementsByTagName("ItemGroup");
+			for (var i = 0; i < eles.Count; i++)
+			{
+				var ele = eles[i];
+				if (ele.ChildNodes[0].Name == "Reference")
+				{
+					var eleNewReference = xmldoc.CreateElement("Reference", ele.NamespaceURI);
+					eleNewReference.SetAttribute("Include", "Assembly-CSharp");
+					var eleNewHintPath = xmldoc.CreateElement("HintPath", eleNewReference.NamespaceURI);
+					eleNewHintPath.InnerText = @"Library\ScriptAssemblies\Assembly-CSharp.dll";
+					eleNewReference.AppendChild(eleNewHintPath);
+					ele.AppendChild(eleNewReference);
+					break;
+				}
+				else if (ele.ChildNodes[0].Name == "Compile")
+				{
+					ele.RemoveAll();
+					var eleNewReference = xmldoc.CreateElement("Compile", ele.NamespaceURI);
+					eleNewReference.SetAttribute("Include", @"AHotGames\**\*.cs");
+					ele.AppendChild(eleNewReference);
+				}
+			}
+
+			xmldoc.Save(fhot);
 		}
 		AssetDatabase.Refresh();
 	}
@@ -348,8 +427,32 @@ public class UBuildTools : EditorWindow
 		ILRUNTIME = EditorGUILayout.ToggleLeft("是否使用ILRUNTIME", ILRUNTIME);
 		if (ilr != ILRUNTIME)
 			DoHotDir();
+		else if (ToggleAsmdef)
+		{
+			if (!ILRUNTIME)
+			{
+				if (File.Exists(sHotScriptAsmdef))
+				{
+					if (File.Exists(sNotHotScriptAsmdef))
+						File.Delete(sNotHotScriptAsmdef);
+					File.Move(sHotScriptAsmdef, sNotHotScriptAsmdef);
+					AssetDatabase.Refresh();
+				}
+			}
+			else if (ILRUNTIME)
+			{
+				if (File.Exists(sNotHotScriptAsmdef))
+				{
+					if (File.Exists(sHotScriptAsmdef))
+						File.Delete(sHotScriptAsmdef);
+					File.Move(sNotHotScriptAsmdef, sHotScriptAsmdef);
+					AssetDatabase.Refresh();
+				}
+			}
+		}
 
 		bUsingLocalCDN = EditorGUILayout.ToggleLeft("是否使用本地CDN", bUsingLocalCDN);
+		ToggleAsmdef = EditorGUILayout.ToggleLeft("自动切换asmdef", ToggleAsmdef);
 
 #if UNITY_ANDROID
 		EditorGUILayout.Space();
