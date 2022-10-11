@@ -339,6 +339,7 @@ public static class ILRuntimeHandler
 	{
 		appdomain.RegisterCrossBindingAdaptor(new IDisposableAdapter());
 		appdomain.RegisterCrossBindingAdaptor(new MonoBehaviourAdapter());
+        appdomain.RegisterCrossBindingAdaptor(new IEquatable_1_ILTypeInstanceAdapter());
 		appdomain.RegisterCrossBindingAdaptor(new IAsyncStateMachineClassInheritanceAdaptor());
 		appdomain.RegisterValueTypeBinder(typeof(Vector2), new Vector2Binder());
 		appdomain.RegisterValueTypeBinder(typeof(Vector3), new Vector3Binder());
