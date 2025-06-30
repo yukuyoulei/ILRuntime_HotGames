@@ -1,3 +1,6 @@
+## Stargazers over time
+[![Stargazers over time](https://starchart.cc/yukuyoulei/ILRuntime_HotGames.svg?variant=adaptive)](https://starchart.cc/yukuyoulei/ILRuntime_HotGames)
+
 最近没什么更新，因为架构已经基本上稳定下来了，本人正在利用业余时间用基于现在的架构断断续续的开发一个自己的小游戏，由于使用到了之前公司的一些资源，所以不便上传，但是如果在开发过程中发现有可以修改或者改进的地方，还是会合并进来的。
 
 ===============================================================
